@@ -635,25 +635,15 @@
     <display-name>Zurquí TV HD [No 24/7](Pococí - Limón)</display-name>
     <icon src="https://i.imgur.com/XvktUBB.jpg"/>
   </channel>
-  <channel id="lasestrellasnacionalv1">
-    <display-name lang="es">Las Estrellas Nacional v1</display-name>
+  <channel id="LasEstrellas.mx">
+    <display-name lang="es">Las Estrellas</display-name>
     <display-name>Las Estrellas HD (Nacional)[v1]</display-name>
     <icon src="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png"/>
   </channel>
-  <channel id="lasestrellasnacionalv2">
-    <display-name lang="es">Las Estrellas Nacional V2</display-name>
-    <display-name>Las Estrellas HD (Nacional)[V2]</display-name>
-    <icon src="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png"/>
-  </channel>
-  <channel id="lasestrellasnacionalv3">
-    <display-name lang="es">Las Estrellas Nacional V3</display-name>
-    <display-name>Las Estrellas HD (Nacional)[V3]</display-name>
-    <icon src="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png"/>
-  </channel>
-  <channel id="canal5nacional">
-    <display-name lang="es">Canal 5 Nacional</display-name>
+  <channel id="Canal5.mx">
+    <display-name lang="es">Canal 5</display-name>
     <display-name>Canal 5 HD (Nacional)[Opc. 1]</display-name>
-    <icon src="https://i.imgur.com/uZdVSoW.png"/>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png"/>
   </channel>
   <channel id="azteca7">
     <display-name lang="es">Azteca 7</display-name>
@@ -15815,329 +15805,69 @@
     <country lang="it">ITA</country>
     <episode-num system="onscreen">S4 E2</episode-num>
   </programme>
-  <programme start="20261103000000 +0000" channel="lasestrellasnacionalv1" stop="20261103005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261103005000 +0000" channel="lasestrellasnacionalv1" stop="20261103014000 +0000">
+  <programme start="20261102223000 +0000" channel="LasEstrellas.mx" stop="20261103003000 +0000">
     <title lang="es">Mi corazón es tuyo</title>
   </programme>
-  <programme start="20261103014000 +0000" channel="lasestrellasnacionalv1" stop="20261103023000 +0000">
+  <programme start="20261103003000 +0000" channel="LasEstrellas.mx" stop="20261103013000 +0000">
     <title lang="es">Infinito Amor</title>
   </programme>
-  <programme start="20261103023000 +0000" channel="lasestrellasnacionalv1" stop="20261103032000 +0000">
+  <programme start="20261103013000 +0000" channel="LasEstrellas.mx" stop="20261103023000 +0000">
     <title lang="es">La Rosa de Guadalupe</title>
   </programme>
-  <programme start="20261103032000 +0000" channel="lasestrellasnacionalv1" stop="20261103041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
+  <programme start="20261103023000 +0000" channel="LasEstrellas.mx" stop="20261103033000 +0000">
+    <title lang="es">Sabor a ti</title>
   </programme>
-  <programme start="20261103041000 +0000" channel="lasestrellasnacionalv1" stop="20261103050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
+  <programme start="20261103033000 +0000" channel="LasEstrellas.mx" stop="20261103043000 +0000">
+    <title lang="es">Tierra de Amor y Coraje</title>
   </programme>
-  <programme start="20261103050000 +0000" channel="lasestrellasnacionalv1" stop="20261103063000 +0000">
-    <title lang="es">Una familia de diez</title>
+  <programme start="20261103043000 +0000" channel="LasEstrellas.mx" stop="20261103050000 +0000">
+    <title lang="es">En Punto Enrique Acevedo
+En Vivo</title>
   </programme>
-  <programme start="20261103063000 +0000" channel="lasestrellasnacionalv1" stop="20261103070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
+  <programme start="20261103050000 +0000" channel="LasEstrellas.mx" stop="20261103060000 +0000">
+    <title lang="es">Tercer Grado Deportivo</title>
   </programme>
-  <programme start="20261103070000 +0000" channel="lasestrellasnacionalv1" stop="20261103080000 +0000">
-    <title lang="es">Laura sin censura</title>
+  <programme start="20261103060000 +0000" channel="LasEstrellas.mx" stop="20261103063000 +0000">
+    <title lang="es">Iglesia Universal</title>
   </programme>
-  <programme start="20261103080000 +0000" channel="lasestrellasnacionalv1" stop="20261103085000 +0000">
-    <title lang="es">Rubi</title>
+  <programme start="20261103063000 +0000" channel="LasEstrellas.mx" stop="20261103093000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261103085000 +0000" channel="lasestrellasnacionalv1" stop="20261103094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
+  <programme start="20261103093000 +0000" channel="LasEstrellas.mx" stop="20261103100000 +0000">
+    <title lang="es">Cronicas</title>
   </programme>
-  <programme start="20261103094000 +0000" channel="lasestrellasnacionalv1" stop="20261103103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
+  <programme start="20261103100000 +0000" channel="LasEstrellas.mx" stop="20261103103000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261103103000 +0000" channel="lasestrellasnacionalv1" stop="20261103112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
+  <programme start="20261103103000 +0000" channel="LasEstrellas.mx" stop="20261103110000 +0000">
+    <title lang="es">Especial de R.T.C</title>
   </programme>
-  <programme start="20261103112000 +0000" channel="lasestrellasnacionalv1" stop="20261103131000 +0000">
-    <title lang="es">Mujer, casos de la vida real</title>
+  <programme start="20261103110000 +0000" channel="LasEstrellas.mx" stop="20261103113000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261103131000 +0000" channel="lasestrellasnacionalv1" stop="20261103140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
+  <programme start="20261103113000 +0000" channel="LasEstrellas.mx" stop="20261103120000 +0000">
+    <title lang="es">Farmacias Similares</title>
   </programme>
-  <programme start="20261103140000 +0000" channel="lasestrellasnacionalv1" stop="20261103150000 +0000">
-    <title lang="es">Las noticiasEn Vivo</title>
-  </programme>
-  <programme start="20261103150000 +0000" channel="lasestrellasnacionalv1" stop="20261103170000 +0000">
-    <title lang="es">DespiertaEn Vivo</title>
-  </programme>
-  <programme start="20261103170000 +0000" channel="lasestrellasnacionalv1" stop="20261103175000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261103175000 +0000" channel="lasestrellasnacionalv1" stop="20261103184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261103184000 +0000" channel="lasestrellasnacionalv1" stop="20261103193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103193000 +0000" channel="lasestrellasnacionalv1" stop="20261103202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103202000 +0000" channel="lasestrellasnacionalv1" stop="20261103211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103211000 +0000" channel="lasestrellasnacionalv1" stop="20261103220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261103220000 +0000" channel="lasestrellasnacionalv1" stop="20261104000000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261104000000 +0000" channel="lasestrellasnacionalv1" stop="20261104005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261104005000 +0000" channel="lasestrellasnacionalv1" stop="20261104014000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261104014000 +0000" channel="lasestrellasnacionalv1" stop="20261104023000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261104023000 +0000" channel="lasestrellasnacionalv1" stop="20261104032000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104032000 +0000" channel="lasestrellasnacionalv1" stop="20261104041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104041000 +0000" channel="lasestrellasnacionalv1" stop="20261104050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104050000 +0000" channel="lasestrellasnacionalv1" stop="20261104063000 +0000">
-    <title lang="es">Nosotros los guapos</title>
-  </programme>
-  <programme start="20261104063000 +0000" channel="lasestrellasnacionalv1" stop="20261104070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
-  </programme>
-  <programme start="20261104070000 +0000" channel="lasestrellasnacionalv1" stop="20261104080000 +0000">
-    <title lang="es">Laura sin censura</title>
-    <episode-num system="onscreen">S2</episode-num>
-  </programme>
-  <programme start="20261104080000 +0000" channel="lasestrellasnacionalv1" stop="20261104085000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261104085000 +0000" channel="lasestrellasnacionalv1" stop="20261104094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261104094000 +0000" channel="lasestrellasnacionalv1" stop="20261104103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104103000 +0000" channel="lasestrellasnacionalv1" stop="20261104112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104112000 +0000" channel="lasestrellasnacionalv1" stop="20261104131000 +0000">
-    <title lang="es">Mujer, casos de la vida real</title>
-  </programme>
-  <programme start="20261104131000 +0000" channel="lasestrellasnacionalv1" stop="20261104140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104140000 +0000" channel="lasestrellasnacionalv1" stop="20261104150000 +0000">
-    <title lang="es">Las noticiasEn Vivo</title>
-  </programme>
-  <programme start="20261104150000 +0000" channel="lasestrellasnacionalv1" stop="20261104170000 +0000">
-    <title lang="es">DespiertaEn Vivo</title>
-  </programme>
-  <programme start="20261104170000 +0000" channel="lasestrellasnacionalv1" stop="20261104175000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261104175000 +0000" channel="lasestrellasnacionalv1" stop="20261104184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261104184000 +0000" channel="lasestrellasnacionalv1" stop="20261104193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104193000 +0000" channel="lasestrellasnacionalv1" stop="20261104202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104202000 +0000" channel="lasestrellasnacionalv1" stop="20261104211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104211000 +0000" channel="lasestrellasnacionalv1" stop="20261104220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261104220000 +0000" channel="lasestrellasnacionalv1" stop="20261105000000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261105000000 +0000" channel="lasestrellasnacionalv1" stop="20261105005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261105005000 +0000" channel="lasestrellasnacionalv1" stop="20261105014000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261105014000 +0000" channel="lasestrellasnacionalv1" stop="20261105023000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261105023000 +0000" channel="lasestrellasnacionalv1" stop="20261105032000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105032000 +0000" channel="lasestrellasnacionalv1" stop="20261105041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105041000 +0000" channel="lasestrellasnacionalv1" stop="20261105050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105050000 +0000" channel="lasestrellasnacionalv1" stop="20261105063000 +0000">
-    <title lang="es">Vecinos</title>
-  </programme>
-  <programme start="20261105063000 +0000" channel="lasestrellasnacionalv1" stop="20261105070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
-  </programme>
-  <programme start="20261105070000 +0000" channel="lasestrellasnacionalv1" stop="20261105080000 +0000">
-    <title lang="es">Laura sin censura</title>
-    <episode-num system="onscreen">S2</episode-num>
-  </programme>
-  <programme start="20261105080000 +0000" channel="lasestrellasnacionalv1" stop="20261105085000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261105085000 +0000" channel="lasestrellasnacionalv1" stop="20261105094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261105094000 +0000" channel="lasestrellasnacionalv1" stop="20261105103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105103000 +0000" channel="lasestrellasnacionalv1" stop="20261105112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105112000 +0000" channel="lasestrellasnacionalv1" stop="20261105131000 +0000">
-    <title lang="es">Mujer, casos de la vida real</title>
-  </programme>
-  <programme start="20261105131000 +0000" channel="lasestrellasnacionalv1" stop="20261105140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105140000 +0000" channel="lasestrellasnacionalv1" stop="20261105150000 +0000">
-    <title lang="es">Las noticiasEn Vivo</title>
-  </programme>
-  <programme start="20261105150000 +0000" channel="lasestrellasnacionalv1" stop="20261105170000 +0000">
-    <title lang="es">DespiertaEn Vivo</title>
-  </programme>
-  <programme start="20261105170000 +0000" channel="lasestrellasnacionalv1" stop="20261105175000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261105175000 +0000" channel="lasestrellasnacionalv1" stop="20261105184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261105184000 +0000" channel="lasestrellasnacionalv1" stop="20261105193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105193000 +0000" channel="lasestrellasnacionalv1" stop="20261105202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105202000 +0000" channel="lasestrellasnacionalv1" stop="20261105211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105211000 +0000" channel="lasestrellasnacionalv1" stop="20261105220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261105220000 +0000" channel="lasestrellasnacionalv1" stop="20261106000000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261106000000 +0000" channel="lasestrellasnacionalv1" stop="20261106005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261103000000 +0000" channel="lasestrellasnacionalv2" stop="20261103005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261103005000 +0000" channel="lasestrellasnacionalv2" stop="20261103014000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261103014000 +0000" channel="lasestrellasnacionalv2" stop="20261103023000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261103023000 +0000" channel="lasestrellasnacionalv2" stop="20261103032000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103032000 +0000" channel="lasestrellasnacionalv2" stop="20261103041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103041000 +0000" channel="lasestrellasnacionalv2" stop="20261103050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103050000 +0000" channel="lasestrellasnacionalv2" stop="20261103063000 +0000">
-    <title lang="es">Una familia de diez</title>
-  </programme>
-  <programme start="20261103063000 +0000" channel="lasestrellasnacionalv2" stop="20261103070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
-  </programme>
-  <programme start="20261103070000 +0000" channel="lasestrellasnacionalv2" stop="20261103080000 +0000">
-    <title lang="es">Laura sin censura</title>
-  </programme>
-  <programme start="20261103080000 +0000" channel="lasestrellasnacionalv2" stop="20261103085000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261103085000 +0000" channel="lasestrellasnacionalv2" stop="20261103094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261103094000 +0000" channel="lasestrellasnacionalv2" stop="20261103103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103103000 +0000" channel="lasestrellasnacionalv2" stop="20261103112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103112000 +0000" channel="lasestrellasnacionalv2" stop="20261103131000 +0000">
-    <title lang="es">Mujer Casos de la Vida Real</title>
-  </programme>
-  <programme start="20261103131000 +0000" channel="lasestrellasnacionalv2" stop="20261103140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103140000 +0000" channel="lasestrellasnacionalv2" stop="20261103150000 +0000">
+  <programme start="20261103120000 +0000" channel="LasEstrellas.mx" stop="20261103130000 +0000">
     <title lang="es">Las noticias
 En Vivo</title>
   </programme>
-  <programme start="20261103150000 +0000" channel="lasestrellasnacionalv2" stop="20261103170000 +0000">
+  <programme start="20261103130000 +0000" channel="LasEstrellas.mx" stop="20261103150000 +0000">
     <title lang="es">Despierta
 En Vivo</title>
   </programme>
-  <programme start="20261103170000 +0000" channel="lasestrellasnacionalv2" stop="20261103175000 +0000">
+  <programme start="20261103150000 +0000" channel="LasEstrellas.mx" stop="20261103180000 +0000">
+    <title lang="es">Hoy
+En Vivo</title>
+  </programme>
+  <programme start="20261103180000 +0000" channel="LasEstrellas.mx" stop="20261103193000 +0000">
+    <title lang="es">Cuéntamelo Ya!
+En Vivo</title>
+  </programme>
+  <programme start="20261103193000 +0000" channel="LasEstrellas.mx" stop="20261103203000 +0000">
     <title lang="es">Como dice el dicho</title>
   </programme>
-  <programme start="20261103175000 +0000" channel="lasestrellasnacionalv2" stop="20261103184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261103184000 +0000" channel="lasestrellasnacionalv2" stop="20261103193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103193000 +0000" channel="lasestrellasnacionalv2" stop="20261103202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103202000 +0000" channel="lasestrellasnacionalv2" stop="20261103211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103211000 +0000" channel="lasestrellasnacionalv2" stop="20261103220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261103220000 +0000" channel="lasestrellasnacionalv2" stop="20261104000000 +0000">
+  <programme start="20261103203000 +0000" channel="LasEstrellas.mx" stop="20261103213000 +0000">
     <title lang="es">El Chavo del Ocho</title>
     <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
     <date>1972</date>
@@ -16150,79 +15880,72 @@ En Vivo</title>
       <value>9.0</value>
     </star-rating>
   </programme>
-  <programme start="20261104000000 +0000" channel="lasestrellasnacionalv2" stop="20261104005000 +0000">
-    <title lang="es">Rubi</title>
+  <programme start="20261103213000 +0000" channel="LasEstrellas.mx" stop="20261103223000 +0000">
+    <title lang="es">Piensa rápido</title>
   </programme>
-  <programme start="20261104005000 +0000" channel="lasestrellasnacionalv2" stop="20261104014000 +0000">
+  <programme start="20261103223000 +0000" channel="LasEstrellas.mx" stop="20261104003000 +0000">
     <title lang="es">Mi corazón es tuyo</title>
   </programme>
-  <programme start="20261104014000 +0000" channel="lasestrellasnacionalv2" stop="20261104023000 +0000">
+  <programme start="20261104003000 +0000" channel="LasEstrellas.mx" stop="20261104013000 +0000">
     <title lang="es">Infinito Amor</title>
   </programme>
-  <programme start="20261104023000 +0000" channel="lasestrellasnacionalv2" stop="20261104032000 +0000">
+  <programme start="20261104013000 +0000" channel="LasEstrellas.mx" stop="20261104023000 +0000">
     <title lang="es">La Rosa de Guadalupe</title>
   </programme>
-  <programme start="20261104032000 +0000" channel="lasestrellasnacionalv2" stop="20261104041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
+  <programme start="20261104023000 +0000" channel="LasEstrellas.mx" stop="20261104033000 +0000">
+    <title lang="es">Sabor a ti</title>
   </programme>
-  <programme start="20261104041000 +0000" channel="lasestrellasnacionalv2" stop="20261104050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
+  <programme start="20261104033000 +0000" channel="LasEstrellas.mx" stop="20261104043000 +0000">
+    <title lang="es">Tierra de Amor y Coraje</title>
   </programme>
-  <programme start="20261104050000 +0000" channel="lasestrellasnacionalv2" stop="20261104063000 +0000">
-    <title lang="es">Nosotros los guapos</title>
+  <programme start="20261104043000 +0000" channel="LasEstrellas.mx" stop="20261104050000 +0000">
+    <title lang="es">En Punto Enrique Acevedo
+En Vivo</title>
   </programme>
-  <programme start="20261104063000 +0000" channel="lasestrellasnacionalv2" stop="20261104070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
+  <programme start="20261104050000 +0000" channel="LasEstrellas.mx" stop="20261104060000 +0000">
+    <title lang="es">Crímenes del pasado</title>
   </programme>
-  <programme start="20261104070000 +0000" channel="lasestrellasnacionalv2" stop="20261104080000 +0000">
-    <title lang="es">Laura sin censura</title>
-    <episode-num system="onscreen">S2</episode-num>
+  <programme start="20261104060000 +0000" channel="LasEstrellas.mx" stop="20261104063000 +0000">
+    <title lang="es">Iglesia Universal</title>
   </programme>
-  <programme start="20261104080000 +0000" channel="lasestrellasnacionalv2" stop="20261104085000 +0000">
-    <title lang="es">Rubi</title>
+  <programme start="20261104063000 +0000" channel="LasEstrellas.mx" stop="20261104093000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261104085000 +0000" channel="lasestrellasnacionalv2" stop="20261104094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
+  <programme start="20261104093000 +0000" channel="LasEstrellas.mx" stop="20261104100000 +0000">
+    <title lang="es">Cronicas</title>
   </programme>
-  <programme start="20261104094000 +0000" channel="lasestrellasnacionalv2" stop="20261104103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
+  <programme start="20261104100000 +0000" channel="LasEstrellas.mx" stop="20261104103000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261104103000 +0000" channel="lasestrellasnacionalv2" stop="20261104112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
+  <programme start="20261104103000 +0000" channel="LasEstrellas.mx" stop="20261104110000 +0000">
+    <title lang="es">Especial de R.T.C</title>
   </programme>
-  <programme start="20261104112000 +0000" channel="lasestrellasnacionalv2" stop="20261104131000 +0000">
-    <title lang="es">Mujer Casos de la Vida Real</title>
+  <programme start="20261104110000 +0000" channel="LasEstrellas.mx" stop="20261104113000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261104131000 +0000" channel="lasestrellasnacionalv2" stop="20261104140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
+  <programme start="20261104113000 +0000" channel="LasEstrellas.mx" stop="20261104120000 +0000">
+    <title lang="es">Farmacias Similares</title>
   </programme>
-  <programme start="20261104140000 +0000" channel="lasestrellasnacionalv2" stop="20261104150000 +0000">
+  <programme start="20261104120000 +0000" channel="LasEstrellas.mx" stop="20261104130000 +0000">
     <title lang="es">Las noticias
 En Vivo</title>
   </programme>
-  <programme start="20261104150000 +0000" channel="lasestrellasnacionalv2" stop="20261104170000 +0000">
+  <programme start="20261104130000 +0000" channel="LasEstrellas.mx" stop="20261104150000 +0000">
     <title lang="es">Despierta
 En Vivo</title>
   </programme>
-  <programme start="20261104170000 +0000" channel="lasestrellasnacionalv2" stop="20261104175000 +0000">
+  <programme start="20261104150000 +0000" channel="LasEstrellas.mx" stop="20261104180000 +0000">
+    <title lang="es">Hoy
+En Vivo</title>
+  </programme>
+  <programme start="20261104180000 +0000" channel="LasEstrellas.mx" stop="20261104193000 +0000">
+    <title lang="es">Cuéntamelo Ya!
+En Vivo</title>
+  </programme>
+  <programme start="20261104193000 +0000" channel="LasEstrellas.mx" stop="20261104203000 +0000">
     <title lang="es">Como dice el dicho</title>
   </programme>
-  <programme start="20261104175000 +0000" channel="lasestrellasnacionalv2" stop="20261104184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261104184000 +0000" channel="lasestrellasnacionalv2" stop="20261104193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104193000 +0000" channel="lasestrellasnacionalv2" stop="20261104202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104202000 +0000" channel="lasestrellasnacionalv2" stop="20261104211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104211000 +0000" channel="lasestrellasnacionalv2" stop="20261104220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261104220000 +0000" channel="lasestrellasnacionalv2" stop="20261105000000 +0000">
+  <programme start="20261104203000 +0000" channel="LasEstrellas.mx" stop="20261104213000 +0000">
     <title lang="es">El Chavo del Ocho</title>
     <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
     <date>1972</date>
@@ -16235,79 +15958,79 @@ En Vivo</title>
       <value>9.0</value>
     </star-rating>
   </programme>
-  <programme start="20261105000000 +0000" channel="lasestrellasnacionalv2" stop="20261105005000 +0000">
-    <title lang="es">Rubi</title>
+  <programme start="20261104213000 +0000" channel="LasEstrellas.mx" stop="20261104223000 +0000">
+    <title lang="es">Piensa rápido</title>
   </programme>
-  <programme start="20261105005000 +0000" channel="lasestrellasnacionalv2" stop="20261105014000 +0000">
+  <programme start="20261104223000 +0000" channel="LasEstrellas.mx" stop="20261105003000 +0000">
     <title lang="es">Mi corazón es tuyo</title>
   </programme>
-  <programme start="20261105014000 +0000" channel="lasestrellasnacionalv2" stop="20261105023000 +0000">
+  <programme start="20261105003000 +0000" channel="LasEstrellas.mx" stop="20261105013000 +0000">
     <title lang="es">Infinito Amor</title>
   </programme>
-  <programme start="20261105023000 +0000" channel="lasestrellasnacionalv2" stop="20261105032000 +0000">
+  <programme start="20261105013000 +0000" channel="LasEstrellas.mx" stop="20261105023000 +0000">
     <title lang="es">La Rosa de Guadalupe</title>
   </programme>
-  <programme start="20261105032000 +0000" channel="lasestrellasnacionalv2" stop="20261105041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
+  <programme start="20261105023000 +0000" channel="LasEstrellas.mx" stop="20261105033000 +0000">
+    <title lang="es">Sabor a ti</title>
   </programme>
-  <programme start="20261105041000 +0000" channel="lasestrellasnacionalv2" stop="20261105050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
+  <programme start="20261105033000 +0000" channel="LasEstrellas.mx" stop="20261105043000 +0000">
+    <title lang="es">Tierra de Amor y Coraje</title>
   </programme>
-  <programme start="20261105050000 +0000" channel="lasestrellasnacionalv2" stop="20261105063000 +0000">
-    <title lang="es">Vecinos</title>
+  <programme start="20261105043000 +0000" channel="LasEstrellas.mx" stop="20261105050000 +0000">
+    <title lang="es">En Punto Enrique Acevedo
+En Vivo</title>
   </programme>
-  <programme start="20261105063000 +0000" channel="lasestrellasnacionalv2" stop="20261105070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
+  <programme start="20261105050000 +0000" channel="LasEstrellas.mx" stop="20261105060000 +0000">
+    <title lang="es">Tercer Grado
+En Vivo</title>
   </programme>
-  <programme start="20261105070000 +0000" channel="lasestrellasnacionalv2" stop="20261105080000 +0000">
-    <title lang="es">Laura sin censura</title>
-    <episode-num system="onscreen">S2</episode-num>
+  <programme start="20261105060000 +0000" channel="LasEstrellas.mx" stop="20261105063000 +0000">
+    <title lang="es">Iglesia Universal</title>
   </programme>
-  <programme start="20261105080000 +0000" channel="lasestrellasnacionalv2" stop="20261105085000 +0000">
-    <title lang="es">Rubi</title>
+  <programme start="20261105063000 +0000" channel="LasEstrellas.mx" stop="20261105070000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261105085000 +0000" channel="lasestrellasnacionalv2" stop="20261105094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
+  <programme start="20261105070000 +0000" channel="LasEstrellas.mx" stop="20261105073000 +0000">
+    <title lang="es">Sognare</title>
   </programme>
-  <programme start="20261105094000 +0000" channel="lasestrellasnacionalv2" stop="20261105103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
+  <programme start="20261105073000 +0000" channel="LasEstrellas.mx" stop="20261105093000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261105103000 +0000" channel="lasestrellasnacionalv2" stop="20261105112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
+  <programme start="20261105093000 +0000" channel="LasEstrellas.mx" stop="20261105100000 +0000">
+    <title lang="es">Cronicas</title>
   </programme>
-  <programme start="20261105112000 +0000" channel="lasestrellasnacionalv2" stop="20261105131000 +0000">
-    <title lang="es">Mujer Casos de la Vida Real</title>
+  <programme start="20261105100000 +0000" channel="LasEstrellas.mx" stop="20261105103000 +0000">
+    <title lang="es">Infomerciales</title>
   </programme>
-  <programme start="20261105131000 +0000" channel="lasestrellasnacionalv2" stop="20261105140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
+  <programme start="20261105103000 +0000" channel="LasEstrellas.mx" stop="20261105110000 +0000">
+    <title lang="es">Especial de R.T.C</title>
   </programme>
-  <programme start="20261105140000 +0000" channel="lasestrellasnacionalv2" stop="20261105150000 +0000">
+  <programme start="20261105110000 +0000" channel="LasEstrellas.mx" stop="20261105113000 +0000">
+    <title lang="es">Infomerciales</title>
+  </programme>
+  <programme start="20261105113000 +0000" channel="LasEstrellas.mx" stop="20261105120000 +0000">
+    <title lang="es">Farmacias Similares</title>
+  </programme>
+  <programme start="20261105120000 +0000" channel="LasEstrellas.mx" stop="20261105130000 +0000">
     <title lang="es">Las noticias
 En Vivo</title>
   </programme>
-  <programme start="20261105150000 +0000" channel="lasestrellasnacionalv2" stop="20261105170000 +0000">
+  <programme start="20261105130000 +0000" channel="LasEstrellas.mx" stop="20261105150000 +0000">
     <title lang="es">Despierta
 En Vivo</title>
   </programme>
-  <programme start="20261105170000 +0000" channel="lasestrellasnacionalv2" stop="20261105175000 +0000">
+  <programme start="20261105150000 +0000" channel="LasEstrellas.mx" stop="20261105180000 +0000">
+    <title lang="es">Hoy
+En Vivo</title>
+  </programme>
+  <programme start="20261105180000 +0000" channel="LasEstrellas.mx" stop="20261105193000 +0000">
+    <title lang="es">Cuéntamelo Ya!
+En Vivo</title>
+  </programme>
+  <programme start="20261105193000 +0000" channel="LasEstrellas.mx" stop="20261105203000 +0000">
     <title lang="es">Como dice el dicho</title>
   </programme>
-  <programme start="20261105175000 +0000" channel="lasestrellasnacionalv2" stop="20261105184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261105184000 +0000" channel="lasestrellasnacionalv2" stop="20261105193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105193000 +0000" channel="lasestrellasnacionalv2" stop="20261105202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105202000 +0000" channel="lasestrellasnacionalv2" stop="20261105211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105211000 +0000" channel="lasestrellasnacionalv2" stop="20261105220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261105220000 +0000" channel="lasestrellasnacionalv2" stop="20261106000000 +0000">
+  <programme start="20261105203000 +0000" channel="LasEstrellas.mx" stop="20261105213000 +0000">
     <title lang="es">El Chavo del Ocho</title>
     <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
     <date>1972</date>
@@ -16320,261 +16043,13 @@ En Vivo</title>
       <value>9.0</value>
     </star-rating>
   </programme>
-  <programme start="20261106000000 +0000" channel="lasestrellasnacionalv2" stop="20261106005000 +0000">
-    <title lang="es">Rubi</title>
+  <programme start="20261105213000 +0000" channel="LasEstrellas.mx" stop="20261105223000 +0000">
+    <title lang="es">Piensa rápido</title>
   </programme>
-  <programme start="20261103000000 +0000" channel="lasestrellasnacionalv3" stop="20261103005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261103005000 +0000" channel="lasestrellasnacionalv3" stop="20261103014000 +0000">
+  <programme start="20261105223000 +0000" channel="LasEstrellas.mx" stop="20261106003000 +0000">
     <title lang="es">Mi corazón es tuyo</title>
   </programme>
-  <programme start="20261103014000 +0000" channel="lasestrellasnacionalv3" stop="20261103023000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261103023000 +0000" channel="lasestrellasnacionalv3" stop="20261103032000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103032000 +0000" channel="lasestrellasnacionalv3" stop="20261103041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103041000 +0000" channel="lasestrellasnacionalv3" stop="20261103050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103050000 +0000" channel="lasestrellasnacionalv3" stop="20261103063000 +0000">
-    <title lang="es">Una familia de diez</title>
-  </programme>
-  <programme start="20261103063000 +0000" channel="lasestrellasnacionalv3" stop="20261103070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
-  </programme>
-  <programme start="20261103070000 +0000" channel="lasestrellasnacionalv3" stop="20261103080000 +0000">
-    <title lang="es">Laura sin censura</title>
-  </programme>
-  <programme start="20261103080000 +0000" channel="lasestrellasnacionalv3" stop="20261103085000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261103085000 +0000" channel="lasestrellasnacionalv3" stop="20261103094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261103094000 +0000" channel="lasestrellasnacionalv3" stop="20261103103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103103000 +0000" channel="lasestrellasnacionalv3" stop="20261103112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103112000 +0000" channel="lasestrellasnacionalv3" stop="20261103131000 +0000">
-    <title lang="es">Mujer Casos de la Vida Real</title>
-  </programme>
-  <programme start="20261103131000 +0000" channel="lasestrellasnacionalv3" stop="20261103140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103140000 +0000" channel="lasestrellasnacionalv3" stop="20261103150000 +0000">
-    <title lang="es">Las noticiasEn Vivo</title>
-  </programme>
-  <programme start="20261103150000 +0000" channel="lasestrellasnacionalv3" stop="20261103170000 +0000">
-    <title lang="es">DespiertaEn Vivo</title>
-  </programme>
-  <programme start="20261103170000 +0000" channel="lasestrellasnacionalv3" stop="20261103175000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261103175000 +0000" channel="lasestrellasnacionalv3" stop="20261103184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261103184000 +0000" channel="lasestrellasnacionalv3" stop="20261103193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261103193000 +0000" channel="lasestrellasnacionalv3" stop="20261103202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261103202000 +0000" channel="lasestrellasnacionalv3" stop="20261103211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261103211000 +0000" channel="lasestrellasnacionalv3" stop="20261103220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261103220000 +0000" channel="lasestrellasnacionalv3" stop="20261104000000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261104000000 +0000" channel="lasestrellasnacionalv3" stop="20261104005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261104005000 +0000" channel="lasestrellasnacionalv3" stop="20261104014000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261104014000 +0000" channel="lasestrellasnacionalv3" stop="20261104023000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261104023000 +0000" channel="lasestrellasnacionalv3" stop="20261104032000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104032000 +0000" channel="lasestrellasnacionalv3" stop="20261104041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104041000 +0000" channel="lasestrellasnacionalv3" stop="20261104050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104050000 +0000" channel="lasestrellasnacionalv3" stop="20261104063000 +0000">
-    <title lang="es">Nosotros los guapos</title>
-  </programme>
-  <programme start="20261104063000 +0000" channel="lasestrellasnacionalv3" stop="20261104070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
-  </programme>
-  <programme start="20261104070000 +0000" channel="lasestrellasnacionalv3" stop="20261104080000 +0000">
-    <title lang="es">Laura sin censura</title>
-    <episode-num system="onscreen">S2</episode-num>
-  </programme>
-  <programme start="20261104080000 +0000" channel="lasestrellasnacionalv3" stop="20261104085000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261104085000 +0000" channel="lasestrellasnacionalv3" stop="20261104094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261104094000 +0000" channel="lasestrellasnacionalv3" stop="20261104103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104103000 +0000" channel="lasestrellasnacionalv3" stop="20261104112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104112000 +0000" channel="lasestrellasnacionalv3" stop="20261104131000 +0000">
-    <title lang="es">Mujer Casos de la Vida Real</title>
-  </programme>
-  <programme start="20261104131000 +0000" channel="lasestrellasnacionalv3" stop="20261104140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104140000 +0000" channel="lasestrellasnacionalv3" stop="20261104150000 +0000">
-    <title lang="es">Las noticiasEn Vivo</title>
-  </programme>
-  <programme start="20261104150000 +0000" channel="lasestrellasnacionalv3" stop="20261104170000 +0000">
-    <title lang="es">DespiertaEn Vivo</title>
-  </programme>
-  <programme start="20261104170000 +0000" channel="lasestrellasnacionalv3" stop="20261104175000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261104175000 +0000" channel="lasestrellasnacionalv3" stop="20261104184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261104184000 +0000" channel="lasestrellasnacionalv3" stop="20261104193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104193000 +0000" channel="lasestrellasnacionalv3" stop="20261104202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261104202000 +0000" channel="lasestrellasnacionalv3" stop="20261104211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261104211000 +0000" channel="lasestrellasnacionalv3" stop="20261104220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261104220000 +0000" channel="lasestrellasnacionalv3" stop="20261105000000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261105000000 +0000" channel="lasestrellasnacionalv3" stop="20261105005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261105005000 +0000" channel="lasestrellasnacionalv3" stop="20261105014000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261105014000 +0000" channel="lasestrellasnacionalv3" stop="20261105023000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261105023000 +0000" channel="lasestrellasnacionalv3" stop="20261105032000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105032000 +0000" channel="lasestrellasnacionalv3" stop="20261105041000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105041000 +0000" channel="lasestrellasnacionalv3" stop="20261105050000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105050000 +0000" channel="lasestrellasnacionalv3" stop="20261105063000 +0000">
-    <title lang="es">Vecinos</title>
-  </programme>
-  <programme start="20261105063000 +0000" channel="lasestrellasnacionalv3" stop="20261105070000 +0000">
-    <title lang="es">En Punto con Enrique Acevedo</title>
-  </programme>
-  <programme start="20261105070000 +0000" channel="lasestrellasnacionalv3" stop="20261105080000 +0000">
-    <title lang="es">Laura sin censura</title>
-    <episode-num system="onscreen">S2</episode-num>
-  </programme>
-  <programme start="20261105080000 +0000" channel="lasestrellasnacionalv3" stop="20261105085000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261105085000 +0000" channel="lasestrellasnacionalv3" stop="20261105094000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261105094000 +0000" channel="lasestrellasnacionalv3" stop="20261105103000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105103000 +0000" channel="lasestrellasnacionalv3" stop="20261105112000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105112000 +0000" channel="lasestrellasnacionalv3" stop="20261105131000 +0000">
-    <title lang="es">Mujer Casos de la Vida Real</title>
-  </programme>
-  <programme start="20261105131000 +0000" channel="lasestrellasnacionalv3" stop="20261105140000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105140000 +0000" channel="lasestrellasnacionalv3" stop="20261105150000 +0000">
-    <title lang="es">Las noticiasEn Vivo</title>
-  </programme>
-  <programme start="20261105150000 +0000" channel="lasestrellasnacionalv3" stop="20261105170000 +0000">
-    <title lang="es">DespiertaEn Vivo</title>
-  </programme>
-  <programme start="20261105170000 +0000" channel="lasestrellasnacionalv3" stop="20261105175000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261105175000 +0000" channel="lasestrellasnacionalv3" stop="20261105184000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261105184000 +0000" channel="lasestrellasnacionalv3" stop="20261105193000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105193000 +0000" channel="lasestrellasnacionalv3" stop="20261105202000 +0000">
-    <title lang="es">Tan cerca de ti, nace el amor</title>
-  </programme>
-  <programme start="20261105202000 +0000" channel="lasestrellasnacionalv3" stop="20261105211000 +0000">
-    <title lang="es">Guardián de mi Vida</title>
-  </programme>
-  <programme start="20261105211000 +0000" channel="lasestrellasnacionalv3" stop="20261105220000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261105220000 +0000" channel="lasestrellasnacionalv3" stop="20261106000000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261106000000 +0000" channel="lasestrellasnacionalv3" stop="20261106005000 +0000">
-    <title lang="es">Rubi</title>
-  </programme>
-  <programme start="20261102233000 +0000" channel="canal5nacional" stop="20261103003000 +0000">
+  <programme start="20261102233000 +0000" channel="Canal5.mx" stop="20261103003000 +0000">
     <title lang="en">Contrato de corazones, tú y yo</title>
     <desc lang="en">Feri llega a una escuela de élite en donde se convierte en una de las alumnas más populares e ícono de la moda. Logró entrar gracias al esfuerzo de su familia que maneja una tienda de vestidos de XV años de barrio. Su secreto corre peligro.</desc>
     <credits>
@@ -16587,7 +16062,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p31402758_b_v12_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103003000 +0000" channel="canal5nacional" stop="20261103023000 +0000">
+  <programme start="20261103003000 +0000" channel="Canal5.mx" stop="20261103023000 +0000">
     <title lang="en">Las crónicas de Spiderwick</title>
     <desc lang="en">Unos hermanos descubren a criaturas mágicas que están detrás de los acontecimientos extraños ocurridos en la antigua hacienda de su tío abuelo.</desc>
     <credits>
@@ -16607,7 +16082,7 @@ En Vivo</title>
       <value>6.0/10</value>
     </star-rating>
   </programme>
-  <programme start="20261103023000 +0000" channel="canal5nacional" stop="20261103043000 +0000">
+  <programme start="20261103023000 +0000" channel="Canal5.mx" stop="20261103043000 +0000">
     <title lang="en">Me caigo de risa</title>
     <desc lang="en">Show de improvisación protagonizado por Faisy y su disfuncional familia.</desc>
     <credits>
@@ -16620,7 +16095,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p10549957_b_v12_ah.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103043000 +0000" channel="canal5nacional" stop="20261103053000 +0000">
+  <programme start="20261103043000 +0000" channel="Canal5.mx" stop="20261103053000 +0000">
     <title lang="en">La ley y el orden: Unidad de Víctimas Especiales</title>
     <desc lang="en">Dirigida por la capitana Olivia Benson, la Unidad de Víctimas Especiales de la policía de Nueva York, que incluye al sargento Odafin Tutuola, la detective Amanda Rollins y la agente Katriona Tamin, investiga crímenes sacados de los titulares.</desc>
     <credits>
@@ -16635,7 +16110,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261103053000 +0000" channel="canal5nacional" stop="20261103060000 +0000">
+  <programme start="20261103053000 +0000" channel="Canal5.mx" stop="20261103060000 +0000">
     <title lang="en">Live: Contacto deportivo</title>
     <desc lang="en">El destino obligado de los amantes del deporte para estar al día con las noticias más importantes y los partidos más destacados de todos los principales deportes.</desc>
     <category lang="en">Sports</category>
@@ -16645,7 +16120,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261103060000 +0000" channel="canal5nacional" stop="20261103063000 +0000">
+  <programme start="20261103060000 +0000" channel="Canal5.mx" stop="20261103063000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -16655,7 +16130,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103063000 +0000" channel="canal5nacional" stop="20261103070000 +0000">
+  <programme start="20261103063000 +0000" channel="Canal5.mx" stop="20261103070000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -16665,35 +16140,35 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103070000 +0000" channel="canal5nacional" stop="20261103073000 +0000">
+  <programme start="20261103070000 +0000" channel="Canal5.mx" stop="20261103073000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103073000 +0000" channel="canal5nacional" stop="20261103080000 +0000">
+  <programme start="20261103073000 +0000" channel="Canal5.mx" stop="20261103080000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103080000 +0000" channel="canal5nacional" stop="20261103083000 +0000">
+  <programme start="20261103080000 +0000" channel="Canal5.mx" stop="20261103083000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103083000 +0000" channel="canal5nacional" stop="20261103090000 +0000">
+  <programme start="20261103083000 +0000" channel="Canal5.mx" stop="20261103090000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103090000 +0000" channel="canal5nacional" stop="20261103093000 +0000">
+  <programme start="20261103090000 +0000" channel="Canal5.mx" stop="20261103093000 +0000">
     <title lang="en">Crónicas</title>
     <desc lang="en">Historias que hacen historia: una mirada profunda a los sucesos que impactan en la vida diaria de las personas.</desc>
     <category lang="en">News</category>
@@ -16704,21 +16179,21 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261103093000 +0000" channel="canal5nacional" stop="20261103100000 +0000">
+  <programme start="20261103093000 +0000" channel="Canal5.mx" stop="20261103100000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103100000 +0000" channel="canal5nacional" stop="20261103103000 +0000">
+  <programme start="20261103100000 +0000" channel="Canal5.mx" stop="20261103103000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103103000 +0000" channel="canal5nacional" stop="20261103110000 +0000">
+  <programme start="20261103103000 +0000" channel="Canal5.mx" stop="20261103110000 +0000">
     <title lang="en">Especial de R.T.C.</title>
     <desc lang="en">Contenidos audiovisuales en los cuales se abordan temas de interés general para informar, educar y entretener al espectador, con notas, entrevistas, testimonios y algo más.</desc>
     <category lang="en">Instructional</category>
@@ -16726,7 +16201,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p380178_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103110000 +0000" channel="canal5nacional" stop="20261103113000 +0000">
+  <programme start="20261103110000 +0000" channel="Canal5.mx" stop="20261103113000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -16736,7 +16211,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103113000 +0000" channel="canal5nacional" stop="20261103120000 +0000">
+  <programme start="20261103113000 +0000" channel="Canal5.mx" stop="20261103120000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -16746,7 +16221,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103120000 +0000" channel="canal5nacional" stop="20261103123000 +0000">
+  <programme start="20261103120000 +0000" channel="Canal5.mx" stop="20261103123000 +0000">
     <title lang="en">PJ Masks: Héroes en pijamas</title>
     <desc lang="en">Connor, Amaya y Greg se ponen sus pijamas y activan sus amuletos animales, que los llevan a ser sus alter egos durante la noche, embarcándose en aventuras de superhéroes llenas de acción.</desc>
     <credits>
@@ -16762,7 +16237,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103123000 +0000" channel="canal5nacional" stop="20261103130000 +0000">
+  <programme start="20261103123000 +0000" channel="Canal5.mx" stop="20261103130000 +0000">
     <title lang="en">Peppa Pig</title>
     <desc lang="en">Peppa, su familia y amigos encarnan valores que sirven de ejemplo a los más pequeños como el amor, la solidaridad, el diálogo familiar entre otros. Unos personajes simpáticos llenos de energía y actividad donde predomina el compañerismo.</desc>
     <credits>
@@ -16778,7 +16253,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103130000 +0000" channel="canal5nacional" stop="20261103140000 +0000">
+  <programme start="20261103130000 +0000" channel="Canal5.mx" stop="20261103140000 +0000">
     <title lang="en">El show de Bely y Beto</title>
     <desc lang="en">Bely cuida a Beto, un niño juguetón e hiperactivo, y le enseña cosas buenas y positivas. Un espacio donde todos se divierten y aprenden.</desc>
     <category lang="en">Children</category>
@@ -16786,7 +16261,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p375787_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103140000 +0000" channel="canal5nacional" stop="20261103143000 +0000">
+  <programme start="20261103140000 +0000" channel="Canal5.mx" stop="20261103143000 +0000">
     <title lang="en">Ve, perro. ¡Ve!</title>
     <desc lang="en">El cachorro Tag experimenta diferentes aventuras con su mejor amigo, Scooch, resuelve problemas y ayuda a los ciudadanos de Pawston en el camino.</desc>
     <credits>
@@ -16802,7 +16277,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103143000 +0000" channel="canal5nacional" stop="20261103150000 +0000">
+  <programme start="20261103143000 +0000" channel="Canal5.mx" stop="20261103150000 +0000">
     <title lang="en">Masha y el oso</title>
     <desc lang="en">Masha es una niña inquieta que explora el mundo. Un buen día, conoce a Oso, un animal de gran corazón que se convierte en su accidental compañero de aventuras.</desc>
     <credits>
@@ -16817,7 +16292,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103150000 +0000" channel="canal5nacional" stop="20261103160000 +0000">
+  <programme start="20261103150000 +0000" channel="Canal5.mx" stop="20261103160000 +0000">
     <title lang="en">Kung Fu Panda: La Leyenda de Po</title>
     <desc lang="en">Po, un oso panda, guerrero del Dragón y especialista en artes marciales protege el Valle de la Paz de toda clase de amenazas.</desc>
     <credits>
@@ -16833,7 +16308,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103160000 +0000" channel="canal5nacional" stop="20261103170000 +0000">
+  <programme start="20261103160000 +0000" channel="Canal5.mx" stop="20261103170000 +0000">
     <title lang="en">Los pingüinos de Madagascar</title>
     <desc lang="en">Un grupo de pingüinos con un estilo muy peculiar se embarcan en realizar misiones secretas en un zoológico de Nueva York.</desc>
     <credits>
@@ -16849,7 +16324,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103170000 +0000" channel="canal5nacional" stop="20261103183000 +0000">
+  <programme start="20261103170000 +0000" channel="Canal5.mx" stop="20261103183000 +0000">
     <title lang="en">Scooby-Doo y ¿quién crees tú?</title>
     <desc lang="en">El equipo regresa tan valiente, aventurero y obsesionado con casos como antes. Fred, Daphne, Velma, Shaggy y Scooby-Doo se unen a celebridades para resolver misterios.</desc>
     <credits>
@@ -16865,7 +16340,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103183000 +0000" channel="canal5nacional" stop="20261103200000 +0000">
+  <programme start="20261103183000 +0000" channel="Canal5.mx" stop="20261103200000 +0000">
     <title lang="en">Bob Esponja</title>
     <desc lang="en">Bob, una esponja cuadrada y amarilla que junto a su mejor amigo Patricio tienen muchas aventuras en el Fondo de Bikini, la ciudad en la que viven, en el fondo del mar.</desc>
     <credits>
@@ -16881,7 +16356,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103200000 +0000" channel="canal5nacional" stop="20261103213000 +0000">
+  <programme start="20261103200000 +0000" channel="Canal5.mx" stop="20261103213000 +0000">
     <title lang="en">El Chavo Animado</title>
     <desc lang="en">Después de más de 30 años de entretenimiento para grandes y pequeños con la serie "El Chavo del 8," Roberto Gómez Bolaños (mejor conocido como "Chespirito"), trae la versión animada de este famoso programa.</desc>
     <credits>
@@ -16897,7 +16372,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103213000 +0000" channel="canal5nacional" stop="20261103233000 +0000">
+  <programme start="20261103213000 +0000" channel="Canal5.mx" stop="20261103233000 +0000">
     <title lang="en">¿Cuál es el bueno?</title>
     <desc lang="en">Diversos famosos compiten para descubrir a los farsantes y acumular puntos para su equipo.</desc>
     <category lang="en">Game Shows</category>
@@ -16908,7 +16383,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261103233000 +0000" channel="canal5nacional" stop="20261104003000 +0000">
+  <programme start="20261103233000 +0000" channel="Canal5.mx" stop="20261104003000 +0000">
     <title lang="en">Contrato de corazones, tú y yo</title>
     <desc lang="en">Feri llega a una escuela de élite en donde se convierte en una de las alumnas más populares e ícono de la moda. Logró entrar gracias al esfuerzo de su familia que maneja una tienda de vestidos de XV años de barrio. Su secreto corre peligro.</desc>
     <credits>
@@ -16921,7 +16396,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p31402758_b_v12_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104003000 +0000" channel="canal5nacional" stop="20261104023000 +0000">
+  <programme start="20261104003000 +0000" channel="Canal5.mx" stop="20261104023000 +0000">
     <title lang="en">Daniel, el travieso</title>
     <desc lang="en">La señora Wilson acepta hospedar al pequeño Daniel en su casa mientras sus padres están de viaje. La pobre señora no imagina el problema que acaba de crear para su malhumorado esposo.</desc>
     <credits>
@@ -16941,7 +16416,7 @@ En Vivo</title>
       <value>4.0/10</value>
     </star-rating>
   </programme>
-  <programme start="20261104023000 +0000" channel="canal5nacional" stop="20261104043000 +0000">
+  <programme start="20261104023000 +0000" channel="Canal5.mx" stop="20261104043000 +0000">
     <title lang="en">Me caigo de risa</title>
     <desc lang="en">Show de improvisación protagonizado por Faisy y su disfuncional familia.</desc>
     <credits>
@@ -16954,7 +16429,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p10549957_b_v12_ah.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104043000 +0000" channel="canal5nacional" stop="20261104053000 +0000">
+  <programme start="20261104043000 +0000" channel="Canal5.mx" stop="20261104053000 +0000">
     <title lang="en">La ley y el orden: Unidad de Víctimas Especiales</title>
     <desc lang="en">Dirigida por la capitana Olivia Benson, la Unidad de Víctimas Especiales de la policía de Nueva York, que incluye al sargento Odafin Tutuola, la detective Amanda Rollins y la agente Katriona Tamin, investiga crímenes sacados de los titulares.</desc>
     <credits>
@@ -16969,7 +16444,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261104053000 +0000" channel="canal5nacional" stop="20261104060000 +0000">
+  <programme start="20261104053000 +0000" channel="Canal5.mx" stop="20261104060000 +0000">
     <title lang="en">Live: Contacto deportivo</title>
     <desc lang="en">El destino obligado de los amantes del deporte para estar al día con las noticias más importantes y los partidos más destacados de todos los principales deportes.</desc>
     <category lang="en">Sports</category>
@@ -16979,7 +16454,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261104060000 +0000" channel="canal5nacional" stop="20261104063000 +0000">
+  <programme start="20261104060000 +0000" channel="Canal5.mx" stop="20261104063000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -16989,7 +16464,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104063000 +0000" channel="canal5nacional" stop="20261104070000 +0000">
+  <programme start="20261104063000 +0000" channel="Canal5.mx" stop="20261104070000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -16999,35 +16474,35 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104070000 +0000" channel="canal5nacional" stop="20261104073000 +0000">
+  <programme start="20261104070000 +0000" channel="Canal5.mx" stop="20261104073000 +0000">
     <title lang="en">Estatus</title>
     <desc lang="en">Las noticias mercadológicas más importantes de la actualidad.</desc>
     <category lang="en">Business</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p8065523_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104073000 +0000" channel="canal5nacional" stop="20261104080000 +0000">
+  <programme start="20261104073000 +0000" channel="Canal5.mx" stop="20261104080000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104080000 +0000" channel="canal5nacional" stop="20261104083000 +0000">
+  <programme start="20261104080000 +0000" channel="Canal5.mx" stop="20261104083000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104083000 +0000" channel="canal5nacional" stop="20261104090000 +0000">
+  <programme start="20261104083000 +0000" channel="Canal5.mx" stop="20261104090000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104090000 +0000" channel="canal5nacional" stop="20261104093000 +0000">
+  <programme start="20261104090000 +0000" channel="Canal5.mx" stop="20261104093000 +0000">
     <title lang="en">Crónicas</title>
     <desc lang="en">Historias que hacen historia: una mirada profunda a los sucesos que impactan en la vida diaria de las personas.</desc>
     <category lang="en">News</category>
@@ -17038,21 +16513,21 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261104093000 +0000" channel="canal5nacional" stop="20261104100000 +0000">
+  <programme start="20261104093000 +0000" channel="Canal5.mx" stop="20261104100000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104100000 +0000" channel="canal5nacional" stop="20261104103000 +0000">
+  <programme start="20261104100000 +0000" channel="Canal5.mx" stop="20261104103000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104103000 +0000" channel="canal5nacional" stop="20261104110000 +0000">
+  <programme start="20261104103000 +0000" channel="Canal5.mx" stop="20261104110000 +0000">
     <title lang="en">Especial de R.T.C.</title>
     <desc lang="en">Contenidos audiovisuales en los cuales se abordan temas de interés general para informar, educar y entretener al espectador, con notas, entrevistas, testimonios y algo más.</desc>
     <category lang="en">Instructional</category>
@@ -17060,7 +16535,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p380178_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104110000 +0000" channel="canal5nacional" stop="20261104113000 +0000">
+  <programme start="20261104110000 +0000" channel="Canal5.mx" stop="20261104113000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17070,7 +16545,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104113000 +0000" channel="canal5nacional" stop="20261104120000 +0000">
+  <programme start="20261104113000 +0000" channel="Canal5.mx" stop="20261104120000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17080,7 +16555,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104120000 +0000" channel="canal5nacional" stop="20261104123000 +0000">
+  <programme start="20261104120000 +0000" channel="Canal5.mx" stop="20261104123000 +0000">
     <title lang="en">PJ Masks: Héroes en pijamas</title>
     <desc lang="en">Connor, Amaya y Greg se ponen sus pijamas y activan sus amuletos animales, que los llevan a ser sus alter egos durante la noche, embarcándose en aventuras de superhéroes llenas de acción.</desc>
     <credits>
@@ -17096,7 +16571,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104123000 +0000" channel="canal5nacional" stop="20261104130000 +0000">
+  <programme start="20261104123000 +0000" channel="Canal5.mx" stop="20261104130000 +0000">
     <title lang="en">Peppa Pig</title>
     <desc lang="en">Peppa, su familia y amigos encarnan valores que sirven de ejemplo a los más pequeños como el amor, la solidaridad, el diálogo familiar entre otros. Unos personajes simpáticos llenos de energía y actividad donde predomina el compañerismo.</desc>
     <credits>
@@ -17112,7 +16587,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104130000 +0000" channel="canal5nacional" stop="20261104133000 +0000">
+  <programme start="20261104130000 +0000" channel="Canal5.mx" stop="20261104133000 +0000">
     <title lang="en">Bebés llorones lágrimas mágicas</title>
     <desc lang="en">Pequeños bebés con grandes personalidades descubren un mundo donde las lágrimas son mágicas y tienen poderes especiales.</desc>
     <credits>
@@ -17128,7 +16603,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261104133000 +0000" channel="canal5nacional" stop="20261104140000 +0000">
+  <programme start="20261104133000 +0000" channel="Canal5.mx" stop="20261104140000 +0000">
     <title lang="en">El show de Bely y Beto</title>
     <desc lang="en">Bely cuida a Beto, un niño juguetón e hiperactivo, y le enseña cosas buenas y positivas. Un espacio donde todos se divierten y aprenden.</desc>
     <category lang="en">Children</category>
@@ -17136,7 +16611,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p375787_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104140000 +0000" channel="canal5nacional" stop="20261104143000 +0000">
+  <programme start="20261104140000 +0000" channel="Canal5.mx" stop="20261104143000 +0000">
     <title lang="en">Ve, perro. ¡Ve!</title>
     <desc lang="en">El cachorro Tag experimenta diferentes aventuras con su mejor amigo, Scooch, resuelve problemas y ayuda a los ciudadanos de Pawston en el camino.</desc>
     <credits>
@@ -17152,7 +16627,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104143000 +0000" channel="canal5nacional" stop="20261104150000 +0000">
+  <programme start="20261104143000 +0000" channel="Canal5.mx" stop="20261104150000 +0000">
     <title lang="en">Masha y el oso</title>
     <desc lang="en">Masha es una niña inquieta que explora el mundo. Un buen día, conoce a Oso, un animal de gran corazón que se convierte en su accidental compañero de aventuras.</desc>
     <credits>
@@ -17167,7 +16642,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104150000 +0000" channel="canal5nacional" stop="20261104160000 +0000">
+  <programme start="20261104150000 +0000" channel="Canal5.mx" stop="20261104160000 +0000">
     <title lang="en">Kung Fu Panda: La Leyenda de Po</title>
     <desc lang="en">Po, un oso panda, guerrero del Dragón y especialista en artes marciales protege el Valle de la Paz de toda clase de amenazas.</desc>
     <credits>
@@ -17183,7 +16658,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104160000 +0000" channel="canal5nacional" stop="20261104170000 +0000">
+  <programme start="20261104160000 +0000" channel="Canal5.mx" stop="20261104170000 +0000">
     <title lang="en">Los pingüinos de Madagascar</title>
     <desc lang="en">Un grupo de pingüinos con un estilo muy peculiar se embarcan en realizar misiones secretas en un zoológico de Nueva York.</desc>
     <credits>
@@ -17199,7 +16674,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104170000 +0000" channel="canal5nacional" stop="20261104183000 +0000">
+  <programme start="20261104170000 +0000" channel="Canal5.mx" stop="20261104183000 +0000">
     <title lang="en">Scooby-Doo y ¿quién crees tú?</title>
     <desc lang="en">El equipo regresa tan valiente, aventurero y obsesionado con casos como antes. Fred, Daphne, Velma, Shaggy y Scooby-Doo se unen a celebridades para resolver misterios.</desc>
     <credits>
@@ -17215,7 +16690,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104183000 +0000" channel="canal5nacional" stop="20261104200000 +0000">
+  <programme start="20261104183000 +0000" channel="Canal5.mx" stop="20261104200000 +0000">
     <title lang="en">Bob Esponja</title>
     <desc lang="en">Bob, una esponja cuadrada y amarilla que junto a su mejor amigo Patricio tienen muchas aventuras en el Fondo de Bikini, la ciudad en la que viven, en el fondo del mar.</desc>
     <credits>
@@ -17231,7 +16706,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104200000 +0000" channel="canal5nacional" stop="20261104213000 +0000">
+  <programme start="20261104200000 +0000" channel="Canal5.mx" stop="20261104213000 +0000">
     <title lang="en">El Chavo Animado</title>
     <desc lang="en">Después de más de 30 años de entretenimiento para grandes y pequeños con la serie "El Chavo del 8," Roberto Gómez Bolaños (mejor conocido como "Chespirito"), trae la versión animada de este famoso programa.</desc>
     <credits>
@@ -17247,7 +16722,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104213000 +0000" channel="canal5nacional" stop="20261104233000 +0000">
+  <programme start="20261104213000 +0000" channel="Canal5.mx" stop="20261104233000 +0000">
     <title lang="en">¿Cuál es el bueno?</title>
     <desc lang="en">Diversos famosos compiten para descubrir a los farsantes y acumular puntos para su equipo.</desc>
     <category lang="en">Game Shows</category>
@@ -17258,7 +16733,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261104233000 +0000" channel="canal5nacional" stop="20261105003000 +0000">
+  <programme start="20261104233000 +0000" channel="Canal5.mx" stop="20261105003000 +0000">
     <title lang="en">Contrato de corazones, tú y yo</title>
     <desc lang="en">Feri llega a una escuela de élite en donde se convierte en una de las alumnas más populares e ícono de la moda. Logró entrar gracias al esfuerzo de su familia que maneja una tienda de vestidos de XV años de barrio. Su secreto corre peligro.</desc>
     <credits>
@@ -17271,7 +16746,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p31402758_b_v12_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105003000 +0000" channel="canal5nacional" stop="20261105023000 +0000">
+  <programme start="20261105003000 +0000" channel="Canal5.mx" stop="20261105023000 +0000">
     <title lang="en">Pequeños traviesos al rescate</title>
     <desc lang="en">La pandilla está tratando de conseguir dinero para que la abuela no pierda su panadería. Su última opción es ganar un concurso de talentos.</desc>
     <credits>
@@ -17288,7 +16763,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261105023000 +0000" channel="canal5nacional" stop="20261105043000 +0000">
+  <programme start="20261105023000 +0000" channel="Canal5.mx" stop="20261105043000 +0000">
     <title lang="en">Me caigo de risa</title>
     <desc lang="en">Show de improvisación protagonizado por Faisy y su disfuncional familia.</desc>
     <credits>
@@ -17301,7 +16776,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p10549957_b_v12_ah.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105043000 +0000" channel="canal5nacional" stop="20261105053000 +0000">
+  <programme start="20261105043000 +0000" channel="Canal5.mx" stop="20261105053000 +0000">
     <title lang="en">La ley y el orden: Unidad de Víctimas Especiales</title>
     <desc lang="en">Dirigida por la capitana Olivia Benson, la Unidad de Víctimas Especiales de la policía de Nueva York, que incluye al sargento Odafin Tutuola, la detective Amanda Rollins y la agente Katriona Tamin, investiga crímenes sacados de los titulares.</desc>
     <credits>
@@ -17316,7 +16791,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261105053000 +0000" channel="canal5nacional" stop="20261105060000 +0000">
+  <programme start="20261105053000 +0000" channel="Canal5.mx" stop="20261105060000 +0000">
     <title lang="en">Live: Contacto deportivo</title>
     <desc lang="en">El destino obligado de los amantes del deporte para estar al día con las noticias más importantes y los partidos más destacados de todos los principales deportes.</desc>
     <category lang="en">Sports</category>
@@ -17326,7 +16801,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261105060000 +0000" channel="canal5nacional" stop="20261105063000 +0000">
+  <programme start="20261105060000 +0000" channel="Canal5.mx" stop="20261105063000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17336,7 +16811,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105063000 +0000" channel="canal5nacional" stop="20261105070000 +0000">
+  <programme start="20261105063000 +0000" channel="Canal5.mx" stop="20261105070000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17346,35 +16821,35 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105070000 +0000" channel="canal5nacional" stop="20261105073000 +0000">
+  <programme start="20261105070000 +0000" channel="Canal5.mx" stop="20261105073000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105073000 +0000" channel="canal5nacional" stop="20261105080000 +0000">
+  <programme start="20261105073000 +0000" channel="Canal5.mx" stop="20261105080000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105080000 +0000" channel="canal5nacional" stop="20261105083000 +0000">
+  <programme start="20261105080000 +0000" channel="Canal5.mx" stop="20261105083000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105083000 +0000" channel="canal5nacional" stop="20261105090000 +0000">
+  <programme start="20261105083000 +0000" channel="Canal5.mx" stop="20261105090000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105090000 +0000" channel="canal5nacional" stop="20261105093000 +0000">
+  <programme start="20261105090000 +0000" channel="Canal5.mx" stop="20261105093000 +0000">
     <title lang="en">Crónicas</title>
     <desc lang="en">Historias que hacen historia: una mirada profunda a los sucesos que impactan en la vida diaria de las personas.</desc>
     <category lang="en">News</category>
@@ -17385,21 +16860,21 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261105093000 +0000" channel="canal5nacional" stop="20261105100000 +0000">
+  <programme start="20261105093000 +0000" channel="Canal5.mx" stop="20261105100000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105100000 +0000" channel="canal5nacional" stop="20261105103000 +0000">
+  <programme start="20261105100000 +0000" channel="Canal5.mx" stop="20261105103000 +0000">
     <title lang="en">CV directo</title>
     <desc lang="en">Venta de productos de todo tipo.</desc>
     <category lang="en">Paid Program</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p346430_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105103000 +0000" channel="canal5nacional" stop="20261105110000 +0000">
+  <programme start="20261105103000 +0000" channel="Canal5.mx" stop="20261105110000 +0000">
     <title lang="en">Especial de R.T.C.</title>
     <desc lang="en">Contenidos audiovisuales en los cuales se abordan temas de interés general para informar, educar y entretener al espectador, con notas, entrevistas, testimonios y algo más.</desc>
     <category lang="en">Instructional</category>
@@ -17407,7 +16882,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p380178_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105110000 +0000" channel="canal5nacional" stop="20261105113000 +0000">
+  <programme start="20261105110000 +0000" channel="Canal5.mx" stop="20261105113000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17417,7 +16892,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105113000 +0000" channel="canal5nacional" stop="20261105120000 +0000">
+  <programme start="20261105113000 +0000" channel="Canal5.mx" stop="20261105120000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17427,7 +16902,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105120000 +0000" channel="canal5nacional" stop="20261105123000 +0000">
+  <programme start="20261105120000 +0000" channel="Canal5.mx" stop="20261105123000 +0000">
     <title lang="en">PJ Masks: Héroes en pijamas</title>
     <desc lang="en">Connor, Amaya y Greg se ponen sus pijamas y activan sus amuletos animales, que los llevan a ser sus alter egos durante la noche, embarcándose en aventuras de superhéroes llenas de acción.</desc>
     <credits>
@@ -17443,7 +16918,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105123000 +0000" channel="canal5nacional" stop="20261105130000 +0000">
+  <programme start="20261105123000 +0000" channel="Canal5.mx" stop="20261105130000 +0000">
     <title lang="en">Peppa Pig</title>
     <desc lang="en">Peppa, su familia y amigos encarnan valores que sirven de ejemplo a los más pequeños como el amor, la solidaridad, el diálogo familiar entre otros. Unos personajes simpáticos llenos de energía y actividad donde predomina el compañerismo.</desc>
     <credits>
@@ -17459,7 +16934,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105130000 +0000" channel="canal5nacional" stop="20261105140000 +0000">
+  <programme start="20261105130000 +0000" channel="Canal5.mx" stop="20261105140000 +0000">
     <title lang="en">El show de Bely y Beto</title>
     <desc lang="en">Bely cuida a Beto, un niño juguetón e hiperactivo, y le enseña cosas buenas y positivas. Un espacio donde todos se divierten y aprenden.</desc>
     <category lang="en">Children</category>
@@ -17467,7 +16942,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p375787_i_s2_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105140000 +0000" channel="canal5nacional" stop="20261105143000 +0000">
+  <programme start="20261105140000 +0000" channel="Canal5.mx" stop="20261105143000 +0000">
     <title lang="en">Ve, perro. ¡Ve!</title>
     <desc lang="en">El cachorro Tag experimenta diferentes aventuras con su mejor amigo, Scooch, resuelve problemas y ayuda a los ciudadanos de Pawston en el camino.</desc>
     <credits>
@@ -17483,7 +16958,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105143000 +0000" channel="canal5nacional" stop="20261105150000 +0000">
+  <programme start="20261105143000 +0000" channel="Canal5.mx" stop="20261105150000 +0000">
     <title lang="en">Masha y el oso</title>
     <desc lang="en">Masha es una niña inquieta que explora el mundo. Un buen día, conoce a Oso, un animal de gran corazón que se convierte en su accidental compañero de aventuras.</desc>
     <credits>
@@ -17498,7 +16973,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105150000 +0000" channel="canal5nacional" stop="20261105160000 +0000">
+  <programme start="20261105150000 +0000" channel="Canal5.mx" stop="20261105160000 +0000">
     <title lang="en">Kung Fu Panda: La Leyenda de Po</title>
     <desc lang="en">Po, un oso panda, guerrero del Dragón y especialista en artes marciales protege el Valle de la Paz de toda clase de amenazas.</desc>
     <credits>
@@ -17514,7 +16989,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105160000 +0000" channel="canal5nacional" stop="20261105170000 +0000">
+  <programme start="20261105160000 +0000" channel="Canal5.mx" stop="20261105170000 +0000">
     <title lang="en">Los pingüinos de Madagascar</title>
     <desc lang="en">Un grupo de pingüinos con un estilo muy peculiar se embarcan en realizar misiones secretas en un zoológico de Nueva York.</desc>
     <credits>
@@ -17530,7 +17005,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105170000 +0000" channel="canal5nacional" stop="20261105183000 +0000">
+  <programme start="20261105170000 +0000" channel="Canal5.mx" stop="20261105183000 +0000">
     <title lang="en">Scooby-Doo y ¿quién crees tú?</title>
     <desc lang="en">El equipo regresa tan valiente, aventurero y obsesionado con casos como antes. Fred, Daphne, Velma, Shaggy y Scooby-Doo se unen a celebridades para resolver misterios.</desc>
     <credits>
@@ -17546,7 +17021,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105183000 +0000" channel="canal5nacional" stop="20261105200000 +0000">
+  <programme start="20261105183000 +0000" channel="Canal5.mx" stop="20261105200000 +0000">
     <title lang="en">Bob Esponja</title>
     <desc lang="en">Bob, una esponja cuadrada y amarilla que junto a su mejor amigo Patricio tienen muchas aventuras en el Fondo de Bikini, la ciudad en la que viven, en el fondo del mar.</desc>
     <credits>
@@ -17562,7 +17037,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105200000 +0000" channel="canal5nacional" stop="20261105213000 +0000">
+  <programme start="20261105200000 +0000" channel="Canal5.mx" stop="20261105213000 +0000">
     <title lang="en">El Chavo Animado</title>
     <desc lang="en">Después de más de 30 años de entretenimiento para grandes y pequeños con la serie "El Chavo del 8," Roberto Gómez Bolaños (mejor conocido como "Chespirito"), trae la versión animada de este famoso programa.</desc>
     <credits>
@@ -17578,7 +17053,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105213000 +0000" channel="canal5nacional" stop="20261105233000 +0000">
+  <programme start="20261105213000 +0000" channel="Canal5.mx" stop="20261105233000 +0000">
     <title lang="en">¿Cuál es el bueno?</title>
     <desc lang="en">Diversos famosos compiten para descubrir a los farsantes y acumular puntos para su equipo.</desc>
     <category lang="en">Game Shows</category>
@@ -17589,7 +17064,7 @@ En Vivo</title>
       <value>TV14</value>
     </rating>
   </programme>
-  <programme start="20261105233000 +0000" channel="canal5nacional" stop="20261106003000 +0000">
+  <programme start="20261105233000 +0000" channel="Canal5.mx" stop="20261106003000 +0000">
     <title lang="en">Contrato de corazones, tú y yo</title>
     <desc lang="en">Feri llega a una escuela de élite en donde se convierte en una de las alumnas más populares e ícono de la moda. Logró entrar gracias al esfuerzo de su familia que maneja una tienda de vestidos de XV años de barrio. Su secreto corre peligro.</desc>
     <credits>
@@ -182326,249 +181801,62 @@ Repetición</title>
       <value>+14</value>
     </rating>
   </programme>
-  <programme start="20261102223000 +0000" channel="canal2televisionchichicasteca" stop="20261103003000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
+  <programme start="20261102210000 +0000" channel="canal2televisionchichicasteca" stop="20261103010000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103003000 +0000" channel="canal2televisionchichicasteca" stop="20261103013000 +0000">
-    <title lang="es">Infinito Amor</title>
+  <programme start="20261103010000 +0000" channel="canal2televisionchichicasteca" stop="20261103050000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103013000 +0000" channel="canal2televisionchichicasteca" stop="20261103023000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
+  <programme start="20261103050000 +0000" channel="canal2televisionchichicasteca" stop="20261103090000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103023000 +0000" channel="canal2televisionchichicasteca" stop="20261103033000 +0000">
-    <title lang="es">Sabor a ti</title>
+  <programme start="20261103090000 +0000" channel="canal2televisionchichicasteca" stop="20261103130000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103033000 +0000" channel="canal2televisionchichicasteca" stop="20261103043000 +0000">
-    <title lang="es">Tierra de Amor y Coraje</title>
+  <programme start="20261103130000 +0000" channel="canal2televisionchichicasteca" stop="20261103170000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103043000 +0000" channel="canal2televisionchichicasteca" stop="20261103050000 +0000">
-    <title lang="es">En Punto Enrique Acevedo
-En Vivo</title>
+  <programme start="20261103170000 +0000" channel="canal2televisionchichicasteca" stop="20261103210000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103050000 +0000" channel="canal2televisionchichicasteca" stop="20261103060000 +0000">
-    <title lang="es">Tercer Grado Deportivo</title>
+  <programme start="20261103210000 +0000" channel="canal2televisionchichicasteca" stop="20261104010000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103060000 +0000" channel="canal2televisionchichicasteca" stop="20261103063000 +0000">
-    <title lang="es">Iglesia Universal</title>
+  <programme start="20261104010000 +0000" channel="canal2televisionchichicasteca" stop="20261104050000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103063000 +0000" channel="canal2televisionchichicasteca" stop="20261103093000 +0000">
-    <title lang="es">Infomerciales</title>
+  <programme start="20261104050000 +0000" channel="canal2televisionchichicasteca" stop="20261104090000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103093000 +0000" channel="canal2televisionchichicasteca" stop="20261103100000 +0000">
-    <title lang="es">Cronicas</title>
+  <programme start="20261104090000 +0000" channel="canal2televisionchichicasteca" stop="20261104130000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103100000 +0000" channel="canal2televisionchichicasteca" stop="20261103103000 +0000">
-    <title lang="es">Infomerciales</title>
+  <programme start="20261104130000 +0000" channel="canal2televisionchichicasteca" stop="20261104170000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103103000 +0000" channel="canal2televisionchichicasteca" stop="20261103110000 +0000">
-    <title lang="es">Especial de R.T.C</title>
+  <programme start="20261104170000 +0000" channel="canal2televisionchichicasteca" stop="20261104210000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103110000 +0000" channel="canal2televisionchichicasteca" stop="20261103113000 +0000">
-    <title lang="es">Infomerciales</title>
+  <programme start="20261104210000 +0000" channel="canal2televisionchichicasteca" stop="20261105010000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103113000 +0000" channel="canal2televisionchichicasteca" stop="20261103120000 +0000">
-    <title lang="es">Farmacias Similares</title>
+  <programme start="20261105010000 +0000" channel="canal2televisionchichicasteca" stop="20261105050000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103120000 +0000" channel="canal2televisionchichicasteca" stop="20261103130000 +0000">
-    <title lang="es">Las noticias
-En Vivo</title>
+  <programme start="20261105050000 +0000" channel="canal2televisionchichicasteca" stop="20261105090000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103130000 +0000" channel="canal2televisionchichicasteca" stop="20261103150000 +0000">
-    <title lang="es">Despierta
-En Vivo</title>
+  <programme start="20261105090000 +0000" channel="canal2televisionchichicasteca" stop="20261105130000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103150000 +0000" channel="canal2televisionchichicasteca" stop="20261103180000 +0000">
-    <title lang="es">Hoy
-En Vivo</title>
+  <programme start="20261105130000 +0000" channel="canal2televisionchichicasteca" stop="20261105170000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103180000 +0000" channel="canal2televisionchichicasteca" stop="20261103193000 +0000">
-    <title lang="es">Cuéntamelo Ya!
-En Vivo</title>
+  <programme start="20261105170000 +0000" channel="canal2televisionchichicasteca" stop="20261105210000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
-  <programme start="20261103193000 +0000" channel="canal2televisionchichicasteca" stop="20261103203000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261103203000 +0000" channel="canal2televisionchichicasteca" stop="20261103213000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261103213000 +0000" channel="canal2televisionchichicasteca" stop="20261103223000 +0000">
-    <title lang="es">Piensa rápido</title>
-  </programme>
-  <programme start="20261103223000 +0000" channel="canal2televisionchichicasteca" stop="20261104003000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261104003000 +0000" channel="canal2televisionchichicasteca" stop="20261104013000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261104013000 +0000" channel="canal2televisionchichicasteca" stop="20261104023000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261104023000 +0000" channel="canal2televisionchichicasteca" stop="20261104033000 +0000">
-    <title lang="es">Sabor a ti</title>
-  </programme>
-  <programme start="20261104033000 +0000" channel="canal2televisionchichicasteca" stop="20261104043000 +0000">
-    <title lang="es">Tierra de Amor y Coraje</title>
-  </programme>
-  <programme start="20261104043000 +0000" channel="canal2televisionchichicasteca" stop="20261104050000 +0000">
-    <title lang="es">En Punto Enrique Acevedo
-En Vivo</title>
-  </programme>
-  <programme start="20261104050000 +0000" channel="canal2televisionchichicasteca" stop="20261104060000 +0000">
-    <title lang="es">Crímenes del pasado</title>
-  </programme>
-  <programme start="20261104060000 +0000" channel="canal2televisionchichicasteca" stop="20261104063000 +0000">
-    <title lang="es">Iglesia Universal</title>
-  </programme>
-  <programme start="20261104063000 +0000" channel="canal2televisionchichicasteca" stop="20261104093000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261104093000 +0000" channel="canal2televisionchichicasteca" stop="20261104100000 +0000">
-    <title lang="es">Cronicas</title>
-  </programme>
-  <programme start="20261104100000 +0000" channel="canal2televisionchichicasteca" stop="20261104103000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261104103000 +0000" channel="canal2televisionchichicasteca" stop="20261104110000 +0000">
-    <title lang="es">Especial de R.T.C</title>
-  </programme>
-  <programme start="20261104110000 +0000" channel="canal2televisionchichicasteca" stop="20261104113000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261104113000 +0000" channel="canal2televisionchichicasteca" stop="20261104120000 +0000">
-    <title lang="es">Farmacias Similares</title>
-  </programme>
-  <programme start="20261104120000 +0000" channel="canal2televisionchichicasteca" stop="20261104130000 +0000">
-    <title lang="es">Las noticias
-En Vivo</title>
-  </programme>
-  <programme start="20261104130000 +0000" channel="canal2televisionchichicasteca" stop="20261104150000 +0000">
-    <title lang="es">Despierta
-En Vivo</title>
-  </programme>
-  <programme start="20261104150000 +0000" channel="canal2televisionchichicasteca" stop="20261104180000 +0000">
-    <title lang="es">Hoy
-En Vivo</title>
-  </programme>
-  <programme start="20261104180000 +0000" channel="canal2televisionchichicasteca" stop="20261104193000 +0000">
-    <title lang="es">Cuéntamelo Ya!
-En Vivo</title>
-  </programme>
-  <programme start="20261104193000 +0000" channel="canal2televisionchichicasteca" stop="20261104203000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261104203000 +0000" channel="canal2televisionchichicasteca" stop="20261104213000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261104213000 +0000" channel="canal2televisionchichicasteca" stop="20261104223000 +0000">
-    <title lang="es">Piensa rápido</title>
-  </programme>
-  <programme start="20261104223000 +0000" channel="canal2televisionchichicasteca" stop="20261105003000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
-  </programme>
-  <programme start="20261105003000 +0000" channel="canal2televisionchichicasteca" stop="20261105013000 +0000">
-    <title lang="es">Infinito Amor</title>
-  </programme>
-  <programme start="20261105013000 +0000" channel="canal2televisionchichicasteca" stop="20261105023000 +0000">
-    <title lang="es">La Rosa de Guadalupe</title>
-  </programme>
-  <programme start="20261105023000 +0000" channel="canal2televisionchichicasteca" stop="20261105033000 +0000">
-    <title lang="es">Sabor a ti</title>
-  </programme>
-  <programme start="20261105033000 +0000" channel="canal2televisionchichicasteca" stop="20261105043000 +0000">
-    <title lang="es">Tierra de Amor y Coraje</title>
-  </programme>
-  <programme start="20261105043000 +0000" channel="canal2televisionchichicasteca" stop="20261105050000 +0000">
-    <title lang="es">En Punto Enrique Acevedo
-En Vivo</title>
-  </programme>
-  <programme start="20261105050000 +0000" channel="canal2televisionchichicasteca" stop="20261105060000 +0000">
-    <title lang="es">Tercer Grado
-En Vivo</title>
-  </programme>
-  <programme start="20261105060000 +0000" channel="canal2televisionchichicasteca" stop="20261105063000 +0000">
-    <title lang="es">Iglesia Universal</title>
-  </programme>
-  <programme start="20261105063000 +0000" channel="canal2televisionchichicasteca" stop="20261105070000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261105070000 +0000" channel="canal2televisionchichicasteca" stop="20261105073000 +0000">
-    <title lang="es">Sognare</title>
-  </programme>
-  <programme start="20261105073000 +0000" channel="canal2televisionchichicasteca" stop="20261105093000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261105093000 +0000" channel="canal2televisionchichicasteca" stop="20261105100000 +0000">
-    <title lang="es">Cronicas</title>
-  </programme>
-  <programme start="20261105100000 +0000" channel="canal2televisionchichicasteca" stop="20261105103000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261105103000 +0000" channel="canal2televisionchichicasteca" stop="20261105110000 +0000">
-    <title lang="es">Especial de R.T.C</title>
-  </programme>
-  <programme start="20261105110000 +0000" channel="canal2televisionchichicasteca" stop="20261105113000 +0000">
-    <title lang="es">Infomerciales</title>
-  </programme>
-  <programme start="20261105113000 +0000" channel="canal2televisionchichicasteca" stop="20261105120000 +0000">
-    <title lang="es">Farmacias Similares</title>
-  </programme>
-  <programme start="20261105120000 +0000" channel="canal2televisionchichicasteca" stop="20261105130000 +0000">
-    <title lang="es">Las noticias
-En Vivo</title>
-  </programme>
-  <programme start="20261105130000 +0000" channel="canal2televisionchichicasteca" stop="20261105150000 +0000">
-    <title lang="es">Despierta
-En Vivo</title>
-  </programme>
-  <programme start="20261105150000 +0000" channel="canal2televisionchichicasteca" stop="20261105180000 +0000">
-    <title lang="es">Hoy
-En Vivo</title>
-  </programme>
-  <programme start="20261105180000 +0000" channel="canal2televisionchichicasteca" stop="20261105193000 +0000">
-    <title lang="es">Cuéntamelo Ya!
-En Vivo</title>
-  </programme>
-  <programme start="20261105193000 +0000" channel="canal2televisionchichicasteca" stop="20261105203000 +0000">
-    <title lang="es">Como dice el dicho</title>
-  </programme>
-  <programme start="20261105203000 +0000" channel="canal2televisionchichicasteca" stop="20261105213000 +0000">
-    <title lang="es">El Chavo del Ocho</title>
-    <desc lang="es">Las vivencias de El Chavo (Roberto Gómez Bolaños), Kiko (Carlos Villagrán), la Chilindrina (María Antonieta de las Nieves), Ñoño (Édgar Vivar) que juntos hacen un sinfín de travesuras a Doña Florinda (Florinda Meza), Don Ramón (Ramón Valdés), Doña Clotilde (Angelines Fernández), el Señor Barriga (Édgar Vivar) y el Profesor Jirafales (Rubén Aguirre).</desc>
-    <date>1972</date>
-    <category lang="es">Comedia</category>
-    <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/el_chavo_del_ocho.jpg"/>
-    <rating system="MX">
-      <value>TV-PG</value>
-    </rating>
-    <star-rating system="MX">
-      <value>9.0</value>
-    </star-rating>
-  </programme>
-  <programme start="20261105213000 +0000" channel="canal2televisionchichicasteca" stop="20261105223000 +0000">
-    <title lang="es">Piensa rápido</title>
-  </programme>
-  <programme start="20261105223000 +0000" channel="canal2televisionchichicasteca" stop="20261106003000 +0000">
-    <title lang="es">Mi corazón es tuyo</title>
+  <programme start="20261105210000 +0000" channel="canal2televisionchichicasteca" stop="20261106010000 +0000">
+    <title lang="es">TVN 2</title>
   </programme>
   <programme start="20261102220000 +0000" channel="canal4televisionchichicasteca" stop="20261103001500 +0000">
     <title lang="es">Telenoche</title>

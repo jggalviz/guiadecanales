@@ -2840,15 +2840,15 @@ https://60417ddeaf0d9.streamlock.net/telemetrika3/smil:telemetrika3.smil/playlis
 https://5e50264bd6766.streamlock.net/canal442/videocanal442/playlist.m3u8
 #EXTINF:-1 tvg-id="canal44ciudadjuarezchihuahua" tvg-name="Canal 44 Ciudad Juárez Chihuahua" tvg-logo="https://i.imgur.com/YDp8MlN.png" group-title="México",Canal 44 Ciudad Juárez Chihuahua
 https://5e50264bd6766.streamlock.net/canal44/videocanal44/playlist.m3u8
-#EXTINF:-1 tvg-id="canal5nacional" tvg-name="Canal 5 Nacional" tvg-logo="https://i.imgur.com/uZdVSoW.png" group-title="México",Canal 5 Nacional
+#EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5
 http://38.65.175.87:8000/play/a0ll/index.m3u8u?hls
-#EXTINF:-1 tvg-id="canal5nacional" tvg-name="Canal 5 Nacional" tvg-logo="https://i.imgur.com/uZdVSoW.png" group-title="México",Canal 5 Nacional (Opc. 2)
+#EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5 (Opc. 2)
 http://45.5.118.152:8000/play/a03i/index.m3u8
-#EXTINF:-1 tvg-id="canal5nacional" tvg-name="Canal 5 Nacional" tvg-logo="https://i.imgur.com/uZdVSoW.png" group-title="México",Canal 5 Nacional (Opc. 3)
+#EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5 (Opc. 3)
 http://200.35.176.154:8000/play/a067/index.m3u8
-#EXTINF:-1 tvg-id="canal5nacional" tvg-name="Canal 5 Nacional" tvg-logo="https://i.imgur.com/uZdVSoW.png" group-title="México",Canal 5 Nacional (Opc. 4)
+#EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5 (Opc. 4)
 http://38.65.175.87:8000/play/a0o1/index.m3u8u?hls
-#EXTINF:-1 tvg-id="canal5nacional" tvg-name="Canal 5 Nacional" tvg-logo="https://i.imgur.com/uZdVSoW.png" group-title="México",Canal 5 Nacional (Opc. 5)
+#EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5 (Opc. 5)
 http://38.65.175.87:8000/play/a0fl/index.m3u8u?hls
 #EXTINF:-1 tvg-id="canaloncenacional" tvg-name="Canal Once Nacional" tvg-logo="https://i.imgur.com/K0351vF.png" group-title="México",Canal Once Nacional
 https://vivo.canaloncelive.tv/oncedos/ngrp:pruebachunks_all/.m3u8
@@ -2860,19 +2860,19 @@ https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00567-estrellamedia-estrellagames-e
 https://estrellatv-oando.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="imagentvplusnacional" tvg-name="Imagen TV Plus Nacional" tvg-logo="https://i.postimg.cc/FHFgYTMW/Diseno-sin-titulo(7).png" group-title="México",Imagen TV Plus Nacional
 https://stream.ads.ottera.tv/playlist.m3u8?network_id=13917&device_os=html5&livestream=1&custom_targeting=html5
-#EXTINF:-1 tvg-id="lasestrellasnacionalv1" tvg-name="Las Estrellas Nacional v1" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional v1
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas
 https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8
-#EXTINF:-1 tvg-id="lasestrellasnacionalv1" tvg-name="Las Estrellas Nacional v1" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional v1 (Opc. 2)
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas (Opc. 2)
 http://205.235.6.29:8000/play/13/index.m3u8?hls
-#EXTINF:-1 tvg-id="lasestrellasnacionalv2" tvg-name="Las Estrellas Nacional V2" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional V2
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas (Opc. 3)
 http://181.224.255.210:8001/play/a0se/index.m3u8?hls
-#EXTINF:-1 tvg-id="lasestrellasnacionalv2" tvg-name="Las Estrellas Nacional V2" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional V2 (Opc. 2)
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas (Opc. 4)
 http://205.235.6.29:8000/play/a0z0/index.m3u8?hls
-#EXTINF:-1 tvg-id="lasestrellasnacionalv2" tvg-name="Las Estrellas Nacional V2" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional V2 (Opc. 3)
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas (Opc. 5)
 http://200.59.191.177:8000/play/a0pc/index.m3u8?hls
-#EXTINF:-1 tvg-id="lasestrellasnacionalv2" tvg-name="Las Estrellas Nacional V2" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional V2 (Opc. 4)
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas (Opc. 6)
 http://186.148.196.100:8000/play/a01g
-#EXTINF:-1 tvg-id="lasestrellasnacionalv3" tvg-name="Las Estrellas Nacional V3" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas Nacional V3
+#EXTINF:-1 tvg-id="LasEstrellas.mx" tvg-name="Las Estrellas" tvg-logo="https://i.ibb.co/pF7gtSQ/las-estrellas-co.png" group-title="México",Las Estrellas (Opc. 7)
 http://45.167.2.101:8000/play/a0pk/index.m3u8
 #EXTINF:-1 tvg-id="mexiquensetvedomex" tvg-name="Mexiquense TV Edomex" tvg-logo="https://i.imgur.com/iVfzakA.png" group-title="México",Mexiquense TV Edomex
 https://5e50264bd6766.streamlock.net/mexiquense/videomexiquense/playlist.m3u8
