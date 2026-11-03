@@ -89,6 +89,80 @@
         "Azteca 1",
         "Azteca Uno (Opc.2)"
       ]
+    },
+    "DSPORTS.(ARG).dtvsp": {
+      "nombre": "DSports",
+      "alias": [
+        "DSports",
+        "DSports HD",
+        "DSports SD",
+        "DSports FHD",
+        "DSports UHD",
+        "DSports 4K",
+        "DSports (Opc.2)",
+        "DSports (Opc.3)",
+        "DSports [Opc. 2]",
+        "DSports Espejo",
+        "DSports Backup",
+        "DSports Señal 2",
+        "DSports ARG",
+        "DSports Argentina",
+        "D Sports",
+        "DIRECTV Sports",
+        "DirecTV Sports",
+        "DIRECTV Sports HD",
+        "DIRECTV Sports (Opc.2)",
+        "DIRECTV Sports Espejo",
+        "DIRECTV Sports Backup"
+      ]
+    },
+    "DSPORTS.2.HD.dtvsp": {
+      "nombre": "DSports 2",
+      "alias": [
+        "DSports 2",
+        "DSports2",
+        "DSports 2 HD",
+        "DSports 2 FHD",
+        "DSports 2 4K",
+        "DSports 2 (Opc.2)",
+        "DSports 2 (Opc.3)",
+        "DSports 2 Espejo",
+        "DSports 2 Backup",
+        "DSports 2 ARG",
+        "DSports 2 Argentina",
+        "DIRECTV Sports 2",
+        "DIRECTV Sports 2 HD",
+        "DIRECTV Sports 2 (Opc.2)"
+      ]
+    },
+    "DSPORTS.+.HD.dtvsp": {
+      "nombre": "DSports +",
+      "alias": [
+        "DSports +",
+        "DSports+",
+        "DSports Plus",
+        "DSports Plus HD",
+        "DSports + HD",
+        "DSports Plus (Opc.2)",
+        "DSports + (Opc.2)",
+        "DSports Plus Espejo",
+        "DSports Plus Backup",
+        "DSports PL",
+        "DIRECTV Sports +",
+        "DIRECTV Sports Plus",
+        "DIRECTV Sports + HD"
+      ]
+    },
+    "DSports.Motor.dtvsp": {
+      "nombre": "DSports Motor",
+      "alias": [
+        "DSports Motor",
+        "DSports Motor HD",
+        "DSports Motor (Opc.2)",
+        "DSports Motor Espejo",
+        "DSports Motor Backup",
+        "DIRECTV Sports Motor"
+      ]
     }
   }
 }

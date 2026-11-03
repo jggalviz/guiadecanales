@@ -632,6 +632,37 @@ class EmparejamientoDeCanalesTests(unittest.TestCase):
             generar_epg.emparejar_canales(canales, fuente), {"canal12": "Canal.12.uy"}
         )
 
+    def test_el_mas_distingue_dsports_de_dsports_plus(self) -> None:
+        # "DSPORTS +(DTS+)" y "DSPORTS" son canales distintos: al descartar el
+        # "+" sus tokens coincidian y DSports recibia la parrilla de DSports +.
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                "\n".join(
+                    [
+                        "#EXTM3U",
+                        '#EXTINF:-1 tvg-id="dsports" tvg-name="DSports",DSports HD',
+                        "http://ejemplo.invalid/dsports/index.m3u8",
+                        '#EXTINF:-1 tvg-id="dsportsplus" tvg-name="DSports +",DSports + HD',
+                        "http://ejemplo.invalid/dsports-plus/index.m3u8",
+                        "",
+                    ]
+                )
+            )
+        )
+        fuente = {
+            "DSPORTS.+(DTS+).co": ["DSPORTS +(DTS+)"],
+            "DSPORTS.(COL).(DTSC).co": ["DSPORTS (COL) (DTSC)"],
+        }
+        self.assertEqual(
+            generar_epg.emparejar_canales(canales, fuente).get("dsportsplus"),
+            "DSPORTS.+(DTS+).co",
+        )
+        # Y DSports ya no se queda con la senal de DSports +.
+        self.assertNotEqual(
+            generar_epg.emparejar_canales(canales, fuente).get("dsports"),
+            "DSPORTS.+(DTS+).co",
+        )
+
     def test_los_canal_nn_genericos_de_francia_no_roban_canales(self) -> None:
         # La guia francesa publica "Canal 32" como bucle de Canal+: no puede
         # quedarse con la programacion de un canal 32 latinoamericano.
@@ -855,6 +886,34 @@ class FuentesEpgPorDefectoTests(unittest.TestCase):
             fuentes,
             ["https://ejemplo.invalid/guia1.xml", "https://ejemplo.invalid/guia2.xml"],
         )
+
+    def test_la_guia_de_deportes_es_una_fuente_por_defecto(self) -> None:
+        # La parrilla de DSports solo existe en esta guia: tiene que venir
+        # siempre y antes que las de canales FAST para ganar el emparejamiento.
+        extra = generar_epg.FUENTES_EPG_EXTRA_POR_DEFECTO
+        self.assertIn("DIRECTVSPORTS1", extra[0])
+        argumentos = generar_epg._crear_parser().parse_args(["--epg-pais", "AR,CO"])
+        fuentes = generar_epg._fuentes_epg_desde_argumentos(argumentos)
+        self.assertIn("epg_ripper_DIRECTVSPORTS1.xml.gz", fuentes[2])
+
+    def test_una_variable_de_entorno_vacia_usa_los_valores_por_defecto(self) -> None:
+        # En GitHub Actions una variable de repositorio sin definir llega como
+        # cadena vacia: no debe desactivar las guias extra (para eso esta
+        # --sin-extras).
+        with mock.patch.dict(os.environ, {"EPG_URLS_EXTRA": ""}):
+            self.assertEqual(
+                generar_epg._lista_entorno("EPG_URLS_EXTRA", "https://a.invalid/x.xml,https://b.invalid/y.xml"),
+                ("https://a.invalid/x.xml", "https://b.invalid/y.xml"),
+            )
+        with mock.patch.dict(os.environ, {"EPG_URLS_EXTRA": " https://c.invalid/z.xml "}):
+            self.assertEqual(
+                generar_epg._lista_entorno("EPG_URLS_EXTRA", "https://a.invalid/x.xml"),
+                ("https://c.invalid/z.xml",),
+            )
+        with mock.patch.dict(os.environ, {"EPG_PAISES": " mx , co "}):
+            self.assertEqual(
+                generar_epg._lista_entorno("EPG_PAISES", "AR"), ("mx", "co")
+            )
 
     def test_un_404_no_se_reintenta(self) -> None:
         llamadas = []
@@ -1185,6 +1244,208 @@ class MapeoConCalificadoresTests(unittest.TestCase):
         # "Canal 5 Chile" es otro canal de otro pais: no se convierte en Canal5.mx.
         self.assertIn("canal5chile", self.canales)
         self.assertFalse(self.canales["canal5chile"]["mapeado"])
+
+
+M3U_DSPORTS = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="dsports" tvg-name="DSports" group-title="DSports",DSports',
+        "http://ejemplo.invalid/dsports/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports (Opc. 2)',
+        "http://ejemplo.invalid/dsports-opc2/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports HD',
+        "http://ejemplo.invalid/dsports-hd/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports 4K',
+        "http://ejemplo.invalid/dsports-4k/index.m3u8",
+        '#EXTINF:-1 tvg-id="dsports2" tvg-name="DSports 2" group-title="DSports",DSports 2',
+        "http://ejemplo.invalid/dsports2/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports 2 (Opc. 2)',
+        "http://ejemplo.invalid/dsports2-opc2/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports +',
+        "http://ejemplo.invalid/dsports-plus/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports Plus HD',
+        "http://ejemplo.invalid/dsports-plus-hd/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports Motor',
+        "http://ejemplo.invalid/dsports-motor/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DIRECTV Sports',
+        "http://ejemplo.invalid/directv-sports/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DIRECTV Sports 2 HD',
+        "http://ejemplo.invalid/directv-sports-2/index.m3u8",
+        '#EXTINF:-1 group-title="DSports",DSports Fight',
+        "http://ejemplo.invalid/dsports-fight/index.m3u8",
+        "",
+    ]
+)
+
+
+def _guia_dsports(inicio: datetime) -> str:
+    """Guia con la misma forma que ``epg_ripper_DIRECTVSPORTS1`` (sin red)."""
+    canales = (
+        ("DSPORTS.(ARG).dtvsp", "DSPORTS (ARG)"),
+        ("DSPORTS.2.HD.dtvsp", "DSPORTS 2 HD"),
+        ("DSPORTS.+.HD.dtvsp", "DSPORTS + HD"),
+        ("DSports.Motor.dtvsp", "DSports Motor"),
+    )
+    partes = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<tv generator-info-name="prueba">',
+    ]
+    for identificador, nombre in canales:
+        partes.append(
+            f'<channel id="{identificador}"><display-name>{nombre}</display-name></channel>'
+        )
+    for posicion, (identificador, nombre) in enumerate(canales):
+        partes.append(
+            f'<programme start="{generar_epg._sello(inicio)}" '
+            f'stop="{generar_epg._sello(inicio + timedelta(hours=1 + posicion))}" '
+            f'channel="{identificador}"><title lang="es">En vivo: {nombre}</title></programme>'
+        )
+    partes.append("</tv>")
+    return "\n".join(partes)
+
+
+class CoberturaDSportsTests(unittest.TestCase):
+    """DSports / DIRECTV Sports: todas las senales con la misma guia real."""
+
+    def setUp(self) -> None:
+        self.inicio = generar_epg._inicio_del_dia()
+        self.ventana = (self.inicio, self.inicio + timedelta(hours=72))
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+        self.canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_DSPORTS), mapeo=self.mapeo
+        )
+        self.por_id = {canal["id"]: canal for canal in self.canales}
+
+    def test_cada_variante_llega_al_tvg_id_de_la_guia_deportiva(self) -> None:
+        # Los ids son los de epg_ripper_DIRECTVSPORTS1, la unica guia que
+        # publica la parrilla de estas senales ("dsports"/"dsports2" del
+        # proveedor no existen en ninguna guia).
+        esperados = {
+            "DSPORTS.(ARG).dtvsp": ("DSports", 5),
+            "DSPORTS.2.HD.dtvsp": ("DSports 2", 3),
+            "DSPORTS.+.HD.dtvsp": ("DSports +", 2),
+            "DSports.Motor.dtvsp": ("DSports Motor", 1),
+        }
+        for identificador, (nombre, senales) in esperados.items():
+            with self.subTest(canal=identificador):
+                self.assertIn(identificador, self.por_id)
+                self.assertEqual(self.por_id[identificador]["nombre"], nombre)
+                self.assertEqual(self.por_id[identificador]["tvg_id"], identificador)
+                self.assertTrue(self.por_id[identificador]["mapeado"])
+                self.assertEqual(len(self.por_id[identificador]["senales"]), senales)
+
+    def test_dsports_plus_no_se_confunde_con_dsports(self) -> None:
+        # El "+" se descartaba al generar la clave: "DSports +" acababa siendo
+        # el canal principal. Ahora cada uno conserva su id.
+        self.assertNotEqual(
+            self.por_id["DSPORTS.(ARG).dtvsp"]["id"],
+            self.por_id["DSPORTS.+.HD.dtvsp"]["id"],
+        )
+        urls = {
+            senal["url"] for senal in self.por_id["DSPORTS.+.HD.dtvsp"]["senales"]
+        }
+        self.assertEqual(
+            urls,
+            {
+                "http://ejemplo.invalid/dsports-plus/index.m3u8",
+                "http://ejemplo.invalid/dsports-plus-hd/index.m3u8",
+            },
+        )
+
+    def test_un_canal_sin_guia_conserva_su_id_propio(self) -> None:
+        # DSports Fight existe como canal aparte: no se le roba la parrilla.
+        self.assertIn("dsportsfight", self.por_id)
+        self.assertFalse(self.por_id["dsportsfight"]["mapeado"])
+
+    def test_una_guia_sin_parrilla_no_bloquea_a_la_que_si_la_tiene(self) -> None:
+        # Las guias por pais publican los <channel> de DSports sin un solo
+        # <programme>: si el canal se diera por resuelto, la guia deportiva
+        # (que va despues) ya no podria aportarle la parrilla real.
+        vacia = "\n".join(
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>',
+                "<tv>",
+                '<channel id="DSPORTS.(ARG).dtvsp">'
+                "<display-name>DSPORTS (ARG)</display-name></channel>",
+                '<channel id="DSPORTS.2.HD.dtvsp">'
+                "<display-name>DSPORTS 2 HD</display-name></channel>",
+                "</tv>",
+            ]
+        )
+        programas, emparejados, informes = generar_epg.integrar_epg(
+            self.canales,
+            ["guia-vacia", "guia-dsports"],
+            self.ventana,
+            cargador=lambda fuente: (
+                vacia if fuente == "guia-vacia" else _guia_dsports(self.inicio)
+            ),
+        )
+        self.assertEqual(
+            [informe["emparejados"] for informe in informes], [2, 4]
+        )
+        self.assertEqual(emparejados["DSPORTS.(ARG).dtvsp"], "DSPORTS.(ARG).dtvsp")
+        self.assertTrue(programas["DSPORTS.(ARG).dtvsp"])
+        self.assertTrue(programas["DSPORTS.2.HD.dtvsp"])
+
+    def test_la_guia_deportiva_aporta_programacion_real(self) -> None:
+        programas, _emparejados, informes = generar_epg.integrar_epg(
+            self.canales,
+            ["guia-dsports"],
+            self.ventana,
+            cargador=lambda _fuente: _guia_dsports(self.inicio),
+        )
+        self.assertEqual(informes[0]["error"], "")
+        for identificador in (
+            "DSPORTS.(ARG).dtvsp",
+            "DSPORTS.2.HD.dtvsp",
+            "DSPORTS.+.HD.dtvsp",
+            "DSports.Motor.dtvsp",
+        ):
+            with self.subTest(canal=identificador):
+                self.assertIn(identificador, programas)
+                self.assertTrue(programas[identificador])
+        self.assertNotIn("dsportsfight", programas)
+
+    def test_el_xmltv_publica_los_programas_con_el_id_sincronizado(self) -> None:
+        programas, _emparejados, _informes = generar_epg.integrar_epg(
+            self.canales,
+            ["guia-dsports"],
+            self.ventana,
+            cargador=lambda _fuente: _guia_dsports(self.inicio),
+        )
+        raiz, total = generar_epg.construir_xmltv(
+            self.canales, self.inicio, programas=programas, relleno=False
+        )
+        identificadores = {canal.get("id") for canal in raiz.findall("channel")}
+        self.assertIn("DSPORTS.(ARG).dtvsp", identificadores)
+        con_programas = [
+            programa
+            for programa in raiz.findall("programme")
+            if programa.get("channel") == "DSPORTS.(ARG).dtvsp"
+        ]
+        self.assertTrue(con_programas)
+        self.assertEqual(total, len(raiz.findall("programme")))
+
+        texto = generar_epg.generar_m3u(
+            self.canales, url_epg="https://ejemplo.invalid/epg.xml"
+        )
+        for entrada in generar_epg.parsear_m3u(texto):
+            with self.subTest(canal=entrada["tvg_id"]):
+                self.assertIn(entrada["tvg_id"], identificadores)
+
+    def test_la_lista_publicada_se_puede_regenerar_sin_perder_ids(self) -> None:
+        # El tvg-id de DSports lleva parentesis y "+", que _normalizar_tvg_id
+        # no acepta: al releer la lista propia el mapeo lo vuelve a fijar.
+        texto = generar_epg.generar_m3u(
+            self.canales, url_epg="https://ejemplo.invalid/epg.xml"
+        )
+        otra_vez = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(texto), mapeo=self.mapeo
+        )
+        self.assertEqual(
+            {canal["id"] for canal in otra_vez},
+            {canal["id"] for canal in self.canales},
+        )
 
 
 if __name__ == "__main__":

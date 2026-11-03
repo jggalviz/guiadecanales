@@ -18,7 +18,8 @@ usar directamente en OTT Navigator, VLC, TiviMate, IPTV Smarters...
 Flujo de la programacion
 ------------------------
 1. Se descargan las guias XMLTV configuradas (``--epg``, ``--epg-pais``,
-   ``--epg-archivo`` o las de por defecto).
+   ``--epg-archivo`` o las de por defecto: una por pais + las extra, entre ellas
+   la de DSports/DIRECTV Sports).
 2. Cada canal del M3U se empareja con el canal de la guia real usando el
    ``tvg-id``, su id normalizado o el nombre normalizado (sin sufijos de
    calidad, sin grupos entre parentesis y sin el pais).
@@ -226,17 +227,38 @@ PLANTILLA_EPG_PAIS = os.environ.get(
     "https://epgshare01.online/epgshare01/epg_ripper_{pais}1.xml.gz",
 )
 
+
+def _lista_entorno(nombre: str, por_defecto: str) -> tuple[str, ...]:
+    """Lee una lista separada por comas de una variable de entorno.
+
+    Si la variable no existe **o esta vacia** se devuelven los valores por
+    defecto. Esto es importante en GitHub Actions: una variable de repositorio
+    sin definir (``${{ vars.EPG_URLS_EXTRA }}``) llega como cadena vacia, y con
+    la lectura anterior eso desactivaba todas las guias extra sin avisar. Para
+    renunciar a ellas de forma explicita esta ``--sin-extras``.
+    """
+    valores = tuple(
+        parte.strip()
+        for parte in os.environ.get(nombre, "").split(",")
+        if parte.strip()
+    )
+    if valores:
+        return valores
+    return tuple(
+        parte.strip() for parte in por_defecto.split(",") if parte.strip()
+    )
+
+
 #: Paises cuyas guias reales se descargan cuando no se indica otra fuente.
 #: Se pueden cambiar con ``--epg-pais`` o con la variable ``EPG_PAISES``.
 #: Orden pensado para que ganen las guias mas especificas (Latinoamerica y
 #: Espana) y quede al final la guia de EE. UU., que es la mas generica.
 PAISES_EPG_POR_DEFECTO = tuple(
-    codigo.strip().upper()
-    for codigo in os.environ.get("EPG_PAISES", "").split(",")
-    if codigo.strip()
-) or (
-    "MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO", "SV",
-    "PT", "IT", "DE", "FR", "US",
+    codigo.upper()
+    for codigo in _lista_entorno(
+        "EPG_PAISES",
+        "MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,FR,US",
+    )
 )
 
 #: Guias por pais que no siguen :data:`PLANTILLA_EPG_PAIS`.
@@ -247,19 +269,24 @@ GUIAS_EPG_POR_PAIS = {
 }
 
 #: Fuentes extra que se suman a las guias por pais (no cuando se indica
-#: ``--epg``/``--epg-archivo``/``EPG_URL``). Son los canales FAST de EE. UU.
-#: (Pluto TV, Samsung TV Plus y Roku) que muchas listas M3U incluyen.
-#: Se pueden cambiar con ``EPG_URLS_EXTRA`` (vacio las desactiva) o con
-#: ``--sin-extras``.
-FUENTES_EPG_EXTRA_POR_DEFECTO = tuple(
-    parte.strip()
-    for parte in os.environ.get(
-        "EPG_URLS_EXTRA",
-        "https://i.mjh.nz/PlutoTV/all.xml.gz,"
-        "https://i.mjh.nz/SamsungTVPlus/us.xml.gz,"
-        "https://i.mjh.nz/Roku/all.xml.gz",
-    ).split(",")
-    if parte.strip()
+#: ``--epg``/``--epg-archivo``/``EPG_URL``):
+#:
+#: * ``epg_ripper_DIRECTVSPORTS1``: guia dedicada de **DSports / DIRECTV Sports**
+#:   (Sudamerica). Es la unica fuente publica que trae la parrilla real de
+#:   ``DSPORTS (ARG)``, ``DSports 2``, ``DSports +`` y ``DSports Motor``; las
+#:   guias por pais de epgshare01 publican esos canales sin programas. Pesa
+#:   ~31 KB y se descarga primero para que gane en el emparejamiento.
+#: * ``i.mjh.nz``: los canales FAST de EE. UU. (Pluto TV, Samsung TV Plus y
+#:   Roku) que muchas listas M3U incluyen.
+#:
+#: Se pueden cambiar con ``EPG_URLS_EXTRA`` (lista separada por comas; vacia o
+#: sin definir deja estas de por defecto) o desactivar con ``--sin-extras``.
+FUENTES_EPG_EXTRA_POR_DEFECTO = _lista_entorno(
+    "EPG_URLS_EXTRA",
+    "https://epgshare01.online/epgshare01/epg_ripper_DIRECTVSPORTS1.xml.gz,"
+    "https://i.mjh.nz/PlutoTV/all.xml.gz,"
+    "https://i.mjh.nz/SamsungTVPlus/us.xml.gz,"
+    "https://i.mjh.nz/Roku/all.xml.gz",
 )
 
 #: Fuentes EPG adicionales indicadas por entorno (URL o ruta local, separadas
@@ -371,6 +398,50 @@ MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
     "ESPNLatinAmerica.us": {
         "nombre": "ESPN Latin America",
         "alias": ("ESPN Latin America", "ESPN Latinoamerica"),
+    },
+    # DSports / DIRECTV Sports: los ids del proveedor ("dsports", "dsports2")
+    # no existen en las guias por pais, asi que se quedaban sin programacion.
+    # Los ids de abajo son los de la guia "epg_ripper_DIRECTVSPORTS1" de
+    # epgshare01 (ver FUENTES_EPG_EXTRA_POR_DEFECTO), la unica que publica la
+    # parrilla real de estas senales. Se conservan tal cual porque el
+    # reproductor compara el tvg-id con el <channel id="..."> de la guia.
+    "DSPORTS.(ARG).dtvsp": {
+        "nombre": "DSports",
+        "alias": (
+            "DSports",
+            "D Sports",
+            "DSports 4K",
+            "DSports Argentina",
+            "DSports ARG",
+            "DIRECTV Sports",
+            "DirecTV Sports",
+            "DIRECTV Sports HD",
+        ),
+    },
+    "DSPORTS.2.HD.dtvsp": {
+        "nombre": "DSports 2",
+        "alias": (
+            "DSports 2",
+            "DSports2",
+            "DSports 2 ARG",
+            "DSports 2 Argentina",
+            "DIRECTV Sports 2",
+        ),
+    },
+    "DSPORTS.+.HD.dtvsp": {
+        "nombre": "DSports +",
+        "alias": (
+            "DSports +",
+            "DSports+",
+            "DSports Plus",
+            "DSports PL",
+            "DIRECTV Sports +",
+            "DIRECTV Sports Plus",
+        ),
+    },
+    "DSports.Motor.dtvsp": {
+        "nombre": "DSports Motor",
+        "alias": ("DSports Motor", "DIRECTV Sports Motor"),
     },
 }
 
@@ -889,6 +960,12 @@ _RE_CALIFICADOR_SENAL = re.compile(
 )
 
 
+#: El "+" forma parte del nombre de algunos canales ("DSports +" es DSports
+#: Plus, no DSports). ``generar_id`` lo descarta, asi que se convierte en
+#: "plus" antes de calcular la clave para que ambos no choquen entre si.
+_RE_MAS_A_PLUS = re.compile(r"\s*\+\s*")
+
+
 def _clave_mapeo(texto: str, sin_calificadores: bool = False) -> str:
     """Clave normalizada de un alias del mapeo explicito.
 
@@ -901,8 +978,13 @@ def _clave_mapeo(texto: str, sin_calificadores: bool = False) -> str:
     senal (:data:`_RE_CALIFICADOR_SENAL`): ``"Canal 5 Nacional"`` -> ``canal5``.
     Ese es el segundo intento de la busqueda, para que las variantes
     "Nacional", "Regional", "v1", "v2"... tambien encuentren su canal.
+
+    El ``"+"`` se convierte en ``plus`` antes de generar la clave
+    (:data:`_RE_MAS_A_PLUS`): ``"DSports +"`` -> ``dsportsplus`` y no
+    ``dsports``, que es la senal principal.
     """
     limpio = limpiar_nombre(str(texto or ""), quitar_region=False)
+    limpio = _RE_MAS_A_PLUS.sub(" plus ", limpio)
     if sin_calificadores:
         limpio = _RE_CALIFICADOR_SENAL.sub(" ", limpio)
         limpio = _RE_ESPACIOS.sub(" ", limpio).strip()
@@ -1021,7 +1103,7 @@ def _indice_mapeo(mapeo: "Mapping[str, Mapping[str, object]]") -> dict[str, "Map
                 if clave:
                     indice.setdefault(clave, entrada)
         for clave in (
-            generar_id(str(entrada.get("nombre", ""))),
+            _clave_mapeo(str(entrada.get("nombre", ""))),
             _clave_mapeo(str(entrada.get("nombre", "")), sin_calificadores=True),
         ):
             if clave:
@@ -1267,6 +1349,11 @@ _RE_TOKEN_NOMBRE = re.compile(r"[a-z0-9]+")
 #: Chichicasteca)"/... de la lista. Se unifica a ``canalplus`` antes de tokenizar.
 _RE_MARCA_CANAL_PLUS = re.compile(r"canal\s*(?:\+|plus)", re.IGNORECASE)
 
+#: El "+" de otros canales ("DSports +", "Win+") tambien forma parte del nombre:
+#: si se descarta, "DSPORTS +(DTS+)" queda como ("dsports",) y le roba la
+#: programacion a "DSports". Se convierte en "plus" antes de tokenizar.
+_RE_MAS_EN_NOMBRE = re.compile(r"\s*\+\s*")
+
 #: Nombres genericos de la guia francesa: Telerama publica canales sueltos
 #: llamados "Canal 11", "Canal 21" o "Canal 32" que solo emiten el bucle de
 #: Canal+ (titulos "Rediffusion en boucle"). Sin este filtro le roban la
@@ -1453,6 +1540,7 @@ def _tokens_nombre(texto: str) -> tuple[str, ...]:
     # "CANAL+LIVE 12" se unifica antes de limpiar: ``limpiar_nombre`` descarta
     # el "+" y el nombre volveria a confundirse con "Canal 12".
     texto = _RE_MARCA_CANAL_PLUS.sub("canalplus", texto or "")
+    texto = _RE_MAS_EN_NOMBRE.sub(" plus ", texto)
     limpio = limpiar_nombre(_RE_PARTES_NOMBRE.sub(" ", texto))
     tokens = _RE_TOKEN_NOMBRE.findall(_texto_normalizado(limpio))
     utiles: list[str] = []
@@ -1856,7 +1944,6 @@ def integrar_epg(
             # siguientes solo cubren los canales que aun no tienen pareja.
             pendientes = [canal for canal in canales if canal["id"] not in asignados]
             mapa = emparejar_canales(pendientes, canales_fuente)
-            asignados.update(mapa)
             reales = parsear_epg_programas(texto, set(mapa.values()), desde, hasta)
 
             nuevos = 0
@@ -1866,6 +1953,11 @@ def integrar_epg(
                     continue
                 programas[canal_id] = lista
                 emparejados[canal_id] = fuente_id
+                # Solo se da el canal por resuelto si la guia traia programas:
+                # muchas guias publican el <channel> pero sin parrilla (las de
+                # DSports en los paises, por ejemplo), y antes eso impedia que
+                # una guia posterior con la programacion real lo emparejara.
+                asignados.add(canal_id)
                 nuevos += len(lista)
 
             informe.update(
@@ -2272,7 +2364,8 @@ def _crear_parser() -> argparse.ArgumentParser:
         action="store_true",
         help=(
             "No descargar las guias extra que se suman a las de --epg-pais "
-            "(Pluto TV, Samsung TV Plus y Roku; variable EPG_URLS_EXTRA)."
+            "(DSports/DIRECTV Sports, Pluto TV, Samsung TV Plus y Roku; "
+            "variable EPG_URLS_EXTRA)."
         ),
     )
     parser.add_argument(
@@ -2487,9 +2580,10 @@ def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
     variable de entorno ``EPG_URL`` > guias publicas por pais por defecto.
 
     Cuando las fuentes salen de codigos de pais se anaden al final las guias
-    extra de :data:`FUENTES_EPG_EXTRA_POR_DEFECTO` (Pluto TV, Samsung TV Plus y
-    Roku) salvo que se use ``--sin-extras``. Si se indica una fuente concreta
-    (``--epg``, ``--epg-archivo`` o ``EPG_URL``) solo se usa esa.
+    extra de :data:`FUENTES_EPG_EXTRA_POR_DEFECTO` (DSports/DIRECTV Sports,
+    Pluto TV, Samsung TV Plus y Roku) salvo que se use ``--sin-extras``. Si se
+    indica una fuente concreta (``--epg``, ``--epg-archivo`` o ``EPG_URL``)
+    solo se usa esa.
     """
     fuentes: list[str] = []
     for valor in argumentos.epg or []:

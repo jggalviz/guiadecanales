@@ -65,8 +65,9 @@ jobs:
           # sobrescribir con la variable de repositorio EPG_PAISES (por ejemplo
           # EPG_PAISES=MX,ES para acortar el tiempo de ejecucion).
           EPG_PAISES: ${{ vars.EPG_PAISES || 'MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,FR,US' }}
-          # Guias extra que se suman a las de los paises (Pluto TV, Samsung TV
-          # Plus y Roku). Dejar la variable vacia para usar las de por defecto.
+          # Guias extra que se suman a las de los paises: DSports/DIRECTV Sports
+          # (epg_ripper_DIRECTVSPORTS1), Pluto TV, Samsung TV Plus y Roku. Dejar
+          # la variable vacia (o sin definir) para usar las de por defecto.
           EPG_URLS_EXTRA: ${{ vars.EPG_URLS_EXTRA }}
           # Opcional: sustituir por completo las fuentes por URLs propias
           # (separadas por comas). Si se define, no se usan los paises.

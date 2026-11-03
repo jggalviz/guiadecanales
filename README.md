@@ -27,8 +27,10 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   de [epg.pw](https://epg.pw/), que no existe en epgshare01), admite **gzip**,
   BOM y desfases horarios, y normaliza todas las fechas a **UTC (`+0000`)**.
 - ✅ **Guías extra automáticas** para los canales FAST que traen muchas listas
-  (Pluto TV, Samsung TV Plus y Roku, vía `i.mjh.nz`), configurables con
-  `EPG_URLS_EXTRA` y desactivables con `--sin-extras`.
+  (Pluto TV, Samsung TV Plus y Roku, vía `i.mjh.nz`) **y para DSports/DIRECTV
+  Sports** (`epg_ripper_DIRECTVSPORTS1` de epgshare01, la única fuente que
+  publica la parrilla de `DSports`, `DSports 2`, `DSports +` y `DSports Motor`),
+  configurables con `EPG_URLS_EXTRA` y desactivables con `--sin-extras`.
 - ✅ **Emparejamiento inteligente** canal ↔ programa: `tvg-id` exacto, `tvg-id`
   normalizado y, si no hay, **nombre normalizado** (sin `HD/FHD/SD`, sin
   `[Opc.2]`, sin paréntesis tipo `(XHGC)` y sin país), con puntuación y
@@ -177,7 +179,7 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `--epg-pais` | Países ISO de las guías públicas (`MX,ES,AR`…). Por defecto `MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,US`. |
 | `--epg-archivo` | Guía XMLTV local para emparejar los canales (no se descarga nada). |
 | `--sin-epg` | No usar guías reales: solo parrilla genérica de 24 h. |
-| `--sin-extras` | No descargar las guías extra (Pluto TV, Samsung TV Plus y Roku). |
+| `--sin-extras` | No descargar las guías extra (DSports/DIRECTV Sports, Pluto TV, Samsung TV Plus y Roku). |
 | `--horas-ventana` | Horas de programación real que se conservan (72 por defecto). |
 | `--relleno` | Rellenar con la parrilla genérica los canales **sin** programación real. |
 | `--sin-tvg-id` | Ignora el `tvg-id` y genera los `id` desde el nombre limpio. |
@@ -190,8 +192,8 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 Variables de entorno equivalentes: `M3U_URL`, `M3U_SALIDA`, `M3U_MAPEO`,
 `EPG_SALIDA`, `EPG_REPO_URL`, `EPG_PUBLICA_URL`, `EPG_URL` (fuentes separadas
 por comas), `EPG_PAISES`, `EPG_URL_PLANTILLA` (plantilla con `{pais}`),
-`EPG_URL_US` (guía de EE. UU.), `EPG_URLS_EXTRA` (guías extra, vacío las
-desactiva) y `EPG_HORAS`.
+`EPG_URL_US` (guía de EE. UU.), `EPG_URLS_EXTRA` (guías extra; vacía o sin
+definir deja las de por defecto, `--sin-extras` las desactiva) y `EPG_HORAS`.
 
 ## Programación real (EPG externo)
 
@@ -201,20 +203,23 @@ desactiva) y `EPG_HORAS`.
 | --- | --- |
 | **Guías públicas por país** (por defecto) | `https://epgshare01.online/epgshare01/epg_ripper_{PAIS}1.xml.gz` para cada código de `--epg-pais` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,FR`). |
 | **Estados Unidos** | `US` no existe en epgshare01 (404), así que se descarga `https://epg.pw/xmltv/epg_US.xml` (~160 MB sin comprimir, ~5.500 canales); se puede cambiar con `EPG_URL_US`. |
-| **Guías extra** (se suman a las de país) | Pluto TV, Samsung TV Plus y Roku (`https://i.mjh.nz/...`), que cubren los canales FAST que traen muchas listas. `EPG_URLS_EXTRA` las cambia y `--sin-extras` las quita. |
+| **Guías extra** (se suman a las de país) | **DSports/DIRECTV Sports** (`https://epgshare01.online/epgshare01/epg_ripper_DIRECTVSPORTS1.xml.gz`, ~31 KB: `DSPORTS (ARG)`, `DSports 2`, `DSports +`, `DSports Motor`) y los canales FAST de Pluto TV, Samsung TV Plus y Roku (`https://i.mjh.nz/...`). `EPG_URLS_EXTRA` las cambia y `--sin-extras` las quita. |
 | Cualquier XMLTV | `--epg URL`, `--epg URL1,URL2`, `--epg-archivo guia.xml.gz` o `EPG_URL`. Con una fuente explícita **no** se añaden las extra. |
 | `--demo` | Usa `epg_de_ejemplo()`, una guía XMLTV incluida en el script: sirve para ver el cruce completo sin red. |
 
 Cada fuente se procesa en orden y **un fallo no detiene el proceso**: se avisa y
-se continúa con la siguiente (un error 404 no se reintenta). Si ninguna se puede
+se continúa con la siguiente (un error 404 no se reintenta). Un canal solo se da
+por resuelto cuando la guía le aportó `<programme>`: si una guía publica el
+`<channel>` pero sin parrilla (es lo que pasa con `DSPORTS`/`DSPORTS 2` en las
+guías de país), una fuente posterior sí puede emparejarlo. Si ninguna se puede
 usar, la guía se genera con la parrilla genérica para que el reproductor no quede
 sin datos. Con una lista de 1.431 canales, el conjunto por defecto (17 países +
-Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~30 canales
-con programación frente a las guías latinoamericanas solas (`epg.xml` pasa de
-257 a ~290 canales con EPG y de 8 a 10,5 MB). La guía de `FR` se incluye porque
-aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus canales
-`CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque `CANAL+` se
-trata como **marca**, no como la palabra «canal» seguida de «live».
+DSports + Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~30
+canales con programación frente a las guías latinoamericanas solas (`epg.xml`
+pasa de 257 a ~290 canales con EPG y de 8 a 10,5 MB). La guía de `FR` se incluye
+porque aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus
+canales `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque
+`CANAL+` se trata como **marca**, no como la palabra «canal» seguida de «live».
 
 Cifras medidas del último run (1.875 entradas en la lista del proveedor):
 
@@ -378,6 +383,28 @@ nombre estándar:
   parecido pero distinto (`Canal 5 Del Pueblo Alcorta`) **no** se ve afectado.
 - Usa `--mapeo otra_ruta.json` para otro archivo o `--sin-mapeo` para desactivarlo.
 
+#### DSports / DIRECTV Sports
+
+Los ids del proveedor (`dsports`, `dsports2`) **no existen en ninguna guía por
+país**, así que estos canales se publicaban sin programación. Se mapean a los ids
+reales de la guía de deportes de epgshare01 (`epg_ripper_DIRECTVSPORTS1`), que
+es la única que trae su parrilla:
+
+| `tvg-id` resultante | Nombre estándar | Alias que se mapean |
+| --- | --- | --- |
+| `DSPORTS.(ARG).dtvsp` | `DSports` | `DSports`, `DSports HD/SD/FHD/4K`, `DSports (Opc. 2)`, `DSports Espejo`, `DSports Backup`, `DSports Argentina`, `DIRECTV Sports`, `DIRECTV Sports HD` |
+| `DSPORTS.2.HD.dtvsp` | `DSports 2` | `DSports 2`, `DSports2`, `DSports 2 HD`, `DSports 2 (Opc. 2)`, `DIRECTV Sports 2`, `DIRECTV Sports 2 HD` |
+| `DSPORTS.+.HD.dtvsp` | `DSports +` | `DSports +`, `DSports+`, `DSports Plus`, `DSports Plus HD`, `DSports Plus (Opc. 2)`, `DIRECTV Sports +` |
+| `DSports.Motor.dtvsp` | `DSports Motor` | `DSports Motor`, `DSports Motor HD`, `DIRECTV Sports Motor` |
+
+- El `+` **forma parte del nombre**: al calcular la clave del mapeo se convierte
+  en `plus`, así `DSports +` (`dsportsplus`) no se confunde con `DSports`
+  (`dsports`). Lo mismo al emparejar por nombre: `DSPORTS +(DTS+)` de la guía
+  colombiana ya no le roba la parrilla a `DSports`.
+- `DSports Fight`, `DSports Radio` o `DSports Uruguay` se quedan con su id
+  propio: no hay fuente pública con su parrilla y no se les asigna la de otro
+  canal.
+
 
 
 Muchas listas IPTV se generan en `cp1252`/`latin-1` y en algún punto se leen
@@ -530,6 +557,16 @@ conservan (una entrada por señal con el mismo `tvg-id`/`tvg-name`) junto con su
 atributos salen limpios; el orden es por grupo y nombre; y `main` escribe ambos
 archivos (`--sin-m3u` los separa).
 
+Y las de **DSports** (`CoberturaDSportsTests`) cubren el caso real: `DSports`,
+`DSports HD`, `DSports (Opc. 2)`, `DSports 4K`, `DIRECTV Sports`… acaban en
+`DSPORTS.(ARG).dtvsp`; `DSports 2`/`DIRECTV Sports 2` en `DSPORTS.2.HD.dtvsp`;
+`DSports +`/`DSports Plus` en `DSPORTS.+.HD.dtvsp` **sin** confundirse con el
+canal principal; `DSports Motor` en `DSports.Motor.dtvsp`; `DSports Fight`
+conserva su id; la guía deportiva aporta `<programme>` reales; una guía que
+publica el canal sin parrilla no bloquea a la siguiente; la lista publicada se
+puede regenerar sin perder ids; y la guía `DIRECTVSPORTS1` está entre las fuentes
+por defecto (también cuando `EPG_URLS_EXTRA` llega vacía).
+
 ## Publicar en GitHub (pasos)
 
 ```powershell
@@ -555,7 +592,7 @@ ambos archivos.
    `generator-info-url`.
 4. (Opcional) En la misma pantalla de *Variables* puedes ajustar las fuentes EPG:
    `EPG_PAISES` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,US` por defecto),
-   `EPG_URLS_EXTRA` (guías extra FAST; vacío = las de por defecto) y/o `EPG_URL`
+   `EPG_URLS_EXTRA` (guías extra: DSports + FAST; vacío = las de por defecto) y/o `EPG_URL`
    (URLs separadas por comas, sustituye por completo a los países). Sin valores
    se usan todas las guías públicas por defecto, incluida la de EE. UU.
    También puedes fijar `EPG_PUBLICA_URL` si sirves el `epg.xml` con otro dominio
@@ -614,6 +651,7 @@ https://USUARIO.github.io/REPOSITORIO/lista.m3u
 | Quiero volver a la parrilla genérica | `--sin-epg --relleno` (o solo `--relleno` para rellenar únicamente los canales sin EPG). |
 | `Aviso: se omite <url>` en la salida | Esa guía no se pudo descargar o no es XMLTV válido; el resto sigue funcionando. Se puede fijar otra con `--epg`. |
 | La guía tarda mucho en generarse | Baja el número de países (`--epg-pais MX,ES`), quita las guías extra (`--sin-extras`) y/o reduce la ventana (`--horas-ventana 24`). |
+| DSports / DIRECTV Sports sin programación | Comprueba que no uses `--sin-extras` (la parrilla viene de `epg_ripper_DIRECTVSPORTS1`, que se suma a las guías de país) y que el canal se llama `DSports`, `DSports 2`, `DSports +` o `DSports Motor`; `DSports Fight`/`Radio` no tienen guía pública. |
 | Un canal de EE. UU. sale sin programación | La guía de EE. UU. es la de `epg.pw` (`EPG_URL_US`) y solo se usa si `US` está en `--epg-pais`/`EPG_PAISES`; comprueba el aviso de esa fuente en el resumen. |
 | Los `id` salen como `espn2` en vez del `tvg-id` | Tu lista no trae `tvg-id` válido para ese canal, o usaste `--sin-tvg-id`. |
 | Varios canales aparecen duplicados en la guía | Son señales distintas (mismo nombre, distinto `tvg-id`/país); con `--sin-tvg-id` se fusionan por nombre. |
