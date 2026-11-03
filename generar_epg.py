@@ -19,7 +19,8 @@ Flujo de la programacion
 ------------------------
 1. Se descargan las guias XMLTV configuradas (``--epg``, ``--epg-pais``,
    ``--epg-archivo`` o las de por defecto: una por pais + las extra, entre ellas
-   la de DSports/DIRECTV Sports).
+   las de DSports/DIRECTV Sports). Las guias con el desfase horario mal
+   declarado se corrigen al leerlas (:data:`AJUSTES_HORARIO_FUENTE`).
 2. Cada canal del M3U se empareja con el canal de la guia real usando el
    ``tvg-id``, su id normalizado o el nombre normalizado (sin sufijos de
    calidad, sin grupos entre parentesis y sin el pais).
@@ -271,11 +272,18 @@ GUIAS_EPG_POR_PAIS = {
 #: Fuentes extra que se suman a las guias por pais (no cuando se indica
 #: ``--epg``/``--epg-archivo``/``EPG_URL``):
 #:
-#: * ``epg_ripper_DIRECTVSPORTS1``: guia dedicada de **DSports / DIRECTV Sports**
-#:   (Sudamerica). Es la unica fuente publica que trae la parrilla real de
-#:   ``DSPORTS (ARG)``, ``DSports 2``, ``DSports +`` y ``DSports Motor``; las
-#:   guias por pais de epgshare01 publican esos canales sin programas. Pesa
-#:   ~31 KB y se descarga primero para que gane en el emparejamiento.
+#: * ``epg_ripper_UY1``: guia de Uruguay, la unica que publica la parrilla de
+#:   **DSports Argentina** (``[SPOARHD].DSports.Argentina.HD.uy``) y
+#:   **DSports +** (``[SPOPLH].DSports.+.HD.uy``) con las horas en UTC
+#:   correctas: ``El juego`` a las 23:00 UTC (20:00 en Argentina) y
+#:   ``De Futbol Se Habla Asi`` a las 16:00 UTC (13:00), que es su horario
+#:   real. Va primero para que gane en el emparejamiento.
+#: * ``epg_ripper_DIRECTVSPORTS1``: guia dedicada de **DSports / DIRECTV
+#:   Sports**. Trae las mismas senales, pero su reloj viene etiquetado como
+#:   ``-0500`` cuando en realidad esta en UTC, asi que sus programas salen 5 h
+#:   adelantados (ver :data:`AJUSTES_HORARIO_FUENTE`). Solo aporta las senales
+#:   que UY1 no publica (``DSports 2`` y ``DSports Motor``); nunca debe ir antes
+#:   que UY1 o se queda con los canales principales.
 #: * ``i.mjh.nz``: los canales FAST de EE. UU. (Pluto TV, Samsung TV Plus y
 #:   Roku) que muchas listas M3U incluyen.
 #:
@@ -283,11 +291,38 @@ GUIAS_EPG_POR_PAIS = {
 #: sin definir deja estas de por defecto) o desactivar con ``--sin-extras``.
 FUENTES_EPG_EXTRA_POR_DEFECTO = _lista_entorno(
     "EPG_URLS_EXTRA",
+    "https://epgshare01.online/epgshare01/epg_ripper_UY1.xml.gz,"
     "https://epgshare01.online/epgshare01/epg_ripper_DIRECTVSPORTS1.xml.gz,"
     "https://i.mjh.nz/PlutoTV/all.xml.gz,"
     "https://i.mjh.nz/SamsungTVPlus/us.xml.gz,"
     "https://i.mjh.nz/Roku/all.xml.gz",
 )
+
+#: Correcciones de hora por fuente: ``(fragmento de la URL, desplazamiento)``.
+#:
+#: ``epg_ripper_DIRECTVSPORTS1`` publica el reloj en UTC pero lo etiqueta como
+#: ``-0500``: el mismo programa que la guia de Uruguay da a las ``23:00 +0000``
+#: (``El juego``, 20:00 en Argentina) aparece alli como ``23:00 -0500``, es
+#: decir 04:00 UTC del dia siguiente. El desfase es de +5 h y afecta a todos
+#: sus canales, asi que se corrige al leer los programas en vez de descartar la
+#: guia: es la unica que trae ``DSports 2`` y ``DSports Motor``.
+AJUSTES_HORARIO_FUENTE: tuple[tuple[str, timedelta], ...] = (
+    ("epg_ripper_directvsports1", timedelta(hours=-5)),
+)
+
+
+def _ajuste_horario(fuente: str) -> timedelta:
+    """Desplazamiento que hay que aplicar a los programas de ``fuente``.
+
+    Devuelve :data:`datetime.timedelta` cero si la fuente no esta en
+    :data:`AJUSTES_HORARIO_FUENTE`.
+    """
+    texto = (fuente or "").lower()
+    for marca, ajuste in AJUSTES_HORARIO_FUENTE:
+        if marca and marca in texto:
+            return ajuste
+    return timedelta()
+
 
 #: Fuentes EPG adicionales indicadas por entorno (URL o ruta local, separadas
 #: por comas). Si esta vacia se usan las guias por pais de arriba.
@@ -401,16 +436,23 @@ MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
     },
     # DSports / DIRECTV Sports: los ids del proveedor ("dsports", "dsports2")
     # no existen en las guias por pais, asi que se quedaban sin programacion.
-    # Los ids de abajo son los de la guia "epg_ripper_DIRECTVSPORTS1" de
-    # epgshare01 (ver FUENTES_EPG_EXTRA_POR_DEFECTO), la unica que publica la
-    # parrilla real de estas senales. Se conservan tal cual porque el
-    # reproductor compara el tvg-id con el <channel id="..."> de la guia.
-    "DSPORTS.(ARG).dtvsp": {
+    # Se usan los ids de la guia de Uruguay ("epg_ripper_UY1", ver
+    # FUENTES_EPG_EXTRA_POR_DEFECTO), que es la unica que publica la parrilla
+    # real de estas senales con las horas en UTC: alli "El juego" va a las
+    # 23:00 UTC (20:00 de Argentina) y "De Futbol Se Habla Asi" a las 16:00 UTC
+    # (13:00), sus horarios reales. La guia "epg_ripper_DIRECTVSPORTS1" trae el
+    # mismo reloj pero etiquetado como -0500, lo que desfasaba la parrilla 2 h
+    # (5 h en UTC); por eso ya no se usa para estos dos canales.
+    # Se conservan los ids tal cual porque el reproductor compara el tvg-id con
+    # el <channel id="..."> de la guia.
+    "[SPOARHD].DSports.Argentina.HD.uy": {
         "nombre": "DSports",
         "alias": (
             "DSports",
             "D Sports",
+            "DSports HD",
             "DSports 4K",
+            "[SPOARHD] DSports Argentina HD",
             "DSports Argentina",
             "DSports ARG",
             "DIRECTV Sports",
@@ -423,18 +465,21 @@ MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
         "alias": (
             "DSports 2",
             "DSports2",
+            "DSports 2 HD",
             "DSports 2 ARG",
             "DSports 2 Argentina",
             "DIRECTV Sports 2",
         ),
     },
-    "DSPORTS.+.HD.dtvsp": {
+    "[SPOPLH].DSports.+.HD.uy": {
         "nombre": "DSports +",
         "alias": (
             "DSports +",
             "DSports+",
             "DSports Plus",
+            "DSports Plus HD",
             "DSports PL",
+            "[SPOPLH] DSports + HD",
             "DIRECTV Sports +",
             "DIRECTV Sports Plus",
         ),
@@ -1824,8 +1869,13 @@ def _programa_en_ventana(
     elemento: ET.Element,
     desde: datetime,
     hasta: datetime,
+    desplazamiento: timedelta = timedelta(),
 ) -> ET.Element | None:
     """Copia un ``<programme>`` normalizando sus fechas a UTC (+0000).
+
+    ``desplazamiento`` corrige las guias cuyo reloj viene con el desfase
+    horario equivocado (ver :data:`AJUSTES_HORARIO_FUENTE`); se aplica antes de
+    comprobar la ventana.
 
     Devuelve ``None`` si el programa no se solapa con la ventana pedida, si no
     tiene una fecha de inicio valida o si no tiene titulo (XMLTV lo exige).
@@ -1833,7 +1883,10 @@ def _programa_en_ventana(
     inicio = parsear_fecha_xmltv(elemento.get("start", ""))
     if inicio is None:
         return None
+    inicio += desplazamiento
     fin = parsear_fecha_xmltv(elemento.get("stop", ""))
+    if fin is not None:
+        fin += desplazamiento
     if fin is not None and fin <= desde:
         return None
     if inicio > hasta:
@@ -1856,12 +1909,17 @@ def parsear_epg_programas(
     ids_fuente: "Sequence[str] | set[str]",
     desde: datetime,
     hasta: datetime,
+    desplazamiento: timedelta = timedelta(),
 ) -> dict[str, list[ET.Element]]:
     """Extrae los ``<programme>`` de los canales indicados dentro de la ventana.
 
     Devuelve ``{id_canal_fuente: [<programme>, ...]}`` con las fechas ya
     normalizadas a UTC. Solo se conservan los programas de los canales que se
     han emparejado, de modo que el archivo de salida no crece de mas.
+
+    ``desplazamiento`` se suma a las fechas de la fuente antes de filtrar por la
+    ventana; se usa para las guias con el desfase horario mal declarado
+    (:data:`AJUSTES_HORARIO_FUENTE`).
     """
     programas: dict[str, list[ET.Element]] = {}
     buscados = set(ids_fuente)
@@ -1880,7 +1938,7 @@ def parsear_epg_programas(
         if elemento.tag == "programme":
             fuente = (elemento.get("channel") or "").strip()
             if fuente in buscados:
-                programa = _programa_en_ventana(elemento, desde, hasta)
+                programa = _programa_en_ventana(elemento, desde, hasta, desplazamiento)
                 if programa is not None:
                     programas.setdefault(fuente, []).append(programa)
         # Solo se liberan los nodos de primer nivel: si se vaciara un <title>
@@ -1944,7 +2002,10 @@ def integrar_epg(
             # siguientes solo cubren los canales que aun no tienen pareja.
             pendientes = [canal for canal in canales if canal["id"] not in asignados]
             mapa = emparejar_canales(pendientes, canales_fuente)
-            reales = parsear_epg_programas(texto, set(mapa.values()), desde, hasta)
+            ajuste = _ajuste_horario(fuente)
+            reales = parsear_epg_programas(
+                texto, set(mapa.values()), desde, hasta, desplazamiento=ajuste
+            )
 
             nuevos = 0
             for canal_id, fuente_id in mapa.items():
@@ -1967,10 +2028,13 @@ def integrar_epg(
                     "programas": nuevos,
                 }
             )
+            correccion = ""
+            if ajuste:
+                correccion = f" | ajuste horario: {int(ajuste.total_seconds() // 3600):+d} h"
             avisar(
                 f"      {fuente}\n"
                 f"        canales en la guia: {len(canales_fuente)} | "
-                f"emparejados: {len(mapa)} | programas: {nuevos}"
+                f"emparejados: {len(mapa)} | programas: {nuevos}{correccion}"
             )
         except (RuntimeError, OSError, ValueError, ET.ParseError) as error:
             informe["error"] = str(error)
@@ -2364,8 +2428,8 @@ def _crear_parser() -> argparse.ArgumentParser:
         action="store_true",
         help=(
             "No descargar las guias extra que se suman a las de --epg-pais "
-            "(DSports/DIRECTV Sports, Pluto TV, Samsung TV Plus y Roku; "
-            "variable EPG_URLS_EXTRA)."
+            "(DSports/DIRECTV Sports de Uruguay y de la guia dedicada, Pluto TV, "
+            "Samsung TV Plus y Roku; variable EPG_URLS_EXTRA)."
         ),
     )
     parser.add_argument(
@@ -2584,6 +2648,11 @@ def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
     Pluto TV, Samsung TV Plus y Roku) salvo que se use ``--sin-extras``. Si se
     indica una fuente concreta (``--epg``, ``--epg-archivo`` o ``EPG_URL``)
     solo se usa esa.
+
+    El orden importa: la guia de Uruguay va antes que la dedicada de
+    DIRECTV Sports porque la primera trae los horarios correctos; las guias de
+    pais se descargan antes que todas las extra, asi que ``UY1`` solo se repite
+    si el usuario no incluyo ``UY`` en ``--epg-pais``.
     """
     fuentes: list[str] = []
     for valor in argumentos.epg or []:

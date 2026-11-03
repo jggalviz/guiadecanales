@@ -90,7 +90,7 @@
         "Azteca Uno (Opc.2)"
       ]
     },
-    "DSPORTS.(ARG).dtvsp": {
+    "[SPOARHD].DSports.Argentina.HD.uy": {
       "nombre": "DSports",
       "alias": [
         "DSports",
@@ -107,6 +107,7 @@
         "DSports Señal 2",
         "DSports ARG",
         "DSports Argentina",
+        "[SPOARHD] DSports Argentina HD",
         "D Sports",
         "DIRECTV Sports",
         "DirecTV Sports",
@@ -135,7 +136,7 @@
         "DIRECTV Sports 2 (Opc.2)"
       ]
     },
-    "DSPORTS.+.HD.dtvsp": {
+    "[SPOPLH].DSports.+.HD.uy": {
       "nombre": "DSports +",
       "alias": [
         "DSports +",
@@ -148,6 +149,7 @@
         "DSports Plus Espejo",
         "DSports Plus Backup",
         "DSports PL",
+        "[SPOPLH] DSports + HD",
         "DIRECTV Sports +",
         "DIRECTV Sports Plus",
         "DIRECTV Sports + HD"

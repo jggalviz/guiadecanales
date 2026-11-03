@@ -888,13 +888,16 @@ class FuentesEpgPorDefectoTests(unittest.TestCase):
         )
 
     def test_la_guia_de_deportes_es_una_fuente_por_defecto(self) -> None:
-        # La parrilla de DSports solo existe en esta guia: tiene que venir
-        # siempre y antes que las de canales FAST para ganar el emparejamiento.
+        # DSports solo tiene parrilla en estas guias: tienen que venir siempre y
+        # antes que las de canales FAST para ganar el emparejamiento. La de
+        # Uruguay va primero porque trae las horas correctas.
         extra = generar_epg.FUENTES_EPG_EXTRA_POR_DEFECTO
-        self.assertIn("DIRECTVSPORTS1", extra[0])
+        self.assertIn("epg_ripper_UY1.xml.gz", extra[0])
+        self.assertIn("epg_ripper_DIRECTVSPORTS1.xml.gz", extra[1])
         argumentos = generar_epg._crear_parser().parse_args(["--epg-pais", "AR,CO"])
         fuentes = generar_epg._fuentes_epg_desde_argumentos(argumentos)
-        self.assertIn("epg_ripper_DIRECTVSPORTS1.xml.gz", fuentes[2])
+        self.assertIn("epg_ripper_UY1.xml.gz", fuentes[2])
+        self.assertIn("epg_ripper_DIRECTVSPORTS1.xml.gz", fuentes[3])
 
     def test_una_variable_de_entorno_vacia_usa_los_valores_por_defecto(self) -> None:
         # En GitHub Actions una variable de repositorio sin definir llega como
@@ -1278,14 +1281,22 @@ M3U_DSPORTS = "\n".join(
 )
 
 
-def _guia_dsports(inicio: datetime) -> str:
-    """Guia con la misma forma que ``epg_ripper_DIRECTVSPORTS1`` (sin red)."""
-    canales = (
-        ("DSPORTS.(ARG).dtvsp", "DSPORTS (ARG)"),
-        ("DSPORTS.2.HD.dtvsp", "DSPORTS 2 HD"),
-        ("DSPORTS.+.HD.dtvsp", "DSPORTS + HD"),
-        ("DSports.Motor.dtvsp", "DSports Motor"),
-    )
+def _sello_local(momento: datetime, desfase: str = "+0000") -> str:
+    """Sello XMLTV con la misma hora y el desfase horario indicado."""
+    return f"{momento.strftime(generar_epg.FORMATO_FECHA_XMLTV)} {desfase}"
+
+
+def _guia_de_prueba(
+    canales: "tuple[tuple[str, str], ...]",
+    inicio: datetime,
+    desfase: str = "+0000",
+) -> str:
+    """Guia XMLTV de prueba con un programa por canal.
+
+    ``desfase`` es la etiqueta horaria que se escribe en los ``<programme>``:
+    con ``"-0500"`` se imita a la guia de DIRECTV Sports, que publica el reloj
+    en UTC pero lo declara como hora de Colombia.
+    """
     partes = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<tv generator-info-name="prueba">',
@@ -1296,12 +1307,46 @@ def _guia_dsports(inicio: datetime) -> str:
         )
     for posicion, (identificador, nombre) in enumerate(canales):
         partes.append(
-            f'<programme start="{generar_epg._sello(inicio)}" '
-            f'stop="{generar_epg._sello(inicio + timedelta(hours=1 + posicion))}" '
+            f'<programme start="{_sello_local(inicio, desfase)}" '
+            f'stop="{_sello_local(inicio + timedelta(hours=1 + posicion), desfase)}" '
             f'channel="{identificador}"><title lang="es">En vivo: {nombre}</title></programme>'
         )
     partes.append("</tv>")
     return "\n".join(partes)
+
+
+#: Canales de la guia de Uruguay (``epg_ripper_UY1``): la que trae la parrilla
+#: de DSports con las horas en UTC correctas.
+CANALES_UY1 = (
+    ("[SPOARHD].DSports.Argentina.HD.uy", "[SPOARHD] DSports Argentina HD"),
+    ("[SPOPLH].DSports.+.HD.uy", "[SPOPLH] DSports + HD"),
+)
+
+#: Canales de la guia dedicada (``epg_ripper_DIRECTVSPORTS1``): solo aporta las
+#: senales que UY1 no publica, y con el reloj 5 h adelantado.
+CANALES_DIRECTVSPORTS = (
+    ("DSPORTS.2.HD.dtvsp", "DSPORTS 2 HD"),
+    ("DSports.Motor.dtvsp", "DSports Motor"),
+)
+
+
+def _guia_uy1(inicio: datetime) -> str:
+    """Guia con la misma forma que ``epg_ripper_UY1`` (sin red)."""
+    return _guia_de_prueba(CANALES_UY1, inicio)
+
+
+def _guia_directvsports(inicio: datetime) -> str:
+    """Guia con la misma forma que ``epg_ripper_DIRECTVSPORTS1`` (sin red).
+
+    Publica el reloj en UTC etiquetado como ``-0500``: sin el ajuste de
+    :data:`generar_epg.AJUSTES_HORARIO_FUENTE` sus programas quedan 5 h
+    adelantados.
+    """
+    return _guia_de_prueba(CANALES_DIRECTVSPORTS, inicio, desfase="-0500")
+
+
+URL_UY1 = "https://ejemplo.invalid/epgshare01/epg_ripper_UY1.xml.gz"
+URL_DIRECTVSPORTS = "https://ejemplo.invalid/epgshare01/epg_ripper_DIRECTVSPORTS1.xml.gz"
 
 
 class CoberturaDSportsTests(unittest.TestCase):
@@ -1317,13 +1362,13 @@ class CoberturaDSportsTests(unittest.TestCase):
         self.por_id = {canal["id"]: canal for canal in self.canales}
 
     def test_cada_variante_llega_al_tvg_id_de_la_guia_deportiva(self) -> None:
-        # Los ids son los de epg_ripper_DIRECTVSPORTS1, la unica guia que
-        # publica la parrilla de estas senales ("dsports"/"dsports2" del
-        # proveedor no existen en ninguna guia).
+        # DSports y DSports + usan los ids de la guia de Uruguay, la unica que
+        # publica su parrilla con las horas correctas; DSports 2 y Motor siguen
+        # en la guia dedicada, que es la unica que los trae.
         esperados = {
-            "DSPORTS.(ARG).dtvsp": ("DSports", 5),
+            "[SPOARHD].DSports.Argentina.HD.uy": ("DSports", 5),
             "DSPORTS.2.HD.dtvsp": ("DSports 2", 3),
-            "DSPORTS.+.HD.dtvsp": ("DSports +", 2),
+            "[SPOPLH].DSports.+.HD.uy": ("DSports +", 2),
             "DSports.Motor.dtvsp": ("DSports Motor", 1),
         }
         for identificador, (nombre, senales) in esperados.items():
@@ -1338,11 +1383,12 @@ class CoberturaDSportsTests(unittest.TestCase):
         # El "+" se descartaba al generar la clave: "DSports +" acababa siendo
         # el canal principal. Ahora cada uno conserva su id.
         self.assertNotEqual(
-            self.por_id["DSPORTS.(ARG).dtvsp"]["id"],
-            self.por_id["DSPORTS.+.HD.dtvsp"]["id"],
+            self.por_id["[SPOARHD].DSports.Argentina.HD.uy"]["id"],
+            self.por_id["[SPOPLH].DSports.+.HD.uy"]["id"],
         )
         urls = {
-            senal["url"] for senal in self.por_id["DSPORTS.+.HD.dtvsp"]["senales"]
+            senal["url"]
+            for senal in self.por_id["[SPOPLH].DSports.+.HD.uy"]["senales"]
         }
         self.assertEqual(
             urls,
@@ -1359,69 +1405,79 @@ class CoberturaDSportsTests(unittest.TestCase):
 
     def test_una_guia_sin_parrilla_no_bloquea_a_la_que_si_la_tiene(self) -> None:
         # Las guias por pais publican los <channel> de DSports sin un solo
-        # <programme>: si el canal se diera por resuelto, la guia deportiva
+        # <programme>: si el canal se diera por resuelto, la guia de Uruguay
         # (que va despues) ya no podria aportarle la parrilla real.
         vacia = "\n".join(
             [
                 '<?xml version="1.0" encoding="UTF-8"?>',
                 "<tv>",
-                '<channel id="DSPORTS.(ARG).dtvsp">'
-                "<display-name>DSPORTS (ARG)</display-name></channel>",
-                '<channel id="DSPORTS.2.HD.dtvsp">'
-                "<display-name>DSPORTS 2 HD</display-name></channel>",
+                '<channel id="[SPOARHD].DSports.Argentina.HD.uy">'
+                "<display-name>[SPOARHD] DSports Argentina HD</display-name></channel>",
+                '<channel id="[SPOPLH].DSports.+.HD.uy">'
+                "<display-name>[SPOPLH] DSports + HD</display-name></channel>",
                 "</tv>",
             ]
         )
         programas, emparejados, informes = generar_epg.integrar_epg(
             self.canales,
-            ["guia-vacia", "guia-dsports"],
+            ["guia-vacia", URL_UY1],
             self.ventana,
             cargador=lambda fuente: (
-                vacia if fuente == "guia-vacia" else _guia_dsports(self.inicio)
+                vacia if fuente == "guia-vacia" else _guia_uy1(self.inicio)
             ),
         )
+        self.assertEqual([informe["emparejados"] for informe in informes], [2, 2])
         self.assertEqual(
-            [informe["emparejados"] for informe in informes], [2, 4]
+            emparejados["[SPOARHD].DSports.Argentina.HD.uy"],
+            "[SPOARHD].DSports.Argentina.HD.uy",
         )
-        self.assertEqual(emparejados["DSPORTS.(ARG).dtvsp"], "DSPORTS.(ARG).dtvsp")
-        self.assertTrue(programas["DSPORTS.(ARG).dtvsp"])
-        self.assertTrue(programas["DSPORTS.2.HD.dtvsp"])
+        self.assertTrue(programas["[SPOARHD].DSports.Argentina.HD.uy"])
+        self.assertTrue(programas["[SPOPLH].DSports.+.HD.uy"])
 
-    def test_la_guia_deportiva_aporta_programacion_real(self) -> None:
-        programas, _emparejados, informes = generar_epg.integrar_epg(
+    def test_las_dos_guias_cubren_todas_las_senales(self) -> None:
+        programas, emparejados, informes = generar_epg.integrar_epg(
             self.canales,
-            ["guia-dsports"],
+            [URL_UY1, URL_DIRECTVSPORTS],
             self.ventana,
-            cargador=lambda _fuente: _guia_dsports(self.inicio),
+            cargador=lambda fuente: (
+                _guia_uy1(self.inicio)
+                if "UY1" in fuente
+                else _guia_directvsports(self.inicio)
+            ),
         )
-        self.assertEqual(informes[0]["error"], "")
+        self.assertEqual([informe["error"] for informe in informes], ["", ""])
         for identificador in (
-            "DSPORTS.(ARG).dtvsp",
+            "[SPOARHD].DSports.Argentina.HD.uy",
             "DSPORTS.2.HD.dtvsp",
-            "DSPORTS.+.HD.dtvsp",
+            "[SPOPLH].DSports.+.HD.uy",
             "DSports.Motor.dtvsp",
         ):
             with self.subTest(canal=identificador):
                 self.assertIn(identificador, programas)
                 self.assertTrue(programas[identificador])
+                self.assertEqual(emparejados[identificador], identificador)
         self.assertNotIn("dsportsfight", programas)
 
     def test_el_xmltv_publica_los_programas_con_el_id_sincronizado(self) -> None:
         programas, _emparejados, _informes = generar_epg.integrar_epg(
             self.canales,
-            ["guia-dsports"],
+            [URL_UY1, URL_DIRECTVSPORTS],
             self.ventana,
-            cargador=lambda _fuente: _guia_dsports(self.inicio),
+            cargador=lambda fuente: (
+                _guia_uy1(self.inicio)
+                if "UY1" in fuente
+                else _guia_directvsports(self.inicio)
+            ),
         )
         raiz, total = generar_epg.construir_xmltv(
             self.canales, self.inicio, programas=programas, relleno=False
         )
         identificadores = {canal.get("id") for canal in raiz.findall("channel")}
-        self.assertIn("DSPORTS.(ARG).dtvsp", identificadores)
+        self.assertIn("[SPOARHD].DSports.Argentina.HD.uy", identificadores)
         con_programas = [
             programa
             for programa in raiz.findall("programme")
-            if programa.get("channel") == "DSPORTS.(ARG).dtvsp"
+            if programa.get("channel") == "[SPOARHD].DSports.Argentina.HD.uy"
         ]
         self.assertTrue(con_programas)
         self.assertEqual(total, len(raiz.findall("programme")))
@@ -1433,8 +1489,54 @@ class CoberturaDSportsTests(unittest.TestCase):
             with self.subTest(canal=entrada["tvg_id"]):
                 self.assertIn(entrada["tvg_id"], identificadores)
 
+    def test_la_guia_dedicada_se_corrige_para_no_desfasarse(self) -> None:
+        # La guia de DIRECTV Sports publica el reloj en UTC pero lo declara
+        # como -0500: sin la correccion, "El juego" (23:00 UTC) se veria a las
+        # 04:00 UTC del dia siguiente, 2 h tarde en Argentina.
+        programas, _emparejados, _informes = generar_epg.integrar_epg(
+            self.canales,
+            [URL_DIRECTVSPORTS],
+            self.ventana,
+            cargador=lambda _fuente: _guia_directvsports(self.inicio),
+        )
+        programa = programas["DSPORTS.2.HD.dtvsp"][0]
+        self.assertEqual(programa.get("start"), generar_epg._sello(self.inicio))
+
+    def test_el_ajuste_horario_solo_afecta_a_la_guia_dedicada(self) -> None:
+        self.assertEqual(
+            generar_epg._ajuste_horario(URL_DIRECTVSPORTS), timedelta(hours=-5)
+        )
+        self.assertEqual(
+            generar_epg._ajuste_horario(URL_DIRECTVSPORTS.upper()), timedelta(hours=-5)
+        )
+        self.assertEqual(generar_epg._ajuste_horario(URL_UY1), timedelta())
+        self.assertEqual(generar_epg._ajuste_horario("guia-local.xml"), timedelta())
+
+    def test_parsear_epg_programas_aplica_el_desplazamiento(self) -> None:
+        # Sin desplazamiento, un sello "23:00 -0500" cae a las 04:00 UTC; con el
+        # desplazamiento de la guia dedicada vuelve a las 23:00 UTC.
+        guia = _guia_directvsports(self.inicio)
+        sin_ajuste = generar_epg.parsear_epg_programas(
+            guia, ["DSPORTS.2.HD.dtvsp"], self.ventana[0], self.ventana[1]
+        )
+        con_ajuste = generar_epg.parsear_epg_programas(
+            guia,
+            ["DSPORTS.2.HD.dtvsp"],
+            self.ventana[0],
+            self.ventana[1],
+            desplazamiento=timedelta(hours=-5),
+        )
+        self.assertEqual(
+            sin_ajuste["DSPORTS.2.HD.dtvsp"][0].get("start"),
+            generar_epg._sello(self.inicio + timedelta(hours=5)),
+        )
+        self.assertEqual(
+            con_ajuste["DSPORTS.2.HD.dtvsp"][0].get("start"),
+            generar_epg._sello(self.inicio),
+        )
+
     def test_la_lista_publicada_se_puede_regenerar_sin_perder_ids(self) -> None:
-        # El tvg-id de DSports lleva parentesis y "+", que _normalizar_tvg_id
+        # El tvg-id de DSports lleva corchetes y puntos, que _normalizar_tvg_id
         # no acepta: al releer la lista propia el mapeo lo vuelve a fijar.
         texto = generar_epg.generar_m3u(
             self.canales, url_epg="https://ejemplo.invalid/epg.xml"
