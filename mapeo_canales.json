@@ -1,0 +1,84 @@
+{
+  "$esquema": "guiadecanales/mapeo_canales v1",
+  "$descripcion": "Mapeo explicito de alias -> tvg-id real de la guia XMLTV (ids de iptv-org/epgshare01). Todas las entradas de la lista M3U cuyo nombre coincida con un alias se publican con ese tvg-id y el nombre estandar, para que OTT Navigator muestre la programacion real en todas las opciones (HD, [Opc.2], backup, espejo...).",
+  "$uso": "python generar_epg.py -u \"$M3U_URL\" --mapeo mapeo_canales.json (es el archivo por defecto). Use --sin-mapeo para desactivarlo.",
+  "$formato_corto": "\"tvg-id\": [\"alias 1\", \"alias 2\"]",
+  "$formato_largo": "\"tvg-id\": {\"nombre\": \"Nombre estandar\", \"logo\": \"https://...\", \"alias\": [\"alias 1\"]}",
+  "canales": {
+    "ESPN2.us": {
+      "nombre": "ESPN 2",
+      "alias": [
+        "ESPN 2",
+        "ESPN2",
+        "ESPN 2 HD",
+        "ESPN 2 (Opc.2)",
+        "ESPN2 HD - (Opc.3)",
+        "ESPN 2 (Opc.3)",
+        "ESPN 2 (Opc.4)",
+        "ESPN 2 (Señal 2)",
+        "ESPN 2 Espejo",
+        "ESPN 2 Backup"
+      ]
+    },
+    "ESPN.us": {
+      "nombre": "ESPN",
+      "alias": [
+        "ESPN",
+        "ESPN HD",
+        "ESPN (Opc.2)",
+        "ESPN HD - (Opc.3)",
+        "ESPN Espejo"
+      ]
+    },
+    "ESPNDeportes.us": {
+      "nombre": "ESPN Deportes",
+      "alias": [
+        "ESPN Deportes",
+        "ESPN Deportes HD",
+        "ESPN Deportes (Opc.2)"
+      ]
+    },
+    "ESPNLatinAmerica.us": {
+      "nombre": "ESPN Latin America",
+      "alias": [
+        "ESPN Latin America",
+        "ESPN Latinoamerica",
+        "ESPN Latam"
+      ]
+    },
+    "Canal5.mx": {
+      "nombre": "Canal 5",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png",
+      "alias": [
+        "Canal 5",
+        "Canal 5 HD",
+        "Canal 5 (Opc.2)",
+        "Canal 5 FHD - (Opc.3)"
+      ]
+    },
+    "LasEstrellas.mx": {
+      "nombre": "Las Estrellas",
+      "alias": [
+        "Las Estrellas",
+        "Las Estrellas HD",
+        "Las Estrellas (Opc.2)"
+      ]
+    },
+    "Azteca7.mx": {
+      "nombre": "Azteca 7",
+      "alias": [
+        "Azteca 7",
+        "Azteca Siete",
+        "Azteca 7 (Opc.2)"
+      ]
+    },
+    "AztecaUno.mx": {
+      "nombre": "Azteca Uno",
+      "alias": [
+        "Azteca Uno",
+        "Azteca 1",
+        "Azteca Uno (Opc.2)"
+      ]
+    }
+  }
+}

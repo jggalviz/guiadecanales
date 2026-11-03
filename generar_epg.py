@@ -11,6 +11,10 @@ la ultima coma del #EXTINF) y sus atributos ``tvg-id``, ``tvg-name`` y
 y genera un ``epg.xml`` en formato XMLTV con la **programacion real** descargada
 de guias XMLTV publicas (por defecto una guia por pais de epgshare01).
 
+Ademas publica ``lista.m3u``: una lista propia (ordenada, con atributos limpios,
+``tvg-id`` sincronizado con la guia y todas las senales de respaldo) que se puede
+usar directamente en OTT Navigator, VLC, TiviMate, IPTV Smarters...
+
 Flujo de la programacion
 ------------------------
 1. Se descargan las guias XMLTV configuradas (``--epg``, ``--epg-pais``,
@@ -25,9 +29,23 @@ Flujo de la programacion
    ninguna guia se puede usar, la guia se rellena con esa parrilla para que el
    reproductor nunca se quede sin datos.
 
+Flujo de la lista propia
+------------------------
+1. Un **mapeo explicito** (``mapeo_canales.json`` + :data:`MAPEO_CANALES_POR_DEFECTO`)
+   fija el ``tvg-id`` real de las senales dificiles: ``ESPN 2 HD``,
+   ``ESPN 2 (Opc.2)`` y ``ESPN2 HD - (Opc.3)`` acaban todas en ``ESPN2.us``.
+2. Los **duplicados/espejos no se eliminan**: cada senal (``Opc.2``, ``Backup``,
+   ``Espejo``...) se publica como una entrada propia con el ``tvg-id`` y el
+   ``tvg-name`` de su canal principal, asi que muestra la misma programacion.
+3. Se ordenan los canales por grupo y nombre y se limpian los atributos
+   (``tvg-id``, ``tvg-name``, ``tvg-logo`` solo si es http(s), ``group-title``),
+   conservando los ``#EXTVLCOPT``/``#KODIPROP`` de la lista original.
+4. La cabecera declara la guia publicada (``x-tvg-url``/``url-tvg``) y la salida
+   se escribe en ``lista.m3u`` junto al ``epg.xml``.
+
 Caracteristicas
 ---------------
-* Solo librerias estandar de Python (3.9+): urllib.request, re, gzip, io,
+* Solo librerias estandar de Python (3.9+): urllib.request, re, gzip, io, json,
   xml.etree.ElementTree, datetime, argparse, unicodedata, html.
 * Descarga con User-Agent de navegador, reintentos, soporte de gzip y deteccion
   de codificacion.
@@ -50,14 +68,18 @@ Uso rapido
     python generar_epg.py --url "https://raw.githubusercontent.com/USUARIO/REPO/RAMA/lista.m3u"
     python generar_epg.py                 # usa la constante URL_M3U o la variable M3U_URL
     python generar_epg.py -u "$M3U_URL" --epg-pais MX,ES,AR   # guias reales por pais
+    python generar_epg.py -u "$M3U_URL" --mapeo mapeo_canales.json
     python generar_epg.py -u "$M3U_URL" --epg https://ejemplo.com/guia.xml.gz
     python generar_epg.py -h              # ayuda completa
 
 Variables de entorno
 --------------------
     M3U_URL            URL de la lista M3U (tiene prioridad sobre la constante).
+    M3U_SALIDA         Ruta de la lista M3U propia (por defecto: lista.m3u).
+    M3U_MAPEO          JSON con el mapeo explicito (por defecto: mapeo_canales.json).
     EPG_SALIDA         Ruta del archivo de salida (por defecto: epg.xml).
     EPG_REPO_URL       URL del repositorio que se publica en <tv generator-info-url>.
+    EPG_PUBLICA_URL    URL publica del epg.xml que se declara en la cabecera del M3U.
     EPG_URL            Fuentes EPG reales separadas por comas (URL o ruta local).
     EPG_PAISES         Paises de las guias de por defecto (por defecto MX,ES,AR,...).
     EPG_URL_PLANTILLA  Plantilla de la guia por pais (``{pais}`` -> codigo ISO).
@@ -74,6 +96,7 @@ import argparse
 import gzip
 import html
 import io
+import json
 import os
 import re
 import sys
@@ -82,6 +105,7 @@ import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections.abc import Mapping
 from datetime import date, datetime, timedelta, timezone
 from xml.etree import ElementTree as ET
 
@@ -284,6 +308,86 @@ http://ejemplo.invalid/deportes247/index.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="Canal Local" group-title="Local",Canal Local SD
 http://ejemplo.invalid/canallocal/index.m3u8
 """
+
+
+# -----------------------------------------------------------------------------
+# Mapeo explicito de canales y lista M3U propia
+# -----------------------------------------------------------------------------
+
+#: Mapeo explicito ``tvg-id real de la guia -> nombre/alias del canal``.
+#:
+#: Sirve para las senales que el emparejamiento automatico no puede resolver
+#: (o resuelve mal): varias entradas de la lista que en realidad son el mismo
+#: canal con distinto nombre ("ESPN 2 HD", "ESPN 2 (Opc.2)",
+#: "ESPN2 HD - (Opc.3)") acaban todas en el ``tvg-id`` canonico de la guia
+#: (``ESPN2.us``), que es lo que el reproductor usa para pedir la programacion.
+#:
+#: Los ids son los de iptv-org/epgshare01 (``Canal5.mx``, ``ESPN2.us``...), que
+#: son los mismos que publican las guias XMLTV. Se pueden añadir o cambiar
+#: canales en ``mapeo_canales.json`` sin tocar el codigo (ver
+#: :func:`cargar_mapeo_canales`).
+MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
+    "Canal5.mx": {
+        "nombre": "Canal 5",
+        "alias": ("Canal 5", "Canal5"),
+    },
+    "LasEstrellas.mx": {
+        "nombre": "Las Estrellas",
+        "alias": ("Las Estrellas",),
+    },
+    "Azteca7.mx": {
+        "nombre": "Azteca 7",
+        "alias": ("Azteca 7", "Azteca Siete"),
+    },
+    "AztecaUno.mx": {
+        "nombre": "Azteca Uno",
+        "alias": ("Azteca Uno", "Azteca 1"),
+    },
+    "ESPN.us": {
+        "nombre": "ESPN",
+        "alias": ("ESPN",),
+    },
+    "ESPN2.us": {
+        "nombre": "ESPN 2",
+        "alias": (
+            "ESPN 2",
+            "ESPN2",
+            "ESPN 2 (Opc.2)",
+            "ESPN2 HD - (Opc.3)",
+            "ESPN 2 (Opc.3)",
+            "ESPN 2 (Opc.4)",
+        ),
+    },
+    "ESPNDeportes.us": {
+        "nombre": "ESPN Deportes",
+        "alias": ("ESPN Deportes", "ESPN Deportes HD"),
+    },
+    "ESPNLatinAmerica.us": {
+        "nombre": "ESPN Latin America",
+        "alias": ("ESPN Latin America", "ESPN Latinoamerica"),
+    },
+}
+
+#: Archivo JSON opcional que amplia :data:`MAPEO_CANALES_POR_DEFECTO`. Se busca
+#: por defecto junto al script (raiz del repositorio) y se puede cambiar con
+#: ``--mapeo`` o con la variable de entorno ``M3U_MAPEO``.
+ARCHIVO_MAPEO_POR_DEFECTO = "mapeo_canales.json"
+
+#: Nombre del archivo M3U propio que se genera junto al ``epg.xml``. Se puede
+#: cambiar con ``--m3u-salida`` o con la variable de entorno ``M3U_SALIDA``.
+LISTA_M3U_POR_DEFECTO = os.environ.get("M3U_SALIDA", "").strip() or "lista.m3u"
+
+#: URL publica de la guia que se declara en la cabecera del M3U
+#: (``x-tvg-url``/``url-tvg``) para que el reproductor descargue la EPG solo.
+#: Se puede cambiar con ``--epg-publica`` o con ``EPG_PUBLICA_URL``.
+URL_EPG_PUBLICA = os.environ.get("EPG_PUBLICA_URL", "").strip() or (
+    URL_GENERADOR.rstrip("/") + "/raw/main/epg.xml"
+)
+
+#: Prefix que se añade al nombre visible de las senales de respaldo (espejos,
+#: ``Opc.2``, ``Backup``...) para distinguirlas en el reproductor sin cambiar el
+#: ``tvg-id`` ni el ``tvg-name`` con el que se pide la programacion.
+ETIQUETA_SENAL_SECUNDARIA = "Opc. {numero}"
 
 
 # =============================================================================
@@ -491,20 +595,26 @@ def _extraer_nombre(linea_extinf: str) -> str:
     return html.unescape(nombre).strip()
 
 
-def parsear_m3u(texto: str) -> list[dict[str, str]]:
+def parsear_m3u(texto: str) -> list[dict[str, object]]:
     """Extrae de la lista M3U la informacion de cada canal.
 
     Devuelve una lista de diccionarios con las claves ``nombre``, ``logo``,
-    ``grupo``, ``tvg_id`` y ``url``. Se ignoran los comentarios (#EXTM3U,
-    #EXTVLCOPT, #EXTGRP...) y las lineas sin ``#EXTINF`` previo.
+    ``grupo``, ``tvg_id``, ``tvg_name``, ``opciones`` y ``url``. Se ignoran los
+    comentarios (#EXTM3U...) y las lineas sin ``#EXTINF`` previo.
+
+    ``opciones`` guarda las lineas de opciones de la entrada
+    (``#EXTVLCOPT:http-user-agent=...``, ``#KODIPROP:...``, ``#EXTGRP:...``),
+    que se publican tal cual en la lista propia para no romper los canales que
+    necesitan un user-agent o un referer concreto.
 
     Antes de analizar el texto se aplica :func:`sanear_codificacion`, de modo
     que los nombres con mojibake (``MÚxico``, ``Espa±a``, ``Panamß``,
     ``MÃ©xico``...) lleguen corregidos al resto del proceso.
     """
     texto = sanear_codificacion(texto)
-    canales: list[dict[str, str]] = []
+    canales: list[dict[str, object]] = []
     pendiente: str | None = None
+    opciones: list[str] = []
 
     for linea in texto.splitlines():
         linea = linea.strip()
@@ -512,8 +622,12 @@ def parsear_m3u(texto: str) -> list[dict[str, str]]:
             continue
         if linea.upper().startswith("#EXTINF"):
             pendiente = linea
+            opciones = []
             continue
         if linea.startswith("#"):
+            # Opciones de la entrada pendiente (#EXTVLCOPT, #KODIPROP...).
+            if pendiente is not None:
+                opciones.append(linea)
             continue
         if pendiente is None:
             continue
@@ -528,10 +642,12 @@ def parsear_m3u(texto: str) -> list[dict[str, str]]:
                     "grupo": atributos.get("group-title", "").strip(),
                     "tvg_id": atributos.get("tvg-id", "").strip(),
                     "tvg_name": (atributos.get("tvg-name") or "").strip(),
+                    "opciones": tuple(opciones),
                     "url": linea,
                 }
             )
         pendiente = None
+        opciones = []
 
     return canales
 
@@ -755,15 +871,161 @@ def _normalizar_tvg_id(valor: str, conservar: bool = False) -> str:
     return limpio
 
 
+def _clave_mapeo(texto: str) -> str:
+    """Clave normalizada de un alias del mapeo explicito.
+
+    Se calcula igual que el nombre limpio **sin** quitar el pais, de modo que
+    ``"ESPN 2 (Opc.2)"`` -> ``espn2`` (el marcador de opcion se descarta) pero
+    ``"ESPN 2 Netherlands"`` -> ``espn2netherlands`` y no roba el canal de
+    ESPN 2 de Estados Unidos.
+    """
+    return generar_id(limpiar_nombre(str(texto or ""), quitar_region=False))
+
+
+def _entrada_mapeo(identificador: str, datos: object) -> dict[str, object]:
+    """Normaliza una entrada del mapeo (``{id: datos}``) a la forma interna.
+
+    Formatos admitidos en el JSON:
+
+    * ``"ESPN2.us": ["ESPN 2 HD", "ESPN 2 (Opc.2)"]`` (solo alias).
+    * ``"ESPN2.us": {"nombre": "ESPN 2", "logo": "...", "alias": [...]}``.
+    """
+    if isinstance(datos, (list, tuple)):
+        datos = {"alias": list(datos)}
+    if not isinstance(datos, dict):
+        raise ValueError(f"el canal {identificador!r} del mapeo debe ser una lista o un objeto")
+
+    nombre = str(datos.get("nombre") or datos.get("nombre_estandar") or "").strip()
+    alias = [
+        str(valor).strip()
+        for valor in (datos.get("alias") or datos.get("aliases") or ())
+        if str(valor).strip()
+    ]
+    if nombre:
+        alias.insert(0, nombre)
+    if not alias:
+        raise ValueError(f"el canal {identificador!r} del mapeo no tiene nombre ni alias")
+
+    return {
+        "id": identificador.strip(),
+        "nombre": nombre or alias[0],
+        "logo": str(datos.get("logo") or datos.get("tvg_logo") or "").strip(),
+        "alias": tuple(dict.fromkeys(alias)),
+    }
+
+
+def cargar_mapeo_canales(ruta: str | None = None) -> dict[str, dict[str, object]]:
+    """Devuelve el mapeo explicito de canales: el de por defecto + el del JSON.
+
+    ``ruta`` es el archivo JSON con canales adicionales (por defecto
+    :data:`ARCHIVO_MAPEO_POR_DEFECTO`, en la raiz del repositorio). El JSON
+    puede traer una clave ``"canales"`` o directamente ``{tvg_id: alias_o_datos}``
+    y admite dos formatos por canal::
+
+        {
+          "canales": {
+            "ESPN2.us": ["ESPN 2 HD", "ESPN 2 (Opc.2)", "ESPN2 HD - (Opc.3)"],
+            "LasEstrellas.mx": {
+              "nombre": "Las Estrellas",
+              "logo": "https://ejemplo.invalid/las-estrellas.png",
+              "alias": ["Las Estrellas", "Las Estrellas HD"]
+            }
+          }
+        }
+
+    Los alias del JSON **se suman** a los del mismo ``tvg-id`` definidos en el
+    codigo, y el ``nombre``/``logo`` del JSON tienen prioridad. Si el archivo no
+    existe se usan solo los canales de por defecto; un JSON invalido lanza
+    :class:`ValueError` para que el llamador pueda avisar y continuar.
+    """
+    mapeo: dict[str, dict[str, object]] = {}
+    for identificador, datos in MAPEO_CANALES_POR_DEFECTO.items():
+        entrada = _entrada_mapeo(identificador, datos)
+        mapeo[str(entrada["id"])] = entrada
+
+    ruta = (ruta if ruta is not None else ARCHIVO_MAPEO_POR_DEFECTO) or ""
+    if not ruta or not os.path.isfile(ruta):
+        return mapeo
+
+    with open(ruta, "r", encoding="utf-8") as archivo:
+        contenido = archivo.read()
+    try:
+        datos_json = json.loads(contenido)
+    except json.JSONDecodeError as error:
+        raise ValueError(f"{ruta}: JSON no valido ({error})") from error
+    if not isinstance(datos_json, dict):
+        raise ValueError(f"{ruta}: se esperaba un objeto JSON con los canales")
+
+    canales_json = datos_json.get("canales", datos_json)
+    if not isinstance(canales_json, dict):
+        raise ValueError(f"{ruta}: la clave 'canales' debe ser un objeto JSON")
+
+    for identificador, datos in canales_json.items():
+        if not isinstance(identificador, str) or identificador.startswith(("$", "_")):
+            # Claves de documentacion del JSON (no son canales).
+            continue
+        creado = _entrada_mapeo(str(identificador), datos)
+        clave = str(creado["id"])
+        previa = mapeo.get(clave)
+        if previa is not None:
+            # Los alias se acumulan; el nombre y el logo del JSON mandan si vienen.
+            creado["alias"] = tuple(
+                dict.fromkeys(list(previa["alias"]) + list(creado["alias"]))  # type: ignore[arg-type]
+            )
+            creado["nombre"] = (
+                str(datos.get("nombre") or datos.get("nombre_estandar") or "").strip()
+                if isinstance(datos, dict)
+                else ""
+            ) or previa["nombre"]
+            creado["logo"] = str(creado["logo"] or previa["logo"])
+        mapeo[clave] = creado
+    return mapeo
+
+
+def _indice_mapeo(mapeo: "Mapping[str, Mapping[str, object]]") -> dict[str, "Mapping[str, object]"]:
+    """Construye ``{clave_normalizada: entrada}`` para buscar alias rapido."""
+    indice: dict[str, Mapping[str, object]] = {}
+    for entrada in mapeo.values():
+        for alias in entrada.get("alias") or ():
+            clave = _clave_mapeo(str(alias))
+            if clave:
+                indice.setdefault(clave, entrada)
+        clave = generar_id(str(entrada.get("nombre", "")))
+        if clave:
+            indice.setdefault(clave, entrada)
+    return indice
+
+
+def buscar_en_mapeo(
+    indice: "Mapping[str, Mapping[str, object]]",
+    *nombres: str,
+) -> "Mapping[str, object] | None":
+    """Devuelve la entrada del mapeo que corresponde a alguno de los nombres."""
+    if not indice:
+        return None
+    for nombre in nombres:
+        for clave in (_clave_mapeo(nombre), generar_id(str(nombre or ""))):
+            if clave and clave in indice:
+                return indice[clave]
+    return None
+
+
+
 def consolidar_canales(
-    canales: Iterable[dict[str, str]],
+    canales: Iterable[Mapping[str, object]],
     usar_tvg_id: bool = True,
     conservar_tvg_id: bool = False,
-) -> list[dict[str, str]]:
+    mapeo: "Mapping[str, Mapping[str, object]] | None" = None,
+) -> list[dict[str, object]]:
     """Limpia los nombres, unifica senales repetidas y asigna un id unico.
 
     Reglas de identificacion, por orden de prioridad:
 
+    0. Si el nombre coincide con un alias del ``mapeo`` explicito
+       (:func:`cargar_mapeo_canales`), se usa su ``tvg-id`` canonico: todas las
+       entradas dificiles ("ESPN 2 HD", "ESPN 2 (Opc.2)",
+       "ESPN2 HD - (Opc.3)") quedan como ``ESPN2.us`` con el nombre estandar
+       ``ESPN 2`` y piden la misma programacion real.
     1. Si la entrada trae un ``tvg-id`` valido, ese es el ``id`` del canal (es
        lo que el reproductor usa para emparejar la guia con la lista). Las
        variantes de calidad de un mismo id (``ESPN2.us@HD`` / ``ESPN2.us@SD``)
@@ -774,27 +1036,59 @@ def consolidar_canales(
     El pais del final del nombre se descarta ("TNT Sports Chile" -> "TNT
     Sports"), salvo que dos senales del mismo nombre solo se diferencien en el
     pais: en ese caso se conserva para no fusionar canales distintos.
+
+    Cada canal conserva en ``senales`` **todas** las entradas de la lista
+    original que representan el mismo canal (HD, espejos, ``Opc.2``,
+    ``Backup``...), con su URL y sus opciones, para que la lista M3U propia las
+    publique todas con el mismo ``tvg-id`` en vez de descartarlas.
     """
-    registros: list[dict[str, str]] = []
+    indice_mapeo = _indice_mapeo(mapeo) if mapeo else {}
+    registros: list[dict[str, object]] = []
     for canal in canales:
-        nombre_original = canal.get("nombre", "")
-        amplio = limpiar_nombre(nombre_original, quitar_region=True)
-        estricto = limpiar_nombre(nombre_original, quitar_region=False)
+        nombre_original = str(canal.get("nombre", "") or "")
+        tvg_name_original = str(canal.get("tvg_name", "") or "")
+        mapeado = buscar_en_mapeo(
+            indice_mapeo,
+            nombre_original,
+            tvg_name_original,
+            str(canal.get("nombre_m3u", "") or ""),
+        )
+        if mapeado is not None:
+            estricto = amplio = str(mapeado["nombre"])
+            clave_amplia = generar_id(estricto)
+            region = ""
+            tvg_id = str(mapeado["id"])
+            tvg_name = str(mapeado["nombre"])
+            logo = str(mapeado.get("logo") or canal.get("logo") or "")
+        else:
+            amplio = limpiar_nombre(nombre_original, quitar_region=True)
+            estricto = limpiar_nombre(nombre_original, quitar_region=False)
+            clave_amplia = generar_id(amplio)
+            region = _region_final(estricto)
+            tvg_id = (
+                _normalizar_tvg_id(str(canal.get("tvg_id", "") or ""), conservar=conservar_tvg_id)
+                if usar_tvg_id
+                else ""
+            )
+            tvg_name = tvg_name_original
+            logo = str(canal.get("logo", "") or "")
+
         registros.append(
             {
                 "nombre_amplio": amplio,
                 "nombre_estricto": estricto,
-                "clave_amplia": generar_id(amplio),
-                "region": _region_final(estricto),
-                "logo": canal.get("logo", ""),
-                "grupo": canal.get("grupo", ""),
-                "tvg_id": (
-                    _normalizar_tvg_id(canal.get("tvg_id", ""), conservar=conservar_tvg_id)
-                    if usar_tvg_id
-                    else ""
-                ),
-                "tvg_name": canal.get("tvg_name", ""),
+                "clave_amplia": clave_amplia,
+                "region": region,
+                "logo": logo,
+                "grupo": str(canal.get("grupo", "") or ""),
+                "tvg_id": tvg_id,
+                "tvg_name": tvg_name,
                 "nombre_m3u": nombre_original.strip(),
+                "senal": {
+                    "url": str(canal.get("url", "") or ""),
+                    "opciones": tuple(canal.get("opciones") or ()),
+                    "nombre_m3u": nombre_original.strip(),
+                },
             }
         )
 
@@ -814,8 +1108,20 @@ def consolidar_canales(
         if len(regiones) > 1 or clave in sin_region_por_clave
     }
 
-    unicos: dict[str, dict[str, str]] = {}
+    unicos: dict[str, dict[str, object]] = {}
     id_por_nombre: dict[str, str] = {}
+
+    def agregar_senal(destino: dict[str, object], senal: Mapping[str, object]) -> None:
+        """Añade una señal (URL + opciones) sin repetir la misma URL."""
+        url = str(senal.get("url", "") or "")
+        if not url:
+            return
+        lista = destino.setdefault("senales", [])
+        if not isinstance(lista, list):
+            return
+        if any(str(previa.get("url", "")) == url for previa in lista):
+            return
+        lista.append(dict(senal))
 
     for registro in registros:
         if registro["clave_amplia"] in en_conflicto:
@@ -841,6 +1147,9 @@ def consolidar_canales(
                 existente["grupo"] = registro["grupo"]
             if not existente["tvg_name"] and registro["tvg_name"]:
                 existente["tvg_name"] = registro["tvg_name"]
+            # Las senales de respaldo (Opc.2, espejo, backup...) se conservan:
+            # la lista M3U propia las publica todas con el mismo tvg-id.
+            agregar_senal(existente, registro["senal"])
             continue
 
         unicos[clave] = {
@@ -852,7 +1161,9 @@ def consolidar_canales(
             "grupo": registro["grupo"],
             "nombre_m3u": registro["nombre_m3u"],
             "origen": origen,
+            "senales": [],
         }
+        agregar_senal(unicos[clave], registro["senal"])
         id_por_nombre.setdefault(id_nombre, clave)
 
     return list(unicos.values())
@@ -1802,14 +2113,15 @@ def _crear_parser() -> argparse.ArgumentParser:
         prog="generar_epg.py",
         description=(
             "Genera una guia EPG en formato XMLTV (epg.xml) a partir de una lista "
-            "M3U remota y de guias XMLTV reales publicas."
+            "M3U remota y de guias XMLTV reales publicas, y publica una lista M3U "
+            "propia (lista.m3u) con el tvg-id de cada canal ya emparejado."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Ejemplos:\n"
             "  python generar_epg.py --demo\n"
             "  python generar_epg.py --url https://raw.githubusercontent.com/USUARIO/REPO/main/lista.m3u\n"
-            "  python generar_epg.py -u \"$M3U_URL\" -s epg.xml\n"
+            "  python generar_epg.py -u \"$M3U_URL\" -s epg.xml -m lista.m3u\n"
             "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX,ES,AR    # guias reales por pais\n"
             "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX,ES,US   # incluye la guia de EE. UU.\n"
             "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX --sin-extras  # solo la de MX\n"
@@ -1817,6 +2129,7 @@ def _crear_parser() -> argparse.ArgumentParser:
             "  python generar_epg.py -u \"$M3U_URL\" --epg-archivo guia.xml --horas-ventana 48\n"
             "  python generar_epg.py -u \"$M3U_URL\" --sin-epg --relleno     # parrilla generica\n"
             "  python generar_epg.py -u \"$M3U_URL\" --sin-tvg-id            # ids desde el nombre\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --mapeo mapeo_canales.json --sin-m3u\n"
         ),
     )
     parser.add_argument(
@@ -1828,6 +2141,43 @@ def _crear_parser() -> argparse.ArgumentParser:
         "-s", "--salida",
         default=ARCHIVO_SALIDA,
         help="Ruta del archivo XMLTV de salida (por defecto: epg.xml).",
+    )
+    parser.add_argument(
+        "-m", "--m3u-salida",
+        default=LISTA_M3U_POR_DEFECTO,
+        metavar="RUTA",
+        help=(
+            "Ruta de la lista M3U propia que se genera con el tvg-id de cada canal "
+            f"(por defecto: {LISTA_M3U_POR_DEFECTO})."
+        ),
+    )
+    parser.add_argument(
+        "--sin-m3u",
+        action="store_true",
+        help="No generar la lista M3U propia: solo el XMLTV.",
+    )
+    parser.add_argument(
+        "--mapeo",
+        default=os.environ.get("M3U_MAPEO", "").strip() or ARCHIVO_MAPEO_POR_DEFECTO,
+        metavar="RUTA",
+        help=(
+            "JSON con el mapeo explicito de alias -> tvg-id real "
+            f"(por defecto: {ARCHIVO_MAPEO_POR_DEFECTO} si existe)."
+        ),
+    )
+    parser.add_argument(
+        "--sin-mapeo",
+        action="store_true",
+        help="Ignorar el mapeo explicito y emparejar solo con el tvg-id/nombre del M3U.",
+    )
+    parser.add_argument(
+        "--epg-publica",
+        default=URL_EPG_PUBLICA,
+        metavar="URL",
+        help=(
+            "URL publica del epg.xml que se declara en la cabecera del M3U nuevo "
+            "(por defecto: EPG_PUBLICA_URL o la del repositorio)."
+        ),
     )
     parser.add_argument(
         "-t", "--timeout",
@@ -1940,7 +2290,148 @@ def _crear_parser() -> argparse.ArgumentParser:
 
 
 # =============================================================================
-# 8. PROGRAMA PRINCIPAL
+# 8. LISTA M3U PROPIA SINCRONIZADA CON LA GUIA
+# =============================================================================
+
+def _limpiar_atributo_m3u(valor: object) -> str:
+    """Normaliza un valor para que se pueda escribir entre comillas en el M3U.
+
+    Se sanea la codificacion, se colapsan los espacios y se sustituyen las
+    comillas por apostrofes: una comilla sin escapar rompe (y desalinea) todos
+    los atributos de la linea ``#EXTINF``.
+    """
+    texto = sanear_codificacion(str(valor or ""))
+    texto = texto.replace('"', "'").replace("\r", " ").replace("\n", " ")
+    return _RE_ESPACIOS.sub(" ", texto).strip()
+
+
+def _logo_publicable(logo: object) -> str:
+    """Devuelve el logo solo si es una URL http(s) utilizable."""
+    texto = _limpiar_atributo_m3u(logo)
+    return texto if texto.lower().startswith(("http://", "https://")) else ""
+
+
+def _senales_del_canal(canal: Mapping[str, object]) -> list[dict[str, object]]:
+    """Señales (URL + opciones) que hay que publicar de un canal."""
+    senales = canal.get("senales") or []
+    if isinstance(senales, (list, tuple)) and senales:
+        return [dict(senal) for senal in senales if isinstance(senal, Mapping)]
+    url = str(canal.get("url", "") or "")
+    return [{"url": url, "opciones": ()}] if url else []
+
+
+def ordenar_canales_m3u(
+    canales: "Sequence[Mapping[str, object]]",
+) -> list[Mapping[str, object]]:
+    """Ordena los canales por grupo y nombre (los sin grupo, al final)."""
+    return sorted(
+        canales,
+        key=lambda canal: (
+            _limpiar_atributo_m3u(canal.get("grupo", "")).casefold() or "\uffff",
+            _limpiar_atributo_m3u(canal.get("nombre", "")).casefold(),
+            str(canal.get("id", "")).casefold(),
+        ),
+    )
+
+
+def _entradas_m3u(
+    canales: "Sequence[Mapping[str, object]]",
+    ordenar: bool = True,
+) -> tuple[list[str], int, int, list[str]]:
+    """Construye las lineas de las entradas y sus estadisticas.
+
+    Devuelve ``(lineas, canales_publicados, entradas, canales_sin_url)``. Se
+    publica **una entrada por señal** (HD, espejo, ``Opc.2``, ``Backup``...)
+    con el mismo ``tvg-id`` del canal principal, de modo que el reproductor
+    encuentra la programacion real en todas las opciones.
+    """
+    lineas: list[str] = []
+    publicados = 0
+    entradas = 0
+    sin_url: list[str] = []
+
+    for canal in ordenar_canales_m3u(canales) if ordenar else canales:
+        canal_id = _limpiar_atributo_m3u(canal.get("id", ""))
+        nombre = _limpiar_atributo_m3u(canal.get("nombre", "")) or canal_id
+        tvg_name = _limpiar_atributo_m3u(canal.get("tvg_name", "")) or nombre
+        logo = _logo_publicable(canal.get("logo", ""))
+        grupo = _limpiar_atributo_m3u(canal.get("grupo", ""))
+        senales = _senales_del_canal(canal)
+        if not senales:
+            sin_url.append(canal_id or nombre)
+            continue
+
+        publicados += 1
+        for indice, senal in enumerate(senales):
+            visible = nombre
+            if indice:
+                visible = f"{nombre} ({ETIQUETA_SENAL_SECUNDARIA.format(numero=indice + 1)})"
+            atributos = [
+                f'tvg-id="{canal_id}"',
+                f'tvg-name="{tvg_name}"',
+            ]
+            if logo:
+                atributos.append(f'tvg-logo="{logo}"')
+            if grupo:
+                atributos.append(f'group-title="{grupo}"')
+            lineas.append(f"#EXTINF:-1 {' '.join(atributos)},{visible}")
+            for opcion in senal.get("opciones") or ():
+                opcion = str(opcion).strip()
+                if opcion:
+                    lineas.append(opcion)
+            lineas.append(str(senal.get("url", "")).strip())
+            entradas += 1
+
+    return lineas, publicados, entradas, sin_url
+
+
+def generar_m3u(
+    canales: "Sequence[Mapping[str, object]]",
+    url_epg: str = "",
+    ordenar: bool = True,
+) -> str:
+    """Devuelve el texto de la lista M3U propia, sincronizada con el ``epg.xml``.
+
+    Cada entrada lleva el ``tvg-id`` del canal (el mismo ``<channel id="...">``
+    que publica la guia) y el ``tvg-name`` estandar, que es lo que usa el
+    reproductor para pedir la programacion. En la cabecera se declara la URL
+    publica de la guia (``x-tvg-url`` y ``url-tvg``) para que OTT Navigator,
+    VLC, TiviMate... la descarguen automaticamente.
+    """
+    lineas, _publicados, _entradas, _sin_url = _entradas_m3u(canales, ordenar)
+    url_epg = (url_epg or "").strip()
+    if url_epg:
+        cabecera = f'#EXTM3U x-tvg-url="{url_epg}" url-tvg="{url_epg}"'
+    else:
+        cabecera = "#EXTM3U"
+    cuerpo = [cabecera, f"# Lista generada por {NOMBRE_GENERADOR} (generar_epg.py)"]
+    cuerpo.extend(lineas)
+    return "\n".join(cuerpo) + "\n"
+
+
+def escribir_m3u(
+    canales: "Sequence[Mapping[str, object]]",
+    destino: str,
+    url_epg: str = "",
+    ordenar: bool = True,
+) -> tuple[int, int, list[str]]:
+    """Escribe la lista M3U propia y devuelve ``(canales, entradas, sin_url)``."""
+    lineas, publicados, entradas, sin_url = _entradas_m3u(canales, ordenar)
+    url_epg = (url_epg or "").strip()
+    if url_epg:
+        cabecera = f'#EXTM3U x-tvg-url="{url_epg}" url-tvg="{url_epg}"'
+    else:
+        cabecera = "#EXTM3U"
+    texto = "\n".join(
+        [cabecera, f"# Lista generada por {NOMBRE_GENERADOR} (generar_epg.py)", *lineas]
+    )
+    with open(destino, "w", encoding="utf-8", newline="\n") as archivo:
+        archivo.write(texto + "\n")
+    return publicados, entradas, sin_url
+
+
+# =============================================================================
+# 9. PROGRAMA PRINCIPAL
 # =============================================================================
 
 def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
@@ -1996,7 +2487,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- 1. Origen de datos -------------------------------------------------
     if argumentos.demo:
-        aviso("[1/6] Usando la lista M3U de ejemplo (--demo), sin descargar nada.")
+        aviso("[1/7] Usando la lista M3U de ejemplo (--demo), sin descargar nada.")
         texto_m3u = M3U_DE_EJEMPLO
         origen = "lista de ejemplo (--demo)"
     else:
@@ -2014,12 +2505,12 @@ def main(argv: list[str] | None = None) -> int:
                 "Nota: 'https://githubusercontent.com' no es una lista M3U valida "
                 "(sirve HTML, no el archivo). Para probar sin conexion usa --demo."
             )
-        aviso(f"[1/6] Descargando la lista M3U desde {url} ...")
+        aviso(f"[1/7] Descargando la lista M3U desde {url} ...")
         texto_m3u = descargar_m3u(url, timeout=argumentos.timeout)
         origen = url
 
     # --- 2. Analisis del M3U ------------------------------------------------
-    aviso("[2/6] Analizando el archivo M3U (nombre + tvg-logo) ...")
+    aviso("[2/7] Analizando el archivo M3U (nombre + tvg-logo) ...")
     canales_brutos = parsear_m3u(texto_m3u)
     if not canales_brutos:
         raise SystemExit(
@@ -2028,19 +2519,35 @@ def main(argv: list[str] | None = None) -> int:
         )
     aviso(f"      Entradas #EXTINF encontradas: {len(canales_brutos)}")
 
-    # --- 3. Limpieza y deduplicacion ---------------------------------------
-    aviso("[3/6] Limpiando nombres (SD/HD/FHD/[Opc.N]/pais) y generando ids ...")
+    # --- 3. Limpieza, deduplicacion y mapeo explicito -----------------------
+    aviso("[3/7] Limpiando nombres (SD/HD/FHD/[Opc.N]/pais) y generando ids ...")
+    mapeo: dict[str, dict[str, object]] = {}
+    if argumentos.sin_mapeo:
+        aviso("      Mapeo explicito desactivado (--sin-mapeo).")
+    else:
+        try:
+            mapeo = cargar_mapeo_canales(argumentos.mapeo)
+        except (OSError, ValueError) as error:
+            aviso(f"      Aviso: se ignora el mapeo de canales ({error})")
+            mapeo = {}
+        if mapeo:
+            aviso(f"      Mapeo explicito de canales: {len(mapeo)} tvg-id canonicos.")
+
     canales = consolidar_canales(
         canales_brutos,
         usar_tvg_id=not argumentos.sin_tvg_id,
         conservar_tvg_id=argumentos.conservar_tvg_id,
+        mapeo=mapeo or None,
     )
     con_tvg_id = sum(1 for canal in canales if canal["origen"] == "tvg-id")
+    espejos = sum(len(canal["senales"]) - 1 for canal in canales if len(canal["senales"]) > 1)
     aviso(f"      Canales unicos tras unificar senales: {len(canales)}")
     aviso(
         f"      Ids tomados del tvg-id del M3U: {con_tvg_id} | "
         f"generados desde el nombre: {len(canales) - con_tvg_id}"
     )
+    if espejos:
+        aviso(f"      Senales de respaldo (Opc.2/espejo/backup) conservadas: {espejos}")
 
     # --- 4. Programacion real (EPG externo) --------------------------------
     if argumentos.fecha:
@@ -2061,7 +2568,7 @@ def main(argv: list[str] | None = None) -> int:
     informes: list[dict[str, object]] = []
 
     if argumentos.sin_epg:
-        aviso("[4/6] EPG real desactivado (--sin-epg): parrilla generica de 24 h.")
+        aviso("[4/7] EPG real desactivado (--sin-epg): parrilla generica de 24 h.")
     else:
         fuentes = _fuentes_epg_desde_argumentos(argumentos)
         offline = argumentos.demo and not (
@@ -2075,9 +2582,9 @@ def main(argv: list[str] | None = None) -> int:
             def cargador(_fuente: str) -> str:
                 return texto_ejemplo
 
-            aviso("[4/6] Usando la guia XMLTV de ejemplo (--demo), sin descargar nada.")
+            aviso("[4/7] Usando la guia XMLTV de ejemplo (--demo), sin descargar nada.")
         else:
-            aviso(f"[4/6] Cargando {len(fuentes)} guia(s) XMLTV reales ...")
+            aviso(f"[4/7] Cargando {len(fuentes)} guia(s) XMLTV reales ...")
 
         aviso(
             f"      Ventana de programacion: {ventana[0]:%Y-%m-%d %H:%M} a "
@@ -2104,7 +2611,7 @@ def main(argv: list[str] | None = None) -> int:
         aviso("      Sin programacion real: se usa la parrilla generica de 24 h.")
 
     # --- 5. Generacion del XMLTV -------------------------------------------
-    aviso(f"[5/6] Generando el XMLTV desde {inicio:%Y-%m-%d 00:00:00} {DESFASE_UTC} ...")
+    aviso(f"[5/7] Generando el XMLTV desde {inicio:%Y-%m-%d 00:00:00} {DESFASE_UTC} ...")
     raiz, total_programas = construir_xmltv(
         canales,
         inicio,
@@ -2114,7 +2621,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- 6. Escritura y validacion -----------------------------------------
     destino = os.path.abspath(argumentos.salida)
-    aviso(f"[6/6] Escribiendo {destino} ...")
+    aviso(f"[6/7] Escribiendo {destino} ...")
     try:
         tamano = escribir_xmltv(raiz, destino, incluir_doctype=not argumentos.sin_doctype)
         validado = ET.parse(destino).getroot()
@@ -2125,6 +2632,30 @@ def main(argv: list[str] | None = None) -> int:
 
     if validado.tag != "tv":
         raise SystemExit("El XMLTV generado no tiene la etiqueta raiz <tv>.")
+
+    # --- 7. Lista M3U propia, sincronizada con la guia ----------------------
+    lista_m3u = ""
+    m3u_canales = m3u_entradas = 0
+    m3u_sin_url: list[str] = []
+    if argumentos.sin_m3u:
+        aviso("[7/7] Lista M3U propia desactivada (--sin-m3u).")
+    else:
+        lista_m3u = os.path.abspath(argumentos.m3u_salida)
+        aviso(f"[7/7] Escribiendo {lista_m3u} (tvg-id sincronizado con la guia) ...")
+        try:
+            m3u_canales, m3u_entradas, m3u_sin_url = escribir_m3u(
+                canales,
+                lista_m3u,
+                url_epg=argumentos.epg_publica,
+            )
+        except OSError as error:
+            raise SystemExit(f"No se pudo escribir la lista M3U: {error}") from error
+        aviso(
+            f"      Entradas publicadas: {m3u_entradas} "
+            f"({m3u_canales} canales, senales de respaldo incluidas)"
+        )
+        if m3u_sin_url:
+            aviso(f"      Canales omitidos por no tener URL: {len(m3u_sin_url)}")
 
     aviso("")
     aviso("-" * 70)
@@ -2148,6 +2679,13 @@ def main(argv: list[str] | None = None) -> int:
     aviso(f" Archivo generado    : {destino}")
     aviso(f" Tamano              : {tamano / 1024:.1f} KB")
     aviso(f" XML valido          : si (leido de nuevo con ElementTree)")
+    if lista_m3u:
+        aviso(
+            f" Lista M3U generada  : {lista_m3u} ({m3u_entradas} entradas, "
+            f"{m3u_canales} canales)"
+        )
+        if argumentos.epg_publica:
+            aviso(f" Guia declarada      : {argumentos.epg_publica}")
     aviso("")
     aviso(" Primeros canales generados:")
     for canal in canales[:10]:
@@ -2160,8 +2698,9 @@ def main(argv: list[str] | None = None) -> int:
     if len(canales) > 10:
         aviso(f"   ... y {len(canales) - 10} canales mas.")
     aviso("")
-    aviso(" Listo. Sube 'epg.xml' a GitHub (o publica con GitHub Pages) y apunta")
-    aviso(" tu reproductor IPTV a la URL del archivo.")
+    aviso(" Listo. Publica 'epg.xml' y 'lista.m3u' en GitHub (o con GitHub Pages) y")
+    aviso(" apunta tu reproductor IPTV a la URL de la lista: la EPG ya va incluida")
+    aviso(" en su cabecera (x-tvg-url) y en el tvg-id de cada canal.")
     return 0
 
 

@@ -1,6 +1,10 @@
 name: Actualizar EPG
 
-# Regenera epg.xml a diario, al hacer push y bajo demanda.
+# Regenera epg.xml y la lista M3U propia (lista.m3u) a diario, al hacer push y
+# bajo demanda. Ambos archivos se publican en la raiz del repositorio, asi que
+# GitHub Pages (Deploy from a branch -> main) los sirve directamente en:
+#   https://USUARIO.github.io/REPOSITORIO/epg.xml
+#   https://USUARIO.github.io/REPOSITORIO/lista.m3u
 on:
   schedule:
     # Todos los dias a las 05:00 UTC
@@ -10,6 +14,7 @@ on:
     branches: [main]
     paths:
       - "generar_epg.py"
+      - "mapeo_canales.json"
       - "tests/**"
       - ".github/workflows/actualizar-epg.yml"
 
@@ -22,7 +27,7 @@ concurrency:
 
 jobs:
   generar:
-    name: Generar y publicar epg.xml
+    name: Generar y publicar epg.xml y lista.m3u
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del repositorio
@@ -48,11 +53,14 @@ jobs:
             echo "configurado=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Generar epg.xml desde la lista M3U y las guias reales
+      - name: Generar epg.xml y lista.m3u desde la lista M3U y las guias reales
         if: steps.comprobar.outputs.configurado == 'true'
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
           EPG_REPO_URL: ${{ vars.EPG_REPO_URL || format('{0}/{1}', github.server_url, github.repository) }}
+          # URL publica de la guia que se declara en la cabecera del M3U
+          # (x-tvg-url/url-tvg). Por defecto, el raw de este repositorio.
+          EPG_PUBLICA_URL: ${{ vars.EPG_PUBLICA_URL || format('{0}/{1}/raw/main/epg.xml', github.server_url, github.repository) }}
           # Paises de los que se descargan las guias EPG reales. Se puede
           # sobrescribir con la variable de repositorio EPG_PAISES (por ejemplo
           # EPG_PAISES=MX,ES para acortar el tiempo de ejecucion).
@@ -63,9 +71,9 @@ jobs:
           # Opcional: sustituir por completo las fuentes por URLs propias
           # (separadas por comas). Si se define, no se usan los paises.
           EPG_URL: ${{ vars.EPG_URL }}
-        run: python generar_epg.py --salida epg.xml
+        run: python generar_epg.py --salida epg.xml --m3u-salida lista.m3u
 
-      - name: Verificar que el XMLTV es valido
+      - name: Verificar que el XMLTV y la lista M3U son validos y estan sincronizados
         if: steps.comprobar.outputs.configurado == 'true'
         run: |
           python - <<'PY'
@@ -91,18 +99,64 @@ jobs:
               assert clave not in vistos, f"programa duplicado: {clave}"
               vistos.add(clave)
 
+          # --- lista.m3u: sincronizada con la guia y con las senales de respaldo ---
+          with open("lista.m3u", encoding="utf-8") as archivo:
+              lineas = [linea.strip() for linea in archivo if linea.strip()]
+
+          assert lineas and lineas[0].startswith("#EXTM3U"), "falta la cabecera #EXTM3U"
+          assert "x-tvg-url=" in lineas[0], "la cabecera no declara la guia (x-tvg-url)"
+
+          entradas = []
+          pendiente = None
+          for linea in lineas:
+              if linea.startswith("#EXTINF"):
+                  pendiente = linea
+              elif linea.startswith("#"):
+                  continue
+              elif pendiente:
+                  entradas.append((pendiente, linea))
+                  pendiente = None
+
+          assert entradas, "la lista M3U no tiene entradas"
+          assert all(url.startswith(("http://", "https://")) for _extinf, url in entradas), \
+              "hay entradas sin URL valida"
+
+          def atributo(linea: str, nombre: str) -> str:
+              import re
+
+              coincidencia = re.search(rf'{nombre}="([^"]*)"', linea)
+              return coincidencia.group(1) if coincidencia else ""
+
+          sin_id = [url for extinf, url in entradas if not atributo(extinf, "tvg-id")]
+          assert not sin_id, f"entradas sin tvg-id: {sin_id[:5]}"
+
+          ids_m3u = {atributo(extinf, "tvg-id") for extinf, _url in entradas}
+          fuera = sorted(ids_m3u - canales)
+          assert not fuera, f"tvg-id del M3U que no existen en epg.xml: {fuera[:5]}"
+
+          urls = [url for _extinf, url in entradas]
+          duplicadas = {url for url in urls if urls.count(url) > 1}
+          if duplicadas:
+              # No es un error: la lista original puede repetir una URL.
+              print(f"aviso: {len(duplicadas)} URLs repetidas en la lista")
+
+          respaldos = len(entradas) - len(ids_m3u)
+          print(
+              f"lista.m3u: entradas={len(entradas)} canales={len(ids_m3u)} "
+              f"senales_respaldo={respaldos}"
+          )
           print(f"OK: {len(con_epg)} canales con programacion real de {len(canales)}")
           PY
 
-      - name: Commit y push de epg.xml
+      - name: Commit y push de epg.xml y lista.m3u
         if: steps.comprobar.outputs.configurado == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add epg.xml
+          git add epg.xml lista.m3u
           if git diff --cached --quiet; then
-            echo "epg.xml sin cambios; no se hace commit."
+            echo "epg.xml y lista.m3u sin cambios; no se hace commit."
           else
-            git commit -m "chore(epg): actualizar guia $(date -u +%Y-%m-%d)"
+            git commit -m "chore(epg): actualizar guia y lista M3U $(date -u +%Y-%m-%d)"
             git push
           fi

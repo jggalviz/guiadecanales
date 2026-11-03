@@ -7,10 +7,16 @@ canales que no aparecen en ninguna guía se publican **sin programas** (nada de
 contenido inventado); la parrilla genérica de 24 h queda solo como respaldo
 opcional o para cuando ninguna guía se puede descargar.
 
+Además genera **`lista.m3u`**: una lista propia, ordenada y con los atributos
+limpios, en la que **cada canal lleva el `tvg-id` real de la guía** (incluidas
+todas sus señales de respaldo: `[Opc.2]`, `Backup`, `Espejo`…) y la cabecera
+declara la EPG publicada, de modo que OTT Navigator, TiviMate, VLC o IPTV
+Smarters muestran la programación sin configurar nada.
+
 ```
-lista.m3u ─┐
-           ├──►  generar_epg.py  ──►  epg.xml (XMLTV con programación real)
-guía EPG ──┘
+lista.m3u (proveedor) ─┐
+                       ├──►  generar_epg.py  ──►  epg.xml  (XMLTV con programación real)
+guía EPG (XMLTV) ──────┘                   └──►  lista.m3u (propia, tvg-id sincronizado)
 ```
 
 ## Características
@@ -56,9 +62,20 @@ guía EPG ──┘
   **fecha actual del sistema a las 00:00:00**.
 - ✅ UTF-8, declaración XML, `<!DOCTYPE tv SYSTEM "xmltv.dtd">` e indentación
   limpia de 2 espacios.
-- ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`,
+- ✅ **Publica una lista M3U propia (`lista.m3u`)** ordenada por grupo y nombre,
+  con `tvg-id` (el mismo `<channel id="...">` del `epg.xml`), `tvg-name`
+  estándar, `tvg-logo` limpio y `group-title`, más `x-tvg-url`/`url-tvg` en la
+  cabecera.
+- ✅ **No elimina los duplicados/espejos**: las señales de respaldo (`[Opc.2]`,
+  `Backup`, `Espejo`, `Señal 2`…) se conservan como entradas propias con el
+  `tvg-id`/`tvg-name` de su canal principal, así que todas muestran la misma
+  programación real.
+- ✅ **Mapeo explícito de señales difíciles** en `mapeo_canales.json` (o en el
+  código): `ESPN 2 HD`, `ESPN 2 (Opc.2)` y `ESPN2 HD - (Opc.3)` apuntan todos a
+  `ESPN2.us`. Editable sin tocar el script y desactivable con `--sin-mapeo`.
+- ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`, `json`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **57 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **75 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -70,6 +87,8 @@ guía EPG ──┘
 guiadecanales/
 ├── generar_epg.py                  # script principal (todo el flujo)
 ├── epg.xml                         # guía generada (se versiona para publicarla)
+├── lista.m3u                       # lista propia generada, con el tvg-id de la guía
+├── mapeo_canales.json              # alias -> tvg-id real de las señales difíciles
 ├── tests/
 │   └── test_generar_epg.py         # pruebas unitarias (unittest)
 ├── .github/workflows/actualizar-epg.yml   # regeneración diaria + commit automático
@@ -105,6 +124,12 @@ python generar_epg.py --url "..." --salida "C:\ruta\epg.xml" --horas-ventana 168
 
 # Volver a la parrilla genérica (sin descargar guías reales)
 python generar_epg.py -u "$env:M3U_URL" --sin-epg --relleno
+
+# Cambiar la ruta de la lista propia (por defecto: lista.m3u)
+python generar_epg.py -u "$env:M3U_URL" -m "C:\ruta\lista.m3u"
+
+# Solo la guía XMLTV, sin regenerar la lista M3U
+python generar_epg.py -u "$env:M3U_URL" --sin-m3u
 ```
 
 Ver todas las opciones:
@@ -141,6 +166,11 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | --- | --- |
 | `-u`, `--url` | URL `raw` de la lista M3U. |
 | `-s`, `--salida` | Archivo XMLTV de salida (por defecto `epg.xml`). |
+| `-m`, `--m3u-salida` | Lista M3U propia de salida (por defecto `lista.m3u`). |
+| `--sin-m3u` | No generar la lista M3U propia: solo el XMLTV. |
+| `--mapeo` | JSON con el mapeo alias → `tvg-id` real (por defecto `mapeo_canales.json`). |
+| `--sin-mapeo` | Ignorar el mapeo explícito (usa solo el `tvg-id`/nombre del M3U). |
+| `--epg-publica` | URL pública del `epg.xml` que se declara en la cabecera del M3U. |
 | `-t`, `--timeout` | Espera máxima de la descarga en segundos (30 por defecto). |
 | `-f`, `--fecha` | Fecha de inicio `YYYY-MM-DD` (por defecto, hoy). |
 | `-e`, `--epg` | Fuente EPG real (URL o ruta local, XML o `.gz`). Repetible o separada por comas. |
@@ -157,10 +187,11 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `--demo` | Genera la guía con la lista M3U **y la EPG de ejemplo**, sin descargar nada. |
 | `-q`, `--silencioso` | Muestra solo los errores. |
 
-Variables de entorno equivalentes: `M3U_URL`, `EPG_SALIDA`, `EPG_REPO_URL`,
-`EPG_URL` (fuentes separadas por comas), `EPG_PAISES`, `EPG_URL_PLANTILLA`
-(plantilla con `{pais}`), `EPG_URL_US` (guía de EE. UU.), `EPG_URLS_EXTRA`
-(guías extra, vacío las desactiva) y `EPG_HORAS`.
+Variables de entorno equivalentes: `M3U_URL`, `M3U_SALIDA`, `M3U_MAPEO`,
+`EPG_SALIDA`, `EPG_REPO_URL`, `EPG_PUBLICA_URL`, `EPG_URL` (fuentes separadas
+por comas), `EPG_PAISES`, `EPG_URL_PLANTILLA` (plantilla con `{pais}`),
+`EPG_URL_US` (guía de EE. UU.), `EPG_URLS_EXTRA` (guías extra, vacío las
+desactiva) y `EPG_HORAS`.
 
 ## Programación real (EPG externo)
 
@@ -268,7 +299,71 @@ empatado, el nombre con un número de palabras más parecido.
    `lang="es"`), el `tvg-name` del M3U y el nombre original de la entrada
    (`ESPN 2 HD [LAT]`), para que el emparejamiento por nombre también funcione.
 
-## Saneado de codificación (mojibake)
+## Lista M3U propia (`lista.m3u`)
+
+Cada ejecución escribe, junto al `epg.xml`, una lista **`lista.m3u`** derivada de
+la lista original del proveedor:
+
+```m3u
+#EXTM3U x-tvg-url="https://USUARIO.github.io/REPOSITORIO/epg.xml" url-tvg="https://USUARIO.github.io/REPOSITORIO/epg.xml"
+# Lista generada por guiadecanales-epg (generar_epg.py)
+#EXTINF:-1 tvg-id="ESPN2.us" tvg-name="ESPN 2" tvg-logo="https://.../espn2.png" group-title="Deportes",ESPN 2
+#EXTVLCOPT:http-user-agent=Mozilla/5.0
+http://proveedor.example/espn2-hd/index.m3u8
+#EXTINF:-1 tvg-id="ESPN2.us" tvg-name="ESPN 2" tvg-logo="https://.../espn2.png" group-title="Deportes",ESPN 2 (Opc. 2)
+http://proveedor.example/espn2-opc2/index.m3u8
+```
+
+Qué hace exactamente:
+
+1. **Ordena** los canales por `group-title` y nombre (los que no tienen grupo, al
+   final), de modo que el orden es estable entre ejecuciones y los *diffs* del
+   repositorio son mínimos.
+2. **Limpia los atributos**: `tvg-id` (el `id` real del canal, idéntico al
+   `<channel id="...">` del `epg.xml`), `tvg-name` estándar, `tvg-logo` solo si es
+   una URL `http(s)` válida y `group-title` sin mojibake ni comillas sueltas.
+3. **Conserva las señales de respaldo.** Los duplicados/espejos de distintos
+   servidores (`[Opc.2]`, `[Opc.3]`, `Backup`, `Espejo`, `Señal 2`…) **no se
+   eliminan**: se publican como entradas propias con el **mismo `tvg-id` y
+   `tvg-name`** de su canal principal y un sufijo visible (`(Opc. 2)`, `(Opc. 3)`)
+   para distinguirlas en el reproductor. Así OTT Navigator muestra la
+   programación real en **todas** las opciones y puedes cambiar de servidor sin
+   perder la EPG.
+4. **Conserva las opciones de reproducción** de cada entrada
+   (`#EXTVLCOPT:http-user-agent=...`, `#KODIPROP:...`, `#EXTGRP:...`), necesarias
+   para los canales que exigen un user-agent o un referer concreto.
+5. **Declara la guía** en la cabecera (`x-tvg-url` y `url-tvg`), así que el
+   reproductor descarga la EPG automáticamente. La URL sale de `--epg-publica` o
+   de `EPG_PUBLICA_URL` (por defecto, el `raw` de tu repositorio).
+
+### Mapeo explícito de señales difíciles (`mapeo_canales.json`)
+
+Algunas entradas no se pueden emparejar por nombre porque el mismo canal aparece
+con nombres muy distintos. El diccionario de mapeo fuerza el `tvg-id` real y el
+nombre estándar:
+
+```json
+{
+  "canales": {
+    "ESPN2.us": {
+      "nombre": "ESPN 2",
+      "alias": ["ESPN 2 HD", "ESPN 2 (Opc.2)", "ESPN2 HD - (Opc.3)", "ESPN 2 (Señal 2)"]
+    },
+    "LasEstrellas.mx": ["Las Estrellas", "Las Estrellas HD"]
+  }
+}
+```
+
+- Formatos admitidos por canal: lista de alias o un objeto con
+  `nombre`/`logo`/`alias`.
+- Los alias del JSON **se suman** a los definidos en el código
+  (`MAPEO_CANALES_POR_DEFECTO`), y el `nombre`/`logo` del JSON tienen prioridad.
+- Se busca con el nombre ya normalizado (sin `HD`, `[Opc.2]`, `(1080p)`…), pero
+  **conservando el país**: `ESPN 2 (Netherlands)` no se confunde con `ESPN 2`
+  (`ESPN2.us`). Las claves que empiezan por `$` o `_` se ignoran (documentación).
+- Usa `--mapeo otra_ruta.json` para otro archivo o `--sin-mapeo` para desactivarlo.
+
+
 
 Muchas listas IPTV se generan en `cp1252`/`latin-1` y en algún punto se leen
 como `cp850`/`cp437`, de modo que los acentos se convierten en símbolos. Antes
@@ -409,6 +504,15 @@ rota que no interrumpe, XMLTV válido en UTF-8), presencia de
 `YYYYMMDDHHMMSS +0000`, integridad `programme` → `channel` y cabecera UTF-8 del
 archivo.
 
+Además, las pruebas de la **lista M3U propia** comprueban que: el `mapeo_canales.json`
+del repositorio es válido y `ESPN 2 HD`/`ESPN 2 (Opc.2)`/`ESPN2 HD - (Opc.3)`
+caen en `ESPN2.us`; el mapeo no roba el canal de otro país
+(`ESPN 2 (Netherlands)`); las señales de respaldo se conservan (una entrada por
+señal con el mismo `tvg-id`/`tvg-name`) junto con sus `#EXTVLCOPT`; cada `tvg-id`
+del M3U existe como `<channel>` del `epg.xml`; los atributos salen limpios; el
+orden es por grupo y nombre; y `main` escribe ambos archivos (`--sin-m3u` los
+separa).
+
 ## Publicar en GitHub (pasos)
 
 ```powershell
@@ -423,7 +527,8 @@ git push -u origin main
 ### 1. Automatizar la regeneración diaria
 
 El workflow `.github/workflows/actualizar-epg.yml` ya está incluido: ejecuta las
-pruebas, regenera el `epg.xml` cada día y hace *commit* del resultado.
+pruebas, regenera el `epg.xml` **y la `lista.m3u`** cada día y hace *commit* de
+ambos archivos.
 
 1. En el repositorio: **Settings → Secrets and variables → Actions → New
    repository secret**.
@@ -436,32 +541,44 @@ pruebas, regenera el `epg.xml` cada día y hace *commit* del resultado.
    `EPG_URLS_EXTRA` (guías extra FAST; vacío = las de por defecto) y/o `EPG_URL`
    (URLs separadas por comas, sustituye por completo a los países). Sin valores
    se usan todas las guías públicas por defecto, incluida la de EE. UU.
+   También puedes fijar `EPG_PUBLICA_URL` si sirves el `epg.xml` con otro dominio
+   (por defecto se usa el `raw` de tu repositorio en la cabecera del M3U).
 5. Lanza el workflow manualmente desde **Actions → Actualizar EPG → Run
    workflow** para comprobar que funciona.
 
 > El paso de verificación del workflow comprueba que el XMLTV tiene canales,
 > que **hay programación**, que **ningún `<programme>` apunta a un canal
 > inexistente**, que cada programa tiene `<title>` y que no hay dos programas
-> del mismo canal a la misma hora.
+> del mismo canal a la misma hora. Además valida la `lista.m3u`: cabecera
+> `#EXTM3U` con `x-tvg-url`, entradas con URL `http(s)`, `tvg-id` en todas las
+> entradas y **todos esos `tvg-id` presentes en el `epg.xml`**.
 >
 > Si tu lista M3U es privada, guárdala en un secreto (`M3U_URL`): el script solo
 > necesita poder descargarla por HTTP(S).
 
-### 2. Publicar el EPG con GitHub Pages
+### 2. Publicar el EPG y la lista con GitHub Pages
 
 1. **Settings → Pages** → *Source*: `Deploy from a branch` → Branch: `main`,
    carpeta `/ (root)` → **Save**.
-2. Tu guía queda disponible en:
+2. Tus archivos quedan disponibles en:
 
 ```
 https://USUARIO.github.io/REPOSITORIO/epg.xml
+https://USUARIO.github.io/REPOSITORIO/lista.m3u
 ```
 
-3. En el reproductor IPTV (o en tu lista M3U) apunta la guía a esa URL:
+3. Apunta el reproductor IPTV a la **lista**; la EPG ya va incluida en su
+   cabecera (y en el `tvg-id` de cada canal):
 
-```m3u
-#EXTM3U url-tvg="https://USUARIO.github.io/REPOSITORIO/epg.xml" x-tvg-url="https://USUARIO.github.io/REPOSITORIO/epg.xml"
 ```
+https://USUARIO.github.io/REPOSITORIO/lista.m3u
+```
+
+> Si prefieres tu propia lista, añade la cabecera con la guía:
+>
+> ```m3u
+> #EXTM3U url-tvg="https://USUARIO.github.io/REPOSITORIO/epg.xml" x-tvg-url="https://USUARIO.github.io/REPOSITORIO/epg.xml"
+> ```
 
 > GitHub Pages tarda ~1 minuto en publicar cada cambio. Las cachés de algunos
 > reproductores pueden tardar más: añade un parámetro al final
@@ -483,6 +600,9 @@ https://USUARIO.github.io/REPOSITORIO/epg.xml
 | Un canal de EE. UU. sale sin programación | La guía de EE. UU. es la de `epg.pw` (`EPG_URL_US`) y solo se usa si `US` está en `--epg-pais`/`EPG_PAISES`; comprueba el aviso de esa fuente en el resumen. |
 | Los `id` salen como `espn2` en vez del `tvg-id` | Tu lista no trae `tvg-id` válido para ese canal, o usaste `--sin-tvg-id`. |
 | Varios canales aparecen duplicados en la guía | Son señales distintas (mismo nombre, distinto `tvg-id`/país); con `--sin-tvg-id` se fusionan por nombre. |
+| La `lista.m3u` no muestra EPG en OTT Navigator | Comprueba que la cabecera lleva `x-tvg-url`/`url-tvg` (`--epg-publica URL`) y que el reproductor puede abrir esa URL. Todos los `tvg-id` de la lista existen en el `epg.xml`. |
+| Un canal sigue con nombre raro en la lista | Añádelo al `mapeo_canales.json` con su `tvg-id` real y un alias; se publicará con el nombre estándar. |
+| Faltan las señales de respaldo (`Opc.2`, `Backup`…) | No se pierden: cada señal se publica con el mismo `tvg-id` y un sufijo `(Opc. N)` en el nombre visible. Si dos entradas tienen la **misma URL**, se publica una sola. |
 | Nombres con calidad pegada al nombre | Ajusta `_RE_CALIDAD` y `_RE_SUFIJO_PEGADO` (bloque 4 del script). |
 | Los nombres salen con símbolos raros en mi PC (`MÚxico`, `Espa±a`, `Panamß`) | El script ya sanea el mojibake al leer el M3U (ver [Saneado de codificación](#saneado-de-codificación-mojibake)). Si aún los ves así, es la consola de Windows (cp850/cp437): abre el `epg.xml` en un editor UTF-8 o usa Windows Terminal. |
 | Windows: `UnicodeEncodeError` en la consola | Usa Windows Terminal o PowerShell 7; el archivo `epg.xml` siempre se escribe en UTF-8. |

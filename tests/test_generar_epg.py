@@ -871,5 +871,265 @@ class FuentesEpgPorDefectoTests(unittest.TestCase):
         self.assertEqual(len(llamadas), 1)
 
 
+M3U_CON_MAPEO = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="espn2.mx" tvg-name="ESPN 2" '
+        'tvg-logo="https://logos.invalid/espn2.png" group-title="Deportes",ESPN 2 HD',
+        "#EXTVLCOPT:http-user-agent=OTT Navigator/1.0",
+        "http://ejemplo.invalid/espn2-hd/index.m3u8",
+        '#EXTINF:-1 group-title="Deportes",ESPN 2 (Opc.2)',
+        "http://ejemplo.invalid/espn2-opc2/index.m3u8",
+        '#EXTINF:-1 group-title="Deportes",ESPN2 HD - (Opc.3)',
+        "http://ejemplo.invalid/espn2-opc3/index.m3u8",
+        '#EXTINF:-1 group-title="Deportes",ESPN 2 (Netherlands) HD',
+        "http://ejemplo.invalid/espn2-nl/index.m3u8",
+        '#EXTINF:-1 group-title="Cine",Cine Latino Backup',
+        "http://ejemplo.invalid/cinelatino/index.m3u8",
+        '#EXTINF:-1 group-title="Cine",Cine Latino',
+        "http://ejemplo.invalid/cinelatino-2/index.m3u8",
+        "#EXTINF:-1,Canal Local SD",
+        "http://ejemplo.invalid/canallocal/index.m3u8",
+        "",
+    ]
+)
+
+
+class MapeoExplicitoTests(unittest.TestCase):
+    """Comprueba el diccionario de alias -> tvg-id real de la guia."""
+
+    def setUp(self) -> None:
+        # Con ruta vacia solo se usan los canales definidos en el codigo, para
+        # que la prueba no dependa del mapeo_canales.json del repositorio.
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+        self.canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_CON_MAPEO), mapeo=self.mapeo
+        )
+
+    def test_el_mapeo_por_defecto_carga_los_canales_dificiles(self) -> None:
+        self.assertIn("ESPN2.us", self.mapeo)
+        indice = generar_epg._indice_mapeo(self.mapeo)
+        for alias in ("ESPN 2 HD", "ESPN 2 (Opc.2)", "ESPN2 HD - (Opc.3)"):
+            with self.subTest(alias=alias):
+                entrada = generar_epg.buscar_en_mapeo(indice, alias)
+                self.assertIsNotNone(entrada)
+                self.assertEqual(entrada["id"], "ESPN2.us")
+
+    def test_todas_las_opciones_apuntan_al_mismo_tvg_id(self) -> None:
+        por_id = {canal["id"]: canal for canal in self.canales}
+        espn2 = por_id["ESPN2.us"]
+        self.assertEqual(espn2["nombre"], "ESPN 2")
+        self.assertEqual(espn2["tvg_name"], "ESPN 2")
+        self.assertEqual(espn2["tvg_id"], "ESPN2.us")
+        self.assertEqual(len(espn2["senales"]), 3)
+        self.assertEqual(
+            [senal["url"] for senal in espn2["senales"]],
+            [
+                "http://ejemplo.invalid/espn2-hd/index.m3u8",
+                "http://ejemplo.invalid/espn2-opc2/index.m3u8",
+                "http://ejemplo.invalid/espn2-opc3/index.m3u8",
+            ],
+        )
+
+    def test_el_mapeo_no_roba_canales_de_otro_pais(self) -> None:
+        identificadores = {canal["id"] for canal in self.canales}
+        self.assertIn("espn2netherlands", identificadores)
+        self.assertNotIn("ESPN2.nl", identificadores)
+
+    def test_sin_mapeo_se_usa_el_tvg_id_del_m3u(self) -> None:
+        sin_mapeo = generar_epg.consolidar_canales(generar_epg.parsear_m3u(M3U_CON_MAPEO))
+        identificadores = {canal["id"] for canal in sin_mapeo}
+        # Sin el diccionario manda el tvg-id de la lista (espn2.mx), no el canonico.
+        self.assertIn("espn2.mx", identificadores)
+        self.assertNotIn("ESPN2.us", identificadores)
+
+    def test_el_json_se_fusiona_con_los_canales_del_codigo(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = os.path.join(carpeta, "mapeo_canales.json")
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write(
+                    '{"canales": {'
+                    '"ESPN2.us": ["ESPN 2 Extreme"],'
+                    '"TVN.cl": {"nombre": "TVN", "alias": ["TVN HD"], "logo": "https://x.invalid/tvn.png"}'
+                    "}}"
+                )
+            mapeo = generar_epg.cargar_mapeo_canales(ruta)
+            indice = generar_epg._indice_mapeo(mapeo)
+            # El alias nuevo y los del codigo conviven en el mismo tvg-id.
+            self.assertEqual(generar_epg.buscar_en_mapeo(indice, "ESPN 2 (Opc.2)")["id"], "ESPN2.us")
+            self.assertEqual(generar_epg.buscar_en_mapeo(indice, "ESPN 2 Extreme")["id"], "ESPN2.us")
+            self.assertEqual(mapeo["TVN.cl"]["nombre"], "TVN")
+            self.assertEqual(mapeo["TVN.cl"]["logo"], "https://x.invalid/tvn.png")
+
+    def test_un_json_invalido_se_informa(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = os.path.join(carpeta, "mapeo_canales.json")
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write("{esto no es json")
+            with self.assertRaises(ValueError):
+                generar_epg.cargar_mapeo_canales(ruta)
+
+    def test_el_mapeo_del_repositorio_es_valido(self) -> None:
+        ruta = Path(__file__).resolve().parent.parent / generar_epg.ARCHIVO_MAPEO_POR_DEFECTO
+        self.assertTrue(ruta.is_file(), f"falta {ruta}")
+        mapeo = generar_epg.cargar_mapeo_canales(str(ruta))
+        indice = generar_epg._indice_mapeo(mapeo)
+        for alias in ("ESPN 2 HD", "ESPN 2 (Opc.2)", "ESPN2 HD - (Opc.3)"):
+            with self.subTest(alias=alias):
+                entrada = generar_epg.buscar_en_mapeo(indice, alias)
+                self.assertEqual(entrada["id"], "ESPN2.us")
+        self.assertNotIn("$esquema", mapeo)
+        self.assertNotIn("_nota", mapeo)
+
+
+class ListaM3UTests(unittest.TestCase):
+    """Comprueba la lista M3U propia generada y sincronizada con la guia."""
+
+    def setUp(self) -> None:
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+        self.canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_CON_MAPEO), mapeo=self.mapeo
+        )
+        self.url_epg = "https://ejemplo.invalid/guiadecanales/epg.xml"
+        self.texto = generar_epg.generar_m3u(self.canales, url_epg=self.url_epg)
+        self.entradas = generar_epg.parsear_m3u(self.texto)
+
+    def _lineas_extinf(self) -> list[str]:
+        return [linea for linea in self.texto.splitlines() if linea.startswith("#EXTINF")]
+
+    def test_la_cabecera_declara_la_guia(self) -> None:
+        cabecera = self.texto.splitlines()[0]
+        self.assertTrue(cabecera.startswith("#EXTM3U"))
+        self.assertIn(f'x-tvg-url="{self.url_epg}"', cabecera)
+        self.assertIn(f'url-tvg="{self.url_epg}"', cabecera)
+
+    def test_publica_una_entrada_por_senal_de_respaldo(self) -> None:
+        espn2 = [entrada for entrada in self.entradas if entrada["tvg_id"] == "ESPN2.us"]
+        self.assertEqual(len(espn2), 3)
+        # Mismo tvg-id y tvg-name en todas: la EPG es la misma en las 3 opciones.
+        self.assertEqual({entrada["tvg_name"] for entrada in espn2}, {"ESPN 2"})
+        self.assertEqual(
+            [entrada["url"] for entrada in espn2],
+            [
+                "http://ejemplo.invalid/espn2-hd/index.m3u8",
+                "http://ejemplo.invalid/espn2-opc2/index.m3u8",
+                "http://ejemplo.invalid/espn2-opc3/index.m3u8",
+            ],
+        )
+        # El nombre visible distingue las opciones sin tocar el tvg-name.
+        nombres = [
+            generar_epg._extraer_nombre(linea)
+            for linea in self._lineas_extinf()
+            if 'tvg-id="ESPN2.us"' in linea
+        ]
+        self.assertEqual(nombres, ["ESPN 2", "ESPN 2 (Opc. 2)", "ESPN 2 (Opc. 3)"])
+
+    def test_vincula_cada_canal_con_el_xmltv(self) -> None:
+        raiz, _total = generar_epg.construir_xmltv(self.canales, generar_epg._inicio_del_dia())
+        identificadores = {canal.get("id") for canal in raiz.findall("channel")}
+        self.assertTrue(self.entradas)
+        for entrada in self.entradas:
+            with self.subTest(canal=entrada["tvg_id"]):
+                self.assertIn(entrada["tvg_id"], identificadores)
+
+    def test_atributos_limpios(self) -> None:
+        self.assertNotIn('tvg-logo=""', self.texto)
+        for entrada in self.entradas:
+            with self.subTest(canal=entrada["nombre"]):
+                self.assertTrue(entrada["tvg_id"])
+                self.assertNotIn('"', entrada["tvg_name"])
+                self.assertNotIn('"', entrada["nombre"])
+        logos = [entrada["logo"] for entrada in self.entradas if entrada["logo"]]
+        self.assertTrue(logos and all(logo.startswith("https://") for logo in logos))
+
+    def test_orden_por_grupo_y_nombre_y_sin_grupo_al_final(self) -> None:
+        grupos = [entrada["grupo"] for entrada in self.entradas]
+        self.assertEqual(grupos, sorted(grupos, key=lambda grupo: (grupo or "\uffff").casefold()))
+        # El canal sin grupo queda al final de la lista.
+        self.assertEqual(self.entradas[-1]["nombre"], "Canal Local")
+        cine = [entrada["nombre"] for entrada in self.entradas if entrada["grupo"] == "Cine"]
+        self.assertEqual(cine, ["Cine Latino", "Cine Latino (Opc. 2)"])
+
+
+    def test_escribir_m3u_en_disco(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            destino = os.path.join(carpeta, "lista.m3u")
+            publicados, entradas, sin_url = generar_epg.escribir_m3u(
+                self.canales, destino, url_epg=self.url_epg
+            )
+            self.assertEqual(publicados, len(self.canales))
+            self.assertEqual(entradas, len(self.entradas))
+            self.assertEqual(sin_url, [])
+            with open(destino, "r", encoding="utf-8") as archivo:
+                self.assertEqual(archivo.read(), self.texto)
+
+    def test_omite_los_canales_sin_url(self) -> None:
+        canales = [
+            {"id": "sinurl", "nombre": "Sin URL", "senales": []},
+            {
+                "id": "conurl",
+                "nombre": "Con URL",
+                "senales": [{"url": "http://ejemplo.invalid/x/index.m3u8", "opciones": ()}],
+            },
+        ]
+        texto = generar_epg.generar_m3u(canales, url_epg=self.url_epg)
+        self.assertEqual(texto.count("#EXTINF"), 1)
+        self.assertIn('tvg-id="conurl"', texto)
+        self.assertNotIn("sinurl", texto)
+        with tempfile.TemporaryDirectory() as carpeta:
+            destino = os.path.join(carpeta, "lista.m3u")
+            publicados, entradas, sin_url = generar_epg.escribir_m3u(canales, destino)
+            self.assertEqual((publicados, entradas, sin_url), (1, 1, ["sinurl"]))
+
+    def test_main_genera_epg_y_lista_sincronizados(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            epg = os.path.join(carpeta, "epg.xml")
+            lista = os.path.join(carpeta, "lista.m3u")
+            codigo = generar_epg.main(
+                [
+                    "--demo",
+                    "--sin-epg",
+                    "--sin-mapeo",
+                    "--silencioso",
+                    "--salida", epg,
+                    "--m3u-salida", lista,
+                    "--epg-publica", self.url_epg,
+                ]
+            )
+            self.assertEqual(codigo, 0)
+            self.assertTrue(os.path.isfile(epg))
+            self.assertTrue(os.path.isfile(lista))
+
+            raiz = ET.parse(epg).getroot()
+            identificadores = {canal.get("id") for canal in raiz.findall("channel")}
+            with open(lista, "r", encoding="utf-8") as archivo:
+                texto = archivo.read()
+            self.assertIn(f'x-tvg-url="{self.url_epg}"', texto.splitlines()[0])
+            entradas = generar_epg.parsear_m3u(texto)
+            # Todas las senales de la lista apuntan a un canal de la guia.
+            self.assertEqual(len(entradas), 8)
+            for entrada in entradas:
+                with self.subTest(canal=entrada["tvg_id"]):
+                    self.assertIn(entrada["tvg_id"], identificadores)
+
+    def test_main_puede_omitir_la_lista(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            epg = os.path.join(carpeta, "epg.xml")
+            lista = os.path.join(carpeta, "lista.m3u")
+            codigo = generar_epg.main(
+                [
+                    "--demo",
+                    "--sin-epg",
+                    "--sin-m3u",
+                    "--silencioso",
+                    "--salida", epg,
+                    "--m3u-salida", lista,
+                ]
+            )
+            self.assertEqual(codigo, 0)
+            self.assertTrue(os.path.isfile(epg))
+            self.assertFalse(os.path.exists(lista))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
