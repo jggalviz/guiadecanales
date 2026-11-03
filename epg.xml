@@ -3836,8 +3836,8 @@
     <display-name>Azteca Internacional HD</display-name>
     <icon src="https://i.ibb.co/tpZCM4Ly/Azteca-Internacional2024.png"/>
   </channel>
-  <channel id="aztecauno">
-    <display-name lang="es">Azteca UNO</display-name>
+  <channel id="AztecaUno.mx">
+    <display-name lang="es">Azteca Uno</display-name>
     <display-name>Azteca UNO SD</display-name>
     <icon src="https://i.imgur.com/rRxgBtI.png"/>
   </channel>
@@ -6063,12 +6063,12 @@
     <display-name lang="es">Movistar Deportes</display-name>
     <icon src="https://i.imgur.com/yGQGDoi.png"/>
   </channel>
-  <channel id="espn">
+  <channel id="ESPN.us">
     <display-name lang="es">ESPN</display-name>
     <display-name>ESPN HD</display-name>
     <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png"/>
   </channel>
-  <channel id="espn2">
+  <channel id="ESPN2.us">
     <display-name lang="es">ESPN 2</display-name>
     <display-name>ESPN 2 HD</display-name>
     <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png"/>
@@ -84391,241 +84391,241 @@ En Vivo</title>
   <programme start="20261106000000 +0000" channel="telemundopuertorico" stop="20261106010000 +0000">
     <title lang="es">La mesa caliente</title>
   </programme>
-  <programme start="20261102223000 +0000" channel="aztecauno" stop="20261103003000 +0000">
+  <programme start="20261102223000 +0000" channel="AztecaUno.mx" stop="20261103003000 +0000">
     <title lang="es">Acércate a Rocío</title>
   </programme>
-  <programme start="20261103003000 +0000" channel="aztecauno" stop="20261103023000 +0000">
+  <programme start="20261103003000 +0000" channel="AztecaUno.mx" stop="20261103023000 +0000">
     <title lang="es">Exatlón México</title>
   </programme>
-  <programme start="20261103023000 +0000" channel="aztecauno" stop="20261103043000 +0000">
+  <programme start="20261103023000 +0000" channel="AztecaUno.mx" stop="20261103043000 +0000">
     <title lang="es">La granja VIP</title>
   </programme>
-  <programme start="20261103043000 +0000" channel="aztecauno" stop="20261103051500 +0000">
+  <programme start="20261103043000 +0000" channel="AztecaUno.mx" stop="20261103051500 +0000">
     <title lang="es">Hechos noche</title>
   </programme>
-  <programme start="20261103051500 +0000" channel="aztecauno" stop="20261103053000 +0000">
+  <programme start="20261103051500 +0000" channel="AztecaUno.mx" stop="20261103053000 +0000">
     <title lang="es">Buenas noches con Anna Lu</title>
   </programme>
-  <programme start="20261103053000 +0000" channel="aztecauno" stop="20261103063000 +0000">
+  <programme start="20261103053000 +0000" channel="AztecaUno.mx" stop="20261103063000 +0000">
     <title lang="es">Los protagonistas</title>
   </programme>
-  <programme start="20261103063000 +0000" channel="aztecauno" stop="20261103070000 +0000">
+  <programme start="20261103063000 +0000" channel="AztecaUno.mx" stop="20261103070000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103070000 +0000" channel="aztecauno" stop="20261103073000 +0000">
+  <programme start="20261103070000 +0000" channel="AztecaUno.mx" stop="20261103073000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103073000 +0000" channel="aztecauno" stop="20261103080000 +0000">
+  <programme start="20261103073000 +0000" channel="AztecaUno.mx" stop="20261103080000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103080000 +0000" channel="aztecauno" stop="20261103083000 +0000">
+  <programme start="20261103080000 +0000" channel="AztecaUno.mx" stop="20261103083000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103083000 +0000" channel="aztecauno" stop="20261103090000 +0000">
+  <programme start="20261103083000 +0000" channel="AztecaUno.mx" stop="20261103090000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103090000 +0000" channel="aztecauno" stop="20261103093000 +0000">
+  <programme start="20261103090000 +0000" channel="AztecaUno.mx" stop="20261103093000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103093000 +0000" channel="aztecauno" stop="20261103100000 +0000">
+  <programme start="20261103093000 +0000" channel="AztecaUno.mx" stop="20261103100000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103100000 +0000" channel="aztecauno" stop="20261103101500 +0000">
+  <programme start="20261103100000 +0000" channel="AztecaUno.mx" stop="20261103101500 +0000">
     <title lang="es">Barras de ajuste</title>
   </programme>
-  <programme start="20261103101500 +0000" channel="aztecauno" stop="20261103103000 +0000">
+  <programme start="20261103101500 +0000" channel="AztecaUno.mx" stop="20261103103000 +0000">
     <title lang="es">RTC</title>
   </programme>
-  <programme start="20261103103000 +0000" channel="aztecauno" stop="20261103110000 +0000">
+  <programme start="20261103103000 +0000" channel="AztecaUno.mx" stop="20261103110000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261103110000 +0000" channel="aztecauno" stop="20261103120000 +0000">
+  <programme start="20261103110000 +0000" channel="AztecaUno.mx" stop="20261103120000 +0000">
     <title lang="es">Farmacias Similares</title>
   </programme>
-  <programme start="20261103120000 +0000" channel="aztecauno" stop="20261103130000 +0000">
+  <programme start="20261103120000 +0000" channel="AztecaUno.mx" stop="20261103130000 +0000">
     <title lang="es">Hechos Contigo</title>
   </programme>
-  <programme start="20261103130000 +0000" channel="aztecauno" stop="20261103150000 +0000">
+  <programme start="20261103130000 +0000" channel="AztecaUno.mx" stop="20261103150000 +0000">
     <title lang="es">Hechos AM</title>
   </programme>
-  <programme start="20261103150000 +0000" channel="aztecauno" stop="20261103170000 +0000">
+  <programme start="20261103150000 +0000" channel="AztecaUno.mx" stop="20261103170000 +0000">
     <title lang="es">Venga la alegría</title>
     <desc lang="es">Un programa de entretenimiento matutino que te alegran las mañanas, con la conducción estelar de la pareja Fernando del Solar e Ingrid Coronado, el programa cuenta con secciones tales cómo:- Ingrid habla con los peques- Cocina de Yolo- Baila con Alegría- Los especialistas- Noli y sus tips- El autobús de Danilo- Las rapiditas de Venga la Alegría- La LiliparodiaEl programa empieza con un tema bailable donde los presentadores y sus chicas bailarinas te ayudan a que te animes y llegue la alegría.Durante todo el programa se dan pistas sobre una palabra o frase que el televidente puede concursar para ganarse un premio.</desc>
     <date>2006</date>
     <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/venga_la_alegria.png"/>
   </programme>
-  <programme start="20261103170000 +0000" channel="aztecauno" stop="20261103190000 +0000">
+  <programme start="20261103170000 +0000" channel="AztecaUno.mx" stop="20261103190000 +0000">
     <title lang="es">Venga la alegría</title>
     <desc lang="es">Un programa de entretenimiento matutino que te alegran las mañanas, con la conducción estelar de la pareja Fernando del Solar e Ingrid Coronado, el programa cuenta con secciones tales cómo:- Ingrid habla con los peques- Cocina de Yolo- Baila con Alegría- Los especialistas- Noli y sus tips- El autobús de Danilo- Las rapiditas de Venga la Alegría- La LiliparodiaEl programa empieza con un tema bailable donde los presentadores y sus chicas bailarinas te ayudan a que te animes y llegue la alegría.Durante todo el programa se dan pistas sobre una palabra o frase que el televidente puede concursar para ganarse un premio.</desc>
     <date>2006</date>
     <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/venga_la_alegria.png"/>
   </programme>
-  <programme start="20261103190000 +0000" channel="aztecauno" stop="20261103200000 +0000">
+  <programme start="20261103190000 +0000" channel="AztecaUno.mx" stop="20261103200000 +0000">
     <title lang="es">Ventaneando</title>
   </programme>
-  <programme start="20261103200000 +0000" channel="aztecauno" stop="20261103210000 +0000">
+  <programme start="20261103200000 +0000" channel="AztecaUno.mx" stop="20261103210000 +0000">
     <title lang="es">Hechos meridiano</title>
   </programme>
-  <programme start="20261103210000 +0000" channel="aztecauno" stop="20261103223000 +0000">
+  <programme start="20261103210000 +0000" channel="AztecaUno.mx" stop="20261103223000 +0000">
     <title lang="es">Al Extremo</title>
   </programme>
-  <programme start="20261103223000 +0000" channel="aztecauno" stop="20261104003000 +0000">
+  <programme start="20261103223000 +0000" channel="AztecaUno.mx" stop="20261104003000 +0000">
     <title lang="es">Acércate a Rocío</title>
   </programme>
-  <programme start="20261104003000 +0000" channel="aztecauno" stop="20261104023000 +0000">
+  <programme start="20261104003000 +0000" channel="AztecaUno.mx" stop="20261104023000 +0000">
     <title lang="es">Exatlón México</title>
   </programme>
-  <programme start="20261104023000 +0000" channel="aztecauno" stop="20261104043000 +0000">
+  <programme start="20261104023000 +0000" channel="AztecaUno.mx" stop="20261104043000 +0000">
     <title lang="es">La granja VIP</title>
   </programme>
-  <programme start="20261104043000 +0000" channel="aztecauno" stop="20261104051500 +0000">
+  <programme start="20261104043000 +0000" channel="AztecaUno.mx" stop="20261104051500 +0000">
     <title lang="es">Hechos noche</title>
   </programme>
-  <programme start="20261104051500 +0000" channel="aztecauno" stop="20261104053000 +0000">
+  <programme start="20261104051500 +0000" channel="AztecaUno.mx" stop="20261104053000 +0000">
     <title lang="es">Buenas noches con Anna Lu</title>
   </programme>
-  <programme start="20261104053000 +0000" channel="aztecauno" stop="20261104063000 +0000">
+  <programme start="20261104053000 +0000" channel="AztecaUno.mx" stop="20261104063000 +0000">
     <title lang="es">Los protagonistas</title>
   </programme>
-  <programme start="20261104063000 +0000" channel="aztecauno" stop="20261104070000 +0000">
+  <programme start="20261104063000 +0000" channel="AztecaUno.mx" stop="20261104070000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104070000 +0000" channel="aztecauno" stop="20261104073000 +0000">
+  <programme start="20261104070000 +0000" channel="AztecaUno.mx" stop="20261104073000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104073000 +0000" channel="aztecauno" stop="20261104080000 +0000">
+  <programme start="20261104073000 +0000" channel="AztecaUno.mx" stop="20261104080000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104080000 +0000" channel="aztecauno" stop="20261104083000 +0000">
+  <programme start="20261104080000 +0000" channel="AztecaUno.mx" stop="20261104083000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104083000 +0000" channel="aztecauno" stop="20261104090000 +0000">
+  <programme start="20261104083000 +0000" channel="AztecaUno.mx" stop="20261104090000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104090000 +0000" channel="aztecauno" stop="20261104093000 +0000">
+  <programme start="20261104090000 +0000" channel="AztecaUno.mx" stop="20261104093000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104093000 +0000" channel="aztecauno" stop="20261104100000 +0000">
+  <programme start="20261104093000 +0000" channel="AztecaUno.mx" stop="20261104100000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104100000 +0000" channel="aztecauno" stop="20261104101500 +0000">
+  <programme start="20261104100000 +0000" channel="AztecaUno.mx" stop="20261104101500 +0000">
     <title lang="es">Barras de ajuste</title>
   </programme>
-  <programme start="20261104101500 +0000" channel="aztecauno" stop="20261104103000 +0000">
+  <programme start="20261104101500 +0000" channel="AztecaUno.mx" stop="20261104103000 +0000">
     <title lang="es">RTC</title>
   </programme>
-  <programme start="20261104103000 +0000" channel="aztecauno" stop="20261104110000 +0000">
+  <programme start="20261104103000 +0000" channel="AztecaUno.mx" stop="20261104110000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261104110000 +0000" channel="aztecauno" stop="20261104120000 +0000">
+  <programme start="20261104110000 +0000" channel="AztecaUno.mx" stop="20261104120000 +0000">
     <title lang="es">Farmacias Similares</title>
   </programme>
-  <programme start="20261104120000 +0000" channel="aztecauno" stop="20261104130000 +0000">
+  <programme start="20261104120000 +0000" channel="AztecaUno.mx" stop="20261104130000 +0000">
     <title lang="es">Hechos Contigo</title>
   </programme>
-  <programme start="20261104130000 +0000" channel="aztecauno" stop="20261104150000 +0000">
+  <programme start="20261104130000 +0000" channel="AztecaUno.mx" stop="20261104150000 +0000">
     <title lang="es">Hechos AM</title>
   </programme>
-  <programme start="20261104150000 +0000" channel="aztecauno" stop="20261104170000 +0000">
+  <programme start="20261104150000 +0000" channel="AztecaUno.mx" stop="20261104170000 +0000">
     <title lang="es">Venga la alegría</title>
     <desc lang="es">Un programa de entretenimiento matutino que te alegran las mañanas, con la conducción estelar de la pareja Fernando del Solar e Ingrid Coronado, el programa cuenta con secciones tales cómo:- Ingrid habla con los peques- Cocina de Yolo- Baila con Alegría- Los especialistas- Noli y sus tips- El autobús de Danilo- Las rapiditas de Venga la Alegría- La LiliparodiaEl programa empieza con un tema bailable donde los presentadores y sus chicas bailarinas te ayudan a que te animes y llegue la alegría.Durante todo el programa se dan pistas sobre una palabra o frase que el televidente puede concursar para ganarse un premio.</desc>
     <date>2006</date>
     <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/venga_la_alegria.png"/>
   </programme>
-  <programme start="20261104170000 +0000" channel="aztecauno" stop="20261104190000 +0000">
+  <programme start="20261104170000 +0000" channel="AztecaUno.mx" stop="20261104190000 +0000">
     <title lang="es">Venga la alegría</title>
     <desc lang="es">Un programa de entretenimiento matutino que te alegran las mañanas, con la conducción estelar de la pareja Fernando del Solar e Ingrid Coronado, el programa cuenta con secciones tales cómo:- Ingrid habla con los peques- Cocina de Yolo- Baila con Alegría- Los especialistas- Noli y sus tips- El autobús de Danilo- Las rapiditas de Venga la Alegría- La LiliparodiaEl programa empieza con un tema bailable donde los presentadores y sus chicas bailarinas te ayudan a que te animes y llegue la alegría.Durante todo el programa se dan pistas sobre una palabra o frase que el televidente puede concursar para ganarse un premio.</desc>
     <date>2006</date>
     <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/venga_la_alegria.png"/>
   </programme>
-  <programme start="20261104190000 +0000" channel="aztecauno" stop="20261104200000 +0000">
+  <programme start="20261104190000 +0000" channel="AztecaUno.mx" stop="20261104200000 +0000">
     <title lang="es">Ventaneando</title>
   </programme>
-  <programme start="20261104200000 +0000" channel="aztecauno" stop="20261104210000 +0000">
+  <programme start="20261104200000 +0000" channel="AztecaUno.mx" stop="20261104210000 +0000">
     <title lang="es">Hechos meridiano</title>
   </programme>
-  <programme start="20261104210000 +0000" channel="aztecauno" stop="20261104223000 +0000">
+  <programme start="20261104210000 +0000" channel="AztecaUno.mx" stop="20261104223000 +0000">
     <title lang="es">Al Extremo</title>
   </programme>
-  <programme start="20261104223000 +0000" channel="aztecauno" stop="20261105003000 +0000">
+  <programme start="20261104223000 +0000" channel="AztecaUno.mx" stop="20261105003000 +0000">
     <title lang="es">Acércate a Rocío</title>
   </programme>
-  <programme start="20261105003000 +0000" channel="aztecauno" stop="20261105023000 +0000">
+  <programme start="20261105003000 +0000" channel="AztecaUno.mx" stop="20261105023000 +0000">
     <title lang="es">Exatlón México</title>
   </programme>
-  <programme start="20261105023000 +0000" channel="aztecauno" stop="20261105043000 +0000">
+  <programme start="20261105023000 +0000" channel="AztecaUno.mx" stop="20261105043000 +0000">
     <title lang="es">La granja VIP</title>
   </programme>
-  <programme start="20261105043000 +0000" channel="aztecauno" stop="20261105051500 +0000">
+  <programme start="20261105043000 +0000" channel="AztecaUno.mx" stop="20261105051500 +0000">
     <title lang="es">Hechos noche</title>
   </programme>
-  <programme start="20261105051500 +0000" channel="aztecauno" stop="20261105053000 +0000">
+  <programme start="20261105051500 +0000" channel="AztecaUno.mx" stop="20261105053000 +0000">
     <title lang="es">Buenas noches con Anna Lu</title>
   </programme>
-  <programme start="20261105053000 +0000" channel="aztecauno" stop="20261105063000 +0000">
+  <programme start="20261105053000 +0000" channel="AztecaUno.mx" stop="20261105063000 +0000">
     <title lang="es">Tolerancia Cero</title>
   </programme>
-  <programme start="20261105063000 +0000" channel="aztecauno" stop="20261105070000 +0000">
+  <programme start="20261105063000 +0000" channel="AztecaUno.mx" stop="20261105070000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105070000 +0000" channel="aztecauno" stop="20261105073000 +0000">
+  <programme start="20261105070000 +0000" channel="AztecaUno.mx" stop="20261105073000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105073000 +0000" channel="aztecauno" stop="20261105080000 +0000">
+  <programme start="20261105073000 +0000" channel="AztecaUno.mx" stop="20261105080000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105080000 +0000" channel="aztecauno" stop="20261105083000 +0000">
+  <programme start="20261105080000 +0000" channel="AztecaUno.mx" stop="20261105083000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105083000 +0000" channel="aztecauno" stop="20261105090000 +0000">
+  <programme start="20261105083000 +0000" channel="AztecaUno.mx" stop="20261105090000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105090000 +0000" channel="aztecauno" stop="20261105093000 +0000">
+  <programme start="20261105090000 +0000" channel="AztecaUno.mx" stop="20261105093000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105093000 +0000" channel="aztecauno" stop="20261105100000 +0000">
+  <programme start="20261105093000 +0000" channel="AztecaUno.mx" stop="20261105100000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105100000 +0000" channel="aztecauno" stop="20261105101500 +0000">
+  <programme start="20261105100000 +0000" channel="AztecaUno.mx" stop="20261105101500 +0000">
     <title lang="es">Barras de ajuste</title>
   </programme>
-  <programme start="20261105101500 +0000" channel="aztecauno" stop="20261105103000 +0000">
+  <programme start="20261105101500 +0000" channel="AztecaUno.mx" stop="20261105103000 +0000">
     <title lang="es">RTC</title>
   </programme>
-  <programme start="20261105103000 +0000" channel="aztecauno" stop="20261105110000 +0000">
+  <programme start="20261105103000 +0000" channel="AztecaUno.mx" stop="20261105110000 +0000">
     <title lang="es">Inova</title>
   </programme>
-  <programme start="20261105110000 +0000" channel="aztecauno" stop="20261105120000 +0000">
+  <programme start="20261105110000 +0000" channel="AztecaUno.mx" stop="20261105120000 +0000">
     <title lang="es">Farmacias Similares</title>
   </programme>
-  <programme start="20261105120000 +0000" channel="aztecauno" stop="20261105130000 +0000">
+  <programme start="20261105120000 +0000" channel="AztecaUno.mx" stop="20261105130000 +0000">
     <title lang="es">Hechos Contigo</title>
   </programme>
-  <programme start="20261105130000 +0000" channel="aztecauno" stop="20261105150000 +0000">
+  <programme start="20261105130000 +0000" channel="AztecaUno.mx" stop="20261105150000 +0000">
     <title lang="es">Hechos AM</title>
   </programme>
-  <programme start="20261105150000 +0000" channel="aztecauno" stop="20261105170000 +0000">
+  <programme start="20261105150000 +0000" channel="AztecaUno.mx" stop="20261105170000 +0000">
     <title lang="es">Venga la alegría</title>
     <desc lang="es">Un programa de entretenimiento matutino que te alegran las mañanas, con la conducción estelar de la pareja Fernando del Solar e Ingrid Coronado, el programa cuenta con secciones tales cómo:- Ingrid habla con los peques- Cocina de Yolo- Baila con Alegría- Los especialistas- Noli y sus tips- El autobús de Danilo- Las rapiditas de Venga la Alegría- La LiliparodiaEl programa empieza con un tema bailable donde los presentadores y sus chicas bailarinas te ayudan a que te animes y llegue la alegría.Durante todo el programa se dan pistas sobre una palabra o frase que el televidente puede concursar para ganarse un premio.</desc>
     <date>2006</date>
     <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/venga_la_alegria.png"/>
   </programme>
-  <programme start="20261105170000 +0000" channel="aztecauno" stop="20261105190000 +0000">
+  <programme start="20261105170000 +0000" channel="AztecaUno.mx" stop="20261105190000 +0000">
     <title lang="es">Venga la alegría</title>
     <desc lang="es">Un programa de entretenimiento matutino que te alegran las mañanas, con la conducción estelar de la pareja Fernando del Solar e Ingrid Coronado, el programa cuenta con secciones tales cómo:- Ingrid habla con los peques- Cocina de Yolo- Baila con Alegría- Los especialistas- Noli y sus tips- El autobús de Danilo- Las rapiditas de Venga la Alegría- La LiliparodiaEl programa empieza con un tema bailable donde los presentadores y sus chicas bailarinas te ayudan a que te animes y llegue la alegría.Durante todo el programa se dan pistas sobre una palabra o frase que el televidente puede concursar para ganarse un premio.</desc>
     <date>2006</date>
     <icon src="https://imagenes.gatotv.com/categorias/programas/miniatura/venga_la_alegria.png"/>
   </programme>
-  <programme start="20261105190000 +0000" channel="aztecauno" stop="20261105200000 +0000">
+  <programme start="20261105190000 +0000" channel="AztecaUno.mx" stop="20261105200000 +0000">
     <title lang="es">Ventaneando</title>
   </programme>
-  <programme start="20261105200000 +0000" channel="aztecauno" stop="20261105210000 +0000">
+  <programme start="20261105200000 +0000" channel="AztecaUno.mx" stop="20261105210000 +0000">
     <title lang="es">Hechos meridiano</title>
   </programme>
-  <programme start="20261105210000 +0000" channel="aztecauno" stop="20261105223000 +0000">
+  <programme start="20261105210000 +0000" channel="AztecaUno.mx" stop="20261105223000 +0000">
     <title lang="es">Al Extremo</title>
   </programme>
-  <programme start="20261105223000 +0000" channel="aztecauno" stop="20261106003000 +0000">
+  <programme start="20261105223000 +0000" channel="AztecaUno.mx" stop="20261106003000 +0000">
     <title lang="es">Acércate a Rocío</title>
   </programme>
   <programme start="20261103000000 +0000" channel="caracolinternacional" stop="20261103013000 +0000">
@@ -173484,7 +173484,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261103000000 +0000" channel="espn" stop="20261103020000 +0000">
+  <programme start="20261103000000 +0000" channel="ESPN.us" stop="20261103020000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173492,7 +173492,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103020000 +0000" channel="espn" stop="20261103040000 +0000">
+  <programme start="20261103020000 +0000" channel="ESPN.us" stop="20261103040000 +0000">
     <title lang="es">ESPN F90</title>
     <desc lang="es">Un clásico de la televisión con toda la actualidad, el mejor análisis y un muy rico debate futbolístico.</desc>
     <date>2021</date>
@@ -173500,7 +173500,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103040000 +0000" channel="espn" stop="20261103050000 +0000">
+  <programme start="20261103040000 +0000" channel="ESPN.us" stop="20261103050000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173508,7 +173508,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103050000 +0000" channel="espn" stop="20261103060000 +0000">
+  <programme start="20261103050000 +0000" channel="ESPN.us" stop="20261103060000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173516,7 +173516,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103060000 +0000" channel="espn" stop="20261103070000 +0000">
+  <programme start="20261103060000 +0000" channel="ESPN.us" stop="20261103070000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173524,7 +173524,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103070000 +0000" channel="espn" stop="20261103080000 +0000">
+  <programme start="20261103070000 +0000" channel="ESPN.us" stop="20261103080000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173532,7 +173532,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103080000 +0000" channel="espn" stop="20261103090000 +0000">
+  <programme start="20261103080000 +0000" channel="ESPN.us" stop="20261103090000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173540,7 +173540,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103090000 +0000" channel="espn" stop="20261103100000 +0000">
+  <programme start="20261103090000 +0000" channel="ESPN.us" stop="20261103100000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173548,7 +173548,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103100000 +0000" channel="espn" stop="20261103140000 +0000">
+  <programme start="20261103100000 +0000" channel="ESPN.us" stop="20261103140000 +0000">
     <title lang="es">Rolex Paris Masters 2026</title>
     <sub-title lang="es">Primera y segunda ronda</sub-title>
     <desc lang="es">Acción de la primera y segunda ronda del Rolex Paris Masters 2026. Desde la Paris La Défense Arena, en Nanterre, París.</desc>
@@ -173557,7 +173557,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103140000 +0000" channel="espn" stop="20261103150000 +0000">
+  <programme start="20261103140000 +0000" channel="ESPN.us" stop="20261103150000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173565,7 +173565,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103150000 +0000" channel="espn" stop="20261103170000 +0000">
+  <programme start="20261103150000 +0000" channel="ESPN.us" stop="20261103170000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173573,7 +173573,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103170000 +0000" channel="espn" stop="20261103173000 +0000">
+  <programme start="20261103170000 +0000" channel="ESPN.us" stop="20261103173000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173581,7 +173581,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103173000 +0000" channel="espn" stop="20261103194000 +0000">
+  <programme start="20261103173000 +0000" channel="ESPN.us" stop="20261103194000 +0000">
     <title lang="es">Fútbol UEFA Champions League</title>
     <sub-title lang="es">Shakhtar Donetsk vs. Sporting Club de Portugal</sub-title>
     <desc lang="es">Acción de la jornada 4 de la UEFA Champions League 2026-27. Shakhtar busca ganar tras perder y Sporting zona de clasificación directa.</desc>
@@ -173590,7 +173590,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261103194000 +0000" channel="espn" stop="20261103215500 +0000">
+  <programme start="20261103194000 +0000" channel="ESPN.us" stop="20261103215500 +0000">
     <title lang="es">Fútbol UEFA Champions League</title>
     <sub-title lang="es">Atlético de Madrid vs. Bayern Munich</sub-title>
     <desc lang="es">Acción de la jornada 4 de la UEFA Champions League 2026-27. Atleti busca ganar tras empatar y los Bávaros zona de clasificación directa.</desc>
@@ -173599,7 +173599,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261103215500 +0000" channel="espn" stop="20261103230000 +0000">
+  <programme start="20261103215500 +0000" channel="ESPN.us" stop="20261103230000 +0000">
     <title lang="es">Balón dividido</title>
     <desc lang="es">El análisis y la actualidad del fútbol de Colombia, a cargo de grandes especialistas. Además, los informes con la última información de cada equipo y la palabra de los protagonistas.</desc>
     <date>2010</date>
@@ -173607,7 +173607,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261103230000 +0000" channel="espn" stop="20261104000000 +0000">
+  <programme start="20261103230000 +0000" channel="ESPN.us" stop="20261104000000 +0000">
     <title lang="es">ESPN F360</title>
     <desc lang="es">Análisis, debate y comentarios de las noticias más relevantes del fútbol nacional, así como a nivel mundial.</desc>
     <date>2025</date>
@@ -173615,7 +173615,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261104000000 +0000" channel="espn" stop="20261104020000 +0000">
+  <programme start="20261104000000 +0000" channel="ESPN.us" stop="20261104020000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173623,7 +173623,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104020000 +0000" channel="espn" stop="20261104040000 +0000">
+  <programme start="20261104020000 +0000" channel="ESPN.us" stop="20261104040000 +0000">
     <title lang="es">ESPN F90</title>
     <desc lang="es">Un clásico de la televisión con toda la actualidad, el mejor análisis y un muy rico debate futbolístico.</desc>
     <date>2021</date>
@@ -173631,7 +173631,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104040000 +0000" channel="espn" stop="20261104050000 +0000">
+  <programme start="20261104040000 +0000" channel="ESPN.us" stop="20261104050000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173639,7 +173639,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104050000 +0000" channel="espn" stop="20261104060000 +0000">
+  <programme start="20261104050000 +0000" channel="ESPN.us" stop="20261104060000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173647,7 +173647,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104060000 +0000" channel="espn" stop="20261104070000 +0000">
+  <programme start="20261104060000 +0000" channel="ESPN.us" stop="20261104070000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173655,7 +173655,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104070000 +0000" channel="espn" stop="20261104080000 +0000">
+  <programme start="20261104070000 +0000" channel="ESPN.us" stop="20261104080000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173663,7 +173663,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104080000 +0000" channel="espn" stop="20261104090000 +0000">
+  <programme start="20261104080000 +0000" channel="ESPN.us" stop="20261104090000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173671,7 +173671,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104090000 +0000" channel="espn" stop="20261104100000 +0000">
+  <programme start="20261104090000 +0000" channel="ESPN.us" stop="20261104100000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173679,7 +173679,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104100000 +0000" channel="espn" stop="20261104140000 +0000">
+  <programme start="20261104100000 +0000" channel="ESPN.us" stop="20261104140000 +0000">
     <title lang="es">Rolex Paris Masters 2026</title>
     <sub-title lang="es">Segunda ronda</sub-title>
     <desc lang="es">Acción de la segunda ronda del Rolex Paris Masters 2026. Desde la Paris La Défense Arena, en Nanterre, París.</desc>
@@ -173688,7 +173688,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104140000 +0000" channel="espn" stop="20261104150000 +0000">
+  <programme start="20261104140000 +0000" channel="ESPN.us" stop="20261104150000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173696,7 +173696,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104150000 +0000" channel="espn" stop="20261104170000 +0000">
+  <programme start="20261104150000 +0000" channel="ESPN.us" stop="20261104170000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173704,7 +173704,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104170000 +0000" channel="espn" stop="20261104173000 +0000">
+  <programme start="20261104170000 +0000" channel="ESPN.us" stop="20261104173000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173712,7 +173712,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104173000 +0000" channel="espn" stop="20261104194000 +0000">
+  <programme start="20261104173000 +0000" channel="ESPN.us" stop="20261104194000 +0000">
     <title lang="es">Fútbol UEFA Champions League</title>
     <sub-title lang="es">AEK vs. Real Madrid</sub-title>
     <desc lang="es">Acción de la jornada 4 de la UEFA Champions League 2026-27. AEK busca romper su racha de dos derrotas y Real Madrid su cuarta victoria al hilo.</desc>
@@ -173721,7 +173721,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104194000 +0000" channel="espn" stop="20261104215500 +0000">
+  <programme start="20261104194000 +0000" channel="ESPN.us" stop="20261104215500 +0000">
     <title lang="es">Fútbol UEFA Champions League</title>
     <sub-title lang="es">RB Leipzig vs. Manchester City</sub-title>
     <desc lang="es">Acción de la jornada 4 de la UEFA Champions League 2026-27. Leipzig busca zona de clasificación y los Citizens su segunda victoria al hilo.</desc>
@@ -173730,7 +173730,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261104215500 +0000" channel="espn" stop="20261104230000 +0000">
+  <programme start="20261104215500 +0000" channel="ESPN.us" stop="20261104230000 +0000">
     <title lang="es">Balón dividido</title>
     <desc lang="es">El análisis y la actualidad del fútbol de Colombia, a cargo de grandes especialistas. Además, los informes con la última información de cada equipo y la palabra de los protagonistas.</desc>
     <date>2010</date>
@@ -173738,7 +173738,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261104230000 +0000" channel="espn" stop="20261105000000 +0000">
+  <programme start="20261104230000 +0000" channel="ESPN.us" stop="20261105000000 +0000">
     <title lang="es">ESPN F360</title>
     <desc lang="es">Análisis, debate y comentarios de las noticias más relevantes del fútbol nacional, así como a nivel mundial.</desc>
     <date>2025</date>
@@ -173746,7 +173746,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261105000000 +0000" channel="espn" stop="20261105020000 +0000">
+  <programme start="20261105000000 +0000" channel="ESPN.us" stop="20261105020000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173754,7 +173754,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105020000 +0000" channel="espn" stop="20261105040000 +0000">
+  <programme start="20261105020000 +0000" channel="ESPN.us" stop="20261105040000 +0000">
     <title lang="es">ESPN F90</title>
     <desc lang="es">Un clásico de la televisión con toda la actualidad, el mejor análisis y un muy rico debate futbolístico.</desc>
     <date>2021</date>
@@ -173762,7 +173762,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105040000 +0000" channel="espn" stop="20261105050000 +0000">
+  <programme start="20261105040000 +0000" channel="ESPN.us" stop="20261105050000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173770,7 +173770,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105050000 +0000" channel="espn" stop="20261105060000 +0000">
+  <programme start="20261105050000 +0000" channel="ESPN.us" stop="20261105060000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173778,7 +173778,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105060000 +0000" channel="espn" stop="20261105070000 +0000">
+  <programme start="20261105060000 +0000" channel="ESPN.us" stop="20261105070000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173786,7 +173786,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105070000 +0000" channel="espn" stop="20261105080000 +0000">
+  <programme start="20261105070000 +0000" channel="ESPN.us" stop="20261105080000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173794,7 +173794,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105080000 +0000" channel="espn" stop="20261105090000 +0000">
+  <programme start="20261105080000 +0000" channel="ESPN.us" stop="20261105090000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173802,7 +173802,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105090000 +0000" channel="espn" stop="20261105100000 +0000">
+  <programme start="20261105090000 +0000" channel="ESPN.us" stop="20261105100000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173810,7 +173810,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105100000 +0000" channel="espn" stop="20261105140000 +0000">
+  <programme start="20261105100000 +0000" channel="ESPN.us" stop="20261105140000 +0000">
     <title lang="es">Rolex Paris Masters 2026</title>
     <sub-title lang="es">Octavos de final</sub-title>
     <desc lang="es">Acción de los octavos de final del Rolex Paris Masters 2026. Desde la Paris La Défense Arena, en Nanterre, París.</desc>
@@ -173819,7 +173819,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105140000 +0000" channel="espn" stop="20261105150000 +0000">
+  <programme start="20261105140000 +0000" channel="ESPN.us" stop="20261105150000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173827,7 +173827,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105150000 +0000" channel="espn" stop="20261105170000 +0000">
+  <programme start="20261105150000 +0000" channel="ESPN.us" stop="20261105170000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173835,7 +173835,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105170000 +0000" channel="espn" stop="20261105173000 +0000">
+  <programme start="20261105170000 +0000" channel="ESPN.us" stop="20261105173000 +0000">
     <title lang="es">SportsCenter</title>
     <desc lang="es">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <date>1979</date>
@@ -173843,7 +173843,7 @@ Repetición</title>
       <value>TE</value>
     </rating>
   </programme>
-  <programme start="20261105173000 +0000" channel="espn" stop="20261105194000 +0000">
+  <programme start="20261105173000 +0000" channel="ESPN.us" stop="20261105194000 +0000">
     <title lang="es">Fútbol UEFA Europa League</title>
     <sub-title lang="es">AC Milan vs. Ferencváros</sub-title>
     <desc lang="es">Cuarta jornada de la UEFA Europa League 2026-27. AC Milán se enfrenta a Ferencváros. Desde el estadio Giuseppe Meazza, en Milán, Italia.</desc>
@@ -173852,7 +173852,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261105194000 +0000" channel="espn" stop="20261105215500 +0000">
+  <programme start="20261105194000 +0000" channel="ESPN.us" stop="20261105215500 +0000">
     <title lang="es">Fútbol UEFA Europa League</title>
     <sub-title lang="es">AZ vs. Juventus</sub-title>
     <desc lang="es">Cuarta jornada de la UEFA Europa League 2026-27. AZ Alkmaar se enfrenta a Juventus. Desde el AFAS Stadion, en Alkmaar, Países Bajos.</desc>
@@ -173861,7 +173861,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261105215500 +0000" channel="espn" stop="20261105230000 +0000">
+  <programme start="20261105215500 +0000" channel="ESPN.us" stop="20261105230000 +0000">
     <title lang="es">Balón dividido</title>
     <desc lang="es">El análisis y la actualidad del fútbol de Colombia, a cargo de grandes especialistas. Además, los informes con la última información de cada equipo y la palabra de los protagonistas.</desc>
     <date>2010</date>
@@ -173869,7 +173869,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261105230000 +0000" channel="espn" stop="20261106000000 +0000">
+  <programme start="20261105230000 +0000" channel="ESPN.us" stop="20261106000000 +0000">
     <title lang="es">ESPN F360</title>
     <desc lang="es">Análisis, debate y comentarios de las noticias más relevantes del fútbol nacional, así como a nivel mundial.</desc>
     <date>2025</date>
@@ -173877,7 +173877,7 @@ Repetición</title>
       <value>AGE228</value>
     </rating>
   </programme>
-  <programme start="20261103000000 +0000" channel="espn2" stop="20261103021000 +0000">
+  <programme start="20261103000000 +0000" channel="ESPN2.us" stop="20261103021000 +0000">
     <title lang="en">Live: Fútbol Argentino Primera División</title>
     <sub-title lang="en">Atlético Tucumán vs. Argentinos Juniors</sub-title>
     <desc lang="en">Decano recibe a El Bicho en la fecha 15 de la Zona B del Torneo Clausura 2026 de la LPF. Desde el Estadio Monumental José Fierro, en San Miguel de Tucumán.</desc>
@@ -173885,21 +173885,21 @@ Repetición</title>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p9208940_b_v12_ac.jpg"/>
   </programme>
-  <programme start="20261103021000 +0000" channel="espn2" stop="20261103030000 +0000">
+  <programme start="20261103021000 +0000" channel="ESPN2.us" stop="20261103030000 +0000">
     <title lang="en">Live: ESPN F10</title>
     <desc lang="en">Los fines de semana se llenan de fútbol. Tras la finalización del partido de la fecha de la Copa de la Liga Profesional del fútbol argentino, llega el mejor análisis.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p19044100_b_v8_ae.jpg"/>
   </programme>
-  <programme start="20261103030000 +0000" channel="espn2" stop="20261103040000 +0000">
+  <programme start="20261103030000 +0000" channel="ESPN2.us" stop="20261103040000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261103040000 +0000" channel="espn2" stop="20261103050000 +0000">
+  <programme start="20261103040000 +0000" channel="ESPN2.us" stop="20261103050000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -173907,7 +173907,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103050000 +0000" channel="espn2" stop="20261103060000 +0000">
+  <programme start="20261103050000 +0000" channel="ESPN2.us" stop="20261103060000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -173915,7 +173915,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103060000 +0000" channel="espn2" stop="20261103070000 +0000">
+  <programme start="20261103060000 +0000" channel="ESPN2.us" stop="20261103070000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -173923,7 +173923,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103070000 +0000" channel="espn2" stop="20261103080000 +0000">
+  <programme start="20261103070000 +0000" channel="ESPN2.us" stop="20261103080000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -173931,7 +173931,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103080000 +0000" channel="espn2" stop="20261103090000 +0000">
+  <programme start="20261103080000 +0000" channel="ESPN2.us" stop="20261103090000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -173939,7 +173939,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103090000 +0000" channel="espn2" stop="20261103100000 +0000">
+  <programme start="20261103090000 +0000" channel="ESPN2.us" stop="20261103100000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -173947,42 +173947,42 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103100000 +0000" channel="espn2" stop="20261103120000 +0000">
+  <programme start="20261103100000 +0000" channel="ESPN2.us" stop="20261103120000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261103120000 +0000" channel="espn2" stop="20261103140000 +0000">
+  <programme start="20261103120000 +0000" channel="ESPN2.us" stop="20261103140000 +0000">
     <title lang="en">Live: Buen día ESPN</title>
     <desc lang="en">Cobertura de la actualidad deportiva con entrevistas, protagonistas y la mejor onda.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p32739438_b_v11_aa.jpg"/>
   </programme>
-  <programme start="20261103140000 +0000" channel="espn2" stop="20261103160000 +0000">
+  <programme start="20261103140000 +0000" channel="ESPN2.us" stop="20261103160000 +0000">
     <title lang="en">Live: ESPN F12</title>
     <desc lang="en">Una nueva propuesta informativa a puro fútbol con un panel destacado. Además, periodistas en vivo desde los entrenamientos de los equipos más destacados del fútbol argentino.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p19044000_b_v8_ac.jpg"/>
   </programme>
-  <programme start="20261103160000 +0000" channel="espn2" stop="20261103180000 +0000">
+  <programme start="20261103160000 +0000" channel="ESPN2.us" stop="20261103180000 +0000">
     <title lang="en">Live: ESPN F90</title>
     <desc lang="en">Un clásico de la televisión con toda la actualidad, el mejor análisis y un muy rico debate futbolístico.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20102264_b_v8_aa.jpg"/>
   </programme>
-  <programme start="20261103180000 +0000" channel="espn2" stop="20261103194000 +0000">
+  <programme start="20261103180000 +0000" channel="ESPN2.us" stop="20261103194000 +0000">
     <title lang="en">Live: ESPN F3</title>
     <desc lang="en">Programación deportiva dedicada a la agenda futbolística, resúmenes, análisis y seguimientos que dan de qué hablar.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p27049351_b_v8_ac.jpg"/>
   </programme>
-  <programme start="20261103194000 +0000" channel="espn2" stop="20261103215500 +0000">
+  <programme start="20261103194000 +0000" channel="ESPN2.us" stop="20261103215500 +0000">
     <title lang="en">Live: Fútbol UEFA Champions League</title>
     <sub-title lang="en">Barcelona vs. Aston Villa</sub-title>
     <desc lang="en">Acción de la jornada 4 de la UEFA Champions League 2026-27. Barcelona busca mantenerse en zona de clasificación directa y Aston Villa el liderato.</desc>
@@ -173990,42 +173990,42 @@ Repetición</title>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p3616485_b_v8_bm.jpg"/>
   </programme>
-  <programme start="20261103215500 +0000" channel="espn2" stop="20261103233000 +0000">
+  <programme start="20261103215500 +0000" channel="ESPN2.us" stop="20261103233000 +0000">
     <title lang="en">Live: Equipo F</title>
     <desc lang="en">El debate de cada fecha llega a la pantalla. El mejor equipo para analizar todo lo que pasó el fin de semana.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Talk Show</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20358041_b_v8_ad.jpg"/>
   </programme>
-  <programme start="20261103233000 +0000" channel="espn2" stop="20261104010000 +0000">
+  <programme start="20261103233000 +0000" channel="ESPN2.us" stop="20261104010000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261104010000 +0000" channel="espn2" stop="20261104020000 +0000">
+  <programme start="20261104010000 +0000" channel="ESPN2.us" stop="20261104020000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261104020000 +0000" channel="espn2" stop="20261104030000 +0000">
+  <programme start="20261104020000 +0000" channel="ESPN2.us" stop="20261104030000 +0000">
     <title lang="en">Live: ESPN F10</title>
     <desc lang="en">Los fines de semana se llenan de fútbol. Tras la finalización del partido de la fecha de la Copa de la Liga Profesional del fútbol argentino, llega el mejor análisis.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p19044100_b_v8_ae.jpg"/>
   </programme>
-  <programme start="20261104030000 +0000" channel="espn2" stop="20261104040000 +0000">
+  <programme start="20261104030000 +0000" channel="ESPN2.us" stop="20261104040000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261104040000 +0000" channel="espn2" stop="20261104050000 +0000">
+  <programme start="20261104040000 +0000" channel="ESPN2.us" stop="20261104050000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174033,7 +174033,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104050000 +0000" channel="espn2" stop="20261104060000 +0000">
+  <programme start="20261104050000 +0000" channel="ESPN2.us" stop="20261104060000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174041,7 +174041,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104060000 +0000" channel="espn2" stop="20261104070000 +0000">
+  <programme start="20261104060000 +0000" channel="ESPN2.us" stop="20261104070000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174049,7 +174049,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104070000 +0000" channel="espn2" stop="20261104080000 +0000">
+  <programme start="20261104070000 +0000" channel="ESPN2.us" stop="20261104080000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174057,7 +174057,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104080000 +0000" channel="espn2" stop="20261104090000 +0000">
+  <programme start="20261104080000 +0000" channel="ESPN2.us" stop="20261104090000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174065,7 +174065,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104090000 +0000" channel="espn2" stop="20261104100000 +0000">
+  <programme start="20261104090000 +0000" channel="ESPN2.us" stop="20261104100000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174073,35 +174073,35 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104100000 +0000" channel="espn2" stop="20261104120000 +0000">
+  <programme start="20261104100000 +0000" channel="ESPN2.us" stop="20261104120000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261104120000 +0000" channel="espn2" stop="20261104140000 +0000">
+  <programme start="20261104120000 +0000" channel="ESPN2.us" stop="20261104140000 +0000">
     <title lang="en">Live: Buen día ESPN</title>
     <desc lang="en">Cobertura de la actualidad deportiva con entrevistas, protagonistas y la mejor onda.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p32739438_b_v11_aa.jpg"/>
   </programme>
-  <programme start="20261104140000 +0000" channel="espn2" stop="20261104160000 +0000">
+  <programme start="20261104140000 +0000" channel="ESPN2.us" stop="20261104160000 +0000">
     <title lang="en">Live: ESPN F12</title>
     <desc lang="en">Una nueva propuesta informativa a puro fútbol con un panel destacado. Además, periodistas en vivo desde los entrenamientos de los equipos más destacados del fútbol argentino.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p19044000_b_v8_ac.jpg"/>
   </programme>
-  <programme start="20261104160000 +0000" channel="espn2" stop="20261104173000 +0000">
+  <programme start="20261104160000 +0000" channel="ESPN2.us" stop="20261104173000 +0000">
     <title lang="en">Live: ESPN F90</title>
     <desc lang="en">Un clásico de la televisión con toda la actualidad, el mejor análisis y un muy rico debate futbolístico.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20102264_b_v8_aa.jpg"/>
   </programme>
-  <programme start="20261104173000 +0000" channel="espn2" stop="20261104194000 +0000">
+  <programme start="20261104173000 +0000" channel="ESPN2.us" stop="20261104194000 +0000">
     <title lang="en">Live: Fútbol UEFA Champions League</title>
     <sub-title lang="en">Fenerbahçe vs. Liverpool</sub-title>
     <desc lang="en">Acción de la jornada 4 de la UEFA Champions League 2026-27. Fenerbahce busca su primera victoria y los Reds ganar su cuarta victoria al hilo.</desc>
@@ -174109,7 +174109,7 @@ Repetición</title>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p3616485_b_v8_bm.jpg"/>
   </programme>
-  <programme start="20261104194000 +0000" channel="espn2" stop="20261104215500 +0000">
+  <programme start="20261104194000 +0000" channel="ESPN2.us" stop="20261104215500 +0000">
     <title lang="en">Live: Fútbol UEFA Champions League</title>
     <sub-title lang="en">RB Leipzig vs. Manchester City</sub-title>
     <desc lang="en">Acción de la jornada 4 de la UEFA Champions League 2026-27. Leipzig busca zona de clasificación y los Citizens su segunda victoria al hilo.</desc>
@@ -174117,42 +174117,42 @@ Repetición</title>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p3616485_b_v8_bm.jpg"/>
   </programme>
-  <programme start="20261104215500 +0000" channel="espn2" stop="20261104233000 +0000">
+  <programme start="20261104215500 +0000" channel="ESPN2.us" stop="20261104233000 +0000">
     <title lang="en">Live: Equipo F</title>
     <desc lang="en">El debate de cada fecha llega a la pantalla. El mejor equipo para analizar todo lo que pasó el fin de semana.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Talk Show</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20358041_b_v8_ad.jpg"/>
   </programme>
-  <programme start="20261104233000 +0000" channel="espn2" stop="20261105010000 +0000">
+  <programme start="20261104233000 +0000" channel="ESPN2.us" stop="20261105010000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261105010000 +0000" channel="espn2" stop="20261105020000 +0000">
+  <programme start="20261105010000 +0000" channel="ESPN2.us" stop="20261105020000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261105020000 +0000" channel="espn2" stop="20261105030000 +0000">
+  <programme start="20261105020000 +0000" channel="ESPN2.us" stop="20261105030000 +0000">
     <title lang="en">Live: ESPN F10</title>
     <desc lang="en">Los fines de semana se llenan de fútbol. Tras la finalización del partido de la fecha de la Copa de la Liga Profesional del fútbol argentino, llega el mejor análisis.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p19044100_b_v8_ae.jpg"/>
   </programme>
-  <programme start="20261105030000 +0000" channel="espn2" stop="20261105040000 +0000">
+  <programme start="20261105030000 +0000" channel="ESPN2.us" stop="20261105040000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261105040000 +0000" channel="espn2" stop="20261105050000 +0000">
+  <programme start="20261105040000 +0000" channel="ESPN2.us" stop="20261105050000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174160,7 +174160,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105050000 +0000" channel="espn2" stop="20261105060000 +0000">
+  <programme start="20261105050000 +0000" channel="ESPN2.us" stop="20261105060000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174168,7 +174168,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105060000 +0000" channel="espn2" stop="20261105070000 +0000">
+  <programme start="20261105060000 +0000" channel="ESPN2.us" stop="20261105070000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174176,7 +174176,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105070000 +0000" channel="espn2" stop="20261105080000 +0000">
+  <programme start="20261105070000 +0000" channel="ESPN2.us" stop="20261105080000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174184,7 +174184,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105080000 +0000" channel="espn2" stop="20261105090000 +0000">
+  <programme start="20261105080000 +0000" channel="ESPN2.us" stop="20261105090000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174192,7 +174192,7 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105090000 +0000" channel="espn2" stop="20261105100000 +0000">
+  <programme start="20261105090000 +0000" channel="ESPN2.us" stop="20261105100000 +0000">
     <title lang="en">SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
@@ -174200,35 +174200,35 @@ Repetición</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105100000 +0000" channel="espn2" stop="20261105120000 +0000">
+  <programme start="20261105100000 +0000" channel="ESPN2.us" stop="20261105120000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
     <category lang="en">News</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p186674_b_v11_ab.jpg"/>
   </programme>
-  <programme start="20261105120000 +0000" channel="espn2" stop="20261105140000 +0000">
+  <programme start="20261105120000 +0000" channel="ESPN2.us" stop="20261105140000 +0000">
     <title lang="en">Live: Buen día ESPN</title>
     <desc lang="en">Cobertura de la actualidad deportiva con entrevistas, protagonistas y la mejor onda.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p32739438_b_v11_aa.jpg"/>
   </programme>
-  <programme start="20261105140000 +0000" channel="espn2" stop="20261105160000 +0000">
+  <programme start="20261105140000 +0000" channel="ESPN2.us" stop="20261105160000 +0000">
     <title lang="en">Live: ESPN F12</title>
     <desc lang="en">Una nueva propuesta informativa a puro fútbol con un panel destacado. Además, periodistas en vivo desde los entrenamientos de los equipos más destacados del fútbol argentino.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p19044000_b_v8_ac.jpg"/>
   </programme>
-  <programme start="20261105160000 +0000" channel="espn2" stop="20261105173000 +0000">
+  <programme start="20261105160000 +0000" channel="ESPN2.us" stop="20261105173000 +0000">
     <title lang="en">Live: ESPN F90</title>
     <desc lang="en">Un clásico de la televisión con toda la actualidad, el mejor análisis y un muy rico debate futbolístico.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Miscellaneous</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20102264_b_v8_aa.jpg"/>
   </programme>
-  <programme start="20261105173000 +0000" channel="espn2" stop="20261105194000 +0000">
+  <programme start="20261105173000 +0000" channel="ESPN2.us" stop="20261105194000 +0000">
     <title lang="en">Live: Fútbol UEFA Europa League</title>
     <sub-title lang="en">AC Milan vs. Ferencváros</sub-title>
     <desc lang="en">Cuarta jornada de la UEFA Europa League 2026-27. AC Milán se enfrenta a Ferencváros. Desde el estadio Giuseppe Meazza, en Milán, Italia.</desc>
@@ -174236,7 +174236,7 @@ Repetición</title>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p7942039_b_v12_dx.jpg"/>
   </programme>
-  <programme start="20261105194000 +0000" channel="espn2" stop="20261105215500 +0000">
+  <programme start="20261105194000 +0000" channel="ESPN2.us" stop="20261105215500 +0000">
     <title lang="en">Live: Fútbol UEFA Europa League</title>
     <sub-title lang="en">AZ vs. Juventus</sub-title>
     <desc lang="en">Cuarta jornada de la UEFA Europa League 2026-27. AZ Alkmaar se enfrenta a Juventus. Desde el AFAS Stadion, en Alkmaar, Países Bajos.</desc>
@@ -174244,14 +174244,14 @@ Repetición</title>
     <category lang="en">Soccer</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p7942039_b_v12_dx.jpg"/>
   </programme>
-  <programme start="20261105215500 +0000" channel="espn2" stop="20261105233000 +0000">
+  <programme start="20261105215500 +0000" channel="ESPN2.us" stop="20261105233000 +0000">
     <title lang="en">Live: Equipo F</title>
     <desc lang="en">El debate de cada fecha llega a la pantalla. El mejor equipo para analizar todo lo que pasó el fin de semana.</desc>
     <category lang="en">Sports</category>
     <category lang="en">Talk Show</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20358041_b_v8_ad.jpg"/>
   </programme>
-  <programme start="20261105233000 +0000" channel="espn2" stop="20261106010000 +0000">
+  <programme start="20261105233000 +0000" channel="ESPN2.us" stop="20261106010000 +0000">
     <title lang="en">Live: SportsCenter</title>
     <desc lang="en">El noticiero de ESPN con la más amplia cobertura y noticias de los eventos deportivos.</desc>
     <category lang="en">Sports</category>
