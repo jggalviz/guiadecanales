@@ -1,0 +1,67 @@
+name: Actualizar EPG
+
+# Regenera epg.xml a diario, al hacer push y bajo demanda.
+on:
+  schedule:
+    # Todos los dias a las 05:00 UTC
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "generar_epg.py"
+      - "tests/**"
+      - ".github/workflows/actualizar-epg.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-epg
+  cancel-in-progress: true
+
+jobs:
+  generar:
+    name: Generar y publicar epg.xml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ejecutar pruebas unitarias
+        run: python -m unittest discover -s tests -v
+
+      - name: Generar epg.xml desde la lista M3U
+        env:
+          M3U_URL: ${{ secrets.M3U_URL }}
+          EPG_REPO_URL: ${{ vars.EPG_REPO_URL || github.server_url }}
+        run: python generar_epg.py --salida epg.xml
+
+      - name: Verificar que el XMLTV es valido
+        run: |
+          python - <<'PY'
+          from xml.etree import ElementTree as ET
+          raiz = ET.parse("epg.xml").getroot()
+          canales = len(raiz.findall("channel"))
+          programas = len(raiz.findall("programme"))
+          print(f"canales={canales} programas={programas}")
+          assert raiz.tag == "tv", "la raiz debe ser <tv>"
+          assert canales > 0 and programas == canales * 6, "parrilla incompleta"
+          PY
+
+      - name: Commit y push de epg.xml
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add epg.xml
+          if git diff --cached --quiet; then
+            echo "epg.xml sin cambios; no se hace commit."
+          else
+            git commit -m "chore(epg): actualizar guia $(date -u +%Y-%m-%d)"
+            git push
+          fi

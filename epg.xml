@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+<tv generator-info-name="guiadecanales-epg" generator-info-url="https://github.com/usuario/repositorio">
+  <channel id="canal5">
+    <display-name lang="es">Canal 5</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png"/>
+  </channel>
+  <channel id="lasestrellas">
+    <display-name lang="es">Las Estrellas</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Las_Estrellas_logo.svg/240px-Las_Estrellas_logo.svg.png"/>
+  </channel>
+  <channel id="cinelatino">
+    <display-name lang="es">Cine Latino</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Cine_Latino_logo.svg/240px-Cine_Latino_logo.svg.png"/>
+  </channel>
+  <channel id="meganoticias">
+    <display-name lang="es">Mega Noticias</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Meganoticias_logo.svg/240px-Meganoticias_logo.svg.png"/>
+  </channel>
+  <channel id="deportes247">
+    <display-name lang="es">Deportes 24/7</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Deportes_247_logo.svg/240px-Deportes_247_logo.svg.png"/>
+  </channel>
+  <channel id="canallocal">
+    <display-name lang="es">Canal Local</display-name>
+  </channel>
+  <programme start="20261103000000 +0000" stop="20261103040000 +0000" channel="canal5">
+    <title lang="es">Cine de Madrugada - Canal 5</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Madrugada). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Madrugada</category>
+  </programme>
+  <programme start="20261103040000 +0000" stop="20261103080000 +0000" channel="canal5">
+    <title lang="es">Primera Hora Informativa - Canal 5</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Matutino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Matutino</category>
+  </programme>
+  <programme start="20261103080000 +0000" stop="20261103120000 +0000" channel="canal5">
+    <title lang="es">Consultorio de la Salud - Canal 5</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Variedades). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Variedades</category>
+  </programme>
+  <programme start="20261103120000 +0000" stop="20261103160000 +0000" channel="canal5">
+    <title lang="es">Documental de la Tarde - Canal 5</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Tarde). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Tarde</category>
+  </programme>
+  <programme start="20261103160000 +0000" stop="20261103200000 +0000" channel="canal5">
+    <title lang="es">Deportes en Vivo - Canal 5</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Vespertino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Vespertino</category>
+  </programme>
+  <programme start="20261103200000 +0000" stop="20261104000000 +0000" channel="canal5">
+    <title lang="es">Pelicula de la Noche - Canal 5</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Estelar). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Estelar</category>
+  </programme>
+  <programme start="20261103000000 +0000" stop="20261103040000 +0000" channel="lasestrellas">
+    <title lang="es">Series de Medianoche - Las Estrellas</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Las Estrellas (Madrugada). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Madrugada</category>
+  </programme>
+  <programme start="20261103040000 +0000" stop="20261103080000 +0000" channel="lasestrellas">
+    <title lang="es">Noticiero Matutino - Las Estrellas</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Las Estrellas (Matutino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Matutino</category>
+  </programme>
+  <programme start="20261103080000 +0000" stop="20261103120000 +0000" channel="lasestrellas">
+    <title lang="es">Cocina y Hogar - Las Estrellas</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Las Estrellas (Variedades). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Variedades</category>
+  </programme>
+  <programme start="20261103120000 +0000" stop="20261103160000 +0000" channel="lasestrellas">
+    <title lang="es">Telenovela de la Tarde - Las Estrellas</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Las Estrellas (Tarde). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Tarde</category>
+  </programme>
+  <programme start="20261103160000 +0000" stop="20261103200000 +0000" channel="lasestrellas">
+    <title lang="es">Concurso de la Tarde - Las Estrellas</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Las Estrellas (Vespertino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Vespertino</category>
+  </programme>
+  <programme start="20261103200000 +0000" stop="20261104000000 +0000" channel="lasestrellas">
+    <title lang="es">Bloque Estelar Nocturno - Las Estrellas</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Las Estrellas (Estelar). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Estelar</category>
+  </programme>
+  <programme start="20261103000000 +0000" stop="20261103040000 +0000" channel="cinelatino">
+    <title lang="es">Noticiero de Madrugada - Cine Latino</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Cine Latino (Madrugada). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Madrugada</category>
+  </programme>
+  <programme start="20261103040000 +0000" stop="20261103080000 +0000" channel="cinelatino">
+    <title lang="es">Rutina de Ejercicio Matutino - Cine Latino</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Cine Latino (Matutino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Matutino</category>
+  </programme>
+  <programme start="20261103080000 +0000" stop="20261103120000 +0000" channel="cinelatino">
+    <title lang="es">Magazine Matutino - Cine Latino</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Cine Latino (Variedades). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Variedades</category>
+  </programme>
+  <programme start="20261103120000 +0000" stop="20261103160000 +0000" channel="cinelatino">
+    <title lang="es">Cine Familiar de la Tarde - Cine Latino</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Cine Latino (Tarde). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Tarde</category>
+  </programme>
+  <programme start="20261103160000 +0000" stop="20261103200000 +0000" channel="cinelatino">
+    <title lang="es">Serie de la Tarde - Cine Latino</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Cine Latino (Vespertino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Vespertino</category>
+  </programme>
+  <programme start="20261103200000 +0000" stop="20261104000000 +0000" channel="cinelatino">
+    <title lang="es">Noticiero de la Noche - Cine Latino</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Cine Latino (Estelar). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Estelar</category>
+  </programme>
+  <programme start="20261103000000 +0000" stop="20261103040000 +0000" channel="meganoticias">
+    <title lang="es">Cine de Madrugada - Mega Noticias</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Mega Noticias (Madrugada). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Madrugada</category>
+  </programme>
+  <programme start="20261103040000 +0000" stop="20261103080000 +0000" channel="meganoticias">
+    <title lang="es">Primera Hora Informativa - Mega Noticias</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Mega Noticias (Matutino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Matutino</category>
+  </programme>
+  <programme start="20261103080000 +0000" stop="20261103120000 +0000" channel="meganoticias">
+    <title lang="es">Consultorio de la Salud - Mega Noticias</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Mega Noticias (Variedades). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Variedades</category>
+  </programme>
+  <programme start="20261103120000 +0000" stop="20261103160000 +0000" channel="meganoticias">
+    <title lang="es">Documental de la Tarde - Mega Noticias</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Mega Noticias (Tarde). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Tarde</category>
+  </programme>
+  <programme start="20261103160000 +0000" stop="20261103200000 +0000" channel="meganoticias">
+    <title lang="es">Deportes en Vivo - Mega Noticias</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Mega Noticias (Vespertino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Vespertino</category>
+  </programme>
+  <programme start="20261103200000 +0000" stop="20261104000000 +0000" channel="meganoticias">
+    <title lang="es">Pelicula de la Noche - Mega Noticias</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Mega Noticias (Estelar). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Estelar</category>
+  </programme>
+  <programme start="20261103000000 +0000" stop="20261103040000 +0000" channel="deportes247">
+    <title lang="es">Series de Medianoche - Deportes 24/7</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Deportes 24/7 (Madrugada). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Madrugada</category>
+  </programme>
+  <programme start="20261103040000 +0000" stop="20261103080000 +0000" channel="deportes247">
+    <title lang="es">Noticiero Matutino - Deportes 24/7</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Deportes 24/7 (Matutino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Matutino</category>
+  </programme>
+  <programme start="20261103080000 +0000" stop="20261103120000 +0000" channel="deportes247">
+    <title lang="es">Cocina y Hogar - Deportes 24/7</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Deportes 24/7 (Variedades). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Variedades</category>
+  </programme>
+  <programme start="20261103120000 +0000" stop="20261103160000 +0000" channel="deportes247">
+    <title lang="es">Telenovela de la Tarde - Deportes 24/7</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Deportes 24/7 (Tarde). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Tarde</category>
+  </programme>
+  <programme start="20261103160000 +0000" stop="20261103200000 +0000" channel="deportes247">
+    <title lang="es">Concurso de la Tarde - Deportes 24/7</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Deportes 24/7 (Vespertino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Vespertino</category>
+  </programme>
+  <programme start="20261103200000 +0000" stop="20261104000000 +0000" channel="deportes247">
+    <title lang="es">Bloque Estelar Nocturno - Deportes 24/7</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Deportes 24/7 (Estelar). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Estelar</category>
+  </programme>
+  <programme start="20261103000000 +0000" stop="20261103040000 +0000" channel="canallocal">
+    <title lang="es">Noticiero de Madrugada - Canal Local</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal Local (Madrugada). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Madrugada</category>
+  </programme>
+  <programme start="20261103040000 +0000" stop="20261103080000 +0000" channel="canallocal">
+    <title lang="es">Rutina de Ejercicio Matutino - Canal Local</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal Local (Matutino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Matutino</category>
+  </programme>
+  <programme start="20261103080000 +0000" stop="20261103120000 +0000" channel="canallocal">
+    <title lang="es">Magazine Matutino - Canal Local</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal Local (Variedades). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Variedades</category>
+  </programme>
+  <programme start="20261103120000 +0000" stop="20261103160000 +0000" channel="canallocal">
+    <title lang="es">Cine Familiar de la Tarde - Canal Local</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal Local (Tarde). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Tarde</category>
+  </programme>
+  <programme start="20261103160000 +0000" stop="20261103200000 +0000" channel="canallocal">
+    <title lang="es">Serie de la Tarde - Canal Local</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal Local (Vespertino). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Vespertino</category>
+  </programme>
+  <programme start="20261103200000 +0000" stop="20261104000000 +0000" channel="canallocal">
+    <title lang="es">Noticiero de la Noche - Canal Local</title>
+    <desc lang="es">Bloque de programacion de 4 horas de Canal Local (Estelar). Contenido generico de referencia para mantener la guia activa en el reproductor IPTV.</desc>
+    <category lang="es">Estelar</category>
+  </programme>
+</tv>

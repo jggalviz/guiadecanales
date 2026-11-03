@@ -1,0 +1,36 @@
+{
+  // Configuraciones de depuracion para generar_epg.py (extension Python de VS Code)
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Generar EPG (demo, sin conexion)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/generar_epg.py",
+      "args": ["--demo"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Generar EPG (URL de la variable M3U_URL)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/generar_epg.py",
+      "args": ["--url", "${env:M3U_URL}", "--salida", "epg.xml"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pruebas unitarias",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "unittest",
+      "args": ["discover", "-s", "tests", "-v"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
