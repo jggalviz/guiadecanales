@@ -329,7 +329,7 @@ http://ejemplo.invalid/canallocal/index.m3u8
 MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
     "Canal5.mx": {
         "nombre": "Canal 5",
-        "alias": ("Canal 5", "Canal5", "Canal 5 Nacional"),
+        "alias": ("Canal 5", "Canal5", "Canal 5 Nacional", "Canal 5 México"),
     },
     "LasEstrellas.mx": {
         "nombre": "Las Estrellas",
@@ -338,15 +338,16 @@ MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
             "Las Estrellas Nacional",
             "Las Estrellas Nacional v1",
             "Las Estrellas Nacional V2",
+            "Las Estrellas México",
         ),
     },
     "Azteca7.mx": {
         "nombre": "Azteca 7",
-        "alias": ("Azteca 7", "Azteca Siete", "Azteca 7 Nacional"),
+        "alias": ("Azteca 7", "Azteca Siete", "Azteca 7 Nacional", "Azteca 7 México"),
     },
     "AztecaUno.mx": {
         "nombre": "Azteca Uno",
-        "alias": ("Azteca Uno", "Azteca 1", "Azteca Uno Nacional"),
+        "alias": ("Azteca Uno", "Azteca 1", "Azteca Uno Nacional", "Azteca Uno México"),
     },
     "ESPN.us": {
         "nombre": "ESPN",

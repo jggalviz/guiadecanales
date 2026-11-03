@@ -1142,6 +1142,10 @@ M3U_CALIFICADORES = "\n".join(
         "http://ejemplo.invalid/a7-regional/index.m3u8",
         '#EXTINF:-1 group-title="México",Azteca Uno Nacional v3',
         "http://ejemplo.invalid/a1-v3/index.m3u8",
+        '#EXTINF:-1 group-title="México",Azteca 7 México HD',
+        "http://ejemplo.invalid/a7-mx/index.m3u8",
+        '#EXTINF:-1 group-title="Chile",Canal 5 Chile HD',
+        "http://ejemplo.invalid/c5-cl/index.m3u8",
         '#EXTINF:-1 group-title="México",Canal 5 Del Pueblo Alcorta',
         "http://ejemplo.invalid/c5-pueblo/index.m3u8",
         "",
@@ -1178,6 +1182,9 @@ class MapeoConCalificadoresTests(unittest.TestCase):
         # "Canal 5 Del Pueblo Alcorta" es otro canal: conserva su id propio.
         self.assertIn("canal5delpuebloalcorta", self.canales)
         self.assertFalse(self.canales["canal5delpuebloalcorta"]["mapeado"])
+        # "Canal 5 Chile" es otro canal de otro pais: no se convierte en Canal5.mx.
+        self.assertIn("canal5chile", self.canales)
+        self.assertFalse(self.canales["canal5chile"]["mapeado"])
 
 
 if __name__ == "__main__":
