@@ -36,13 +36,27 @@ jobs:
       - name: Ejecutar pruebas unitarias
         run: python -m unittest discover -s tests -v
 
+      - name: Comprobar que el secreto M3U_URL esta configurado
+        id: comprobar
+        env:
+          M3U_URL: ${{ secrets.M3U_URL }}
+        run: |
+          if [ -z "$M3U_URL" ]; then
+            echo "::warning::El secreto M3U_URL no esta configurado. Se omite la generacion de la EPG."
+            echo "configurado=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configurado=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Generar epg.xml desde la lista M3U
+        if: steps.comprobar.outputs.configurado == 'true'
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
           EPG_REPO_URL: ${{ vars.EPG_REPO_URL || github.server_url }}
         run: python generar_epg.py --salida epg.xml
 
       - name: Verificar que el XMLTV es valido
+        if: steps.comprobar.outputs.configurado == 'true'
         run: |
           python - <<'PY'
           from xml.etree import ElementTree as ET
@@ -55,6 +69,7 @@ jobs:
           PY
 
       - name: Commit y push de epg.xml
+        if: steps.comprobar.outputs.configurado == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
