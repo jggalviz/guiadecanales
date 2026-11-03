@@ -204,11 +204,39 @@ PLANTILLA_EPG_PAIS = os.environ.get(
 
 #: Paises cuyas guias reales se descargan cuando no se indica otra fuente.
 #: Se pueden cambiar con ``--epg-pais`` o con la variable ``EPG_PAISES``.
+#: Orden pensado para que ganen las guias mas especificas (Latinoamerica y
+#: Espana) y quede al final la guia de EE. UU., que es la mas generica.
 PAISES_EPG_POR_DEFECTO = tuple(
     codigo.strip().upper()
     for codigo in os.environ.get("EPG_PAISES", "").split(",")
     if codigo.strip()
-) or ("MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO", "SV")
+) or (
+    "MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO", "SV",
+    "PT", "IT", "FR", "DE", "US",
+)
+
+#: Guias por pais que no siguen :data:`PLANTILLA_EPG_PAIS`.
+#: ``US`` no existe en epgshare01 (devuelve 404), asi que se usa la guia
+#: publica de Estados Unidos de epg.pw; asi ``--epg-pais ...,US`` funciona.
+GUIAS_EPG_POR_PAIS = {
+    "US": os.environ.get("EPG_URL_US", "https://epg.pw/xmltv/epg_US.xml"),
+}
+
+#: Fuentes extra que se suman a las guias por pais (no cuando se indica
+#: ``--epg``/``--epg-archivo``/``EPG_URL``). Son los canales FAST de EE. UU.
+#: (Pluto TV, Samsung TV Plus y Roku) que muchas listas M3U incluyen.
+#: Se pueden cambiar con ``EPG_URLS_EXTRA`` (vacio las desactiva) o con
+#: ``--sin-extras``.
+FUENTES_EPG_EXTRA_POR_DEFECTO = tuple(
+    parte.strip()
+    for parte in os.environ.get(
+        "EPG_URLS_EXTRA",
+        "https://i.mjh.nz/PlutoTV/all.xml.gz,"
+        "https://i.mjh.nz/SamsungTVPlus/us.xml.gz,"
+        "https://i.mjh.nz/Roku/all.xml.gz",
+    ).split(",")
+    if parte.strip()
+)
 
 #: Fuentes EPG adicionales indicadas por entorno (URL o ruta local, separadas
 #: por comas). Si esta vacia se usan las guias por pais de arriba.
@@ -226,8 +254,9 @@ def _entero_entorno(nombre: str, defecto: int) -> int:
 #: Horas de programacion real que se conservan desde el inicio de la guia.
 HORAS_GUIA_REAL = _entero_entorno("EPG_HORAS", 72)
 
-#: Tamano maximo (ya descomprimido) que se acepta de una guia externa.
-MAX_BYTES_EPG = 160 * 1024 * 1024
+#: Tamano maximo (ya descomprimido) que se acepta de una guia externa. La guia
+#: de EE. UU. (epg.pw) ronda los 160 MB sin comprimir, por eso el limite es alto.
+MAX_BYTES_EPG = 200 * 1024 * 1024
 
 #: Puntaje minimo (0 a 1) para aceptar un emparejamiento por nombre.
 #: 1.0 = nombres identicos; 0.75 admite como maximo un cuarto de tokens extra
@@ -906,7 +935,8 @@ def urls_epg_por_defecto(paises: "Sequence[str] | None" = None) -> list[str]:
     """Devuelve las URLs de las guias XMLTV publicas de los paises indicados.
 
     Sin argumentos usa :data:`PAISES_EPG_POR_DEFECTO`. La plantilla se puede
-    cambiar con la variable de entorno ``EPG_URL_PLANTILLA``.
+    cambiar con la variable de entorno ``EPG_URL_PLANTILLA``. Los paises de
+    :data:`GUIAS_EPG_POR_PAIS` (``US``) tienen su propia URL.
     """
     codigos = paises if paises else PAISES_EPG_POR_DEFECTO
     urls: list[str] = []
@@ -914,7 +944,7 @@ def urls_epg_por_defecto(paises: "Sequence[str] | None" = None) -> list[str]:
         codigo = (codigo or "").strip().upper()
         if not codigo:
             continue
-        url = PLANTILLA_EPG_PAIS.replace("{pais}", codigo)
+        url = GUIAS_EPG_POR_PAIS.get(codigo) or PLANTILLA_EPG_PAIS.replace("{pais}", codigo)
         if url not in urls:
             urls.append(url)
     return urls
@@ -972,7 +1002,15 @@ def descargar_epg(
             with urllib.request.urlopen(peticion, timeout=timeout) as respuesta:
                 datos = respuesta.read()
             return _texto_epg(datos)
-        except (urllib.error.HTTPError, urllib.error.URLError, OSError, ValueError) as error:
+        except urllib.error.HTTPError as error:
+            ultimo_error = error
+            # Un 4xx (salvo 429) es un error permanente: reintentar solo hace
+            # perder tiempo (por ejemplo un pais sin guia publicada).
+            if error.code != 429 and 400 <= error.code < 500:
+                break
+            if intento < reintentos:
+                time.sleep(1.5 * intento)
+        except (urllib.error.URLError, OSError, ValueError) as error:
             ultimo_error = error
             if intento < reintentos:
                 time.sleep(1.5 * intento)
@@ -1736,6 +1774,8 @@ def _crear_parser() -> argparse.ArgumentParser:
             "  python generar_epg.py --url https://raw.githubusercontent.com/USUARIO/REPO/main/lista.m3u\n"
             "  python generar_epg.py -u \"$M3U_URL\" -s epg.xml\n"
             "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX,ES,AR    # guias reales por pais\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX,ES,US   # incluye la guia de EE. UU.\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX --sin-extras  # solo la de MX\n"
             "  python generar_epg.py -u \"$M3U_URL\" --epg https://ejemplo.com/guia.xml.gz\n"
             "  python generar_epg.py -u \"$M3U_URL\" --epg-archivo guia.xml --horas-ventana 48\n"
             "  python generar_epg.py -u \"$M3U_URL\" --sin-epg --relleno     # parrilla generica\n"
@@ -1793,6 +1833,14 @@ def _crear_parser() -> argparse.ArgumentParser:
         "--sin-epg",
         action="store_true",
         help="No usar ninguna guia real: genera solo la parrilla generica de 24 h.",
+    )
+    parser.add_argument(
+        "--sin-extras",
+        action="store_true",
+        help=(
+            "No descargar las guias extra que se suman a las de --epg-pais "
+            "(Pluto TV, Samsung TV Plus y Roku; variable EPG_URLS_EXTRA)."
+        ),
     )
     parser.add_argument(
         "--horas-ventana",
@@ -1863,6 +1911,11 @@ def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
 
     Prioridad: ``--epg`` y ``--epg-archivo`` (en ese orden) > ``--epg-pais`` >
     variable de entorno ``EPG_URL`` > guias publicas por pais por defecto.
+
+    Cuando las fuentes salen de codigos de pais se anaden al final las guias
+    extra de :data:`FUENTES_EPG_EXTRA_POR_DEFECTO` (Pluto TV, Samsung TV Plus y
+    Roku) salvo que se use ``--sin-extras``. Si se indica una fuente concreta
+    (``--epg``, ``--epg-archivo`` o ``EPG_URL``) solo se usa esa.
     """
     fuentes: list[str] = []
     for valor in argumentos.epg or []:
@@ -1876,11 +1929,19 @@ def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
             fuentes.append(ruta)
     if fuentes:
         return fuentes
+
     if argumentos.epg_pais is not None:
-        return urls_epg_por_defecto(argumentos.epg_pais.split(","))
-    if URL_EPG:
+        fuentes = urls_epg_por_defecto(argumentos.epg_pais.split(","))
+    elif URL_EPG:
         return [parte.strip() for parte in URL_EPG.split(",") if parte.strip()]
-    return urls_epg_por_defecto()
+    else:
+        fuentes = urls_epg_por_defecto()
+
+    if not getattr(argumentos, "sin_extras", False):
+        for extra in FUENTES_EPG_EXTRA_POR_DEFECTO:
+            if extra not in fuentes:
+                fuentes.append(extra)
+    return fuentes
 
 
 def main(argv: list[str] | None = None) -> int:

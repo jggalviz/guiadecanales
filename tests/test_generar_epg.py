@@ -18,6 +18,7 @@ import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from unittest import mock
 from xml.etree import ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -744,6 +745,73 @@ class GuiaDeEjemploTests(unittest.TestCase):
         self.assertIn("MX", urls[0])
         self.assertIn("ES", urls[1])
         self.assertNotIn("{pais}", urls[0])
+
+
+class FuentesEpgPorDefectoTests(unittest.TestCase):
+    """Cobertura amplia: guias por pais, guia de EE. UU. y guias FAST extra."""
+
+    def test_los_paises_por_defecto_cubren_america_y_europa(self) -> None:
+        paises = generar_epg.PAISES_EPG_POR_DEFECTO
+        for codigo in ("MX", "ES", "AR", "CO", "CL", "PE", "PT", "IT", "FR", "DE", "US"):
+            with self.subTest(codigo=codigo):
+                self.assertIn(codigo, paises)
+        # La guia mas generica (EE. UU.) va al final para no robar canales.
+        self.assertEqual(paises[-1], "US")
+
+    def test_el_pais_us_usa_la_guia_de_epg_pw(self) -> None:
+        # epgshare01 no publica guia de EE. UU. (devuelve 404).
+        urls = generar_epg.urls_epg_por_defecto(["us"])
+        self.assertEqual(urls, ["https://epg.pw/xmltv/epg_US.xml"])
+
+    def test_mezcla_de_paises_mantiene_el_orden(self) -> None:
+        urls = generar_epg.urls_epg_por_defecto(["MX", "US"])
+        self.assertIn("epg_ripper_MX1.xml.gz", urls[0])
+        self.assertEqual(urls[1], "https://epg.pw/xmltv/epg_US.xml")
+
+    def test_las_guias_extra_se_suman_a_los_paises(self) -> None:
+        argumentos = generar_epg._crear_parser().parse_args(["--epg-pais", "MX"])
+        fuentes = generar_epg._fuentes_epg_desde_argumentos(argumentos)
+        self.assertIn("epg_ripper_MX1.xml.gz", fuentes[0])
+        self.assertEqual(len(fuentes), 1 + len(generar_epg.FUENTES_EPG_EXTRA_POR_DEFECTO))
+        for extra in generar_epg.FUENTES_EPG_EXTRA_POR_DEFECTO:
+            self.assertIn(extra, fuentes)
+
+    def test_sin_extras_deja_solo_las_guias_de_pais(self) -> None:
+        argumentos = generar_epg._crear_parser().parse_args(
+            ["--epg-pais", "MX,US", "--sin-extras"]
+        )
+        fuentes = generar_epg._fuentes_epg_desde_argumentos(argumentos)
+        self.assertEqual(
+            fuentes,
+            [
+                "https://epgshare01.online/epgshare01/epg_ripper_MX1.xml.gz",
+                "https://epg.pw/xmltv/epg_US.xml",
+            ],
+        )
+
+    def test_una_fuente_explicita_no_lleva_extras(self) -> None:
+        argumentos = generar_epg._crear_parser().parse_args(
+            ["--epg", "https://ejemplo.invalid/guia1.xml,https://ejemplo.invalid/guia2.xml"]
+        )
+        fuentes = generar_epg._fuentes_epg_desde_argumentos(argumentos)
+        self.assertEqual(
+            fuentes,
+            ["https://ejemplo.invalid/guia1.xml", "https://ejemplo.invalid/guia2.xml"],
+        )
+
+    def test_un_404_no_se_reintenta(self) -> None:
+        llamadas = []
+
+        def urlopen_falso(peticion, timeout=None):
+            llamadas.append(peticion.full_url)
+            raise generar_epg.urllib.error.HTTPError(
+                peticion.full_url, 404, "Not Found", {}, None
+            )
+
+        with mock.patch("urllib.request.urlopen", side_effect=urlopen_falso):
+            with self.assertRaises(RuntimeError):
+                generar_epg.descargar_epg("https://ejemplo.invalid/epg_XX1.xml.gz", reintentos=3)
+        self.assertEqual(len(llamadas), 1)
 
 
 if __name__ == "__main__":
