@@ -910,6 +910,14 @@ _RE_TOKEN_NOMBRE = re.compile(r"[a-z0-9]+")
 #: Chichicasteca)"/... de la lista. Se unifica a ``canalplus`` antes de tokenizar.
 _RE_MARCA_CANAL_PLUS = re.compile(r"canal\s*(?:\+|plus)", re.IGNORECASE)
 
+#: Nombres genericos de la guia francesa: Telerama publica canales sueltos
+#: llamados "Canal 11", "Canal 21" o "Canal 32" que solo emiten el bucle de
+#: Canal+ (titulos "Rediffusion en boucle"). Sin este filtro le roban la
+#: programacion a canales como "CANAL 32 (Television Chichicasteca)". Solo se
+#: aplica a la guia de Francia para no tocar los "Canal NN" reales de otros
+#: paises ("Canal 7 de Mexico", "Canal 9" de Panama...).
+_RE_GUIA_GENERICA_FR = re.compile(r"canal\s*\d+\s*$", re.IGNORECASE)
+
 #: Marcas de calidad que, solas, no identifican ningun canal ("Canal HD").
 _TOKENS_CALIDAD = frozenset({"hd", "fhd", "uhd", "qhd", "sd", "4k", "8k", "hdr", "hevc"})
 
@@ -1216,6 +1224,24 @@ def _mejor_coincidencia(
     return mejor
 
 
+def _es_canal_generico_frances(
+    id_fuente: str, nombres: "Sequence[str]"
+) -> bool:
+    """Indica si un canal de la guia es un ``Canal NN`` generico de Francia.
+
+    La guia francesa de Telerama incluye canales sueltos llamados "Canal 11",
+    "Canal 21" o "Canal 32" que solo repiten el bucle de Canal+; si no se
+    descartan le roban la programacion a canales como "Canal 32 (Television
+    Chichicasteca)". Se limita a Francia: en otros paises "Canal 9" (TVMax de
+    Panama) o "Canal 7" si son canales de verdad.
+    """
+    if _pais_de_fuente(id_fuente, nombres) != "fr":
+        return False
+    return any(
+        _RE_GUIA_GENERICA_FR.match((nombre or "").strip()) for nombre in nombres
+    )
+
+
 def emparejar_canales(
     canales: "Sequence[Mapping[str, str]]",
     canales_fuente: "Mapping[str, Sequence[str]]",
@@ -1242,6 +1268,8 @@ def emparejar_canales(
     palabras_fuente: dict[str, int] = {}
 
     for id_fuente, nombres in canales_fuente.items():
+        if _es_canal_generico_frances(id_fuente, nombres):
+            continue
         indice_id.setdefault(id_fuente.lower(), id_fuente)
         indice_id.setdefault(_clave_id(id_fuente), id_fuente)
         variantes[id_fuente] = _variantes_tokens(id_fuente, *nombres)

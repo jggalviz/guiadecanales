@@ -632,6 +632,33 @@ class EmparejamientoDeCanalesTests(unittest.TestCase):
             generar_epg.emparejar_canales(canales, fuente), {"canal12": "Canal.12.uy"}
         )
 
+    def test_los_canal_nn_genericos_de_francia_no_roban_canales(self) -> None:
+        # La guia francesa publica "Canal 32" como bucle de Canal+: no puede
+        # quedarse con la programacion de un canal 32 latinoamericano.
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                "\n".join(
+                    [
+                        "#EXTM3U",
+                        '#EXTINF:-1 tvg-name="CANAL 32 (TELEVISION CHICHICASTECA)",'
+                        "CANAL 32 TELEVISION CHICHICASTECA",
+                        "http://ejemplo.invalid/canal32/index.m3u8",
+                        '#EXTINF:-1 tvg-name="Canal 9",Canal 9 HD',
+                        "http://ejemplo.invalid/canal9/index.m3u8",
+                        "",
+                    ]
+                )
+            )
+        )
+        fuente = {
+            "Canal.32.fr": ["Canal 32"],
+            "Canal.9.pa": ["Canal 9"],
+        }
+        # El "Canal 9" de Panama si es un canal real: se empareja.
+        self.assertEqual(
+            generar_epg.emparejar_canales(canales, fuente), {"canal9": "Canal.9.pa"}
+        )
+
     def test_codigos_de_pais_y_barras_no_confunden(self) -> None:
         canales = generar_epg.consolidar_canales(
             generar_epg.parsear_m3u(

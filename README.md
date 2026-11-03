@@ -222,6 +222,12 @@ que la guía no repite (`Nacional`, `Geo-Blocked`, `No 24/7`, `Regional`,
 legítimos (`Las Estrellas Nacional v1`, `UFC EE.UU`, `Teleantioquia Antioquia /
 Regional`…), así que se prefiere el par de falsos positivos.
 
+Por el lado de la guía, se descartan los `Canal NN` **genéricos de Francia**
+(`Canal 11`, `Canal 21`, `Canal 32` de Telerama emiten el bucle de Canal+), que
+si no le roban la programación a `CANAL 32 (Televisión Chichicasteca)`. El
+filtro solo se aplica a la guía `FR`, para no tocar los `Canal NN` reales de
+otros países (`Canal 7 de México`, `Canal 9` de Panamá = TVMax).
+
 Además, **un canal de la guía no se reutiliza** para dos canales del M3U y la
 asignación se resuelve **por puntaje global**: primero se emparejan los nombres
 idénticos y después los parecidos, así que un nombre exacto nunca pierde su
