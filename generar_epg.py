@@ -16,6 +16,9 @@ Caracteristicas
 * Solo librerias estandar de Python (3.9+): urllib.request, re,
   xml.etree.ElementTree, datetime, argparse, unicodedata, html.
 * Descarga con User-Agent de navegador, reintentos y deteccion de codificacion.
+* Saneado de mojibake al leer la lista: ``MÚxico`` -> ``México``, ``Espa±a`` ->
+  ``España``, ``Panamß`` -> ``Panamá`` y ``MÃ©xico`` -> ``México`` (ver
+  :func:`sanear_codificacion`), sin alterar los nombres correctos.
 * El ``tvg-id`` del M3U tiene prioridad como ``<channel id="...">`` (es lo que
   compara el reproductor). Se descarta el sufijo ``@calidad/feed`` para agrupar
   las variantes de un mismo canal; ``--conservar-tvg-id`` lo respeta literal.
@@ -197,6 +200,119 @@ def _decodificar(datos: bytes) -> str:
     return datos.decode("utf-8", errors="replace")
 
 
+# --- Saneado de codificacion (mojibake) ------------------------------------
+#
+# Muchas listas IPTV se generan en cp1252/latin-1 y en algun punto se leen como
+# cp850/cp437, dejando los acentos convertidos en simbolos: "México" aparece
+# como "MÚxico", "España" como "Espa±a", "Panamá" como "Panamß", "Visión" como
+# "Visi¾n", "Cúcuta" como "C·cuta" o "Amazonía" como "AmazonÝa". Tambien es
+# habitual el doble codificado de UTF-8 visto como cp1252 ("MÃ©xico").
+# Como esas secuencias son reversibles, se detectan y se reparan al leer la
+# lista, justo antes de limpiar los nombres.
+
+#: Caracteres que nunca aparecen en un nombre de canal bien codificado: son el
+#: resultado de leer bytes cp1252 como cp850 (ß<-á, ±<-ñ, ·<-ú, ¾<-ó, Ý<-í...).
+#: No incluye "°" ni "ª"/"º" porque son legitimos ("90° TV", "1º Canal").
+_MOJIBAKE_SIEMPRE = frozenset(
+    "ßµþÞ¯´≡±‗¾¶§÷¸¨·¹³²■¤⌐"
+    "░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐"
+)
+
+#: Mayusculas acentuadas que en espanol solo son validas al inicio de palabra:
+#: "MÚxico" o "AmazonÝa" las delatan, mientras "Único TV" o "Última Hora" no.
+_MOJIBAKE_MAYUSCULA = frozenset("ÓÚÛÙÝÃÅÇ")
+
+#: UTF-8 leido como cp1252: "MÃ©xico", "EspaÃ±a", "â€“", "Â¿".
+_RE_MOJIBAKE_UTF8 = re.compile(
+    r"Ã[\u0080-\u00bf]|Â[\u0080-\u00bf]"
+    r"|â€[\u0080-\u00bf\u2013\u2014\u2018\u2019\u201c\u201d\u20ac\u2122]"
+)
+
+#: Palabras de la lista (se sanean una a una para no perder el resto de linea).
+_RE_PALABRA = re.compile(r"\S+")
+
+
+def _tiene_mojibake_cp850(palabra: str) -> bool:
+    """Indica si la palabra parece cp1252 leido como cp850."""
+    if any(caracter in _MOJIBAKE_SIEMPRE for caracter in palabra):
+        return True
+    # Una palabra escrita toda en mayusculas puede contener "Ú" legitima
+    # ("PERÚ"), asi que esa pista solo se usa en texto con minusculas.
+    if palabra.isupper():
+        return False
+    return any(
+        caracter in _MOJIBAKE_MAYUSCULA and indice > 0
+        for indice, caracter in enumerate(palabra)
+    )
+
+
+def _reparar_utf8(palabra: str) -> str:
+    """Revierte el UTF-8 leido como cp1252/latin-1 (``MÃ©xico`` -> ``México``)."""
+    for codificacion in ("cp1252", "latin-1"):
+        try:
+            return palabra.encode(codificacion).decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            continue
+    return palabra
+
+
+def _reparar_cp850(palabra: str) -> str:
+    """Revierte el cp1252 leido como cp850 (``MÚxico`` -> ``México``)."""
+    try:
+        return palabra.encode("cp850").decode("cp1252")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return palabra
+
+
+def _sanear_palabra(palabra: str) -> str:
+    """Intenta reparar una sola palabra, validando que el resultado mejora."""
+    # Los separadores y simbolos sueltos ("·", "|", "¾") no se tocan: un "·"
+    # legitimo como separador jamas debe convertirse en "ú".
+    if not any(caracter.isalnum() for caracter in palabra):
+        return palabra
+
+    if _RE_MOJIBAKE_UTF8.search(palabra):
+        candidato = _reparar_utf8(palabra)
+        if candidato != palabra and not _RE_MOJIBAKE_UTF8.search(candidato):
+            palabra = candidato
+
+    if _tiene_mojibake_cp850(palabra):
+        candidato = _reparar_cp850(palabra)
+        if candidato != palabra and not _tiene_mojibake_cp850(candidato):
+            palabra = candidato
+
+    return palabra
+
+
+def sanear_codificacion(texto: str) -> str:
+    """Corrige el mojibake habitual de las listas M3U antes de analizarlas.
+
+    Repara los dos casos mas frecuentes sin tocar el texto que ya esta bien:
+
+    * ``cp1252`` leido como ``cp850``/``cp437`` (el mas comun en listas IPTV
+      generadas en Windows)::
+
+          "Azteca 7 MÚxico"      -> "Azteca 7 México"
+          "Anime Visi¾n Espa±a"  -> "Anime Visión España"
+          "Hispania TV Panamß"   -> "Hispania TV Panamá"
+          "NSTV C·cuta"          -> "NSTV Cúcuta"
+
+    * UTF-8 leido como ``cp1252`` (doble codificado)::
+
+          "Azteca 7 MÃ©xico"     -> "Azteca 7 México"
+          "PanamÃ¡ TV"           -> "Panamá TV"
+
+    La funcion es idempotente y conserva los acentos correctos, las mayusculas
+    iniciales ("Único TV", "Última Hora") y los simbolos legitimos ("90° TV").
+    Si una palabra no se puede reparar con seguridad, se deja tal cual.
+    """
+    if not texto:
+        return texto
+    return _RE_PALABRA.sub(
+        lambda coincidencia: _sanear_palabra(coincidencia.group(0)), texto
+    )
+
+
 def descargar_m3u(
     url: str,
     timeout: int = TIMEOUT_SEGUNDOS,
@@ -281,7 +397,12 @@ def parsear_m3u(texto: str) -> list[dict[str, str]]:
     Devuelve una lista de diccionarios con las claves ``nombre``, ``logo``,
     ``grupo``, ``tvg_id`` y ``url``. Se ignoran los comentarios (#EXTM3U,
     #EXTVLCOPT, #EXTGRP...) y las lineas sin ``#EXTINF`` previo.
+
+    Antes de analizar el texto se aplica :func:`sanear_codificacion`, de modo
+    que los nombres con mojibake (``MÚxico``, ``Espa±a``, ``Panamß``,
+    ``MÃ©xico``...) lleguen corregidos al resto del proceso.
     """
+    texto = sanear_codificacion(texto)
     canales: list[dict[str, str]] = []
     pendiente: str | None = None
 

@@ -24,6 +24,117 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import generar_epg  # noqa: E402  (import tras ajustar sys.path)
 
 
+class SaneadoDeCodificacionTests(unittest.TestCase):
+    """Comprueba el filtro de mojibake aplicado al leer la lista M3U."""
+
+    def test_corrige_cp1252_leido_como_cp850(self) -> None:
+        casos = {
+            "Azteca 7 MÚxico": "Azteca 7 México",
+            "Anime Visi¾n Espa±a": "Anime Visión España",
+            "Hispania TV Panamß": "Hispania TV Panamá",
+            "Pantalla Clßsica No 24/7": "Pantalla Clásica No 24/7",
+            "NSTV C·cuta": "NSTV Cúcuta",
+            "Canal Trece AmazonÝa": "Canal Trece Amazonía",
+            "M·sica Total": "Música Total",
+        }
+        for roto, esperado in casos.items():
+            with self.subTest(roto=roto):
+                self.assertEqual(generar_epg.sanear_codificacion(roto), esperado)
+
+    def test_corrige_utf8_leido_como_cp1252(self) -> None:
+        casos = {
+            "Azteca 7 MÃ©xico": "Azteca 7 México",
+            "Anime VisiÃ³n EspaÃ±a": "Anime Visión España",
+            "PanamÃ¡ TV": "Panamá TV",
+            "SeÃ±al 2": "Señal 2",
+        }
+        for roto, esperado in casos.items():
+            with self.subTest(roto=roto):
+                self.assertEqual(generar_epg.sanear_codificacion(roto), esperado)
+
+    def test_no_toca_el_texto_bien_codificado(self) -> None:
+        casos = (
+            "Azteca 7 México",
+            "Anime Visión España",
+            "Panamá TV",
+            "NSTV Cúcuta",
+            "Fútbol Total",
+            "Perú TV",
+            # Mayusculas acentuadas legitimas (solo al inicio de palabra).
+            "Único TV",
+            "Última Hora",
+            # Simbolos legitimos.
+            "90° TV",
+            "1º Canal",
+            # Nombres ya procesados por el limpiador.
+            "Canal 5",
+            "ESPN 2",
+            "Cine Latino",
+        )
+        for texto in casos:
+            with self.subTest(texto=texto):
+                self.assertEqual(generar_epg.sanear_codificacion(texto), texto)
+
+    def test_es_idempotente(self) -> None:
+        textos = ("Azteca 7 MÚxico", "MÃ©xico TV", "Canal 5 HD [LAT]", "Espa±a Total")
+        for texto in textos:
+            with self.subTest(texto=texto):
+                una_vez = generar_epg.sanear_codificacion(texto)
+                self.assertEqual(generar_epg.sanear_codificacion(una_vez), una_vez)
+
+    def test_conserva_texto_vacio(self) -> None:
+        self.assertEqual(generar_epg.sanear_codificacion(""), "")
+
+    def test_se_aplica_al_leer_la_lista(self) -> None:
+        m3u = "\n".join(
+            [
+                "#EXTM3U",
+                '#EXTINF:-1 tvg-name="Azteca 7 MÚxico" group-title="MÚxico",Azteca 7 MÚxico HD',
+                "http://ejemplo.invalid/azteca7/index.m3u8",
+                '#EXTINF:-1 group-title="Cine",Cine Espa±a FHD',
+                "http://ejemplo.invalid/cine-espana/index.m3u8",
+                "",
+            ]
+        )
+        canales = generar_epg.parsear_m3u(m3u)
+        self.assertEqual([canal["nombre"] for canal in canales], ["Azteca 7 México HD", "Cine España FHD"])
+        self.assertEqual(canales[0]["tvg_name"], "Azteca 7 México")
+        self.assertEqual(canales[0]["grupo"], "México")
+
+    def test_nombres_corregidos_generan_ids_esperados(self) -> None:
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                "\n".join(
+                    [
+                        "#EXTM3U",
+                        "#EXTINF:-1,Azteca 7 MÚxico HD",
+                        "http://ejemplo.invalid/azteca7/index.m3u8",
+                        "#EXTINF:-1,Azteca 7 MÃ©xico SD",
+                        "http://ejemplo.invalid/azteca7-sd/index.m3u8",
+                        "#EXTINF:-1,Cine Espa±a FHD",
+                        "http://ejemplo.invalid/cine-espana/index.m3u8",
+                        "#EXTINF:-1,Cine EspaÃ±a SD",
+                        "http://ejemplo.invalid/cine-espana-sd/index.m3u8",
+                        "",
+                    ]
+                )
+            )
+        )
+        identificadores = {canal["id"]: canal["nombre"] for canal in canales}
+        # Las dos variantes rotas ("MÚxico" y "MÃ©xico") acaban en el mismo canal.
+        self.assertEqual(len(canales), 2)
+        self.assertEqual(identificadores["azteca7"], "Azteca 7")
+        self.assertEqual(identificadores["cineespana"], "Cine España")
+
+    def test_nombre_corregido_pierde_el_pais_redundante(self) -> None:
+        # Antes del saneado, "MÚxico" no se reconocia como pais y se quedaba.
+        sin_sanear = generar_epg.limpiar_nombre("Azteca 7 MÚxico")
+        saneado = generar_epg.limpiar_nombre(generar_epg.sanear_codificacion("Azteca 7 MÚxico"))
+        self.assertEqual(sin_sanear, "Azteca 7 MÚxico")
+        self.assertEqual(saneado, "Azteca 7")
+        self.assertEqual(generar_epg.limpiar_nombre("Azteca 7 México"), "Azteca 7")
+
+
 class LimpiezaDeNombresTests(unittest.TestCase):
     """Comprueba la unificacion de nombres duplicados."""
 

@@ -12,7 +12,8 @@ lista.m3u  ──►  generar_epg.py  ──►  epg.xml (XMLTV)
 ## Características
 
 - ✅ Descarga la lista M3U desde una URL (`urllib.request`) con User-Agent de
-  navegador, reintentos y detección automática de codificación.
+  navegador, reintentos, detección automática de codificación y **saneado de
+  mojibake** (`MÚxico` → `México`, `Espa±a` → `España`, `MÃ©xico` → `México`).
 - ✅ Extrae de cada `#EXTINF` el **nombre del canal** (texto posterior a la
   última coma), los atributos **`tvg-logo`**, **`tvg-id`** y **`tvg-name`**.
 - ✅ **Prioriza el `tvg-id` de la lista** como `id` del `<channel>` (es lo que
@@ -30,7 +31,7 @@ lista.m3u  ──►  generar_epg.py  ──►  epg.xml (XMLTV)
   limpia de 2 espacios.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **22 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **30 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -129,6 +130,40 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
    `lang="es"`), el `tvg-name` del M3U y el nombre original de la entrada
    (`ESPN 2 HD [LAT]`), para que el emparejamiento por nombre también funcione.
 
+## Saneado de codificación (mojibake)
+
+Muchas listas IPTV se generan en `cp1252`/`latin-1` y en algún punto se leen
+como `cp850`/`cp437`, de modo que los acentos se convierten en símbolos. Antes
+de analizar el M3U, `parsear_m3u()` aplica `sanear_codificacion()`, que repara
+esos textos de forma reversible y **sin tocar los nombres que ya están bien**:
+
+| Nombre en el M3U (roto) | Nombre corregido | Tipo de mojibake |
+| --- | --- | --- |
+| `Azteca 7 MÚxico` | `Azteca 7 México` | `cp1252` leído como `cp850` (`é` → `Ú`) |
+| `Anime Visi¾n Espa±a` | `Anime Visión España` | `ñ` → `±`, `ó` → `¾` |
+| `Hispania TV Panamß` | `Hispania TV Panamá` | `á` → `ß` |
+| `NSTV C·cuta` | `NSTV Cúcuta` | `ú` → `·` |
+| `Canal Trece AmazonÝa` | `Canal Trece Amazonía` | `í` → `Ý` |
+| `Azteca 7 MÃ©xico` | `Azteca 7 México` | UTF-8 leído como `cp1252` |
+| `PanamÃ¡ TV` | `Panamá TV` | UTF-8 leído como `cp1252` |
+
+Reglas de seguridad para no estropear nombres correctos:
+
+- Solo se intenta reparar cuando aparece un carácter imposible en un nombre bien
+  codificado (`ß`, `±`, `·`, `¾`, `Ý`, recuadros `░▒▓│`…) o una secuencia de
+  doble codificado (`Ã©`, `Ã±`, `â€“`).
+- La reparación se valida palabra por palabra: si el resultado sigue teniendo
+  señales de mojibake, se descarta y se deja el texto original.
+- Se respetan las mayúsculas acentuadas legítimas al inicio de palabra
+  (`Único TV`, `Última Hora`), las palabras en mayúsculas (`PERÚ`) y los
+  símbolos válidos (`90° TV`, `1º Canal`, separadores `·` o `|` sueltos).
+- Es idempotente: aplicarlo dos veces produce el mismo resultado.
+
+Como el saneado ocurre **antes** de limpiar los nombres, los países que antes
+quedaban sin reconocer ya se descartan bien: `Azteca 7 MÚxico` → `Azteca 7`
+(antes se quedaba como `Azteca 7 MÚxico`) y dos variantes rotas del mismo canal
+(`MÚxico` y `MÃ©xico`) se unifican en una sola señal.
+
 ## Cómo se limpian los nombres
 
 | Nombre en el M3U | Nombre limpio | `id` generado |
@@ -208,7 +243,9 @@ python -m unittest discover -s tests -v
 
 Cubren: limpieza de nombres (calidades, opciones, `Full HD`, país al final),
 generación de `id`, prioridad y normalización del `tvg-id`, unificación de
-duplicados, parseo del M3U, presencia de `<display-name>`/`<icon>`, alias de
+duplicados, parseo del M3U, **saneado de mojibake** (`MÚxico`, `Espa±a`,
+`Panamß`, `MÃ©xico` y los casos que no deben tocarse: `Único TV`, `90° TV`,
+`Cine Latino`), presencia de `<display-name>`/`<icon>`, alias de
 nombres, continuidad de los 6 bloques de 4 h, formato `YYYYMMDDHHMMSS +0000`,
 integridad `programme` → `channel` y cabecera UTF-8 del archivo.
 
@@ -271,6 +308,7 @@ https://USUARIO.github.io/REPOSITORIO/epg.xml
 | Los `id` salen como `espn2` en vez del `tvg-id` | Tu lista no trae `tvg-id` válido para ese canal, o usaste `--sin-tvg-id`. |
 | Varios canales aparecen duplicados en la guía | Son señales distintas (mismo nombre, distinto `tvg-id`/país); con `--sin-tvg-id` se fusionan por nombre. |
 | Nombres con calidad pegada al nombre | Ajusta `_RE_CALIDAD` y `_RE_SUFIJO_PEGADO` (bloque 4 del script). |
+| Los nombres salen con símbolos raros en mi PC (`MÚxico`, `Espa±a`, `Panamß`) | El script ya sanea el mojibake al leer el M3U (ver [Saneado de codificación](#saneado-de-codificación-mojibake)). Si aún los ves así, es la consola de Windows (cp850/cp437): abre el `epg.xml` en un editor UTF-8 o usa Windows Terminal. |
 | Windows: `UnicodeEncodeError` en la consola | Usa Windows Terminal o PowerShell 7; el archivo `epg.xml` siempre se escribe en UTF-8. |
 
 ## Licencia
