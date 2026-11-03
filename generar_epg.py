@@ -208,7 +208,7 @@ PAISES_EPG_POR_DEFECTO = tuple(
     codigo.strip().upper()
     for codigo in os.environ.get("EPG_PAISES", "").split(",")
     if codigo.strip()
-) or ("MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO")
+) or ("MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO", "SV")
 
 #: Fuentes EPG adicionales indicadas por entorno (URL o ruta local, separadas
 #: por comas). Si esta vacia se usan las guias por pais de arriba.

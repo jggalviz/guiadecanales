@@ -17,7 +17,7 @@ guía EPG ──┘
 
 - ✅ **Descarga guías XMLTV reales** (por defecto una por país de
   [epgshare01](https://epgshare01.online/): `MX`, `ES`, `AR`, `CO`, `CL`, `PE`,
-  `EC`, `UY`, `CR`, `PA`, `DO`), admite **gzip**, BOM y desfases horarios, y
+  `EC`, `UY`, `CR`, `PA`, `DO`, `SV`), admite **gzip**, BOM y desfases horarios, y
   normaliza todas las fechas a **UTC (`+0000`)**.
 - ✅ **Emparejamiento inteligente** canal ↔ programa: `tvg-id` exacto, `tvg-id`
   normalizado y, si no hay, **nombre normalizado** (sin `HD/FHD/SD`, sin
@@ -139,7 +139,7 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-t`, `--timeout` | Espera máxima de la descarga en segundos (30 por defecto). |
 | `-f`, `--fecha` | Fecha de inicio `YYYY-MM-DD` (por defecto, hoy). |
 | `-e`, `--epg` | Fuente EPG real (URL o ruta local, XML o `.gz`). Repetible o separada por comas. |
-| `--epg-pais` | Países ISO de las guías públicas (`MX,ES,AR`…). Por defecto `MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO`. |
+| `--epg-pais` | Países ISO de las guías públicas (`MX,ES,AR`…). Por defecto `MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV`. |
 | `--epg-archivo` | Guía XMLTV local para emparejar los canales (no se descarga nada). |
 | `--sin-epg` | No usar guías reales: solo parrilla genérica de 24 h. |
 | `--horas-ventana` | Horas de programación real que se conservan (72 por defecto). |
