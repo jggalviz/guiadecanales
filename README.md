@@ -1,16 +1,38 @@
 # Guía de canales → EPG XMLTV
 
 Script en **Python (solo librerías estándar)** que descarga una lista **M3U**
-remota y genera una **guía de programación `epg.xml` en formato XMLTV** con
-24 horas de programación genérica por canal, para que la guía **nunca aparezca
-vacía** en el reproductor IPTV.
+remota, cruza sus canales con **guías XMLTV reales públicas** y genera
+**`epg.xml` en formato XMLTV** con la **programación real** de cada canal. Los
+canales que no aparecen en ninguna guía se publican **sin programas** (nada de
+contenido inventado); la parrilla genérica de 24 h queda solo como respaldo
+opcional o para cuando ninguna guía se puede descargar.
 
 ```
-lista.m3u  ──►  generar_epg.py  ──►  epg.xml (XMLTV)
+lista.m3u ─┐
+           ├──►  generar_epg.py  ──►  epg.xml (XMLTV con programación real)
+guía EPG ──┘
 ```
 
 ## Características
 
+- ✅ **Descarga guías XMLTV reales** (por defecto una por país de
+  [epgshare01](https://epgshare01.online/): `MX`, `ES`, `AR`, `CO`, `CL`, `PE`,
+  `EC`, `UY`, `CR`, `PA`, `DO`), admite **gzip**, BOM y desfases horarios, y
+  normaliza todas las fechas a **UTC (`+0000`)**.
+- ✅ **Emparejamiento inteligente** canal ↔ programa: `tvg-id` exacto, `tvg-id`
+  normalizado y, si no hay, **nombre normalizado** (sin `HD/FHD/SD`, sin
+  `[Opc.2]`, sin paréntesis tipo `(XHGC)` y sin país), con puntuación y
+  desempate por país. Un canal de la guía no se reutiliza dos veces.
+- ✅ **Fallback limpio**: los canales sin coincidencia se publican **sin
+  `<programme>`** (no se inventa programación). `--relleno` les añade la
+  parrilla genérica y, si **ninguna** guía se puede usar, la guía completa se
+  rellena para que el reproductor nunca quede sin datos.
+- ✅ Ventana temporal configurable (`--horas-ventana`, 72 h por defecto) y solo
+  se conservan los programas de los canales emparejados: el archivo no crece de
+  más aunque la guía original tenga una semana completa.
+- ✅ Compatible con **cualquier fuente XMLTV** (open-epg, `i.mjh.nz`, la guía de
+  tu proveedor…) mediante `--epg URL`, `--epg-archivo ruta.xml.gz` o las
+  variables `EPG_URL` / `EPG_PAISES`.
 - ✅ Descarga la lista M3U desde una URL (`urllib.request`) con User-Agent de
   navegador, reintentos, detección automática de codificación y **saneado de
   mojibake** (`MÚxico` → `México`, `Espa±a` → `España`, `MÃ©xico` → `México`).
@@ -23,15 +45,16 @@ lista.m3u  ──►  generar_epg.py  ──►  epg.xml (XMLTV)
   `(1080p)`, `[LAT]`, `Señal 2`, `Feed 4`, `Full HD`, país al final…
 - ✅ Publica **alias `<display-name>`** (nombre limpio + `tvg-name` + nombre
   original del M3U) para que el reproductor empareje también por nombre.
-- ✅ Genera `epg.xml` con `<channel>` (`<display-name>` + `<icon src="..."`) y
-  **6 bloques `<programme>` de 4 h** por canal = 24 h continuas.
-- ✅ Fechas en formato `YYYYMMDDHHMMSS +0000`, arrancando en la **fecha actual
-  del sistema a las 00:00:00**.
+- ✅ Genera `epg.xml` con `<channel>` (`<display-name>` + `<icon src="...">`) y
+  los `<programme>` **reales** de cada canal emparejado, conservando título,
+  subtítulo, descripción, categoría, episodio, icono…
+- ✅ Fechas en formato `YYYYMMDDHHMMSS +0000`, con la ventana arrancando en la
+  **fecha actual del sistema a las 00:00:00**.
 - ✅ UTF-8, declaración XML, `<!DOCTYPE tv SYSTEM "xmltv.dtd">` e indentación
   limpia de 2 espacios.
-- ✅ **Cero dependencias externas** (`urllib.request`, `re`,
+- ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **30 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **50 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -59,14 +82,24 @@ guiadecanales/
 3. Abre `generar_epg.py` y pulsa **F5** (o `Ctrl+F5`), o usa la terminal:
 
 ```powershell
-# Prueba sin conexión: usa una lista M3U de ejemplo incluida en el script
+# Prueba sin conexión: lista M3U + guía EPG de ejemplo incluidas en el script
 python generar_epg.py --demo
 
-# Con tu lista real
+# Con tu lista real y las guías reales por país (por defecto MX,ES,AR,CO,CL,PE,...)
 python generar_epg.py --url "https://raw.githubusercontent.com/USUARIO/REPOSITORIO/main/lista.m3u"
 
-# Guardar en otra ruta y con otro nombre
-python generar_epg.py --url "..." --salida "C:\ruta\epg.xml"
+# Solo los países que te interesan
+python generar_epg.py -u "$env:M3U_URL" --epg-pais MX,ES,AR
+
+# Una guía XMLTV concreta (URL o archivo local, XML o .gz)
+python generar_epg.py -u "$env:M3U_URL" --epg https://www.open-epg.com/files/mexico1.xml
+python generar_epg.py -u "$env:M3U_URL" --epg-archivo C:\guias\mexico1.xml
+
+# Guardar en otra ruta y con otro nombre, con 7 días de programación
+python generar_epg.py --url "..." --salida "C:\ruta\epg.xml" --horas-ventana 168
+
+# Volver a la parrilla genérica (sin descargar guías reales)
+python generar_epg.py -u "$env:M3U_URL" --sin-epg --relleno
 ```
 
 Ver todas las opciones:
@@ -105,12 +138,85 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-s`, `--salida` | Archivo XMLTV de salida (por defecto `epg.xml`). |
 | `-t`, `--timeout` | Espera máxima de la descarga en segundos (30 por defecto). |
 | `-f`, `--fecha` | Fecha de inicio `YYYY-MM-DD` (por defecto, hoy). |
+| `-e`, `--epg` | Fuente EPG real (URL o ruta local, XML o `.gz`). Repetible o separada por comas. |
+| `--epg-pais` | Países ISO de las guías públicas (`MX,ES,AR`…). Por defecto `MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO`. |
+| `--epg-archivo` | Guía XMLTV local para emparejar los canales (no se descarga nada). |
+| `--sin-epg` | No usar guías reales: solo parrilla genérica de 24 h. |
+| `--horas-ventana` | Horas de programación real que se conservan (72 por defecto). |
+| `--relleno` | Rellenar con la parrilla genérica los canales **sin** programación real. |
 | `--sin-tvg-id` | Ignora el `tvg-id` y genera los `id` desde el nombre limpio. |
 | `--conservar-tvg-id` | Respeta el `tvg-id` literal (con el sufijo `@HD`/`@SD`). |
 | `--usar-tvg-id` | *Obsoleto*: ahora el `tvg-id` se usa siempre que exista (ver `--sin-tvg-id`). |
 | `--sin-doctype` | No escribir la línea `<!DOCTYPE tv SYSTEM "xmltv.dtd">`. |
-| `--demo` | Genera la guía con una lista M3U de ejemplo, sin descargar nada. |
+| `--demo` | Genera la guía con la lista M3U **y la EPG de ejemplo**, sin descargar nada. |
 | `-q`, `--silencioso` | Muestra solo los errores. |
+
+Variables de entorno equivalentes: `M3U_URL`, `EPG_SALIDA`, `EPG_REPO_URL`,
+`EPG_URL` (fuentes separadas por comas), `EPG_PAISES`, `EPG_URL_PLANTILLA`
+(plantilla con `{pais}`) y `EPG_HORAS`.
+
+## Programación real (EPG externo)
+
+### Fuentes
+
+| Fuente | Cómo se usa |
+| --- | --- |
+| **Guías públicas por país** (por defecto) | `https://epgshare01.online/epgshare01/epg_ripper_{PAIS}1.xml.gz` para cada código de `--epg-pais`. |
+| Cualquier XMLTV | `--epg URL`, `--epg URL1,URL2`, `--epg-archivo guia.xml.gz` o `EPG_URL`. |
+| `--demo` | Usa `epg_de_ejemplo()`, una guía XMLTV incluida en el script: sirve para ver el cruce completo sin red. |
+
+Cada fuente se procesa en orden y **un fallo no detiene el proceso**: se avisa y
+se continúa con la siguiente. Si ninguna se puede usar, la guía se genera con la
+parrilla genérica para que el reproductor no quede sin datos.
+
+### Emparejamiento (canal del M3U ↔ canal de la guía)
+
+1. **`tvg-id` exacto** con el `id` de la guía (es el mecanismo que usan los
+   reproductores cuando la guía y la lista comparten ids, p. ej. iptv-org).
+2. **`tvg-id` normalizado** (sin `@HD`, sin símbolos, sin mayúsculas).
+3. **Nombre normalizado**: se comparan los tokens del nombre después de
+   quitar calidad (`HD`, `FHD`, `4K`…), grupos (`[Opc.2]`, `(1080p)`), el país
+   del final, los códigos de país sueltos (`ESPN MX` = `ESPN`) y palabras sin
+   valor (`Canal`, `de`, `TV`…). También se comparan las **partes** del
+   `display-name` de la guía, porque muchas concatenan alias
+   (`Canal 2 de México (Canal Las Estrellas - XEW)`).
+
+La coincidencia por nombre exige un **puntaje mínimo (0,75)**: el nombre corto
+debe cubrir al menos 3/4 del largo y aparecer de forma contigua. Así:
+
+| Canal del M3U | `display-name` de la guía | ¿Empareja? |
+| --- | --- | --- |
+| `Canal 5 HD` | `Canal 5 de México (XHGC)` | ✅ sí (`canal 5`) |
+| `Las Estrellas FHD [LAT]` | `Canal 2 de México (Canal Las Estrellas - XEW)` | ✅ sí (alias entre paréntesis) |
+| `TV UNAM HD` | `Canal TVUNAM` | ✅ sí (`TV UNAM` = `TVUNAM`) |
+| `ESPN MX` | `ESPN` | ✅ sí (código de país descartado) |
+| `ESPN` | `ESPN 2` | ❌ no (cobertura 1/2) |
+| `Canal 7 HD` | `Canal 7 de México` | ✅ sí |
+| `Canal 7 HD` | `La 7` (España) | ❌ no (uno dice `canal`, el otro no) |
+| `Deportes 24/7` | `La 7` | ❌ no (no se divide por `/`) |
+| `Canal Local` | *(no está en la guía)* | ❌ no → sin programas |
+
+Además, **un canal de la guía no se reutiliza** para dos canales del M3U y la
+asignación se resuelve **por puntaje global**: primero se emparejan los nombres
+idénticos y después los parecidos, así que un nombre exacto nunca pierde su
+canal frente a uno aproximado. En caso de empate gana el candidato del mismo
+país (`tvg-id` con sufijo `.mx`, `.es`… o el país del nombre) y, si sigue
+empatado, el nombre con un número de palabras más parecido.
+
+### Ventana temporal y salida
+
+- Se conserva la programación que **se solapa** con la ventana
+  `[hoy 00:00 UTC, +N horas]` (N = `--horas-ventana`, 72 por defecto). Los
+  programas que empezaron antes pero siguen en emisión se mantienen.
+- Las fechas se **normalizan a UTC (`+0000`)**: las guías suelen venir con
+  desfases locales (`-0600`, `+0100`…).
+- Se copian del original `title`, `sub-title`, `desc`, `category`,
+  `episode-num`, `date`, `icon`, `rating`… y se descarta el resto.
+- Se eliminan duplicados (`mismo canal + misma hora`) y los programas sin
+  `<title>` (XMLTV lo exige).
+- Los canales **sin coincidencia** se publican con su `<channel>` y **sin
+  `<programme>`**; con `--relleno` reciben la parrilla genérica.
+
 
 
 ## Cómo se empareja la guía con la lista (`tvg-id`)
@@ -199,10 +305,12 @@ Las entradas que producen el **mismo `id`** se consideran la misma señal: se
 publica un solo `<channel>` (con el logo de la primera aparición que lo tenga) y
 un único bloque de programación, evitando duplicados en la guía.
 
-## Parrilla genérica de 24 horas
+## Parrilla genérica de respaldo (24 horas)
 
-Seis bloques continuos de 4 horas por canal, con títulos variables en español y
-el nombre del canal al final:
+Solo se usa para los canales **sin** programación real cuando se pasa
+`--relleno`, o para toda la guía cuando no hay ninguna fuente EPG utilizable
+(`--sin-epg`, fallo de red…). Son seis bloques continuos de 4 horas por canal,
+con títulos variables en español y el nombre del canal al final:
 
 | Horario (UTC) | Categoría | Títulos posibles (ejemplos) |
 | --- | --- | --- |
@@ -222,17 +330,31 @@ la parrilla es estable entre ejecuciones pero distinta entre señales.
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tv SYSTEM "xmltv.dtd">
 <tv generator-info-name="guiadecanales-epg" generator-info-url="https://github.com/usuario/repositorio">
-  <channel id="canal5">
+  <channel id="canal5.mx">
     <display-name lang="es">Canal 5</display-name>
+    <display-name>Canal 5 HD</display-name>
     <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png"/>
   </channel>
-  <programme start="20260311000000 +0000" stop="20260311040000 +0000" channel="canal5">
-    <title lang="es">Cine de Madrugada - Canal 5</title>
-    <desc lang="es">Bloque de programacion de 4 horas de Canal 5 (Madrugada). ...</desc>
-    <category lang="es">Madrugada</category>
+  <programme start="20260311003000 +0000" stop="20260311023000 +0000" channel="canal5.mx">
+    <title lang="es">Las crónicas de Spiderwick</title>
   </programme>
-  <!-- ... 5 bloques más por canal hasta completar 24 h ... -->
+  <programme start="20260311023000 +0000" stop="20260311043000 +0000" channel="canal5.mx">
+    <title lang="es">Me caigo de risa</title>
+  </programme>
+  <!-- ... programación real del resto de canales emparejados ... -->
+  <!-- Los canales sin coincidencia en la guía no llevan <programme> -->
 </tv>
+```
+
+Para inspeccionar el resultado de una ejecución, la salida del script resume
+cuántos canales se emparejaron con cada guía:
+
+```
+[4/6] Descargando 2 guia(s) XMLTV reales ...
+      Ventana de programacion: 2026-11-03 00:00 a 2026-11-06 00:00 UTC
+      https://epgshare01.online/epgshare01/epg_ripper_MX1.xml.gz
+        canales en la guia: 178 | emparejados: 96 | programas: 5211
+      Canales con programacion real: 118 | sin coincidencia: 1433
 ```
 
 ## Ejecutar las pruebas
@@ -245,9 +367,15 @@ Cubren: limpieza de nombres (calidades, opciones, `Full HD`, país al final),
 generación de `id`, prioridad y normalización del `tvg-id`, unificación de
 duplicados, parseo del M3U, **saneado de mojibake** (`MÚxico`, `Espa±a`,
 `Panamß`, `MÃ©xico` y los casos que no deben tocarse: `Único TV`, `90° TV`,
-`Cine Latino`), presencia de `<display-name>`/`<icon>`, alias de
-nombres, continuidad de los 6 bloques de 4 h, formato `YYYYMMDDHHMMSS +0000`,
-integridad `programme` → `channel` y cabecera UTF-8 del archivo.
+`Cine Latino`), **lectura de guías XMLTV reales** (canales, `display-name`,
+fechas con desfase a UTC, ventana temporal, gzip), **emparejamiento**
+(`tvg-id`, nombre normalizado, alias entre paréntesis, `ESPN` ≠ `ESPN 2`,
+`Canal 7` ≠ `La 7`), **integración completa** (programas reales con el `id` del
+canal, canales sin EPG sin contenido inventado, `--relleno` opcional, fuente
+rota que no interrumpe, XMLTV válido en UTF-8), presencia de
+`<display-name>`/`<icon>`, continuidad de los 6 bloques de 4 h, formato
+`YYYYMMDDHHMMSS +0000`, integridad `programme` → `channel` y cabecera UTF-8 del
+archivo.
 
 ## Publicar en GitHub (pasos)
 
@@ -271,9 +399,17 @@ pruebas, regenera el `epg.xml` cada día y hace *commit* del resultado.
 3. (Opcional) En **Settings → Secrets and variables → Actions → Variables**,
    crea `EPG_REPO_URL` con la URL pública de tu repositorio para que aparezca en
    `generator-info-url`.
-4. Lanza el workflow manualmente desde **Actions → Actualizar EPG → Run
+4. (Opcional) En la misma pantalla de *Variables* puedes ajustar las fuentes EPG:
+   `EPG_PAISES` (`MX,ES,AR`) y/o `EPG_URL` (URLs separadas por comas). Sin
+   valores se usan las guías públicas por país por defecto.
+5. Lanza el workflow manualmente desde **Actions → Actualizar EPG → Run
    workflow** para comprobar que funciona.
 
+> El paso de verificación del workflow comprueba que el XMLTV tiene canales,
+> que **hay programación**, que **ningún `<programme>` apunta a un canal
+> inexistente**, que cada programa tiene `<title>` y que no hay dos programas
+> del mismo canal a la misma hora.
+>
 > Si tu lista M3U es privada, guárdala en un secreto (`M3U_URL`): el script solo
 > necesita poder descargarla por HTTP(S).
 
@@ -305,6 +441,11 @@ https://USUARIO.github.io/REPOSITORIO/epg.xml
 | `HTTP Error 404` | La URL no es el enlace `raw` del archivo o el repositorio es privado. |
 | `No se encontró ningún canal válido` | El contenido descargado no es un M3U (¿HTML de la página del repo?). |
 | La guía aparece vacía en el reproductor | Comprueba la URL del EPG y que los `id` coincidan con los `tvg-id` de tu lista. Por defecto ya se usan esos ids; si tu lista empareja de forma estricta, prueba `--conservar-tvg-id`. |
+| Muchos canales salen **sin programación** | No se encontraron en las guías descargadas: añade el país que falta (`--epg-pais MX,ES,AR,…`) o una guía propia (`--epg URL`). Revisa el resumen: muestra los emparejados por fuente. |
+| Un canal muestra programación de otro | El emparejamiento por nombre falló; ponle a ese canal un `tvg-id` que exista en la guía o usa `--epg-archivo` con una guía que lo contenga. |
+| Quiero volver a la parrilla genérica | `--sin-epg --relleno` (o solo `--relleno` para rellenar únicamente los canales sin EPG). |
+| `Aviso: se omite <url>` en la salida | Esa guía no se pudo descargar o no es XMLTV válido; el resto sigue funcionando. Se puede fijar otra con `--epg`. |
+| La guía tarda mucho en generarse | Baja el número de países (`--epg-pais MX,ES`) y/o la ventana (`--horas-ventana 24`). |
 | Los `id` salen como `espn2` en vez del `tvg-id` | Tu lista no trae `tvg-id` válido para ese canal, o usaste `--sin-tvg-id`. |
 | Varios canales aparecen duplicados en la guía | Son señales distintas (mismo nombre, distinto `tvg-id`/país); con `--sin-tvg-id` se fusionan por nombre. |
 | Nombres con calidad pegada al nombre | Ajusta `_RE_CALIDAD` y `_RE_SUFIJO_PEGADO` (bloque 4 del script). |

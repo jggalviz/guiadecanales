@@ -48,11 +48,15 @@ jobs:
             echo "configurado=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Generar epg.xml desde la lista M3U
+      - name: Generar epg.xml desde la lista M3U y las guias reales
         if: steps.comprobar.outputs.configurado == 'true'
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
           EPG_REPO_URL: ${{ vars.EPG_REPO_URL || format('{0}/{1}', github.server_url, github.repository) }}
+          # Opcional: sobrescribir las fuentes EPG reales (URLs separadas por comas
+          # y/o paises). Sin estos valores se usan las guias publicas por pais.
+          EPG_URL: ${{ vars.EPG_URL }}
+          EPG_PAISES: ${{ vars.EPG_PAISES }}
         run: python generar_epg.py --salida epg.xml
 
       - name: Verificar que el XMLTV es valido
@@ -60,12 +64,28 @@ jobs:
         run: |
           python - <<'PY'
           from xml.etree import ElementTree as ET
+
           raiz = ET.parse("epg.xml").getroot()
-          canales = len(raiz.findall("channel"))
-          programas = len(raiz.findall("programme"))
-          print(f"canales={canales} programas={programas}")
+          canales = {canal.get("id") for canal in raiz.findall("channel")}
+          programas = raiz.findall("programme")
+          con_epg = {programa.get("channel") for programa in programas}
+          print(f"canales={len(canales)} programas={len(programas)} canales_con_epg={len(con_epg)}")
+
           assert raiz.tag == "tv", "la raiz debe ser <tv>"
-          assert canales > 0 and programas == canales * 6, "parrilla incompleta"
+          assert canales, "la guia no tiene canales"
+          assert programas, "la guia no tiene programacion"
+
+          huerfanos = [p.get("channel") for p in programas if p.get("channel") not in canales]
+          assert not huerfanos, f"programas sin canal: {huerfanos[:5]}"
+
+          vistos = set()
+          for programa in programas:
+              assert programa.find("title") is not None, f"programa sin titulo: {programa.get('start')}"
+              clave = (programa.get("channel"), programa.get("start"))
+              assert clave not in vistos, f"programa duplicado: {clave}"
+              vistos.add(clave)
+
+          print(f"OK: {len(con_epg)} canales con programacion real de {len(canales)}")
           PY
 
       - name: Commit y push de epg.xml

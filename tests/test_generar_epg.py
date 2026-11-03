@@ -11,6 +11,7 @@ Se ejecutan con::
 
 from __future__ import annotations
 
+import gzip
 import os
 import sys
 import tempfile
@@ -412,6 +413,337 @@ class XmltvTests(unittest.TestCase):
         identificadores = {canal.get("id") for canal in self.arbol.findall("channel")}
         for programa in self.arbol.findall("programme"):
             self.assertIn(programa.get("channel"), identificadores)
+
+
+def _xmltv_de_prueba(inicio: datetime) -> str:
+    """Guia XMLTV de prueba (misma forma que las guias reales, sin red)."""
+    canales = (
+        ("canal5.mx", "Canal 5"),
+        (
+            "Canal.2.de.México.(Canal.Las.Estrellas.-.XEW).mx",
+            "Canal 2 de México (Canal Las Estrellas - XEW)",
+        ),
+        ("ESPN.2.mx", "ESPN 2"),
+        ("ESPN.mx", "ESPN"),
+        ("La.7.es", "La 7"),
+        ("Canal.7.de.México.mx", "Canal 7 de México"),
+    )
+
+    def programa(canal: str, titulo: str, desde: float, hasta: float) -> str:
+        return (
+            f'<programme start="{generar_epg._sello(inicio + timedelta(hours=desde))}" '
+            f'stop="{generar_epg._sello(inicio + timedelta(hours=hasta))}" '
+            f'channel="{canal}"><title lang="es">{titulo}</title>'
+            '<desc lang="es">Sinopsis de prueba con acentos: México, España.</desc>'
+            '<category lang="es">Series</category></programme>'
+        )
+
+    partes = ['<?xml version="1.0" encoding="UTF-8"?>', '<tv generator-info-name="prueba">']
+    for identificador, nombre in canales:
+        partes.append(
+            f'<channel id="{identificador}"><display-name>{nombre}</display-name></channel>'
+        )
+    partes.extend(
+        [
+            # Programas dentro de la ventana (72 h desde el inicio).
+            programa("canal5.mx", "Noticiero Matutino", 0, 2),
+            programa("canal5.mx", "Cine de la Tarde", 2, 4),
+            # Empezo antes de la ventana y sigue en emision.
+            programa("canal5.mx", "Programa en curso", -1, 1),
+            # Muy anterior y muy posterior: fuera de la ventana.
+            programa("canal5.mx", "Programa viejo", -96, -92),
+            programa("canal5.mx", "Programa futuro", 200, 202),
+            # Sin <title>: se descarta.
+            '<programme start="'
+            + generar_epg._sello(inicio + timedelta(hours=5))
+            + '" stop="'
+            + generar_epg._sello(inicio + timedelta(hours=6))
+            + '" channel="canal5.mx"><desc>sin titulo</desc></programme>',
+            programa(
+                "Canal.2.de.México.(Canal.Las.Estrellas.-.XEW).mx",
+                "La Rosa de Guadalupe",
+                0,
+                1,
+            ),
+            programa("ESPN.2.mx", "Futbol de la Liga MX", 0, 3),
+            programa("ESPN.mx", "SportsCenter", 0, 3),
+            programa("La.7.es", "Informativos La 7", 0, 3),
+            programa("Canal.7.de.México.mx", "Azteca 7 Noticias", 0, 3),
+        ]
+    )
+    partes.append("</tv>")
+    return "\n".join(partes)
+
+
+M3U_DE_PRUEBA = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="canal5.mx" tvg-name="Canal 5" group-title="Nacional",Canal 5 HD',
+        "http://ejemplo.invalid/canal5/index.m3u8",
+        '#EXTINF:-1 tvg-name="Las Estrellas" group-title="Nacional",Las Estrellas FHD [LAT]',
+        "http://ejemplo.invalid/estrellas/index.m3u8",
+        '#EXTINF:-1 tvg-name="ESPN 2" group-title="Deportes",ESPN 2 HD',
+        "http://ejemplo.invalid/espn2/index.m3u8",
+        '#EXTINF:-1 tvg-name="ESPN" group-title="Deportes",ESPN HD',
+        "http://ejemplo.invalid/espn/index.m3u8",
+        '#EXTINF:-1 tvg-name="Canal 7" group-title="Nacional",Canal 7 HD',
+        "http://ejemplo.invalid/canal7/index.m3u8",
+        '#EXTINF:-1 tvg-name="Canal Local" group-title="Local",Canal Local HD',
+        "http://ejemplo.invalid/local/index.m3u8",
+        "",
+    ]
+)
+
+
+class ParseoDeGuiasRealesTests(unittest.TestCase):
+    """Comprueba la lectura de las guias XMLTV reales."""
+
+    def setUp(self) -> None:
+        self.inicio = generar_epg._inicio_del_dia()
+        self.texto = _xmltv_de_prueba(self.inicio)
+
+    def test_extrae_canales_y_display_names(self) -> None:
+        canales = generar_epg.parsear_epg_canales(self.texto)
+        self.assertEqual(len(canales), 6)
+        self.assertEqual(canales["canal5.mx"], ["Canal 5"])
+        self.assertIn(
+            "Canal 2 de México (Canal Las Estrellas - XEW)",
+            canales["Canal.2.de.México.(Canal.Las.Estrellas.-.XEW).mx"],
+        )
+
+    def test_normaliza_las_fechas_a_utc(self) -> None:
+        parsear = generar_epg.parsear_fecha_xmltv
+        self.assertEqual(
+            parsear("20261102003000 -0600"),
+            datetime(2026, 11, 2, 6, 30, tzinfo=timezone.utc),
+        )
+        self.assertEqual(
+            parsear("20261102003000 +0000"),
+            datetime(2026, 11, 2, 0, 30, tzinfo=timezone.utc),
+        )
+        # Formatos alternativos: sin segundos y sin desfase.
+        self.assertEqual(
+            parsear("202611020030"), datetime(2026, 11, 2, 0, 30, tzinfo=timezone.utc)
+        )
+        for invalido in ("", "   ", "no-es-fecha", "2026"):
+            with self.subTest(valor=invalido):
+                self.assertIsNone(parsear(invalido))
+
+    def test_conserva_solo_los_programas_de_la_ventana(self) -> None:
+        ventana = (self.inicio, self.inicio + timedelta(hours=72))
+        programas = generar_epg.parsear_epg_programas(self.texto, {"canal5.mx"}, *ventana)
+        titulos = [programa.findtext("title") for programa in programas["canal5.mx"]]
+        self.assertIn("Noticiero Matutino", titulos)
+        self.assertIn("Programa en curso", titulos)
+        self.assertNotIn("Programa viejo", titulos)
+        self.assertNotIn("Programa futuro", titulos)
+        self.assertNotIn(None, titulos)
+        self.assertEqual(len(programas["canal5.mx"]), 3)
+
+    def test_programas_normalizados_en_utc_y_con_hijos(self) -> None:
+        ventana = (self.inicio, self.inicio + timedelta(hours=72))
+        programas = generar_epg.parsear_epg_programas(self.texto, {"canal5.mx"}, *ventana)
+        programa = next(
+            p for p in programas["canal5.mx"] if p.findtext("title") == "Noticiero Matutino"
+        )
+        self.assertEqual(programa.get("start"), generar_epg._sello(self.inicio))
+        self.assertEqual(
+            programa.get("stop"), generar_epg._sello(self.inicio + timedelta(hours=2))
+        )
+        self.assertEqual(
+            programa.findtext("desc"), "Sinopsis de prueba con acentos: México, España."
+        )
+        self.assertEqual(programa.findtext("category"), "Series")
+
+    def test_solo_lee_los_canales_pedidos(self) -> None:
+        ventana = (self.inicio, self.inicio + timedelta(hours=72))
+        programas = generar_epg.parsear_epg_programas(self.texto, {"ESPN.mx"}, *ventana)
+        self.assertEqual(list(programas), ["ESPN.mx"])
+        self.assertEqual(len(programas["ESPN.mx"]), 1)
+
+    def test_descomprime_gzip(self) -> None:
+        self.assertEqual(generar_epg._descomprimir(gzip.compress(b"<tv/>")), b"<tv/>")
+        self.assertEqual(generar_epg._descomprimir(b"<tv/>"), b"<tv/>")
+
+
+class EmparejamientoDeCanalesTests(unittest.TestCase):
+    """Comprueba el cruce entre los canales del M3U y la guia real."""
+
+    def setUp(self) -> None:
+        self.inicio = generar_epg._inicio_del_dia()
+        self.fuente = generar_epg.parsear_epg_canales(_xmltv_de_prueba(self.inicio))
+        self.canales = generar_epg.consolidar_canales(generar_epg.parsear_m3u(M3U_DE_PRUEBA))
+
+    def _mapa(self) -> dict[str, str]:
+        return generar_epg.emparejar_canales(self.canales, self.fuente)
+
+    def test_empareja_por_tvg_id_exacto(self) -> None:
+        self.assertEqual(self._mapa()["canal5.mx"], "canal5.mx")
+
+    def test_empareja_por_nombre_normalizado(self) -> None:
+        mapa = self._mapa()
+        # "Las Estrellas FHD [LAT]" -> display-name con prefijo y alias.
+        self.assertEqual(
+            mapa["lasestrellas"],
+            "Canal.2.de.México.(Canal.Las.Estrellas.-.XEW).mx",
+        )
+        self.assertEqual(mapa["espn2"], "ESPN.2.mx")
+        self.assertEqual(mapa["espn"], "ESPN.mx")
+
+    def test_numero_suelto_no_se_confunde_con_otra_cadena(self) -> None:
+        # "Canal 7" debe emparejar con "Canal 7 de Mexico", nunca con "La 7".
+        self.assertEqual(self._mapa()["canal7"], "Canal.7.de.México.mx")
+
+    def test_canal_sin_coincidencia_no_se_inventa(self) -> None:
+        self.assertNotIn("canallocal", self._mapa())
+
+    def test_cada_canal_de_la_guia_se_usa_una_sola_vez(self) -> None:
+        valores = list(self._mapa().values())
+        self.assertEqual(len(valores), len(set(valores)))
+
+    def test_codigos_de_pais_y_barras_no_confunden(self) -> None:
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                "\n".join(
+                    [
+                        "#EXTM3U",
+                        '#EXTINF:-1 tvg-name="ESPN MX",ESPN MX HD',
+                        "http://ejemplo.invalid/espn-mx/index.m3u8",
+                        '#EXTINF:-1 tvg-name="Deportes 24/7",Deportes 24/7 HD',
+                        "http://ejemplo.invalid/deportes/index.m3u8",
+                        "",
+                    ]
+                )
+            )
+        )
+        mapa = generar_epg.emparejar_canales(canales, self.fuente)
+        # El codigo de pais del nombre ("ESPN MX") no impide el cruce.
+        self.assertEqual(mapa["espnmx"], "ESPN.mx")
+        # "Deportes 24/7" no acaba en "La 7" por dividir el nombre en la "/".
+        self.assertNotIn("deportes247", mapa)
+
+
+class IntegracionEpgRealTests(unittest.TestCase):
+    """Comprueba el flujo completo M3U + guia real + XMLTV."""
+
+    def setUp(self) -> None:
+        self.inicio = generar_epg._inicio_del_dia()
+        self.ventana = (self.inicio, self.inicio + timedelta(hours=72))
+        self.texto_epg = _xmltv_de_prueba(self.inicio)
+        self.canales = generar_epg.consolidar_canales(generar_epg.parsear_m3u(M3U_DE_PRUEBA))
+        self.programas, self.emparejados, self.informes = generar_epg.integrar_epg(
+            self.canales,
+            ["guia-de-prueba"],
+            self.ventana,
+            cargador=lambda _fuente: self.texto_epg,
+        )
+
+    def test_recupera_la_programacion_de_cada_canal_emparejado(self) -> None:
+        self.assertEqual(len(self.programas), 5)
+        for canal in ("canal5.mx", "lasestrellas", "espn2", "espn", "canal7"):
+            self.assertIn(canal, self.programas)
+        self.assertEqual(self.informes[0]["emparejados"], 5)
+        self.assertEqual(self.informes[0]["error"], "")
+        titulos = {programa.findtext("title") for programa in self.programas["canal5.mx"]}
+        self.assertIn("Noticiero Matutino", titulos)
+
+    def test_publica_los_programas_con_el_id_del_canal(self) -> None:
+        raiz, total = generar_epg.construir_xmltv(
+            self.canales, self.inicio, programas=self.programas, relleno=False
+        )
+        programas = raiz.findall("programme")
+        self.assertEqual(total, len(programas))
+        identificadores = {canal.get("id") for canal in raiz.findall("channel")}
+        for programa in programas:
+            self.assertIn(programa.get("channel"), identificadores)
+            self.assertIsNotNone(programa.find("title"))
+            self.assertRegex(programa.get("start"), r"^\d{14} \+0000$")
+        titulos = {programa.findtext("title") for programa in programas}
+        self.assertIn("Futbol de la Liga MX", titulos)
+        self.assertNotIn("Programa viejo", titulos)
+
+    def test_canal_sin_epg_se_publica_sin_programas(self) -> None:
+        raiz, _total = generar_epg.construir_xmltv(
+            self.canales, self.inicio, programas=self.programas, relleno=False
+        )
+        con_programas = {programa.get("channel") for programa in raiz.findall("programme")}
+        self.assertIn("canallocal", {canal.get("id") for canal in raiz.findall("channel")})
+        self.assertNotIn("canallocal", con_programas)
+
+    def test_relleno_opcional_solo_para_los_canales_sin_epg(self) -> None:
+        raiz, _total = generar_epg.construir_xmltv(
+            self.canales, self.inicio, programas=self.programas, relleno=True
+        )
+        programas = raiz.findall("programme")
+        del_local = [p for p in programas if p.get("channel") == "canallocal"]
+        self.assertEqual(len(del_local), len(generar_epg.BLOQUES_24H))
+        del_canal5 = [p for p in programas if p.get("channel") == "canal5.mx"]
+        self.assertEqual(len(del_canal5), 3)
+        self.assertTrue(
+            all("Contenido generico" not in (p.findtext("desc") or "") for p in del_canal5)
+        )
+
+    def test_una_fuente_rota_no_interrumpe_el_proceso(self) -> None:
+        def cargador(_fuente: str) -> str:
+            raise RuntimeError("sin conexion")
+
+        programas, emparejados, informes = generar_epg.integrar_epg(
+            self.canales, ["fuente-rota"], self.ventana, cargador=cargador
+        )
+        self.assertEqual(programas, {})
+        self.assertEqual(emparejados, {})
+        self.assertIn("sin conexion", informes[0]["error"])
+
+    def test_el_xmltv_escrito_es_valido_y_utf8(self) -> None:
+        raiz, _total = generar_epg.construir_xmltv(
+            self.canales, self.inicio, programas=self.programas, relleno=False
+        )
+        with tempfile.TemporaryDirectory() as directorio:
+            ruta = os.path.join(directorio, "epg.xml")
+            generar_epg.escribir_xmltv(raiz, ruta)
+            arbol = ET.parse(ruta).getroot()
+            with open(ruta, encoding="utf-8") as archivo:
+                self.assertEqual(
+                    archivo.readline().strip(), '<?xml version="1.0" encoding="UTF-8"?>'
+                )
+            with open(ruta, encoding="utf-8") as archivo:
+                self.assertIn("México", archivo.read())
+        self.assertEqual(arbol.tag, "tv")
+        identificadores = {canal.get("id") for canal in arbol.findall("channel")}
+        for programa in arbol.findall("programme"):
+            self.assertIn(programa.get("channel"), identificadores)
+        self.assertGreater(len(arbol.findall("programme")), 0)
+
+
+class GuiaDeEjemploTests(unittest.TestCase):
+    """La guia de ``--demo`` debe alimentar el flujo real sin red."""
+
+    def test_la_guia_de_ejemplo_empareja_los_canales_de_ejemplo(self) -> None:
+        inicio = generar_epg._inicio_del_dia()
+        ventana = (inicio, inicio + timedelta(hours=72))
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(generar_epg.M3U_DE_EJEMPLO)
+        )
+        programas, emparejados, informes = generar_epg.integrar_epg(
+            canales,
+            ["guia de ejemplo"],
+            ventana,
+            cargador=lambda _fuente: generar_epg.epg_de_ejemplo(inicio),
+        )
+        self.assertEqual(informes[0]["error"], "")
+        self.assertEqual(len(programas), 4)
+        self.assertEqual(programas["canal5.mx"][0].findtext("title"), "Noticiero Matutino")
+        self.assertEqual(emparejados["lasestrellas.mx"], "Canal.Las.Estrellas.mx")
+        # Los canales sin guia se quedan sin programacion (nada inventado).
+        self.assertNotIn("deportes247", programas)
+        self.assertNotIn("canallocal", programas)
+
+    def test_urls_por_defecto_sustituyen_el_pais(self) -> None:
+        urls = generar_epg.urls_epg_por_defecto(["mx", "ES"])
+        self.assertEqual(len(urls), 2)
+        self.assertIn("MX", urls[0])
+        self.assertIn("ES", urls[1])
+        self.assertNotIn("{pais}", urls[0])
 
 
 if __name__ == "__main__":

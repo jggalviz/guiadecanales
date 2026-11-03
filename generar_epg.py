@@ -8,14 +8,29 @@
 Descarga una lista M3U, extrae de cada canal el nombre (texto que va despues de
 la ultima coma del #EXTINF) y sus atributos ``tvg-id``, ``tvg-name`` y
 ``tvg-logo``, unifica las senales repetidas (SD / HD / FHD / [Opc.2] / pais...)
-y genera un ``epg.xml`` en formato XMLTV con 24 horas de programacion generica
-por canal, para que la guia nunca aparezca vacia en el reproductor IPTV.
+y genera un ``epg.xml`` en formato XMLTV con la **programacion real** descargada
+de guias XMLTV publicas (por defecto una guia por pais de epgshare01).
+
+Flujo de la programacion
+------------------------
+1. Se descargan las guias XMLTV configuradas (``--epg``, ``--epg-pais``,
+   ``--epg-archivo`` o las de por defecto).
+2. Cada canal del M3U se empareja con el canal de la guia real usando el
+   ``tvg-id``, su id normalizado o el nombre normalizado (sin sufijos de
+   calidad, sin grupos entre parentesis y sin el pais).
+3. Se publican los ``<programme>`` reales de cada canal emparejado dentro de la
+   ventana pedida (``--horas-ventana``, 72 h por defecto).
+4. Los canales sin coincidencia se publican sin programas (no se inventa
+   contenido). Con ``--relleno`` reciben la parrilla generica de 24 h. Si
+   ninguna guia se puede usar, la guia se rellena con esa parrilla para que el
+   reproductor nunca se quede sin datos.
 
 Caracteristicas
 ---------------
-* Solo librerias estandar de Python (3.9+): urllib.request, re,
+* Solo librerias estandar de Python (3.9+): urllib.request, re, gzip, io,
   xml.etree.ElementTree, datetime, argparse, unicodedata, html.
-* Descarga con User-Agent de navegador, reintentos y deteccion de codificacion.
+* Descarga con User-Agent de navegador, reintentos, soporte de gzip y deteccion
+  de codificacion.
 * Saneado de mojibake al leer la lista: ``MÚxico`` -> ``México``, ``Espa±a`` ->
   ``España``, ``Panamß`` -> ``Panamá`` y ``MÃ©xico`` -> ``México`` (ver
   :func:`sanear_codificacion`), sin alterar los nombres correctos.
@@ -25,21 +40,28 @@ Caracteristicas
 * Limpieza de nombres -> un ``id`` unico cuando no hay ``tvg-id`` valido.
 * Varios ``<display-name>`` por canal (nombre limpio, ``tvg-name`` y nombre
   original del M3U) para que el emparejamiento por nombre tambien funcione.
-* 6 bloques continuos de 4 horas (24 h) con titulos realistas en espanol.
+* Emparejamiento por puntaje (id exacto, id normalizado, nombre contiguo) con
+  preferencia por el mismo pais y sin reutilizar un canal de la guia dos veces.
 * Salida UTF-8, declaracion XML, DOCTYPE xmltv.dtd e indentacion limpia.
 
 Uso rapido
 ----------
-    python generar_epg.py --demo          # prueba sin conexion (datos de ejemplo)
+    python generar_epg.py --demo          # prueba sin conexion (M3U + EPG de ejemplo)
     python generar_epg.py --url "https://raw.githubusercontent.com/USUARIO/REPO/RAMA/lista.m3u"
     python generar_epg.py                 # usa la constante URL_M3U o la variable M3U_URL
+    python generar_epg.py -u "$M3U_URL" --epg-pais MX,ES,AR   # guias reales por pais
+    python generar_epg.py -u "$M3U_URL" --epg https://ejemplo.com/guia.xml.gz
     python generar_epg.py -h              # ayuda completa
 
 Variables de entorno
 --------------------
-    M3U_URL        URL de la lista M3U (tiene prioridad sobre la constante).
-    EPG_SALIDA     Ruta del archivo de salida (por defecto: epg.xml).
-    EPG_REPO_URL   URL del repositorio que se publica en <tv generator-info-url>.
+    M3U_URL            URL de la lista M3U (tiene prioridad sobre la constante).
+    EPG_SALIDA         Ruta del archivo de salida (por defecto: epg.xml).
+    EPG_REPO_URL       URL del repositorio que se publica en <tv generator-info-url>.
+    EPG_URL            Fuentes EPG reales separadas por comas (URL o ruta local).
+    EPG_PAISES         Paises de las guias de por defecto (por defecto MX,ES,AR,...).
+    EPG_URL_PLANTILLA  Plantilla de la guia por pais (``{pais}`` -> codigo ISO).
+    EPG_HORAS          Horas de programacion real que se conservan (72).
 
 Autor: guiadecanales
 Licencia: MIT
@@ -49,7 +71,9 @@ Licencia: MIT
 from __future__ import annotations
 
 import argparse
+import gzip
 import html
+import io
 import os
 import re
 import sys
@@ -162,6 +186,53 @@ BLOQUES_24H = (
         ),
     },
 )
+
+# -----------------------------------------------------------------------------
+# EPG real (XMLTV externo)
+# -----------------------------------------------------------------------------
+
+#: Plantilla de las guias XMLTV publicas por pais. La de por defecto son las de
+#: epgshare01 (XMLTV comprimido en gzip, actualizado a diario y con las cadenas
+#: de television de cada pais). ``{pais}`` se sustituye por el codigo ISO de dos
+#: letras en mayusculas (MX, ES, AR, CO, CL, PE...). Cualquier otra fuente
+#: XMLTV (open-epg, i.mjh.nz, la guia del proveedor...) se puede indicar con
+#: ``--epg`` o con la variable de entorno ``EPG_URL``.
+PLANTILLA_EPG_PAIS = os.environ.get(
+    "EPG_URL_PLANTILLA",
+    "https://epgshare01.online/epgshare01/epg_ripper_{pais}1.xml.gz",
+)
+
+#: Paises cuyas guias reales se descargan cuando no se indica otra fuente.
+#: Se pueden cambiar con ``--epg-pais`` o con la variable ``EPG_PAISES``.
+PAISES_EPG_POR_DEFECTO = tuple(
+    codigo.strip().upper()
+    for codigo in os.environ.get("EPG_PAISES", "").split(",")
+    if codigo.strip()
+) or ("MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO")
+
+#: Fuentes EPG adicionales indicadas por entorno (URL o ruta local, separadas
+#: por comas). Si esta vacia se usan las guias por pais de arriba.
+URL_EPG = os.environ.get("EPG_URL", "").strip()
+
+
+def _entero_entorno(nombre: str, defecto: int) -> int:
+    """Lee un entero de una variable de entorno y cae al valor por defecto."""
+    try:
+        return max(0, int(os.environ.get(nombre, str(defecto))))
+    except (TypeError, ValueError):
+        return defecto
+
+
+#: Horas de programacion real que se conservan desde el inicio de la guia.
+HORAS_GUIA_REAL = _entero_entorno("EPG_HORAS", 72)
+
+#: Tamano maximo (ya descomprimido) que se acepta de una guia externa.
+MAX_BYTES_EPG = 160 * 1024 * 1024
+
+#: Puntaje minimo (0 a 1) para aceptar un emparejamiento por nombre.
+#: 1.0 = nombres identicos; 0.75 admite como maximo un cuarto de tokens extra
+#: ("Canal 5" frente a "Canal 5 de Mexico"), pero nunca "ESPN" frente a "ESPN 2".
+PUNTAJE_MINIMO_EMPAREJAMIENTO = 0.75
 
 #: Datos de ejemplo usados con ``--demo`` (permiten probar el script sin red y
 #: sin exponer una URL privada). Incluye senales duplicadas a proposito.
@@ -759,7 +830,702 @@ def consolidar_canales(
 
 
 # =============================================================================
-# 5. CONSTRUCCION DEL XMLTV
+# 5. EPG REAL (XMLTV EXTERNO) Y EMPAREJAMIENTO CON LOS CANALES DEL M3U
+# =============================================================================
+
+#: Etiquetas de ``<programme>`` que se copian de la guia real. El resto de
+#: etiquetas propias del proveedor se descarta para mantener el XMLTV limpio.
+_ETIQUETAS_PROGRAMA = frozenset(
+    {
+        "title", "sub-title", "desc", "credits", "date", "category", "keyword",
+        "language", "original-language", "country", "episode-num", "icon",
+        "rating", "star-rating", "video", "audio", "previously-shown",
+        "premiere", "new", "subtitles", "url",
+    }
+)
+
+#: Palabras que no aportan identidad al comparar nombres de canales. Se
+#: eliminan solo como token completo ("Canal 5" y "Canal Azteca Uno" siguen
+#: siendo reconocibles, pero "Canal" y "de" dejan de ensuciar la comparacion).
+_PALABRAS_SIN_VALOR = frozenset(
+    {
+        "canal", "channel", "de", "del", "la", "el", "los", "las", "un", "una",
+        "en", "y", "e", "al", "por", "con", "the", "and", "tv", "television",
+        "senal", "signal", "feed", "live", "vivo", "oficial", "official",
+    }
+)
+
+#: Codigos de pais o de feed que las guias anaden como token suelto
+#: ("ESPN MX", "TNT Sports AR"). Se descartan al comparar nombres porque no
+#: aportan identidad: el pais se usa aparte como desempate. Se limita a los
+#: mercados habituales de las listas en espanol para no descartar palabras
+#: cortas con significado propio.
+_CODIGOS_PAIS_TOKENS = frozenset(
+    {
+        "mx", "us", "ar", "co", "cl", "pe", "ve", "ec", "uy", "py", "bo", "br",
+        "es", "pt", "it", "fr", "de", "gb", "uk", "ca", "pa", "cr", "gt", "sv",
+        "hn", "ni", "do", "pr", "cu",
+    }
+)
+
+#: Partes de un nombre compuesto: "Canal 2 (Canal Las Estrellas - XEW)".
+#: No se divide por "/" para no romper nombres como "Deportes 24/7".
+_RE_PARTES_NOMBRE = re.compile(r"[\[\]\(\)\{\}|\u2013\u2014]|\s+-\s+")
+
+#: Token de comparacion: secuencia de letras o digitos ya normalizada.
+_RE_TOKEN_NOMBRE = re.compile(r"[a-z0-9]+")
+
+#: Marcas de calidad que, solas, no identifican ningun canal ("Canal HD").
+_TOKENS_CALIDAD = frozenset({"hd", "fhd", "uhd", "qhd", "sd", "4k", "8k", "hdr", "hevc"})
+
+#: Nombres de pais o region normalizados a un solo token ("Costa Rica" ->
+#: "costarica"). Sirven para descartar variantes que no identifican al canal:
+#: en "Canal Sony (Mexico)", la parte "(Mexico)" no debe emparejar con
+#: cualquier canal mexicano.
+_TOKENS_REGION = frozenset(generar_id(region) for region in _REGIONES)
+
+#: Region o pais (normalizado con :func:`generar_id`) -> codigo ISO de dos
+#: letras. Se usa solo como desempate entre candidatos con el mismo puntaje.
+_CODIGO_POR_REGION = {
+    "mexico": "mx", "mx": "mx", "argentina": "ar", "arg": "ar", "ar": "ar",
+    "chile": "cl", "cl": "cl", "colombia": "co", "co": "co",
+    "peru": "pe", "pe": "pe", "venezuela": "ve", "ve": "ve",
+    "ecuador": "ec", "ec": "ec", "uruguay": "uy", "uy": "uy",
+    "paraguay": "py", "py": "py", "bolivia": "bo", "bo": "bo",
+    "brasil": "br", "brazil": "br", "br": "br", "espana": "es", "spain": "es",
+    "es": "es", "portugal": "pt", "pt": "pt", "panama": "pa", "pa": "pa",
+    "costarica": "cr", "cr": "cr", "guatemala": "gt", "gt": "gt",
+    "honduras": "hn", "hn": "hn", "elsalvador": "sv", "sv": "sv",
+    "nicaragua": "ni", "ni": "ni", "republicadominicana": "do", "do": "do",
+    "puertorico": "pr", "pr": "pr", "cuba": "cu", "cu": "cu",
+    "estadosunidos": "us", "usa": "us", "us": "us", "canada": "ca", "ca": "ca",
+}
+
+
+def urls_epg_por_defecto(paises: "Sequence[str] | None" = None) -> list[str]:
+    """Devuelve las URLs de las guias XMLTV publicas de los paises indicados.
+
+    Sin argumentos usa :data:`PAISES_EPG_POR_DEFECTO`. La plantilla se puede
+    cambiar con la variable de entorno ``EPG_URL_PLANTILLA``.
+    """
+    codigos = paises if paises else PAISES_EPG_POR_DEFECTO
+    urls: list[str] = []
+    for codigo in codigos:
+        codigo = (codigo or "").strip().upper()
+        if not codigo:
+            continue
+        url = PLANTILLA_EPG_PAIS.replace("{pais}", codigo)
+        if url not in urls:
+            urls.append(url)
+    return urls
+
+
+def _descomprimir(datos: bytes) -> bytes:
+    """Descomprime el contenido si viene en gzip (la guia real suele venir asi)."""
+    if datos[:2] == b"\x1f\x8b":
+        try:
+            return gzip.decompress(datos)
+        except OSError:
+            return datos
+    return datos
+
+
+def _texto_epg(datos: bytes) -> str:
+    """Convierte los bytes de una guia (posiblemente gzip) en texto XMLTV."""
+    datos = _descomprimir(datos)
+    if not datos:
+        raise ValueError("la guia EPG esta vacia")
+    if len(datos) > MAX_BYTES_EPG:
+        raise ValueError(
+            f"la guia EPG es demasiado grande ({len(datos) / 1024 / 1024:.0f} MB, "
+            f"maximo {MAX_BYTES_EPG / 1024 / 1024:.0f} MB)"
+        )
+    return _decodificar(datos)
+
+
+def descargar_epg(
+    url: str,
+    timeout: int = TIMEOUT_SEGUNDOS,
+    reintentos: int = REINTENTOS,
+) -> str:
+    """Descarga una guia XMLTV real y devuelve su contenido como texto.
+
+    Acepta respuestas en gzip (extension ``.gz`` o cabecera ``Content-Encoding``)
+    y BOM UTF-8. A diferencia de :func:`descargar_m3u`, un fallo no termina el
+    programa: lanza ``RuntimeError`` para que el llamador pueda probar otra
+    fuente o seguir sin programacion real.
+    """
+    if not url.lower().startswith(("http://", "https://")):
+        raise ValueError(f"la fuente EPG no es una URL valida: {url!r}")
+
+    cabeceras = {
+        "User-Agent": USER_AGENT,
+        "Accept": "*/*",
+        "Accept-Encoding": "identity",
+        "Connection": "close",
+    }
+
+    ultimo_error: Exception | None = None
+    for intento in range(1, reintentos + 1):
+        try:
+            peticion = urllib.request.Request(url, headers=cabeceras)
+            with urllib.request.urlopen(peticion, timeout=timeout) as respuesta:
+                datos = respuesta.read()
+            return _texto_epg(datos)
+        except (urllib.error.HTTPError, urllib.error.URLError, OSError, ValueError) as error:
+            ultimo_error = error
+            if intento < reintentos:
+                time.sleep(1.5 * intento)
+
+    raise RuntimeError(f"no se pudo descargar la guia EPG ({ultimo_error})") from ultimo_error
+
+
+def cargar_fuente_epg(
+    fuente: str,
+    timeout: int = TIMEOUT_SEGUNDOS,
+    reintentos: int = REINTENTOS,
+) -> str:
+    """Carga una guia EPG desde una URL remota o desde un archivo local."""
+    fuente = (fuente or "").strip()
+    if fuente.lower().startswith(("http://", "https://")):
+        return descargar_epg(fuente, timeout=timeout, reintentos=reintentos)
+
+    ruta = os.path.abspath(fuente)
+    with open(ruta, "rb") as archivo:
+        return _texto_epg(archivo.read())
+
+
+def parsear_fecha_xmltv(valor: str) -> datetime | None:
+    """Convierte una fecha XMLTV (``20261102003000 -0600``) en ``datetime`` UTC.
+
+    Admite los formatos que usan las guias reales (con o sin segundos, con o
+    sin desfase horario). Devuelve ``None`` si el valor no es utilizable.
+    """
+    texto = (valor or "").strip()
+    if not texto:
+        return None
+    partes = texto.split()
+    numero = partes[0]
+    desfase = partes[1] if len(partes) > 1 else "+0000"
+    formato = {14: "%Y%m%d%H%M%S", 12: "%Y%m%d%H%M", 8: "%Y%m%d"}.get(len(numero))
+    if formato is None:
+        return None
+    try:
+        base = datetime.strptime(numero, formato)
+        zona = datetime.strptime(desfase, "%z").tzinfo
+    except ValueError:
+        return None
+    return base.replace(tzinfo=zona or timezone.utc).astimezone(timezone.utc)
+
+
+def _texto_normalizado(texto: str) -> str:
+    """Minusculas, sin acentos y solo con letras y digitos separados por espacios."""
+    descompuesto = unicodedata.normalize("NFKD", texto or "")
+    sin_acentos = "".join(
+        caracter for caracter in descompuesto if not unicodedata.combining(caracter)
+    )
+    return " ".join(_RE_TOKEN_NOMBRE.findall(sin_acentos.lower()))
+
+
+def _palabras_clave(texto: str) -> int:
+    """Numero de palabras del nombre, para desempatar entre candidatos."""
+    return len(_texto_normalizado(texto).split())
+
+
+def _tokens_nombre(texto: str) -> tuple[str, ...]:
+    """Convierte un nombre de canal en tokens comparables.
+
+    Se descartan la calidad (HD/FHD...), las opciones ([Opc.2]), el pais del
+    final y las palabras sin valor ("Canal", "de", "TV"...), de modo que
+    "Canal 5 de Mexico (XHGC)" y "Canal 5 HD" quedan como ``("5",)``. Tambien
+    se unifican las grafias "TV UNAM"/"TVUNAM" y se ignoran los codigos de pais
+    sueltos ("ESPN MX" -> ``("espn",)``).
+    """
+    limpio = limpiar_nombre(_RE_PARTES_NOMBRE.sub(" ", texto or ""))
+    tokens = _RE_TOKEN_NOMBRE.findall(_texto_normalizado(limpio))
+    utiles: list[str] = []
+    for token in tokens:
+        if token in _PALABRAS_SIN_VALOR or token in _CODIGOS_PAIS_TOKENS:
+            continue
+        # "TVUNAM" -> "UNAM": el prefijo TV no distingue al canal.
+        if len(token) > 4 and token.startswith("tv"):
+            token = token[2:]
+        utiles.append(token)
+    if not utiles or set(utiles) <= _TOKENS_CALIDAD:
+        return ()
+    # Los canales que solo se llaman por un numero ("Canal 7") conservan la
+    # palabra "canal": asi no se confunden con "La 7" ni con "7 TV".
+    if all(token.isdigit() for token in utiles):
+        if any(token in ("canal", "channel") for token in tokens):
+            return ("canal", *utiles)
+    return tuple(utiles)
+
+
+def _variantes_tokens(*textos: str) -> list[tuple[str, ...]]:
+    """Genera las variantes comparables de un nombre (completo y por partes).
+
+    Las guias reales suelen concatenar varios alias en un mismo
+    ``display-name`` ("Canal 2 de Mexico (Canal Las Estrellas - XEW)"), asi que
+    tambien se comparan las partes por separado. Las partes que solo dicen un
+    pais o region ("(Mexico)") se descartan: no identifican al canal y
+    emparejarian con cualquier canal de ese pais.
+    """
+    variantes: list[tuple[str, ...]] = []
+    for texto in textos:
+        if not texto:
+            continue
+        partes = _RE_PARTES_NOMBRE.split(texto)
+        for indice, candidato in enumerate([texto, *partes]):
+            tokens = _tokens_nombre(candidato)
+            if not tokens or tokens in variantes:
+                continue
+            if indice and all(token in _TOKENS_REGION for token in tokens):
+                continue
+            # Un token de una sola letra ("A&E" -> "a") no identifica nada.
+            if all(len(token) < 2 for token in tokens):
+                continue
+            variantes.append(tokens)
+    return variantes
+
+
+def _clave_id(texto: str) -> str:
+    """Normaliza un id de canal (``ESPN2.us@HD`` -> ``espn2us``) para comparar."""
+    return generar_id((texto or "").split("@", 1)[0])
+
+
+def _pais_de_id(identificador: str) -> str:
+    """Devuelve el codigo de pais del final de un id (``canal5.mx`` -> ``mx``)."""
+    identificador = (identificador or "").strip()
+    if "." not in identificador:
+        return ""
+    sufijo = identificador.rsplit(".", 1)[-1].lower()
+    return sufijo if len(sufijo) == 2 and sufijo.isalpha() else ""
+
+
+def _pais_del_canal(canal: "Mapping[str, str]") -> str:
+    """Pista de pais del canal del M3U: ``tvg-id`` (``canal5.mx``) o region."""
+    pais = _pais_de_id(canal.get("tvg_id", ""))
+    if pais:
+        return pais
+    region = _region_final(canal.get("nombre_m3u", "") or canal.get("nombre", ""))
+    return _CODIGO_POR_REGION.get(generar_id(region), "") if region else ""
+
+
+def _pais_de_fuente(identificador: str, nombres: "Sequence[str]") -> str:
+    """Pais de un canal de la guia: el de su nombre o el del sufijo del id."""
+    for nombre in nombres:
+        region = _region_final(nombre or "")
+        if not region:
+            continue
+        codigo = _CODIGO_POR_REGION.get(generar_id(region), "")
+        if codigo:
+            return codigo
+    return _pais_de_id(identificador)
+
+
+def _puntaje_coincidencia(nuestros: tuple[str, ...], ajenos: tuple[str, ...]) -> float:
+    """Puntua dos conjuntos de tokens: 1.0 identicos, 0.0 si no se parecen.
+
+    Solo se acepta coincidencia exacta o contigua y se exige que el nombre
+    corto cubra al menos :data:`PUNTAJE_MINIMO_EMPAREJAMIENTO` del largo. Asi
+    "Canal 5" empareja con "Canal 5 de Mexico", pero "ESPN" no empareja con
+    "ESPN 2" (0.5 de cobertura).
+    """
+    if not nuestros or not ajenos:
+        return 0.0
+    if nuestros == ajenos:
+        return 1.0
+    corto, largo = (
+        (nuestros, ajenos) if len(nuestros) <= len(ajenos) else (ajenos, nuestros)
+    )
+    cobertura = len(corto) / len(largo)
+    if cobertura < PUNTAJE_MINIMO_EMPAREJAMIENTO:
+        return 0.0
+    for posicion in range(len(largo) - len(corto) + 1):
+        if largo[posicion : posicion + len(corto)] == corto:
+            return round(cobertura, 3)
+    return 0.0
+
+
+def _mejor_coincidencia(
+    nuestras: "Sequence[tuple[str, ...]]",
+    ajenas: "Sequence[tuple[str, ...]]",
+) -> tuple[float, int]:
+    """Devuelve ``(puntaje, tokens coincidentes)`` del mejor par de variantes.
+
+    Los tokens coincidentes desempatan entre dos canales con el mismo puntaje:
+    gana la coincidencia mas especifica ("canal 5 de mexico xhgc" antes que
+    "xhgc"), que es la que identifica realmente al canal.
+    """
+    mejor: tuple[float, int] = (0.0, 0)
+    for propia in nuestras:
+        for ajena in ajenas:
+            puntaje = _puntaje_coincidencia(propia, ajena)
+            if puntaje <= 0:
+                continue
+            especificidad = max(len(propia), len(ajena))
+            if (puntaje, especificidad) > mejor:
+                mejor = (puntaje, especificidad)
+    return mejor
+
+
+def emparejar_canales(
+    canales: "Sequence[Mapping[str, str]]",
+    canales_fuente: "Mapping[str, Sequence[str]]",
+) -> dict[str, str]:
+    """Empareja los canales del M3U con los de una guia XMLTV real.
+
+    Orden de prioridad:
+
+    1. ``tvg-id`` identico al ``<channel id="...">`` de la guia.
+    2. ``tvg-id`` normalizado (sin ``@calidad`` ni simbolos).
+    3. Nombre normalizado (sin calidad, sin parentesis y sin pais) con puntaje
+       mayor o igual a :data:`PUNTAJE_MINIMO_EMPAREJAMIENTO`.
+
+    La coincidencia por nombre se resuelve **por puntaje global**: primero se
+    emparejan los canales con nombres identicos y despues los parecidos, de
+    modo que un nombre exacto nunca pierde su canal frente a uno aproximado.
+    Un canal de la guia no se reutiliza y, en caso de empate, gana el candidato
+    del mismo pais. Devuelve ``{id_canal: id_fuente}``.
+    """
+    indice_id: dict[str, str] = {}
+    variantes: dict[str, list[tuple[str, ...]]] = {}
+    por_token: dict[str, set[str]] = {}
+    pais_fuente: dict[str, str] = {}
+    palabras_fuente: dict[str, int] = {}
+
+    for id_fuente, nombres in canales_fuente.items():
+        indice_id.setdefault(id_fuente.lower(), id_fuente)
+        indice_id.setdefault(_clave_id(id_fuente), id_fuente)
+        variantes[id_fuente] = _variantes_tokens(id_fuente, *nombres)
+        pais_fuente[id_fuente] = _pais_de_fuente(id_fuente, nombres)
+        palabras_fuente[id_fuente] = _palabras_clave(nombres[0] if nombres else id_fuente)
+        for tokens in variantes[id_fuente]:
+            for token in tokens:
+                por_token.setdefault(token, set()).add(id_fuente)
+
+    mapa: dict[str, str] = {}
+    usados: set[str] = set()
+    propuestas: list[tuple[float, int, int, str, str]] = []
+    pendientes: list[Mapping[str, str]] = []
+
+    for canal in canales:
+        canal_id = canal.get("id", "")
+        if not canal_id:
+            continue
+
+        # 1-2) Coincidencia por id (la que usan los reproductores).
+        for clave in (canal.get("tvg_id", ""), canal_id):
+            if not clave:
+                continue
+            fuente = indice_id.get(clave.lower()) or indice_id.get(_clave_id(clave))
+            if fuente and fuente not in usados:
+                mapa[canal_id] = fuente
+                usados.add(fuente)
+                break
+        if canal_id not in mapa:
+            pendientes.append(canal)
+
+    # 3) Coincidencia por nombre normalizado: se acumulan las propuestas y se
+    #    asignan de mayor a menor puntaje.
+    for canal in pendientes:
+        canal_id = canal["id"]
+        nuestras = _variantes_tokens(
+            canal.get("nombre", ""),
+            canal.get("tvg_name", ""),
+            canal.get("nombre_m3u", ""),
+        )
+        candidatos: set[str] = set()
+        for tokens in nuestras:
+            for token in tokens:
+                candidatos.update(por_token.get(token, ()))
+        if not candidatos:
+            continue
+
+        pais = _pais_del_canal(canal)
+        palabras = _palabras_clave(canal.get("nombre", ""))
+        for fuente in candidatos:
+            if fuente in usados:
+                continue
+            puntaje, especificidad = _mejor_coincidencia(nuestras, variantes[fuente])
+            if puntaje < PUNTAJE_MINIMO_EMPAREJAMIENTO:
+                continue
+            if pais and pais == pais_fuente.get(fuente):
+                puntaje += 0.05
+            # Desempate: el nombre con un numero de palabras mas parecido.
+            cercania = -abs(palabras - palabras_fuente.get(fuente, palabras))
+            propuestas.append((puntaje, especificidad, cercania, canal_id, fuente))
+
+    for _puntaje, _especificidad, _cercania, canal_id, fuente in sorted(
+        propuestas, reverse=True
+    ):
+        if canal_id in mapa or fuente in usados:
+            continue
+        mapa[canal_id] = fuente
+        usados.add(fuente)
+
+    return mapa
+
+
+def parsear_epg_canales(texto: str) -> dict[str, list[str]]:
+    """Extrae de una guia XMLTV ``{id_canal: [display-name, ...]}``.
+
+    Usa ``iterparse`` para no cargar la guia completa en memoria (las guias
+    reales ocupan decenas de MB) y libera los nodos ya procesados.
+    """
+    canales: dict[str, list[str]] = {}
+    contexto = ET.iterparse(io.StringIO(texto), events=("start", "end"))
+    try:
+        _, raiz = next(contexto)
+    except StopIteration:
+        return canales
+
+    for evento, elemento in contexto:
+        if evento != "end":
+            continue
+        if elemento.tag == "channel":
+            identificador = (elemento.get("id") or "").strip()
+            if identificador:
+                nombres = canales.setdefault(identificador, [])
+                for hijo in elemento.findall("display-name"):
+                    nombre = (hijo.text or "").strip()
+                    if nombre and nombre not in nombres:
+                        nombres.append(nombre)
+        # Solo se liberan los nodos de primer nivel: si se vaciara un
+        # <display-name> antes de tiempo se perderia su texto.
+        if elemento.tag in ("channel", "programme"):
+            elemento.clear()
+            raiz.clear()
+
+    return canales
+
+
+def _programa_en_ventana(
+    elemento: ET.Element,
+    desde: datetime,
+    hasta: datetime,
+) -> ET.Element | None:
+    """Copia un ``<programme>`` normalizando sus fechas a UTC (+0000).
+
+    Devuelve ``None`` si el programa no se solapa con la ventana pedida, si no
+    tiene una fecha de inicio valida o si no tiene titulo (XMLTV lo exige).
+    """
+    inicio = parsear_fecha_xmltv(elemento.get("start", ""))
+    if inicio is None:
+        return None
+    fin = parsear_fecha_xmltv(elemento.get("stop", ""))
+    if fin is not None and fin <= desde:
+        return None
+    if inicio > hasta:
+        return None
+
+    atributos = {"start": _sello(inicio)}
+    if fin is not None and fin > inicio:
+        atributos["stop"] = _sello(fin)
+    programa = ET.Element("programme", atributos)
+    for hijo in elemento:
+        if hijo.tag in _ETIQUETAS_PROGRAMA:
+            programa.append(hijo)
+    if programa.find("title") is None:
+        return None
+    return programa
+
+
+def parsear_epg_programas(
+    texto: str,
+    ids_fuente: "Sequence[str] | set[str]",
+    desde: datetime,
+    hasta: datetime,
+) -> dict[str, list[ET.Element]]:
+    """Extrae los ``<programme>`` de los canales indicados dentro de la ventana.
+
+    Devuelve ``{id_canal_fuente: [<programme>, ...]}`` con las fechas ya
+    normalizadas a UTC. Solo se conservan los programas de los canales que se
+    han emparejado, de modo que el archivo de salida no crece de mas.
+    """
+    programas: dict[str, list[ET.Element]] = {}
+    buscados = set(ids_fuente)
+    if not buscados:
+        return programas
+
+    contexto = ET.iterparse(io.StringIO(texto), events=("start", "end"))
+    try:
+        _, raiz = next(contexto)
+    except StopIteration:
+        return programas
+
+    for evento, elemento in contexto:
+        if evento != "end":
+            continue
+        if elemento.tag == "programme":
+            fuente = (elemento.get("channel") or "").strip()
+            if fuente in buscados:
+                programa = _programa_en_ventana(elemento, desde, hasta)
+                if programa is not None:
+                    programas.setdefault(fuente, []).append(programa)
+        # Solo se liberan los nodos de primer nivel: si se vaciara un <title>
+        # antes de tiempo se perderia el texto del programa.
+        if elemento.tag in ("programme", "channel"):
+            elemento.clear()
+            raiz.clear()
+
+    return programas
+
+
+def integrar_epg(
+    canales: "Sequence[Mapping[str, str]]",
+    fuentes: "Sequence[str]",
+    ventana: tuple[datetime, datetime],
+    *,
+    timeout: int = TIMEOUT_SEGUNDOS,
+    reintentos: int = REINTENTOS,
+    cargador=None,
+    aviso=None,
+) -> tuple[dict[str, list[ET.Element]], dict[str, str], list[dict[str, object]]]:
+    """Descarga las guias reales y acumula la programacion de cada canal.
+
+    Procesa las fuentes en orden: la primera que empareja un canal es la que
+    aporta su programacion (las siguientes solo cubren los canales pendientes).
+    Un fallo en una fuente no interrumpe el resto.
+
+    Devuelve ``(programas, emparejados, informes)``:
+
+    * ``programas``: ``{id_canal: [<programme>, ...]}`` listo para el XMLTV.
+    * ``emparejados``: ``{id_canal: id_canal_fuente}``.
+    * ``informes``: una entrada por fuente con canales, emparejados y error.
+    """
+    desde, hasta = ventana
+    cargar = cargador or (
+        lambda fuente: cargar_fuente_epg(fuente, timeout=timeout, reintentos=reintentos)
+    )
+    avisar = aviso or (lambda mensaje: None)
+
+    programas: dict[str, list[ET.Element]] = {}
+    emparejados: dict[str, str] = {}
+    asignados: set[str] = set()
+    informes: list[dict[str, object]] = []
+
+    for fuente in fuentes:
+        informe: dict[str, object] = {
+            "fuente": fuente,
+            "canales": 0,
+            "emparejados": 0,
+            "programas": 0,
+            "error": "",
+        }
+        informes.append(informe)
+        try:
+            texto = cargar(fuente)
+            canales_fuente = parsear_epg_canales(texto)
+            if not canales_fuente:
+                raise ValueError("la guia no contiene canales <channel>")
+
+            # La primera guia que reconoce un canal decide su programacion; las
+            # siguientes solo cubren los canales que aun no tienen pareja.
+            pendientes = [canal for canal in canales if canal["id"] not in asignados]
+            mapa = emparejar_canales(pendientes, canales_fuente)
+            asignados.update(mapa)
+            reales = parsear_epg_programas(texto, set(mapa.values()), desde, hasta)
+
+            nuevos = 0
+            for canal_id, fuente_id in mapa.items():
+                lista = reales.get(fuente_id) or []
+                if not lista:
+                    continue
+                programas[canal_id] = lista
+                emparejados[canal_id] = fuente_id
+                nuevos += len(lista)
+
+            informe.update(
+                {
+                    "canales": len(canales_fuente),
+                    "emparejados": len(mapa),
+                    "programas": nuevos,
+                }
+            )
+            avisar(
+                f"      {fuente}\n"
+                f"        canales en la guia: {len(canales_fuente)} | "
+                f"emparejados: {len(mapa)} | programas: {nuevos}"
+            )
+        except (RuntimeError, OSError, ValueError, ET.ParseError) as error:
+            informe["error"] = str(error)
+            avisar(f"      Aviso: se omite {fuente} ({error})")
+
+    return programas, emparejados, informes
+
+
+def epg_de_ejemplo(inicio: datetime) -> str:
+    """Guia XMLTV de ejemplo para ``--demo`` (sin red).
+
+    Reproduce los casos tipicos del emparejamiento: un id identico
+    (``canal5.mx``), un nombre con prefijo (``Canal Las Estrellas``), un nombre
+    con calidad (``Cine Latino HD``) y dos canales de la lista sin guia
+    (``deportes247`` y ``Canal Local``) para ver el fallback sin relleno.
+    """
+    canales = (
+        (
+            "canal5.mx",
+            "Canal 5",
+            (
+                ("Noticiero Matutino", "Noticias"),
+                ("Cine de la Tarde", "Cine"),
+                ("Serie Nocturna", "Series"),
+            ),
+        ),
+        (
+            "Canal.Las.Estrellas.mx",
+            "Canal Las Estrellas",
+            (
+                ("Hoy", "Variedades"),
+                ("La Rosa de Guadalupe", "Drama"),
+                ("Noticiero Estelar", "Noticias"),
+            ),
+        ),
+        (
+            "cinelatino.mx",
+            "Cine Latino HD",
+            (
+                ("Cine Clasico", "Cine"),
+                ("Cine de Accion", "Cine"),
+                ("Cine de Autor", "Cine"),
+            ),
+        ),
+        (
+            "meganoticias.mx",
+            "Mega Noticias",
+            (
+                ("Primera Edicion", "Noticias"),
+                ("Mega Tarde", "Noticias"),
+                ("Mega Noche", "Noticias"),
+            ),
+        ),
+    )
+
+    lineas = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<tv generator-info-name="epg-de-ejemplo">',
+    ]
+    for id_fuente, nombre, _bloques in canales:
+        lineas.append(f'  <channel id="{id_fuente}">')
+        lineas.append(f'    <display-name lang="es">{nombre}</display-name>')
+        lineas.append("  </channel>")
+    for id_fuente, _nombre, bloques in canales:
+        for indice, (titulo, categoria) in enumerate(bloques):
+            comienzo = inicio + timedelta(hours=6 * indice)
+            lineas.append(
+                f'  <programme start="{_sello(comienzo)}" '
+                f'stop="{_sello(comienzo + timedelta(hours=6))}" channel="{id_fuente}">'
+                f'<title lang="es">{titulo}</title>'
+                f'<category lang="es">{categoria}</category>'
+                "</programme>"
+            )
+    lineas.append("</tv>")
+    return "\n".join(lineas) + "\n"
+
+
+# =============================================================================
+# 6. CONSTRUCCION DEL XMLTV
 # =============================================================================
 
 def _sello(fecha: datetime) -> str:
@@ -803,15 +1569,53 @@ def _nombres_alternativos(canal: Mapping[str, str]) -> list[str]:
     return alias
 
 
+def _agregar_programas_reales(
+    raiz: ET.Element,
+    programas: "Sequence[ET.Element]",
+    canal_id: str,
+) -> int:
+    """Añade a la guia los ``<programme>`` reales de un canal.
+
+    Se ordenan por hora de inicio y se descartan los duplicados
+    (mismo canal y misma hora), que aparecen cuando dos guias se solapan.
+    Devuelve el numero de programas añadidos.
+    """
+    vistos: set[str] = set()
+    total = 0
+    for programa in sorted(programas, key=lambda nodo: nodo.get("start", "")):
+        comienzo = programa.get("start", "")
+        if not comienzo or comienzo in vistos:
+            continue
+        vistos.add(comienzo)
+
+        atributos = {"start": comienzo, "channel": canal_id}
+        fin = programa.get("stop", "")
+        if fin:
+            atributos["stop"] = fin
+        nodo = ET.SubElement(raiz, "programme", atributos)
+        for hijo in programa:
+            nodo.append(hijo)
+        total += 1
+    return total
+
+
 def construir_xmltv(
     canales: Sequence[Mapping[str, str]],
     inicio: datetime,
+    programas: "Mapping[str, Sequence[ET.Element]] | None" = None,
+    relleno: bool = True,
 ) -> tuple[ET.Element, int]:
-    """Construye el arbol XMLTV con los canales y sus 24 h de programacion.
+    """Construye el arbol XMLTV con los canales y su programacion.
 
-    Devuelve la raiz ``<tv>`` y el numero total de bloques ``<programme>``
-    generados (6 por canal).
+    ``programas`` es el mapa ``{id_canal: [<programme>]}`` que devuelve
+    :func:`integrar_epg`: los canales con programacion real se publican tal
+    cual. ``relleno`` solo afecta a los canales **sin** programacion real: con
+    ``True`` reciben la parrilla generica de 24 h (comportamiento historico) y
+    con ``False`` se publican sin ``<programme>``, sin inventar contenido.
+
+    Devuelve la raiz ``<tv>`` y el numero total de ``<programme>`` escritos.
     """
+    programas_reales = programas or {}
     raiz = ET.Element(
         "tv",
         {
@@ -830,9 +1634,17 @@ def construir_xmltv(
         if logo and logo.lower().startswith(("http://", "https://")):
             ET.SubElement(nodo_canal, "icon", {"src": logo})
 
-    # 2) Parrilla generica: 6 bloques continuos de 4 horas = 24 h por canal.
+    # 2) Programacion: la real de cada canal emparejado y, solo si se pide
+    #    (o si no hubo ninguna guia utilizable), la parrilla generica de 24 h.
     total_programas = 0
     for canal in canales:
+        reales = programas_reales.get(canal["id"]) or ()
+        if reales:
+            total_programas += _agregar_programas_reales(raiz, reales, canal["id"])
+            continue
+        if not relleno:
+            continue
+
         semilla = _semilla(canal["id"])
         for indice, bloque in enumerate(BLOQUES_24H):
             comienzo = inicio + timedelta(hours=int(bloque["hora"]))
@@ -896,7 +1708,7 @@ def escribir_xmltv(raiz: ET.Element, destino: str, incluir_doctype: bool = True)
 
 
 # =============================================================================
-# 6. INTERFAZ DE LINEA DE COMANDOS
+# 7. INTERFAZ DE LINEA DE COMANDOS
 # =============================================================================
 
 def _es_url_placeholder(url: str) -> bool:
@@ -915,7 +1727,7 @@ def _crear_parser() -> argparse.ArgumentParser:
         prog="generar_epg.py",
         description=(
             "Genera una guia EPG en formato XMLTV (epg.xml) a partir de una lista "
-            "M3U remota, con 24 h de programacion generica por canal."
+            "M3U remota y de guias XMLTV reales publicas."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
@@ -923,8 +1735,11 @@ def _crear_parser() -> argparse.ArgumentParser:
             "  python generar_epg.py --demo\n"
             "  python generar_epg.py --url https://raw.githubusercontent.com/USUARIO/REPO/main/lista.m3u\n"
             "  python generar_epg.py -u \"$M3U_URL\" -s epg.xml\n"
-            "  python generar_epg.py -u \"$M3U_URL\" --sin-tvg-id       # ids desde el nombre\n"
-            "  python generar_epg.py -u \"$M3U_URL\" --conservar-tvg-id  # tvg-id literal (@HD)\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --epg-pais MX,ES,AR    # guias reales por pais\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --epg https://ejemplo.com/guia.xml.gz\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --epg-archivo guia.xml --horas-ventana 48\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --sin-epg --relleno     # parrilla generica\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --sin-tvg-id            # ids desde el nombre\n"
         ),
     )
     parser.add_argument(
@@ -947,6 +1762,55 @@ def _crear_parser() -> argparse.ArgumentParser:
         "-f", "--fecha",
         default=None,
         help="Fecha de inicio de la guia en formato YYYY-MM-DD (por defecto: hoy).",
+    )
+    parser.add_argument(
+        "-e", "--epg",
+        action="append",
+        default=None,
+        metavar="URL",
+        help=(
+            "Fuente EPG real (XMLTV, admite gzip): URL o ruta local. Se puede repetir "
+            "o separar varias con comas. Por defecto se usan las guias de --epg-pais."
+        ),
+    )
+    parser.add_argument(
+        "--epg-pais",
+        default=None,
+        metavar="CODIGOS",
+        help=(
+            "Codigos ISO de los paises cuyas guias publicas se descargan "
+            "(por defecto: " + ",".join(PAISES_EPG_POR_DEFECTO) + ")."
+        ),
+    )
+    parser.add_argument(
+        "--epg-archivo",
+        action="append",
+        default=None,
+        metavar="RUTA",
+        help="Guia XMLTV local (XML o .gz) para emparejar los canales, sin descargarla.",
+    )
+    parser.add_argument(
+        "--sin-epg",
+        action="store_true",
+        help="No usar ninguna guia real: genera solo la parrilla generica de 24 h.",
+    )
+    parser.add_argument(
+        "--horas-ventana",
+        type=int,
+        default=HORAS_GUIA_REAL,
+        metavar="N",
+        help=(
+            "Horas de programacion real que se conservan desde el inicio de la guia "
+            f"(por defecto: {HORAS_GUIA_REAL})."
+        ),
+    )
+    parser.add_argument(
+        "--relleno",
+        action="store_true",
+        help=(
+            "Rellenar con la parrilla generica los canales sin programacion real. "
+            "Por defecto esos canales se publican sin programas."
+        ),
     )
     parser.add_argument(
         "--sin-tvg-id",
@@ -977,7 +1841,10 @@ def _crear_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--demo",
         action="store_true",
-        help="Generar la EPG con la lista M3U de ejemplo, sin descargar nada.",
+        help=(
+            "Generar la EPG con la lista M3U y la guia XMLTV de ejemplo, sin "
+            "descargar nada."
+        ),
     )
     parser.add_argument(
         "-q", "--silencioso",
@@ -988,11 +1855,36 @@ def _crear_parser() -> argparse.ArgumentParser:
 
 
 # =============================================================================
-# 7. PROGRAMA PRINCIPAL
+# 8. PROGRAMA PRINCIPAL
 # =============================================================================
 
+def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
+    """Construye la lista de fuentes EPG reales a partir de los argumentos.
+
+    Prioridad: ``--epg`` y ``--epg-archivo`` (en ese orden) > ``--epg-pais`` >
+    variable de entorno ``EPG_URL`` > guias publicas por pais por defecto.
+    """
+    fuentes: list[str] = []
+    for valor in argumentos.epg or []:
+        for parte in str(valor).split(","):
+            parte = parte.strip()
+            if parte and parte not in fuentes:
+                fuentes.append(parte)
+    for ruta in argumentos.epg_archivo or []:
+        ruta = (ruta or "").strip()
+        if ruta and ruta not in fuentes:
+            fuentes.append(ruta)
+    if fuentes:
+        return fuentes
+    if argumentos.epg_pais is not None:
+        return urls_epg_por_defecto(argumentos.epg_pais.split(","))
+    if URL_EPG:
+        return [parte.strip() for parte in URL_EPG.split(",") if parte.strip()]
+    return urls_epg_por_defecto()
+
+
 def main(argv: list[str] | None = None) -> int:
-    """Ejecuta el flujo completo: descarga -> analisis -> limpieza -> XMLTV."""
+    """Flujo completo: M3U -> canales -> EPG real -> emparejamiento -> XMLTV."""
     argumentos = _crear_parser().parse_args(argv)
     hablador = not argumentos.silencioso
 
@@ -1006,7 +1898,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- 1. Origen de datos -------------------------------------------------
     if argumentos.demo:
-        aviso("[1/5] Usando la lista M3U de ejemplo (--demo), sin descargar nada.")
+        aviso("[1/6] Usando la lista M3U de ejemplo (--demo), sin descargar nada.")
         texto_m3u = M3U_DE_EJEMPLO
         origen = "lista de ejemplo (--demo)"
     else:
@@ -1024,12 +1916,12 @@ def main(argv: list[str] | None = None) -> int:
                 "Nota: 'https://githubusercontent.com' no es una lista M3U valida "
                 "(sirve HTML, no el archivo). Para probar sin conexion usa --demo."
             )
-        aviso(f"[1/5] Descargando la lista M3U desde {url} ...")
+        aviso(f"[1/6] Descargando la lista M3U desde {url} ...")
         texto_m3u = descargar_m3u(url, timeout=argumentos.timeout)
         origen = url
 
     # --- 2. Analisis del M3U ------------------------------------------------
-    aviso("[2/5] Analizando el archivo M3U (nombre + tvg-logo) ...")
+    aviso("[2/6] Analizando el archivo M3U (nombre + tvg-logo) ...")
     canales_brutos = parsear_m3u(texto_m3u)
     if not canales_brutos:
         raise SystemExit(
@@ -1039,7 +1931,7 @@ def main(argv: list[str] | None = None) -> int:
     aviso(f"      Entradas #EXTINF encontradas: {len(canales_brutos)}")
 
     # --- 3. Limpieza y deduplicacion ---------------------------------------
-    aviso("[3/5] Limpiando nombres (SD/HD/FHD/[Opc.N]/pais) y generando ids ...")
+    aviso("[3/6] Limpiando nombres (SD/HD/FHD/[Opc.N]/pais) y generando ids ...")
     canales = consolidar_canales(
         canales_brutos,
         usar_tvg_id=not argumentos.sin_tvg_id,
@@ -1052,7 +1944,7 @@ def main(argv: list[str] | None = None) -> int:
         f"generados desde el nombre: {len(canales) - con_tvg_id}"
     )
 
-    # --- 4. Generacion del XMLTV -------------------------------------------
+    # --- 4. Programacion real (EPG externo) --------------------------------
     if argumentos.fecha:
         try:
             fecha_inicio = datetime.strptime(argumentos.fecha, "%Y-%m-%d").date()
@@ -1065,12 +1957,66 @@ def main(argv: list[str] | None = None) -> int:
         fecha_inicio = datetime.now().date()
 
     inicio = _inicio_del_dia(fecha_inicio)
-    aviso(f"[4/5] Generando 24 h de programacion desde {inicio:%Y-%m-%d 00:00:00} {DESFASE_UTC} ...")
-    raiz, total_programas = construir_xmltv(canales, inicio)
+    ventana = (inicio, inicio + timedelta(hours=max(1, argumentos.horas_ventana)))
+    programas: dict[str, list[ET.Element]] = {}
+    emparejados: dict[str, str] = {}
+    informes: list[dict[str, object]] = []
 
-    # --- 5. Escritura y validacion -----------------------------------------
+    if argumentos.sin_epg:
+        aviso("[4/6] EPG real desactivado (--sin-epg): parrilla generica de 24 h.")
+    else:
+        fuentes = _fuentes_epg_desde_argumentos(argumentos)
+        offline = argumentos.demo and not (
+            argumentos.epg or argumentos.epg_archivo or argumentos.epg_pais
+        )
+        cargador = None
+        if offline:
+            fuentes = ["guia XMLTV de ejemplo (--demo)"]
+            texto_ejemplo = epg_de_ejemplo(inicio)
+
+            def cargador(_fuente: str) -> str:
+                return texto_ejemplo
+
+            aviso("[4/6] Usando la guia XMLTV de ejemplo (--demo), sin descargar nada.")
+        else:
+            aviso(f"[4/6] Cargando {len(fuentes)} guia(s) XMLTV reales ...")
+
+        aviso(
+            f"      Ventana de programacion: {ventana[0]:%Y-%m-%d %H:%M} a "
+            f"{ventana[1]:%Y-%m-%d %H:%M} UTC"
+        )
+        programas, emparejados, informes = integrar_epg(
+            canales,
+            fuentes,
+            ventana,
+            timeout=argumentos.timeout,
+            cargador=cargador,
+            aviso=aviso,
+        )
+        sin_coincidencia = len(canales) - len(programas)
+        aviso(
+            f"      Canales con programacion real: {len(programas)} | "
+            f"sin coincidencia: {sin_coincidencia}"
+        )
+        if sin_coincidencia and not argumentos.relleno:
+            aviso("      (se publican sin programas; use --relleno para rellenarlos)")
+
+    relleno = argumentos.relleno or not programas
+    if not programas:
+        aviso("      Sin programacion real: se usa la parrilla generica de 24 h.")
+
+    # --- 5. Generacion del XMLTV -------------------------------------------
+    aviso(f"[5/6] Generando el XMLTV desde {inicio:%Y-%m-%d 00:00:00} {DESFASE_UTC} ...")
+    raiz, total_programas = construir_xmltv(
+        canales,
+        inicio,
+        programas=programas,
+        relleno=relleno,
+    )
+
+    # --- 6. Escritura y validacion -----------------------------------------
     destino = os.path.abspath(argumentos.salida)
-    aviso(f"[5/5] Escribiendo {destino} ...")
+    aviso(f"[6/6] Escribiendo {destino} ...")
     try:
         tamano = escribir_xmltv(raiz, destino, incluir_doctype=not argumentos.sin_doctype)
         validado = ET.parse(destino).getroot()
@@ -1089,7 +2035,18 @@ def main(argv: list[str] | None = None) -> int:
     aviso(f" Origen              : {origen}")
     aviso(f" Entradas M3U        : {len(canales_brutos)}")
     aviso(f" Canales unicos      : {len(canales)}")
-    aviso(f" Bloques <programme> : {total_programas} ({len(canales)} x {len(BLOQUES_24H)} bloques)")
+    aviso(
+        f" Canales con EPG real: {len(programas)} | "
+        f"sin coincidencia: {len(canales) - len(programas)}"
+    )
+    aviso(f" Programas <programme>: {total_programas}")
+    for informe in informes:
+        estado = informe["error"] or "ok"
+        aviso(
+            f"   - {informe['fuente']}: canales={informe['canales']} "
+            f"emparejados={informe['emparejados']} "
+            f"programas={informe['programas']} [{estado}]"
+        )
     aviso(f" Archivo generado    : {destino}")
     aviso(f" Tamano              : {tamano / 1024:.1f} KB")
     aviso(f" XML valido          : si (leido de nuevo con ElementTree)")
@@ -1097,7 +2054,11 @@ def main(argv: list[str] | None = None) -> int:
     aviso(" Primeros canales generados:")
     for canal in canales[:10]:
         marca_logo = "logo si" if canal["logo"] else "sin logo"
-        aviso(f"   - {canal['id']:<24} {canal['nombre']}  [{marca_logo} / {canal['origen']}]")
+        marca_epg = emparejados.get(canal["id"], "-")
+        aviso(
+            f"   - {canal['id']:<24} {canal['nombre']}  "
+            f"[{marca_logo} / {canal['origen']} / epg: {marca_epg}]"
+        )
     if len(canales) > 10:
         aviso(f"   ... y {len(canales) - 10} canales mas.")
     aviso("")
