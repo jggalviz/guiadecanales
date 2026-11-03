@@ -180,7 +180,7 @@ usar, la guía se genera con la parrilla genérica para que el reproductor no qu
 sin datos. Con una lista de 1.433 canales, el conjunto por defecto (17 países +
 Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~30 canales
 con programación frente a las guías latinoamericanas solas (`epg.xml` pasa de
-257 a ~290 canales con EPG y de 8 a 10 MB). La guía de `FR` se incluye porque
+257 a ~290 canales con EPG y de 8 a 10,5 MB). La guía de `FR` se incluye porque
 aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus canales
 `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque `CANAL+` se
 trata como **marca**, no como la palabra «canal» seguida de «live».
