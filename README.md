@@ -14,10 +14,15 @@ lista.m3u  ──►  generar_epg.py  ──►  epg.xml (XMLTV)
 - ✅ Descarga la lista M3U desde una URL (`urllib.request`) con User-Agent de
   navegador, reintentos y detección automática de codificación.
 - ✅ Extrae de cada `#EXTINF` el **nombre del canal** (texto posterior a la
-  última coma) y el atributo **`tvg-logo`**.
-- ✅ **Unifica señales duplicadas**: `[Opc.2]`, `HD`, `SD`, `FHD`, `(1080p)`,
-  `[LAT]`, `Señal 2`… y genera un **`id` único** (solo `a-z0-9`).
-- ✅ Genera `epg.xml` con `<channel>` (`<display-name>` + `<icon src="...">`) y
+  última coma), los atributos **`tvg-logo`**, **`tvg-id`** y **`tvg-name`**.
+- ✅ **Prioriza el `tvg-id` de la lista** como `id` del `<channel>` (es lo que
+  usan TiviMate, OTT Navigator, IPTV Smarters o Kodi para emparejar), y agrupa
+  las variantes de calidad de un mismo id (`ESPN2.us@HD` / `ESPN2.us@SD`).
+- ✅ **Unifica señales duplicadas**: `[Opc.2]`, `HD`, `SD`, `FHD`, `4K`,
+  `(1080p)`, `[LAT]`, `Señal 2`, `Feed 4`, `Full HD`, país al final…
+- ✅ Publica **alias `<display-name>`** (nombre limpio + `tvg-name` + nombre
+  original del M3U) para que el reproductor empareje también por nombre.
+- ✅ Genera `epg.xml` con `<channel>` (`<display-name>` + `<icon src="..."`) y
   **6 bloques `<programme>` de 4 h** por canal = 24 h continuas.
 - ✅ Fechas en formato `YYYYMMDDHHMMSS +0000`, arrancando en la **fecha actual
   del sistema a las 00:00:00**.
@@ -25,7 +30,7 @@ lista.m3u  ──►  generar_epg.py  ──►  epg.xml (XMLTV)
   limpia de 2 espacios.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ 10 pruebas unitarias con `unittest` y workflow de GitHub Actions.
+- ✅ **22 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -99,11 +104,30 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-s`, `--salida` | Archivo XMLTV de salida (por defecto `epg.xml`). |
 | `-t`, `--timeout` | Espera máxima de la descarga en segundos (30 por defecto). |
 | `-f`, `--fecha` | Fecha de inicio `YYYY-MM-DD` (por defecto, hoy). |
-| `--usar-tvg-id` | Usa el `tvg-id` del M3U como `id` del canal (mejor emparejado con la lista). |
+| `--sin-tvg-id` | Ignora el `tvg-id` y genera los `id` desde el nombre limpio. |
+| `--conservar-tvg-id` | Respeta el `tvg-id` literal (con el sufijo `@HD`/`@SD`). |
+| `--usar-tvg-id` | *Obsoleto*: ahora el `tvg-id` se usa siempre que exista (ver `--sin-tvg-id`). |
 | `--sin-doctype` | No escribir la línea `<!DOCTYPE tv SYSTEM "xmltv.dtd">`. |
 | `--demo` | Genera la guía con una lista M3U de ejemplo, sin descargar nada. |
 | `-q`, `--silencioso` | Muestra solo los errores. |
 
+
+## Cómo se empareja la guía con la lista (`tvg-id`)
+
+1. **Si la entrada trae un `tvg-id` válido, ese es el `id` del `<channel>`.**
+   Es el valor que el reproductor compara con la lista, así que es el que
+   garantiza que la guía no salga vacía.
+2. El sufijo posterior a `@` se descarta porque identifica la **calidad o el
+   feed**, no el canal: `ESPN2.us@HD`, `ESPN2.us@SD` y `ESPN2.us` son el mismo
+   `<channel>` (`ESPN2.us`); `ESPNLatinAmerica.us@Argentina` y
+   `ESPNLatinAmerica.us@South` también. Con `--conservar-tvg-id` se respeta el
+   valor literal (para listas que emparejan de forma estricta).
+3. Si el `tvg-id` no existe o no es utilizable (`""`, `0`, `none`, `sin-epg`,
+   con espacios…), el `id` se genera desde el nombre limpio (`ESPN 2 HD` →
+   `espn2`).
+4. Cada `<channel>` publica varios `<display-name>`: el nombre limpio (con
+   `lang="es"`), el `tvg-name` del M3U y el nombre original de la entrada
+   (`ESPN 2 HD [LAT]`), para que el emparejamiento por nombre también funcione.
 
 ## Cómo se limpian los nombres
 
@@ -116,9 +140,25 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `Cine Latino SD` | `Cine Latino` | `cinelatino` |
 | `Mega Noticias (1080p)` | `Mega Noticias` | `meganoticias` |
 | `TNT Series FHD (Opcion 3)` | `TNT Series` | `tntseries` |
+| `TNT Series Feed 4` | `TNT Series` | `tntseries` |
 | `HBO SignatureHD` | `HBO Signature` | `hbosignature` |
 | `ESPN 2 HD [LAT]` | `ESPN 2` | `espn2` |
+| `ESPN2` | `ESPN2` | `espn2` |
+| `ESPN 2 FHD` | `ESPN 2` | `espn2` |
+| `ESPN Premium HD (1080p)` | `ESPN Premium` | `espnpremium` |
+| `TNT Sports Chile HD` | `TNT Sports` | `tntsports` |
 | `Deportes 24/7 UHD` | `Deportes 24/7` | `deportes247` |
+
+\* Las variantes `ESPN2`, `ESPN 2`, `ESPN 2 HD [LAT]` y `ESPN 2 FHD` comparten el
+mismo `id` (`espn2`), que es lo que importa para unificar la guía; el nombre
+publicado es el de la primera aparición en la lista.
+
+> ℹ️ El país del final (`Chile`, `(Argentina)`, `- México`, `[LAT]`) se descarta
+> **solo si el nombre sigue teniendo al menos dos palabras**: `TNT Sports Chile`
+> → `TNT Sports`, pero `Cine Latino`, `Mega Chile` o `ESPN Chile` se conservan.
+> Y si dos señales del mismo nombre solo se diferencian en el país (`TNT Sports
+> Chile` y `TNT Sports Argentina`), **no se fusionan**: se quedan como dos
+> canales con su país en el nombre.
 
 Las entradas que producen el **mismo `id`** se consideran la misma señal: se
 publica un solo `<channel>` (con el logo de la primera aparición que lo tenga) y
@@ -166,9 +206,11 @@ la parrilla es estable entre ejecuciones pero distinta entre señales.
 python -m unittest discover -s tests -v
 ```
 
-Cubren: limpieza de nombres, generación de `id`, parseo del M3U, unificación de
-duplicados, presencia de `<display-name>`/`<icon>`, continuidad de los 6 bloques
-de 4 h, formato `YYYYMMDDHHMMSS +0000` y cabecera UTF-8 del archivo.
+Cubren: limpieza de nombres (calidades, opciones, `Full HD`, país al final),
+generación de `id`, prioridad y normalización del `tvg-id`, unificación de
+duplicados, parseo del M3U, presencia de `<display-name>`/`<icon>`, alias de
+nombres, continuidad de los 6 bloques de 4 h, formato `YYYYMMDDHHMMSS +0000`,
+integridad `programme` → `channel` y cabecera UTF-8 del archivo.
 
 ## Publicar en GitHub (pasos)
 
@@ -225,7 +267,9 @@ https://USUARIO.github.io/REPOSITORIO/epg.xml
 | `Debes indicar la URL real de tu lista M3U` | Sigue el mensaje: usa `--url`, `M3U_URL` o edita `URL_M3U`. |
 | `HTTP Error 404` | La URL no es el enlace `raw` del archivo o el repositorio es privado. |
 | `No se encontró ningún canal válido` | El contenido descargado no es un M3U (¿HTML de la página del repo?). |
-| La guía aparece vacía en el reproductor | Comprueba la URL del EPG en el reproductor y que los `id` coincidan con tu M3U: prueba `--usar-tvg-id`, que usa el `tvg-id` original de la lista. |
+| La guía aparece vacía en el reproductor | Comprueba la URL del EPG y que los `id` coincidan con los `tvg-id` de tu lista. Por defecto ya se usan esos ids; si tu lista empareja de forma estricta, prueba `--conservar-tvg-id`. |
+| Los `id` salen como `espn2` en vez del `tvg-id` | Tu lista no trae `tvg-id` válido para ese canal, o usaste `--sin-tvg-id`. |
+| Varios canales aparecen duplicados en la guía | Son señales distintas (mismo nombre, distinto `tvg-id`/país); con `--sin-tvg-id` se fusionan por nombre. |
 | Nombres con calidad pegada al nombre | Ajusta `_RE_CALIDAD` y `_RE_SUFIJO_PEGADO` (bloque 4 del script). |
 | Windows: `UnicodeEncodeError` en la consola | Usa Windows Terminal o PowerShell 7; el archivo `epg.xml` siempre se escribe en UTF-8. |
 

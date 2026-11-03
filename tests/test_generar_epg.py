@@ -31,26 +31,77 @@ class LimpiezaDeNombresTests(unittest.TestCase):
         casos = {
             "Canal 5 HD": "Canal 5",
             "Canal 5 FHD [Opc.2]": "Canal 5",
+            "Canal 5 Full HD": "Canal 5",
+            "Canal 5 HD2": "Canal 5",
             "Las Estrellas [Opc.2]": "Las Estrellas",
             "Mega Noticias (1080p)": "Mega Noticias",
             "Cine Latino SD": "Cine Latino",
             "TNT Series FHD (Opcion 3)": "TNT Series",
+            "TNT Series (Señal 2)": "TNT Series",
+            "TNT Series Feed 4": "TNT Series",
             "HBO SignatureHD": "HBO Signature",
             "ESPN 2 HD [LAT]": "ESPN 2",
+            "ESPN 2 FHD": "ESPN 2",
+            "ESPN 2 [VIP]": "ESPN 2",
         }
         for entrada, esperado in casos.items():
             with self.subTest(entrada=entrada):
                 self.assertEqual(generar_epg.limpiar_nombre(entrada), esperado)
 
     def test_no_rompe_nombres_legitimos(self) -> None:
-        self.assertEqual(generar_epg.limpiar_nombre("Cine Latino"), "Cine Latino")
-        self.assertEqual(generar_epg.limpiar_nombre("Deportes 24/7 UHD"), "Deportes 24/7")
+        casos = {
+            "Cine Latino": "Cine Latino",
+            "Cine Latino SD": "Cine Latino",
+            "Deportes 24/7 UHD": "Deportes 24/7",
+            # "Premium" es parte del nombre real del canal, no una calidad.
+            "ESPN Premium HD (1080p)": "ESPN Premium",
+            # Un pais al final nunca deja el nombre en una sola palabra.
+            "Mega Chile": "Mega Chile",
+            "ESPN Chile": "ESPN Chile",
+            # "Deportes" no es una region.
+            "ESPN Deportes HD (720p)": "ESPN Deportes",
+        }
+        for entrada, esperado in casos.items():
+            with self.subTest(entrada=entrada):
+                self.assertEqual(generar_epg.limpiar_nombre(entrada), esperado)
+
+    def test_elimina_pais_redundante_al_final(self) -> None:
+        casos = {
+            "TNT Sports Chile": "TNT Sports",
+            "TNT Sports (Argentina)": "TNT Sports",
+            "Fox Sports - México": "Fox Sports",
+            "TNT Sports ArgentinaHD (1080p)": "TNT Sports",
+        }
+        for entrada, esperado in casos.items():
+            with self.subTest(entrada=entrada):
+                self.assertEqual(generar_epg.limpiar_nombre(entrada), esperado)
+
+    def test_quitar_region_desactivable(self) -> None:
+        self.assertEqual(
+            generar_epg.limpiar_nombre("TNT Sports Chile", quitar_region=False),
+            "TNT Sports Chile",
+        )
 
     def test_id_unico_sin_espacios_ni_simbolos(self) -> None:
         for nombre in ("Canal 5", "Mega Noticias | HD", "Ñandú TV (1080p)", "A&E Mundo"):
             identificador = generar_epg.generar_id(nombre)
             with self.subTest(nombre=nombre):
                 self.assertRegex(identificador, r"^[a-z0-9]+$")
+
+    def test_variantes_de_espn_generan_el_mismo_id(self) -> None:
+        variantes = (
+            "ESPN 2 HD [LAT]",
+            "ESPN 2 FHD",
+            "ESPN2",
+            "ESPN 2",
+            "ESPN 2 SD (1080p)",
+            "ESPN 2 Opción 2",
+            "ESPN 2 Chile",
+        )
+        identificadores = {
+            generar_epg.generar_id(generar_epg.limpiar_nombre(nombre)) for nombre in variantes
+        }
+        self.assertEqual(identificadores, {"espn2"})
 
 
 class ParseoTests(unittest.TestCase):
@@ -62,6 +113,7 @@ class ParseoTests(unittest.TestCase):
         self.assertEqual(canales[0]["nombre"], "Canal 5 HD")
         self.assertTrue(canales[0]["logo"].startswith("https://"))
         self.assertEqual(canales[0]["tvg_id"], "canal5.mx")
+        self.assertEqual(canales[0]["tvg_name"], "Canal 5")
 
     def test_consolida_senales_duplicadas(self) -> None:
         canales = generar_epg.consolidar_canales(
@@ -70,11 +122,106 @@ class ParseoTests(unittest.TestCase):
         identificadores = [canal["id"] for canal in canales]
         self.assertEqual(len(canales), 6)
         self.assertEqual(len(set(identificadores)), 6)
-        self.assertIn("canal5", identificadores)
+        # El tvg-id del M3U tiene prioridad sobre el id generado.
+        self.assertIn("canal5.mx", identificadores)
         self.assertIn("cinelatino", identificadores)
         # El canal sin logo en el M3U no debe llevar <icon>.
         canal_local = next(canal for canal in canales if canal["id"] == "canallocal")
         self.assertEqual(canal_local["logo"], "")
+        self.assertEqual(canal_local["origen"], "nombre")
+
+
+M3U_ESPN = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="ESPN2.us@HD" tvg-name="ESPN 2" group-title="Deportes",ESPN 2 HD [LAT]',
+        "http://ejemplo.invalid/espn2-hd/index.m3u8",
+        '#EXTINF:-1 tvg-id="ESPN2.us@SD" tvg-name="ESPN 2" group-title="Deportes",ESPN2 (720p)',
+        "http://ejemplo.invalid/espn2-sd/index.m3u8",
+        '#EXTINF:-1 tvg-id="ESPN2.us" group-title="Deportes",ESPN 2 FHD',
+        "http://ejemplo.invalid/espn2-fhd/index.m3u8",
+        '#EXTINF:-1 tvg-id="ESPN2.nl@HD" group-title="Deportes",ESPN 2 (Netherlands) HD',
+        "http://ejemplo.invalid/espn2-nl/index.m3u8",
+        '#EXTINF:-1 tvg-id="0" group-title="Deportes",ESPN 3 SD',
+        "http://ejemplo.invalid/espn3/index.m3u8",
+        "#EXTINF:-1 group-title=\"Deportes\",ESPN 4 HD",
+        "http://ejemplo.invalid/espn4/index.m3u8",
+        "",
+    ]
+)
+
+
+class TvgIdTests(unittest.TestCase):
+    """Comprueba la prioridad del ``tvg-id`` y el mapeo de canales."""
+
+    def _consolidar(self, texto: str = M3U_ESPN, **opciones: object) -> list[dict[str, str]]:
+        return generar_epg.consolidar_canales(generar_epg.parsear_m3u(texto), **opciones)
+
+    def test_tvg_id_es_el_id_prioritario_y_agrupa_calidades(self) -> None:
+        canales = {canal["id"]: canal for canal in self._consolidar()}
+        # @HD, @SD y sin sufijo son el mismo canal -> una sola entrada.
+        espn2 = canales["ESPN2.us"]
+        self.assertEqual(espn2["nombre"], "ESPN 2")
+        self.assertEqual(espn2["origen"], "tvg-id")
+        # Otro pais del mismo nombre sigue siendo un canal distinto.
+        self.assertIn("ESPN2.nl", canales)
+        self.assertEqual(canales["ESPN2.nl"]["nombre"], "ESPN 2 Netherlands")
+
+    def test_tvg_id_invalido_cae_al_nombre(self) -> None:
+        canales = {canal["id"]: canal for canal in self._consolidar()}
+        self.assertEqual(canales["espn3"]["origen"], "nombre")
+        self.assertEqual(canales["espn3"]["nombre"], "ESPN 3")
+
+    def test_sin_tvg_id_genera_ids_desde_el_nombre(self) -> None:
+        canales = {canal["id"]: canal for canal in self._consolidar(usar_tvg_id=False)}
+        self.assertIn("espn2", canales)
+        self.assertIn("espn3", canales)
+        self.assertIn("espn4", canales)
+        self.assertTrue(all(canal["origen"] == "nombre" for canal in canales.values()))
+
+    def test_conservar_tvg_id_literal(self) -> None:
+        canales = {canal["id"] for canal in self._consolidar(conservar_tvg_id=True)}
+        self.assertIn("ESPN2.us@HD", canales)
+        self.assertIn("ESPN2.us@SD", canales)
+        self.assertIn("ESPN2.nl@HD", canales)
+
+    def test_normaliza_tvg_id(self) -> None:
+        normalizar = generar_epg._normalizar_tvg_id
+        self.assertEqual(normalizar("ESPN2.us@HD"), "ESPN2.us")
+        self.assertEqual(normalizar("ESPN2.us@HD", conservar=True), "ESPN2.us@HD")
+        for invalido in ("", "  ", "0", "sin-epg", "null", "con espacios", "<x>"):
+            with self.subTest(valor=invalido):
+                self.assertEqual(normalizar(invalido), "")
+
+    def test_paises_distintos_no_se_fusionan(self) -> None:
+        texto = "\n".join(
+            [
+                "#EXTM3U",
+                "#EXTINF:-1,TNT Sports Chile HD",
+                "http://ejemplo.invalid/tnt-cl/index.m3u8",
+                "#EXTINF:-1,TNT Sports Argentina HD",
+                "http://ejemplo.invalid/tnt-ar/index.m3u8",
+                "",
+            ]
+        )
+        identificadores = [canal["id"] for canal in self._consolidar(texto)]
+        self.assertEqual(identificadores, ["tntsportschile", "tntsportsargentina"])
+
+    def test_pais_redundante_se_descarta(self) -> None:
+        texto = "\n".join(
+            [
+                "#EXTM3U",
+                "#EXTINF:-1,TNT Sports Chile HD",
+                "http://ejemplo.invalid/tnt-cl/index.m3u8",
+                "#EXTINF:-1,TNT Sports Chile SD",
+                "http://ejemplo.invalid/tnt-cl-sd/index.m3u8",
+                "",
+            ]
+        )
+        canales = self._consolidar(texto)
+        self.assertEqual(len(canales), 1)
+        self.assertEqual(canales[0]["id"], "tntsports")
+        self.assertEqual(canales[0]["nombre"], "TNT Sports")
 
 
 class XmltvTests(unittest.TestCase):
@@ -140,6 +287,20 @@ class XmltvTests(unittest.TestCase):
         with open(self.ruta, encoding="utf-8") as archivo:
             cabecera = archivo.readline().strip()
         self.assertEqual(cabecera, '<?xml version="1.0" encoding="UTF-8"?>')
+
+    def test_display_names_incluyen_alias_para_el_match(self) -> None:
+        canal = next(
+            nodo for nodo in self.arbol.findall("channel") if nodo.get("id") == "canal5.mx"
+        )
+        nombres = [nodo.text for nodo in canal.findall("display-name")]
+        self.assertEqual(nombres[0], "Canal 5")
+        # El nombre original del M3U se publica como alias (match por nombre).
+        self.assertIn("Canal 5 HD", nombres)
+
+    def test_todo_programa_apunta_a_un_canal_existente(self) -> None:
+        identificadores = {canal.get("id") for canal in self.arbol.findall("channel")}
+        for programa in self.arbol.findall("programme"):
+            self.assertIn(programa.get("channel"), identificadores)
 
 
 if __name__ == "__main__":

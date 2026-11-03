@@ -52,7 +52,7 @@ jobs:
         if: steps.comprobar.outputs.configurado == 'true'
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
-          EPG_REPO_URL: ${{ vars.EPG_REPO_URL || github.server_url }}
+          EPG_REPO_URL: ${{ vars.EPG_REPO_URL || format('{0}/{1}', github.server_url, github.repository) }}
         run: python generar_epg.py --salida epg.xml
 
       - name: Verificar que el XMLTV es valido

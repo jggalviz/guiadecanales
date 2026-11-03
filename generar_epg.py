@@ -6,17 +6,22 @@
 ===============================================================================
 
 Descarga una lista M3U, extrae de cada canal el nombre (texto que va despues de
-la ultima coma del #EXTINF) y su atributo ``tvg-logo``, unifica las senales
-repetidas (SD / HD / FHD / [Opc.2] ...) y genera un ``epg.xml`` en formato
-XMLTV con 24 horas de programacion generica por canal, para que la guia nunca
-aparezca vacia en el reproductor IPTV.
+la ultima coma del #EXTINF) y sus atributos ``tvg-id``, ``tvg-name`` y
+``tvg-logo``, unifica las senales repetidas (SD / HD / FHD / [Opc.2] / pais...)
+y genera un ``epg.xml`` en formato XMLTV con 24 horas de programacion generica
+por canal, para que la guia nunca aparezca vacia en el reproductor IPTV.
 
 Caracteristicas
 ---------------
 * Solo librerias estandar de Python (3.9+): urllib.request, re,
   xml.etree.ElementTree, datetime, argparse, unicodedata, html.
 * Descarga con User-Agent de navegador, reintentos y deteccion de codificacion.
-* Limpieza de nombres -> un ``id`` unico por senal (solo letras y numeros).
+* El ``tvg-id`` del M3U tiene prioridad como ``<channel id="...">`` (es lo que
+  compara el reproductor). Se descarta el sufijo ``@calidad/feed`` para agrupar
+  las variantes de un mismo canal; ``--conservar-tvg-id`` lo respeta literal.
+* Limpieza de nombres -> un ``id`` unico cuando no hay ``tvg-id`` valido.
+* Varios ``<display-name>`` por canal (nombre limpio, ``tvg-name`` y nombre
+  original del M3U) para que el emparejamiento por nombre tambien funcione.
 * 6 bloques continuos de 4 horas (24 h) con titulos realistas en espanol.
 * Salida UTF-8, declaracion XML, DOCTYPE xmltv.dtd e indentacion limpia.
 
@@ -73,7 +78,7 @@ ARCHIVO_SALIDA = os.environ.get("EPG_SALIDA", "epg.xml")
 
 #: Identificacion del generador dentro de la etiqueta <tv>.
 NOMBRE_GENERADOR = "guiadecanales-epg"
-URL_GENERADOR = os.environ.get("EPG_REPO_URL", "https://github.com/usuario/repositorio")
+URL_GENERADOR = os.environ.get("EPG_REPO_URL", "https://github.com/jggalviz/guiadecanales")
 
 #: Parametros de red.
 USER_AGENT = (
@@ -301,6 +306,7 @@ def parsear_m3u(texto: str) -> list[dict[str, str]]:
                     "logo": (atributos.get("tvg-logo") or atributos.get("logo") or "").strip(),
                     "grupo": atributos.get("group-title", "").strip(),
                     "tvg_id": atributos.get("tvg-id", "").strip(),
+                    "tvg_name": (atributos.get("tvg-name") or "").strip(),
                     "url": linea,
                 }
             )
@@ -313,20 +319,23 @@ def parsear_m3u(texto: str) -> list[dict[str, str]]:
 # 4. LIMPIEZA DE NOMBRES Y GENERACION DE IDS UNICOS
 # =============================================================================
 
-#: Marcadores de "senal duplicada": [Opc.2], (Opcion 3), Alternativa 2, Senal 2...
+#: Marcadores de "senal duplicada": [Opc.2], (Opcion 3), Alternativa 2, Senal 2,
+#: Feed 4, Servidor 2, Camara 1...
 _RE_OPCION = re.compile(
     r"\b(?:opc(?:i[oó]n)?\.?\s*\d+|\d+\s*opc(?:i[oó]n)?|opc(?:i[oó]n)?|"
     r"alt(?:ernativ[oa])?\.?\s*\d*|respaldo|backup|espejo|mirror|"
-    r"se[ñn]al\s*\d+|canal\s*alterno)\b",
+    r"feed\s*\d*|se[ñn]al\s*\d+|server\s*\d*|servidor\s*\d*|link\s*\d+|"
+    r"c[áa]mara\s*\d*|canal\s*alterno)\b",
     re.IGNORECASE,
 )
 
 #: Indicadores de calidad que no forman parte del nombre del canal.
 #: Se eliminan solo como palabra completa ("Canal 5 HD" -> "Canal 5"), para no
-#: romper nombres legitimos como "Cine Latino" o "Discovery World".
+#: romper nombres legitimos como "Cine Latino", "Discovery World" o
+#: "ESPN Premium" (que es el nombre real de un canal, no una marca de calidad).
 _RE_CALIDAD = re.compile(
-    r"\b(?:FHD|UHD|QHD|HD|SD|4K|8K|HEVC|H\.?26[45]|AVC|X26[45]|"
-    r"(?:1080|720|576|480|360)[PI]|\d{2}\s*FPS|VIP|PREMIUM)\b",
+    r"\b(?:FULL\s*HD|HIGH\s*DEFINITION|FHD|UHD|QHD|HD|SD|4K|8K|HEVC|HDR|"
+    r"H\.?26[45]|AVC|X26[45]|\d{3,4}\s*[PI]|\d{2,3}\s*FPS|AAC|AC3|DOLBY)\b",
     re.IGNORECASE,
 )
 
@@ -334,13 +343,14 @@ _RE_CALIDAD = re.compile(
 #: por ejemplo "[LAT]", "(Español)" o "[Multi]".
 _RE_ETIQUETA_GRUPO = re.compile(
     r"(?:LATINO|LATAM|LAT|ESPA[ÑN]OL|CASTELLANO|SUB(?:TITULADO)?|DUAL|MULTI|"
-    r"ORIGINAL|VOSE|VOD)",
+    r"ORIGINAL|VOSE|VOD|VIP|IPV6|PROXY)",
     re.IGNORECASE,
 )
 
-#: Calidad pegada al nombre sin espacio: "Canal5HD" -> "Canal5".
+#: Calidad pegada al nombre sin espacio: "Canal5HD" -> "Canal5",
+#: "TNT Sports ArgentinaHD" -> "TNT Sports Argentina".
 _RE_SUFIJO_PEGADO = re.compile(
-    r"(?:FHD|UHD|HD|SD|4K|HEVC|1080P|720P|OPC\d+)$",
+    r"(?:FULLHD|FHD|UHD|HD|SD|4K|8K|HEVC|HDR|(?:1080|720|576|480|360)[PI]|\d{2}FPS)(?:\d)?$",
     re.IGNORECASE,
 )
 
@@ -353,6 +363,53 @@ _RE_ESPACIOS = re.compile(r"\s+")
 
 #: Contenido de un grupo que solo indica region o numero: (MX), [ES], [2].
 _RE_CODIGO_REGION = re.compile(r"(?:[A-Z]{2,3}|\d{1,2})")
+
+#: Paises y regiones que las listas anaden al final del nombre ("TNT Sports
+#: Chile", "Fox Sports - Argentina", "(Mexico)"). Se eliminan solo al final y
+#: nunca si el nombre quedaria en una sola palabra: asi "Cine Latino" o
+#: "Mega Chile" conservan su identidad.
+_REGIONES = (
+    "latinoamerica", "centroamerica", "sudamerica", "caribe",
+    "latam", "latino", "lat", "andino",
+    "mexico", "méxico", "mx", "argentina", "arg", "ar",
+    "chile", "cl", "colombia", "co", "peru", "perú", "pe",
+    "venezuela", "ve", "ecuador", "ec", "uruguay", "uy",
+    "paraguay", "py", "bolivia", "bo", "brasil", "brazil", "br",
+    "espana", "españa", "spain", "es", "portugal", "pt",
+    "panama", "panamá", "pa", "costa rica", "cr", "guatemala", "gt",
+    "honduras", "hn", "el salvador", "sv", "nicaragua", "ni",
+    "republica dominicana", "república dominicana", "dominican republic", "do",
+    "puerto rico", "pr", "cuba", "cu", "haiti", "haití", "ht",
+    "estados unidos", "united states", "usa", "us", "canada", "canadá", "ca",
+    "reino unido", "united kingdom", "uk", "inglaterra", "gb",
+    "francia", "france", "fr", "italia", "italy", "it", "alemania", "germany", "de",
+    "holanda", "netherlands", "nl", "belgica", "bélgica", "be", "suiza", "ch",
+    "suecia", "se", "noruega", "no", "dinamarca", "dk", "polonia", "pl",
+    "rusia", "russia", "ru", "turquia", "turquía", "tr", "india", "in",
+    "japon", "japón", "jp", "china", "cn", "corea", "korea", "kr", "australia", "au",
+)
+
+#: Region escrita al final del nombre, con separador opcional (- / |).
+_RE_REGION_FINAL = re.compile(
+    r"(?:[\s\-\u2013|]+)(?:" + "|".join(re.escape(r) for r in _REGIONES) + r")\s*$",
+    re.IGNORECASE,
+)
+
+#: Region entre corchetes o parentesis al final: "(Chile)", "[Argentina]".
+_RE_REGION_GRUPO = re.compile(
+    r"[\s\-]*[\[\(]\s*(?:" + "|".join(re.escape(r) for r in _REGIONES) + r")\s*[\]\)]\s*$",
+    re.IGNORECASE,
+)
+
+#: Un ``tvg-id`` utilizable: sin espacios y con caracteres admitidos por los
+#: reproductores (los ids de iptv-org son del tipo ``ESPN2.us@HD``).
+_RE_TVG_ID_VALIDO = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:+#/@-]{0,63}$")
+
+#: Valores que algunos proveedores usan como "canal sin EPG".
+_TVG_ID_INVALIDOS = {
+    "0", "-", "none", "null", "n/a", "na", "unknown", "tv", "canal",
+    "sin-epg", "sinepg", "no-epg", "x", "***",
+}
 
 
 def _reemplazo_grupo(coincidencia: "re.Match[str]") -> str:
@@ -378,25 +435,69 @@ def _quitar_sufijo_pegado(nombre: str) -> str:
     return nombre[: coincidencia.start()].rstrip()
 
 
-def limpiar_nombre(nombre: str) -> str:
+def _region_final(nombre: str) -> str:
+    """Devuelve la region o pais escrito al final del nombre ('' si no hay).
+
+    Se usa para distinguir dos canales que solo se diferencian en el pais
+    ("TNT Sports Chile" frente a "TNT Sports Argentina") y no fusionarlos por
+    error.
+    """
+    for patron in (_RE_REGION_GRUPO, _RE_REGION_FINAL):
+        coincidencia = patron.search(nombre)
+        if coincidencia:
+            texto = re.sub(r"[^\wáéíóúüñ ]", "", coincidencia.group(0))
+            return _RE_ESPACIOS.sub(" ", texto).strip().lower()
+    return ""
+
+
+def _quitar_region_final(nombre: str) -> str:
+    """Descarta el pais/region del final si el nombre sigue siendo reconocible.
+
+    Solo se elimina cuando queda un nombre de dos o mas palabras, de modo que
+    "TNT Sports Chile" -> "TNT Sports" pero "Cine Latino", "Mega Chile" o
+    "ESPN Chile" se conservan intactos.
+    """
+    for patron in (_RE_REGION_GRUPO, _RE_REGION_FINAL):
+        coincidencia = patron.search(nombre)
+        if not coincidencia:
+            continue
+        base = nombre[: coincidencia.start()].strip(" -\u2013\u2014_:;,./*#°")
+        if len(_RE_ESPACIOS.sub(" ", base).split()) >= 2:
+            return base
+    return nombre
+
+
+def limpiar_nombre(nombre: str, quitar_region: bool = True) -> str:
     """Unifica el nombre de un canal eliminando duplicados y marcas de calidad.
 
     Ejemplos::
 
-        "Canal 5 HD"                -> "Canal 5"
-        "Canal 5 FHD [Opc.2]"       -> "Canal 5"
-        "Las Estrellas [Opc.2]"     -> "Las Estrellas"
-        "Mega Noticias (1080p)"     -> "Mega Noticias"
-        "Cine Latino SD"            -> "Cine Latino"
+        "Canal 5 HD"                        -> "Canal 5"
+        "Canal 5 FHD [Opc.2]"               -> "Canal 5"
+        "Las Estrellas [Opc.2]"             -> "Las Estrellas"
+        "Mega Noticias (1080p)"             -> "Mega Noticias"
+        "Cine Latino SD"                    -> "Cine Latino"
+        "ESPN 2 HD [LAT]"                   -> "ESPN 2"
+        "ESPN Premium HD (1080p)"           -> "ESPN Premium"
+        "TNT Sports ArgentinaHD (1080p)"    -> "TNT Sports"
+        "Cine Latino"                       -> "Cine Latino"  (no se toca)
+
+    Con ``quitar_region=False`` se conserva el pais/region del final, que es la
+    variante "estricta" que se usa cuando dos senales del mismo nombre solo se
+    diferencian en el pais.
     """
     limpio = _RE_GRUPO.sub(_reemplazo_grupo, nombre)
     limpio = _RE_OPCION.sub(" ", limpio)
     limpio = _RE_CALIDAD.sub(" ", limpio)
+    limpio = _RE_ESPACIOS.sub(" ", limpio).strip()
     limpio = _quitar_sufijo_pegado(limpio)
     limpio = _RE_ADORNOS.sub(" ", limpio)
     limpio = _RE_ESPACIOS.sub(" ", limpio).strip()
-    limpio = limpio.strip(" -–—_:;,./*#°")
+    limpio = limpio.strip(" -\u2013\u2014_:;,./*#°")
     limpio = _RE_ESPACIOS.sub(" ", limpio).strip()
+    if quitar_region:
+        limpio = _quitar_region_final(limpio)
+        limpio = _RE_ESPACIOS.sub(" ", limpio).strip(" -\u2013\u2014_:;,./*#°")
     return limpio or nombre.strip()
 
 
@@ -411,56 +512,129 @@ def generar_id(nombre: str) -> str:
     return identificador or "canal"
 
 
-def _normalizar_tvg_id(valor: str) -> str:
-    """Limpia el tvg-id original del M3U (solo se usa con --usar-tvg-id)."""
-    return re.sub(r"\s+", "", valor.strip())
+def _normalizar_tvg_id(valor: str, conservar: bool = False) -> str:
+    """Valida y normaliza el ``tvg-id`` del M3U (``''`` si no es utilizable).
+
+    Muchos proveedores (y el propio iptv-org) escriben la calidad o el feed
+    despues de una arroba: ``ESPN2.us@HD``, ``ESPN2.us@SD``,
+    ``ESPNLatinAmerica.us@Argentina``. El id canonico del canal es la parte
+    anterior a ``@``, asi que por defecto se descarta ese sufijo para que todas
+    las variantes SD/HD/FHD terminen en una sola entrada de la guia.
+
+    Con ``conservar=True`` se respeta el valor literal, para listas cuyo
+    reproductor empareja por el ``tvg-id`` exacto.
+    """
+    limpio = _RE_ESPACIOS.sub(" ", valor or "").strip()
+    if not limpio or limpio.lower() in _TVG_ID_INVALIDOS:
+        return ""
+    if not conservar and "@" in limpio:
+        limpio = limpio.split("@", 1)[0].strip()
+    if not _RE_TVG_ID_VALIDO.fullmatch(limpio):
+        return ""
+    return limpio
 
 
 def consolidar_canales(
     canales: Iterable[dict[str, str]],
-    usar_tvg_id: bool = False,
+    usar_tvg_id: bool = True,
+    conservar_tvg_id: bool = False,
 ) -> list[dict[str, str]]:
     """Limpia los nombres, unifica senales repetidas y asigna un id unico.
 
-    Dos entradas del M3U que solo difieren en la calidad o en el marcador de
-    opcion ("Canal 5 HD" y "Canal 5 FHD [Opc.2]") se consideran la misma senal:
-    se conserva la primera aparicion y se completa el logo si faltaba.
-    """
-    unicos: dict[str, dict[str, str]] = {}
-    orden: list[str] = []
+    Reglas de identificacion, por orden de prioridad:
 
+    1. Si la entrada trae un ``tvg-id`` valido, ese es el ``id`` del canal (es
+       lo que el reproductor usa para emparejar la guia con la lista). Las
+       variantes de calidad de un mismo id (``ESPN2.us@HD`` / ``ESPN2.us@SD``)
+       se agrupan en una sola entrada.
+    2. Si no hay ``tvg-id``, el id se genera a partir del nombre limpio
+       (``ESPN 2 HD [LAT]`` -> ``espn2``).
+
+    El pais del final del nombre se descarta ("TNT Sports Chile" -> "TNT
+    Sports"), salvo que dos senales del mismo nombre solo se diferencien en el
+    pais: en ese caso se conserva para no fusionar canales distintos.
+    """
+    registros: list[dict[str, str]] = []
     for canal in canales:
-        nombre_limpio = limpiar_nombre(canal["nombre"])
-        clave = generar_id(nombre_limpio)
+        nombre_original = canal.get("nombre", "")
+        amplio = limpiar_nombre(nombre_original, quitar_region=True)
+        estricto = limpiar_nombre(nombre_original, quitar_region=False)
+        registros.append(
+            {
+                "nombre_amplio": amplio,
+                "nombre_estricto": estricto,
+                "clave_amplia": generar_id(amplio),
+                "region": _region_final(estricto),
+                "logo": canal.get("logo", ""),
+                "grupo": canal.get("grupo", ""),
+                "tvg_id": (
+                    _normalizar_tvg_id(canal.get("tvg_id", ""), conservar=conservar_tvg_id)
+                    if usar_tvg_id
+                    else ""
+                ),
+                "tvg_name": canal.get("tvg_name", ""),
+                "nombre_m3u": nombre_original.strip(),
+            }
+        )
+
+    # Canales que solo se diferencian en el pais: no se pueden fusionar.
+    # Hay conflicto cuando un mismo nombre base aparece con dos paises
+    # distintos, o cuando una senal lleva pais y otra del mismo nombre no.
+    regiones_por_clave: dict[str, set[str]] = {}
+    sin_region_por_clave: set[str] = set()
+    for registro in registros:
+        if registro["region"]:
+            regiones_por_clave.setdefault(registro["clave_amplia"], set()).add(registro["region"])
+        else:
+            sin_region_por_clave.add(registro["clave_amplia"])
+    en_conflicto = {
+        clave
+        for clave, regiones in regiones_por_clave.items()
+        if len(regiones) > 1 or clave in sin_region_por_clave
+    }
+
+    unicos: dict[str, dict[str, str]] = {}
+    id_por_nombre: dict[str, str] = {}
+
+    for registro in registros:
+        if registro["clave_amplia"] in en_conflicto:
+            nombre_final = registro["nombre_estricto"]
+        else:
+            nombre_final = registro["nombre_amplio"]
+        id_nombre = generar_id(nombre_final)
+
+        if registro["tvg_id"]:
+            clave = registro["tvg_id"]
+            origen = "tvg-id"
+        else:
+            # Sin tvg-id: si el nombre ya pertenece a un canal registrado
+            # (que si tenia tvg-id), se reutiliza esa entrada.
+            clave = id_por_nombre.get(id_nombre, id_nombre)
+            origen = "tvg-id" if clave in unicos and unicos[clave]["origen"] == "tvg-id" else "nombre"
+
         existente = unicos.get(clave)
         if existente is not None:
-            if not existente["logo"] and canal["logo"]:
-                existente["logo"] = canal["logo"]
+            if not existente["logo"] and registro["logo"]:
+                existente["logo"] = registro["logo"]
+            if not existente["grupo"] and registro["grupo"]:
+                existente["grupo"] = registro["grupo"]
+            if not existente["tvg_name"] and registro["tvg_name"]:
+                existente["tvg_name"] = registro["tvg_name"]
             continue
+
         unicos[clave] = {
             "id": clave,
-            "nombre": nombre_limpio,
-            "logo": canal["logo"],
-            "tvg_id": canal["tvg_id"],
-            "grupo": canal["grupo"],
+            "nombre": nombre_final,
+            "logo": registro["logo"],
+            "tvg_id": registro["tvg_id"],
+            "tvg_name": registro["tvg_name"],
+            "grupo": registro["grupo"],
+            "nombre_m3u": registro["nombre_m3u"],
+            "origen": origen,
         }
-        orden.append(clave)
+        id_por_nombre.setdefault(id_nombre, clave)
 
-    resultado: list[dict[str, str]] = []
-    ids_usados: set[str] = set()
-    for clave in orden:
-        canal = dict(unicos[clave])
-        if usar_tvg_id and canal["tvg_id"]:
-            canal["id"] = _normalizar_tvg_id(canal["tvg_id"]) or clave
-        base = canal["id"]
-        sufijo = 2
-        while canal["id"] in ids_usados:
-            canal["id"] = f"{base}{sufijo}"
-            sufijo += 1
-        ids_usados.add(canal["id"])
-        resultado.append(canal)
-
-    return resultado
+    return list(unicos.values())
 
 
 # =============================================================================
@@ -487,6 +661,27 @@ def _semilla(canal_id: str) -> int:
     return sum(ord(caracter) for caracter in canal_id)
 
 
+def _nombres_alternativos(canal: Mapping[str, str]) -> list[str]:
+    """Alias que ayudan al reproductor a emparejar la guia con la lista.
+
+    Se publican como ``<display-name>`` adicionales: el ``tvg-name`` del M3U y
+    el nombre original de la entrada (``ESPN 2 HD [LAT]``), que es justo el que
+    muestran muchos reproductores al emparejar por nombre.
+    """
+    principal = canal.get("nombre", "")
+    alias: list[str] = []
+    for candidato in (canal.get("tvg_name", ""), canal.get("nombre_m3u", "")):
+        candidato = (candidato or "").strip()
+        if not candidato:
+            continue
+        if candidato.lower() == principal.lower():
+            continue
+        if any(candidato.lower() == previo.lower() for previo in alias):
+            continue
+        alias.append(candidato)
+    return alias
+
+
 def construir_xmltv(
     canales: Sequence[Mapping[str, str]],
     inicio: datetime,
@@ -504,10 +699,12 @@ def construir_xmltv(
         },
     )
 
-    # 1) Canales: <channel> con <display-name> y, si existe, <icon src="...">.
+    # 1) Canales: <channel id="tvg-id|id-generado"> con nombres e icono.
     for canal in canales:
         nodo_canal = ET.SubElement(raiz, "channel", {"id": canal["id"]})
         ET.SubElement(nodo_canal, "display-name", {"lang": "es"}).text = canal["nombre"]
+        for alias in _nombres_alternativos(canal):
+            ET.SubElement(nodo_canal, "display-name").text = alias
         logo = canal["logo"]
         if logo and logo.lower().startswith(("http://", "https://")):
             ET.SubElement(nodo_canal, "icon", {"src": logo})
@@ -604,7 +801,9 @@ def _crear_parser() -> argparse.ArgumentParser:
             "Ejemplos:\n"
             "  python generar_epg.py --demo\n"
             "  python generar_epg.py --url https://raw.githubusercontent.com/USUARIO/REPO/main/lista.m3u\n"
-            "  python generar_epg.py -u \"$M3U_URL\" -s epg.xml --usar-tvg-id\n"
+            "  python generar_epg.py -u \"$M3U_URL\" -s epg.xml\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --sin-tvg-id       # ids desde el nombre\n"
+            "  python generar_epg.py -u \"$M3U_URL\" --conservar-tvg-id  # tvg-id literal (@HD)\n"
         ),
     )
     parser.add_argument(
@@ -629,9 +828,25 @@ def _crear_parser() -> argparse.ArgumentParser:
         help="Fecha de inicio de la guia en formato YYYY-MM-DD (por defecto: hoy).",
     )
     parser.add_argument(
+        "--sin-tvg-id",
+        action="store_true",
+        help="Ignorar el tvg-id del M3U y generar los ids desde el nombre limpio.",
+    )
+    parser.add_argument(
+        "--conservar-tvg-id",
+        action="store_true",
+        help=(
+            "Respetar el tvg-id literal (incluido el sufijo @HD/@SD). Por defecto "
+            "se descarta ese sufijo para agrupar las variantes de calidad."
+        ),
+    )
+    parser.add_argument(
         "--usar-tvg-id",
         action="store_true",
-        help="Usar el tvg-id del M3U como id del canal (util para emparejar con la lista).",
+        help=(
+            "(obsoleto) Antes activaba el uso del tvg-id. Ahora es el comportamiento "
+            "por defecto; use --sin-tvg-id para desactivarlo."
+        ),
     )
     parser.add_argument(
         "--sin-doctype",
@@ -703,9 +918,18 @@ def main(argv: list[str] | None = None) -> int:
     aviso(f"      Entradas #EXTINF encontradas: {len(canales_brutos)}")
 
     # --- 3. Limpieza y deduplicacion ---------------------------------------
-    aviso("[3/5] Limpiando nombres (SD/HD/FHD/[Opc.N]) y generando ids unicos ...")
-    canales = consolidar_canales(canales_brutos, usar_tvg_id=argumentos.usar_tvg_id)
+    aviso("[3/5] Limpiando nombres (SD/HD/FHD/[Opc.N]/pais) y generando ids ...")
+    canales = consolidar_canales(
+        canales_brutos,
+        usar_tvg_id=not argumentos.sin_tvg_id,
+        conservar_tvg_id=argumentos.conservar_tvg_id,
+    )
+    con_tvg_id = sum(1 for canal in canales if canal["origen"] == "tvg-id")
     aviso(f"      Canales unicos tras unificar senales: {len(canales)}")
+    aviso(
+        f"      Ids tomados del tvg-id del M3U: {con_tvg_id} | "
+        f"generados desde el nombre: {len(canales) - con_tvg_id}"
+    )
 
     # --- 4. Generacion del XMLTV -------------------------------------------
     if argumentos.fecha:
@@ -752,7 +976,7 @@ def main(argv: list[str] | None = None) -> int:
     aviso(" Primeros canales generados:")
     for canal in canales[:10]:
         marca_logo = "logo si" if canal["logo"] else "sin logo"
-        aviso(f"   - {canal['id']:<24} {canal['nombre']}  [{marca_logo}]")
+        aviso(f"   - {canal['id']:<24} {canal['nombre']}  [{marca_logo} / {canal['origen']}]")
     if len(canales) > 10:
         aviso(f"   ... y {len(canales) - 10} canales mas.")
     aviso("")
