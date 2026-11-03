@@ -39232,6 +39232,666 @@ En Vivo</title>
     <sub-title lang="es">El cascabel al gato</sub-title>
     <icon src="https://cdn.sincroguia.tv/storage/series/232516/image.jpg"/>
   </programme>
+  <programme start="20261103000000 +0000" channel="24h" stop="20261103003000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E671</episode-num>
+  </programme>
+  <programme start="20261103003000 +0000" channel="24h" stop="20261103010000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E671</episode-num>
+  </programme>
+  <programme start="20261103010000 +0000" channel="24h" stop="20261103013000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103013000 +0000" channel="24h" stop="20261103020000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103020000 +0000" channel="24h" stop="20261103023000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103023000 +0000" channel="24h" stop="20261103030000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103030000 +0000" channel="24h" stop="20261103033000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103033000 +0000" channel="24h" stop="20261103040000 +0000">
+    <title lang="fr">La hora cultural</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/0/3/15901300.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/8/2/15901287.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/2/15868235.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/9/2/15901296.jpg"/>
+    <episode-num system="onscreen">E65</episode-num>
+  </programme>
+  <programme start="20261103040000 +0000" channel="24h" stop="20261103043000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103043000 +0000" channel="24h" stop="20261103050000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E306</episode-num>
+  </programme>
+  <programme start="20261103050000 +0000" channel="24h" stop="20261103065000 +0000">
+    <title lang="fr">Telediario Matinal</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/8/4/15844482.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/4/15844453.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/4/15844440.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/4/15844473.jpg"/>
+    <episode-num system="onscreen">E476</episode-num>
+  </programme>
+  <programme start="20261103065000 +0000" channel="24h" stop="20261103093500 +0000">
+    <title lang="fr">La hora de La 1: La hora de la actualidad</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/4/15844459.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/4/15844467.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/4/4/15844448.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/3/4/15844439.jpg"/>
+    <episode-num system="onscreen">S10 E217</episode-num>
+  </programme>
+  <programme start="20261103093500 +0000" channel="24h" stop="20261103100000 +0000">
+    <title lang="fr">Diario 24</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/3/15904317.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15904313.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/1/15853153.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/3/15904314.jpg"/>
+    <episode-num system="onscreen">E483</episode-num>
+  </programme>
+  <programme start="20261103100000 +0000" channel="24h" stop="20261103120000 +0000">
+    <title lang="fr">Diario 24</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/3/15904317.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15904313.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/1/15853153.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/3/15904314.jpg"/>
+    <episode-num system="onscreen">E483</episode-num>
+  </programme>
+  <programme start="20261103120000 +0000" channel="24h" stop="20261103130000 +0000">
+    <title lang="fr">Canal 24H en directo</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/4/2/15205243.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/2/15205241.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/2/15205240.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/4/15969413.jpg"/>
+  </programme>
+  <programme start="20261103130000 +0000" channel="24h" stop="20261103135500 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103135500 +0000" channel="24h" stop="20261103143200 +0000">
+    <title lang="fr">Telediario 1</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/0/6/15205607.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/3/6/15925634.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/5/15857547.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/6/15925635.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103143200 +0000" channel="24h" stop="20261103143800 +0000">
+    <title lang="fr">Deportes 1</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/9/2/15969297.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/9/2/15969296.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/4/5/15857544.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/3/15703367.jpg"/>
+    <episode-num system="onscreen">E646</episode-num>
+  </programme>
+  <programme start="20261103143800 +0000" channel="24h" stop="20261103144100 +0000">
+    <title lang="fr">El tiempo</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/0/3/15969300.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/2/15969298.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/2/15868240.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/2/15969299.jpg"/>
+  </programme>
+  <programme start="20261103144100 +0000" channel="24h" stop="20261103144600 +0000">
+    <title lang="fr">Historias inspiradoras</title>
+    <category lang="fr">Documentaire de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/6/15975638.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/6/15975636.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/6/15975637.jpg"/>
+    <episode-num system="onscreen">E360</episode-num>
+  </programme>
+  <programme start="20261103144600 +0000" channel="24h" stop="20261103150000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103150000 +0000" channel="24h" stop="20261103153000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103153000 +0000" channel="24h" stop="20261103160000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103160000 +0000" channel="24h" stop="20261103190000 +0000">
+    <title lang="fr">La tarde en 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/3/15904321.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/3/15904319.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/3/15904315.jpg"/>
+    <episode-num system="onscreen">E219</episode-num>
+  </programme>
+  <programme start="20261103190000 +0000" channel="24h" stop="20261103192700 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103192700 +0000" channel="24h" stop="20261103195800 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103195800 +0000" channel="24h" stop="20261103204500 +0000">
+    <title lang="fr">Telediario 2</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/5/15708568.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/4/5/15857545.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/5/15708570.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/5/15857546.jpg"/>
+    <episode-num system="onscreen">E672</episode-num>
+  </programme>
+  <programme start="20261103204500 +0000" channel="24h" stop="20261103233000 +0000">
+    <title lang="fr">La noche en 24H</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/3/15904324.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/3/15904318.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/4/2/15868242.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/3/15904322.jpg"/>
+    <episode-num system="onscreen">E666</episode-num>
+  </programme>
+  <programme start="20261103233000 +0000" channel="24h" stop="20261104013000 +0000">
+    <title lang="fr">Especial informativo: Mid Term elecciones EE.UU.</title>
+    <desc lang="fr">Programa especial de actualidad informativa con el seguimiento y análisis de las elecciones de medio mandato del 4 de noviembre de 2026 en Estados Unidos. Las elecciones se celebran en un segundo mandato de Donald Trump dictado por la crisis económica que marca el país.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/3/15198304.jpg"/>
+  </programme>
+  <programme start="20261104013000 +0000" channel="24h" stop="20261104033000 +0000">
+    <title lang="fr">Especial informativo: Mid Term elecciones EE.UU.</title>
+    <desc lang="fr">Programa especial de actualidad informativa con el seguimiento y análisis de las elecciones de medio mandato del 4 de noviembre de 2026 en Estados Unidos. Las elecciones se celebran en un segundo mandato de Donald Trump dictado por la crisis económica que marca el país.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/3/15198304.jpg"/>
+  </programme>
+  <programme start="20261104033000 +0000" channel="24h" stop="20261104050000 +0000">
+    <title lang="fr">Especiales informativos</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/6/16262669.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/6/16262668.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/6/16262667.jpg"/>
+    <episode-num system="onscreen">E43</episode-num>
+  </programme>
+  <programme start="20261104050000 +0000" channel="24h" stop="20261104065000 +0000">
+    <title lang="fr">Telediario Matinal</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/8/4/15844482.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/4/15844453.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/4/15844440.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/4/15844473.jpg"/>
+    <episode-num system="onscreen">E477</episode-num>
+  </programme>
+  <programme start="20261104065000 +0000" channel="24h" stop="20261104093500 +0000">
+    <title lang="fr">La hora de La 1: La hora de la actualidad</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/4/15844459.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/4/15844467.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/4/4/15844448.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/3/4/15844439.jpg"/>
+    <episode-num system="onscreen">S10 E218</episode-num>
+  </programme>
+  <programme start="20261104093500 +0000" channel="24h" stop="20261104100000 +0000">
+    <title lang="fr">Diario 24</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/3/15904317.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15904313.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/1/15853153.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/3/15904314.jpg"/>
+    <episode-num system="onscreen">E484</episode-num>
+  </programme>
+  <programme start="20261104100000 +0000" channel="24h" stop="20261104130000 +0000">
+    <title lang="fr">Diario 24</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/3/15904317.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15904313.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/1/15853153.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/3/15904314.jpg"/>
+    <episode-num system="onscreen">E484</episode-num>
+  </programme>
+  <programme start="20261104130000 +0000" channel="24h" stop="20261104135500 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104135500 +0000" channel="24h" stop="20261104143200 +0000">
+    <title lang="fr">Telediario 1</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/0/6/15205607.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/3/6/15925634.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/5/15857547.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/6/15925635.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104143200 +0000" channel="24h" stop="20261104143800 +0000">
+    <title lang="fr">Deportes 1</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/9/2/15969297.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/9/2/15969296.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/4/5/15857544.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/3/15703367.jpg"/>
+    <episode-num system="onscreen">E647</episode-num>
+  </programme>
+  <programme start="20261104143800 +0000" channel="24h" stop="20261104144100 +0000">
+    <title lang="fr">El tiempo</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/0/3/15969300.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/2/15969298.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/2/15868240.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/2/15969299.jpg"/>
+  </programme>
+  <programme start="20261104144100 +0000" channel="24h" stop="20261104150000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104150000 +0000" channel="24h" stop="20261104153000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104153000 +0000" channel="24h" stop="20261104160000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104160000 +0000" channel="24h" stop="20261104190000 +0000">
+    <title lang="fr">La tarde en 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/3/15904321.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/3/15904319.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/3/15904315.jpg"/>
+    <episode-num system="onscreen">E220</episode-num>
+  </programme>
+  <programme start="20261104190000 +0000" channel="24h" stop="20261104192700 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104192700 +0000" channel="24h" stop="20261104195800 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104195800 +0000" channel="24h" stop="20261104203800 +0000">
+    <title lang="fr">Telediario 2</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/5/15708568.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/4/5/15857545.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/5/15708570.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/5/15857546.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261104203800 +0000" channel="24h" stop="20261104233000 +0000">
+    <title lang="fr">La noche en 24H</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/3/15904324.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/3/15904318.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/4/2/15868242.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/3/15904322.jpg"/>
+    <episode-num system="onscreen">E667</episode-num>
+  </programme>
+  <programme start="20261104233000 +0000" channel="24h" stop="20261105000000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261105000000 +0000" channel="24h" stop="20261105003000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261105003000 +0000" channel="24h" stop="20261105010000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E673</episode-num>
+  </programme>
+  <programme start="20261105010000 +0000" channel="24h" stop="20261105013000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E308</episode-num>
+  </programme>
+  <programme start="20261105013000 +0000" channel="24h" stop="20261105020000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E308</episode-num>
+  </programme>
+  <programme start="20261105020000 +0000" channel="24h" stop="20261105023000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E308</episode-num>
+  </programme>
+  <programme start="20261105023000 +0000" channel="24h" stop="20261105030000 +0000">
+    <title lang="fr">Metrópolis</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/5/15857553.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/8/2/15901289.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/3/2/15868234.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/2/15901298.jpg"/>
+    <episode-num system="onscreen">E376</episode-num>
+  </programme>
+  <programme start="20261105030000 +0000" channel="24h" stop="20261105033000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E308</episode-num>
+  </programme>
+  <programme start="20261105033000 +0000" channel="24h" stop="20261105040000 +0000">
+    <title lang="fr">Conversatorios en Casa de América</title>
+    <category lang="fr">Interview</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/8/2/15901282.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/7/2/15901275.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/6/5/15890561.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/7/2/15901279.jpg"/>
+    <episode-num system="onscreen">E581</episode-num>
+  </programme>
+  <programme start="20261105040000 +0000" channel="24h" stop="20261105043000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E308</episode-num>
+  </programme>
+  <programme start="20261105043000 +0000" channel="24h" stop="20261105050000 +0000">
+    <title lang="fr">TD Internacional 24 Horas</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15901285.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/7/2/15901276.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/2/15868227.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15901280.jpg"/>
+    <episode-num system="onscreen">E308</episode-num>
+  </programme>
+  <programme start="20261105050000 +0000" channel="24h" stop="20261105065000 +0000">
+    <title lang="fr">Telediario Matinal</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/8/4/15844482.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/4/15844453.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/4/15844440.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/4/15844473.jpg"/>
+    <episode-num system="onscreen">E478</episode-num>
+  </programme>
+  <programme start="20261105065000 +0000" channel="24h" stop="20261105093500 +0000">
+    <title lang="fr">La hora de La 1: La hora de la actualidad</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/4/15844459.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/4/15844467.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/4/4/15844448.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/3/4/15844439.jpg"/>
+    <episode-num system="onscreen">S10 E219</episode-num>
+  </programme>
+  <programme start="20261105093500 +0000" channel="24h" stop="20261105100000 +0000">
+    <title lang="fr">Diario 24</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/3/15904317.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15904313.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/1/15853153.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/3/15904314.jpg"/>
+    <episode-num system="onscreen">E485</episode-num>
+  </programme>
+  <programme start="20261105100000 +0000" channel="24h" stop="20261105130000 +0000">
+    <title lang="fr">Diario 24</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/3/15904317.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15904313.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/1/15853153.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/3/15904314.jpg"/>
+    <episode-num system="onscreen">E485</episode-num>
+  </programme>
+  <programme start="20261105130000 +0000" channel="24h" stop="20261105135500 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105135500 +0000" channel="24h" stop="20261105143200 +0000">
+    <title lang="fr">Telediario 1</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/0/6/15205607.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/3/6/15925634.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/5/15857547.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/6/15925635.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105143200 +0000" channel="24h" stop="20261105143800 +0000">
+    <title lang="fr">Deportes 1</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/9/2/15969297.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/9/2/15969296.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/4/5/15857544.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/6/3/15703367.jpg"/>
+    <episode-num system="onscreen">E648</episode-num>
+  </programme>
+  <programme start="20261105143800 +0000" channel="24h" stop="20261105144100 +0000">
+    <title lang="fr">El tiempo</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/0/3/15969300.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/2/15969298.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/2/15868240.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/2/15969299.jpg"/>
+  </programme>
+  <programme start="20261105144100 +0000" channel="24h" stop="20261105150000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105150000 +0000" channel="24h" stop="20261105153000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105153000 +0000" channel="24h" stop="20261105160000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105160000 +0000" channel="24h" stop="20261105190000 +0000">
+    <title lang="fr">La tarde en 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/3/15904321.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/3/15904319.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/3/15904315.jpg"/>
+    <episode-num system="onscreen">E221</episode-num>
+  </programme>
+  <programme start="20261105190000 +0000" channel="24h" stop="20261105192700 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105192700 +0000" channel="24h" stop="20261105195800 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105195800 +0000" channel="24h" stop="20261105203800 +0000">
+    <title lang="fr">Telediario 2</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/5/15708568.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/4/5/15857545.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/5/15708570.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/5/15857546.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
+  <programme start="20261105203800 +0000" channel="24h" stop="20261105233000 +0000">
+    <title lang="fr">La noche en 24H</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/3/15904324.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/3/15904318.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/4/2/15868242.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/3/15904322.jpg"/>
+    <episode-num system="onscreen">E668</episode-num>
+  </programme>
+  <programme start="20261105233000 +0000" channel="24h" stop="20261106000000 +0000">
+    <title lang="fr">Noticias 24H</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/4/15844483.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/5/4/15844454.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/4/15844441.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15844468.jpg"/>
+    <episode-num system="onscreen">E674</episode-num>
+  </programme>
   <programme start="20261102234252 +0000" channel="elpais" stop="20261103002707 +0000">
     <title lang="es">El Faro de Mara Torres</title>
     <sub-title lang="es">Ana Milán: "mi Abuelo Murió Dos Veces; La Primera De Ellas, Fusilado" El Faro</sub-title>
@@ -54788,6 +55448,376 @@ En Vivo</title>
   <programme start="20261105212000 +0000" channel="etb2onpaisvasco" stop="20261105221000 +0000">
     <title lang="es">Atrápame si puedes</title>
     <sub-title lang="es">Atrápame si puedes Finde</sub-title>
+  </programme>
+  <programme start="20261102214500 +0000" channel="tg7no247andalucia" stop="20261103010000 +0000">
+    <title lang="fr">Andalucía 360</title>
+    <desc lang="fr">Andalucía 360 estrena segunda temporada con un nuevo equipo delante de las cámaras: el ex-waterpolista olímpico y presentador Pedro García Aguado se estrena al frente del espacio, acompañado por los reporteros Rafa Posadas y Luisa Chamizo.</desc>
+    <category lang="fr">Magazine de découvertes</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/16165285.jpg"/>
+  </programme>
+  <programme start="20261103010000 +0000" channel="tg7no247andalucia" stop="20261103013000 +0000">
+    <title lang="fr">Andalucía por el mundo</title>
+    <desc lang="fr">Destinos de todo el mundo donde viven andaluces. Conocemos cómo es la vida lejos de su tierra. Hoy, Tartu, Estonia.</desc>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/4/15905416.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/4/15905415.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/8/2/15878281.jpg"/>
+  </programme>
+  <programme start="20261103013000 +0000" channel="tg7no247andalucia" stop="20261103020000 +0000">
+    <title lang="fr">Hijos de Andalucía</title>
+    <desc lang="fr">Serie documental que narra la trayectoria de hombres y mujeres cuyas aportaciones en todos los campos son reconocidas, desde 1983, por la Junta de Andalucía. Ellos han sido nombrados ""Hijos predilectos"" o han recibido la Medalla de Andalucía.</desc>
+    <category lang="fr">Documentaire</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/2/6/15718625.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/2/6/15718623.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/0/8/15265806.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/8/2/15878285.jpg"/>
+  </programme>
+  <programme start="20261103020000 +0000" channel="tg7no247andalucia" stop="20261103025600 +0000">
+    <title lang="fr">Los Repobladores</title>
+    <desc lang="fr">Programa que refleja la experiencia de personas que, tras vivir en la ciudad, dan un gran cambio a su vida al trasladarse a pequeños municipios andaluces. (S/C).</desc>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/7/15265770.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/7/15265759.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/2/15630237.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/6/7/15265765.jpg"/>
+  </programme>
+  <programme start="20261103025600 +0000" channel="tg7no247andalucia" stop="20261103030200 +0000">
+    <title lang="fr">Al sur del tiempo</title>
+    <desc lang="fr">Serie documental dque muestra la esencia del Patrimonio Inmaterial y la cultura de Andalucía. Dirigida por Álvaro Begines y guionizada por Jorge Molina, la producción desmitifica tópicos andaluces a través de cuatro ejes: fiestas, oficios, modos de expresión y gastronomía.</desc>
+    <category lang="fr">Documentaire culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/4/15574411.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/0/4/15574409.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15975801.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/5/15703559.jpg"/>
+  </programme>
+  <programme start="20261103030200 +0000" channel="tg7no247andalucia" stop="20261103070000 +0000">
+    <title lang="fr">Conexión CSTV</title>
+    <desc lang="fr">Conexión con emisión CSTV.</desc>
+    <category lang="fr">Divertissement</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/9/7/15513792.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/9/7/15513791.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/4/16137435.jpg"/>
+  </programme>
+  <programme start="20261103070000 +0000" channel="tg7no247andalucia" stop="20261103072500 +0000">
+    <title lang="fr">Buenos días</title>
+    <desc lang="fr">Edición matinal, de lunes a viernes, con un primer repaso, rápido y exhaustivo, de la actualidad del día presentado por Mª José Martínez.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/4/7/15265742.jpg"/>
+  </programme>
+  <programme start="20261103072500 +0000" channel="tg7no247andalucia" stop="20261103083000 +0000">
+    <title lang="fr">Despierta Andalucía</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/7/7/15265771.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/5/7/15265757.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/8/2/15878284.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/6/7/15265762.jpg"/>
+  </programme>
+  <programme start="20261103083000 +0000" channel="tg7no247andalucia" stop="20261103112500 +0000">
+    <title lang="fr">Hoy en día con Toñi Moreno</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/4/16137436.jpg"/>
+  </programme>
+  <programme start="20261103112500 +0000" channel="tg7no247andalucia" stop="20261103125500 +0000">
+    <title lang="fr">Hoy en día mesa de análisis</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/7/2/15878277.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/2/5/16196525.jpg"/>
+  </programme>
+  <programme start="20261103125500 +0000" channel="tg7no247andalucia" stop="20261103133000 +0000">
+    <title lang="fr">Andalucía Mediodía</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/1/15902135.jpg"/>
+  </programme>
+  <programme start="20261103133000 +0000" channel="tg7no247andalucia" stop="20261103143000 +0000">
+    <title lang="fr">Canal Sur Noticias</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/7/15265769.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/5/7/15265758.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/5/7/15265752.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/7/15265764.jpg"/>
+  </programme>
+  <programme start="20261103143000 +0000" channel="tg7no247andalucia" stop="20261103170000 +0000">
+    <title lang="fr">La tarde, aquí y ahora</title>
+    <desc lang="fr">Juan y Medio y Eva Ruiz conducen este magacín de las tardes de Canal Sur con música, historias de vida y actualidad.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/7/6/15714674.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/6/15714673.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/2/15878283.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/9/15698904.jpg"/>
+  </programme>
+  <programme start="20261103170000 +0000" channel="tg7no247andalucia" stop="20261103185000 +0000">
+    <title lang="fr">Andalucía Directo</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/3/5/15709534.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/3/5/15709533.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/8/2/15878282.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/5/5/15703556.jpg"/>
+  </programme>
+  <programme start="20261103185000 +0000" channel="tg7no247andalucia" stop="20261103193000 +0000">
+    <title lang="fr">Cómetelo</title>
+    <desc lang="fr">Programa de cocina en el que se elabora una receta con productos naturales andaluces, presentado por el chef Enrique Sánchez.</desc>
+    <category lang="fr">Divertissement</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/7/15265773.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/6/7/15265763.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/2/15878280.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/7/15265768.jpg"/>
+  </programme>
+  <programme start="20261103193000 +0000" channel="tg7no247andalucia" stop="20261103205500 +0000">
+    <title lang="fr">Canal Sur Noticias 2</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/3/5/15709532.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/3/5/15709531.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/5/16003564.jpg"/>
+  </programme>
+  <programme start="20261103205500 +0000" channel="tg7no247andalucia" stop="20261103215000 +0000">
+    <title lang="fr">Atrápame si puedes</title>
+    <desc lang="fr">Manolo Sarria pone a prueba a los concursantes cada semana con divertidas preguntas y un suculento bote.</desc>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/7/2/15878279.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/4/15218440.jpg"/>
+  </programme>
+  <programme start="20261103215000 +0000" channel="tg7no247andalucia" stop="20261103225500 +0000">
+    <title lang="fr">Tierra de Sabores</title>
+    <desc lang="fr">Descubrimos la esencia de los pueblos de Andalucía a través de sus recetas de toda la vida.</desc>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/8/7/15265788.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/5/16196546.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/4/5/16196545.jpg"/>
+  </programme>
+  <programme start="20261103225500 +0000" channel="tg7no247andalucia" stop="20261103234500 +0000">
+    <title lang="fr">Los Repobladores</title>
+    <desc lang="fr">Conocemos la vida de dos personas que dejaron atrás su vida en la gran ciudad para repoblar un pueblo andaluz.</desc>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/7/15265770.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/7/15265759.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/2/15630237.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/6/7/15265765.jpg"/>
+  </programme>
+  <programme start="20261103234500 +0000" channel="tg7no247andalucia" stop="20261104003500 +0000">
+    <title lang="fr">Salud al día</title>
+    <desc lang="fr">Programa con consejos saludables que recorre Andalucía de la mano de Roberto Sánchez.</desc>
+    <category lang="fr">Magazine scientifique</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/8/6/15891688.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/7/15265780.jpg"/>
+  </programme>
+  <programme start="20261104003500 +0000" channel="tg7no247andalucia" stop="20261104010000 +0000">
+    <title lang="fr">Destino Andalucía</title>
+    <desc lang="fr">Recorremos Andalucía para descubrir toda la riqueza que convierte a esta tierra en un destino de viaje inolvidable.</desc>
+    <category lang="fr">Magazine de découvertes</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/8/5/16009588.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/8/5/16009584.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/8/6/15891686.jpg"/>
+  </programme>
+  <programme start="20261104010000 +0000" channel="tg7no247andalucia" stop="20261104013000 +0000">
+    <title lang="fr">Canal Andalucía Turismo</title>
+    <category lang="fr">Magazine de découvertes</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/3/5/16145533.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/3/5/16145531.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/9/15698914.jpg"/>
+  </programme>
+  <programme start="20261104013000 +0000" channel="tg7no247andalucia" stop="20261104014000 +0000">
+    <title lang="fr">Callejeando</title>
+    <desc lang="fr">Recorremos las calles más emblemáticas de Andalucía.</desc>
+    <category lang="fr">Magazine de découvertes</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/8/5/15327582.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/8/5/15327581.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/5/15327580.jpg"/>
+  </programme>
+  <programme start="20261104014000 +0000" channel="tg7no247andalucia" stop="20261104024000 +0000">
+    <title lang="fr">Una de cine</title>
+    <desc lang="fr">Actores, directores, críticos y profesionales del cine español conversan cada semana con Isabel Gómez, en un programa con marcado acento andaluz. El espacio incluye la emisión de un cortometraje andaluz.</desc>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/8/7/15265789.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/8/7/15265784.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/7/7/15265779.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/8/7/15265787.jpg"/>
+  </programme>
+  <programme start="20261104024000 +0000" channel="tg7no247andalucia" stop="20261104034000 +0000">
+    <title lang="fr">Los Repobladores</title>
+    <desc lang="fr">Programa que refleja la experiencia de personas que, tras vivir en la ciudad, dan un gran cambio a su vida al trasladarse a pequeños municipios andaluces. (S/C).</desc>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/7/15265770.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/7/15265759.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/2/15630237.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/6/7/15265765.jpg"/>
+  </programme>
+  <programme start="20261104034000 +0000" channel="tg7no247andalucia" stop="20261104070000 +0000">
+    <title lang="fr">Conexión CSTV</title>
+    <category lang="fr">Divertissement</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/9/7/15513792.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/9/7/15513791.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/4/16137435.jpg"/>
+  </programme>
+  <programme start="20261104070000 +0000" channel="tg7no247andalucia" stop="20261104072500 +0000">
+    <title lang="fr">Buenos días</title>
+    <desc lang="fr">Edición matinal, de lunes a viernes, con un primer repaso, rápido y exhaustivo, de la actualidad del día presentado por Mª José Martínez.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/4/7/15265742.jpg"/>
+  </programme>
+  <programme start="20261104072500 +0000" channel="tg7no247andalucia" stop="20261104083000 +0000">
+    <title lang="fr">Despierta Andalucía</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/7/7/15265771.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/5/7/15265757.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/8/2/15878284.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/6/7/15265762.jpg"/>
+  </programme>
+  <programme start="20261104083000 +0000" channel="tg7no247andalucia" stop="20261104112500 +0000">
+    <title lang="fr">Hoy en día con Toñi Moreno</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/4/16137436.jpg"/>
+  </programme>
+  <programme start="20261104112500 +0000" channel="tg7no247andalucia" stop="20261104125500 +0000">
+    <title lang="fr">Hoy en día mesa de análisis</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/7/2/15878277.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/2/5/16196525.jpg"/>
+  </programme>
+  <programme start="20261104125500 +0000" channel="tg7no247andalucia" stop="20261104133000 +0000">
+    <title lang="fr">Andalucía Mediodía</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/1/15902135.jpg"/>
+  </programme>
+  <programme start="20261104133000 +0000" channel="tg7no247andalucia" stop="20261104143000 +0000">
+    <title lang="fr">Canal Sur Noticias</title>
+    <desc lang="fr">Informativo general con especial atención a las noticias de Andalucía presentado por Victoria Romero, Carmen Millán y Álvaro Moreno de la Santa. Incluye Deportes y el Tiempo.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/7/15265769.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/5/7/15265758.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/5/7/15265752.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/7/15265764.jpg"/>
+  </programme>
+  <programme start="20261104143000 +0000" channel="tg7no247andalucia" stop="20261104183000 +0000">
+    <title lang="fr">La tarde, aquí y ahora</title>
+    <desc lang="fr">Juan y Medio y Eva Ruiz conducen este magacín de las tardes de Canal Sur con música, historias de vida y actualidad.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/7/6/15714674.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/6/15714673.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/2/15878283.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/9/15698904.jpg"/>
+  </programme>
+  <programme start="20261104183000 +0000" channel="tg7no247andalucia" stop="20261104193000 +0000">
+    <title lang="fr">La tarde, aquí y ahora</title>
+    <desc lang="fr">Juan y Medio y Eva Ruiz conducen este magacín de las tardes de Canal Sur con música, historias de vida y actualidad.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/7/6/15714674.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/6/15714673.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/2/15878283.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/9/15698904.jpg"/>
+  </programme>
+  <programme start="20261104193000 +0000" channel="tg7no247andalucia" stop="20261104205000 +0000">
+    <title lang="fr">Canal Sur Noticias 2</title>
+    <desc lang="fr">Informativo general con especial atención a las noticias de Andalucía presentado por Marta Paneque y Jaime Castilla. Incluye Deportes y El Tiempo.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/3/5/15709532.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/3/5/15709531.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/5/16003564.jpg"/>
+  </programme>
+  <programme start="20261104205000 +0000" channel="tg7no247andalucia" stop="20261104214500 +0000">
+    <title lang="fr">Atrápame si puedes</title>
+    <desc lang="fr">Manolo Sarria pone a prueba a los concursantes cada semana con divertidas preguntas y un suculento bote.</desc>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/7/2/15878279.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/4/15218440.jpg"/>
+  </programme>
+  <programme start="20261104214500 +0000" channel="tg7no247andalucia" stop="20261104230000 +0000">
+    <title lang="fr">El Hilo Verde</title>
+    <desc lang="fr">Toñi Moreno entrevista y tira del hilo invisible que une la vida, los secretos y el alma de rostros inolvidables con sus raíces. Hoy, Norma Duval.</desc>
+    <category lang="fr">Interview</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15652313.jpg"/>
+  </programme>
+  <programme start="20261104230000 +0000" channel="tg7no247andalucia" stop="20261105020000 +0000">
+    <title lang="fr">El Hilo Verde</title>
+    <category lang="fr">Interview</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/3/15652313.jpg"/>
+  </programme>
+  <programme start="20261105020000 +0000" channel="tg7no247andalucia" stop="20261105030000 +0000">
+    <title lang="fr">Los Repobladores</title>
+    <desc lang="fr">Programa que refleja la experiencia de personas que, tras vivir en la ciudad, dan un gran cambio a su vida al trasladarse a pequeños municipios andaluces. (S/C).</desc>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/7/15265770.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/5/7/15265759.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/2/15630237.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/6/7/15265765.jpg"/>
+  </programme>
+  <programme start="20261105030000 +0000" channel="tg7no247andalucia" stop="20261105070000 +0000">
+    <title lang="fr">Conexión CSTV</title>
+    <category lang="fr">Divertissement</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/9/7/15513792.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/9/7/15513791.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/4/16137435.jpg"/>
+  </programme>
+  <programme start="20261105070000 +0000" channel="tg7no247andalucia" stop="20261105072500 +0000">
+    <title lang="fr">Buenos días</title>
+    <desc lang="fr">Edición matinal, de lunes a viernes, con un primer repaso, rápido y exhaustivo, de la actualidad del día presentado por Mª José Martínez.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/4/7/15265742.jpg"/>
+  </programme>
+  <programme start="20261105072500 +0000" channel="tg7no247andalucia" stop="20261105083000 +0000">
+    <title lang="fr">Despierta Andalucía</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/7/7/15265771.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/5/7/15265757.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/8/2/15878284.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/6/7/15265762.jpg"/>
+  </programme>
+  <programme start="20261105083000 +0000" channel="tg7no247andalucia" stop="20261105112500 +0000">
+    <title lang="fr">Hoy en día con Toñi Moreno</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/4/16137436.jpg"/>
+  </programme>
+  <programme start="20261105112500 +0000" channel="tg7no247andalucia" stop="20261105125500 +0000">
+    <title lang="fr">Hoy en día mesa de análisis</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/7/2/15878277.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/2/5/16196525.jpg"/>
+  </programme>
+  <programme start="20261105125500 +0000" channel="tg7no247andalucia" stop="20261105133000 +0000">
+    <title lang="fr">Andalucía Mediodía</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/3/1/15902135.jpg"/>
+  </programme>
+  <programme start="20261105133000 +0000" channel="tg7no247andalucia" stop="20261105143000 +0000">
+    <title lang="fr">Canal Sur Noticias</title>
+    <desc lang="fr">Informativo general con especial atención a las noticias de Andalucía presentado por Victoria Romero, Carmen Millán y Álvaro Moreno de la Santa. Incluye Deportes y el Tiempo.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/7/15265769.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/5/7/15265758.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/5/7/15265752.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/7/15265764.jpg"/>
+  </programme>
+  <programme start="20261105143000 +0000" channel="tg7no247andalucia" stop="20261105183000 +0000">
+    <title lang="fr">La tarde, aquí y ahora</title>
+    <desc lang="fr">Juan y Medio y Eva Ruiz conducen este magacín de las tardes de Canal Sur con música, historias de vida y actualidad.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/7/6/15714674.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/6/15714673.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/2/15878283.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/9/15698904.jpg"/>
+  </programme>
+  <programme start="20261105183000 +0000" channel="tg7no247andalucia" stop="20261105193000 +0000">
+    <title lang="fr">La tarde, aquí y ahora</title>
+    <desc lang="fr">Juan y Medio y Eva Ruiz conducen este magacín de las tardes de Canal Sur con música, historias de vida y actualidad.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/7/6/15714674.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/7/6/15714673.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/8/2/15878283.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/0/9/15698904.jpg"/>
+  </programme>
+  <programme start="20261105193000 +0000" channel="tg7no247andalucia" stop="20261105205000 +0000">
+    <title lang="fr">Canal Sur Noticias 2</title>
+    <desc lang="fr">Informativo general con especial atención a las noticias de Andalucía presentado por Marta Paneque y Jaime Castilla. Incluye Deportes y El Tiempo.</desc>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/3/5/15709532.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/3/5/15709531.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/5/16003564.jpg"/>
+  </programme>
+  <programme start="20261105205000 +0000" channel="tg7no247andalucia" stop="20261106001000 +0000">
+    <title lang="fr">Atrápame si puedes</title>
+    <desc lang="fr">Manolo Sarria pone a prueba a los concursantes cada semana con divertidas preguntas y un suculento bote.</desc>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/7/2/15878279.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/4/15218440.jpg"/>
   </programme>
   <programme start="20261103023000 +0000" channel="populartvmelillano247melilla" stop="20261103041500 +0000">
     <title lang="es">Melilla CD Torreblanca - Estrella Revoltosa</title>
@@ -103940,6 +104970,256 @@ En Vivo</title>
     <category lang="de">Tourism</category>
     <episode-num system="onscreen">E5</episode-num>
   </programme>
+  <programme start="20261102220000 +0000" channel="ontv" stop="20261103023000 +0000">
+    <title lang="fr">Qoloub 'Amera</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261103023000 +0000" channel="ontv" stop="20261103030000 +0000">
+    <title lang="fr">Zai El Ketab</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/1/15178140.jpg"/>
+  </programme>
+  <programme start="20261103030000 +0000" channel="ontv" stop="20261103040000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103040000 +0000" channel="ontv" stop="20261103050000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103050000 +0000" channel="ontv" stop="20261103060000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103060000 +0000" channel="ontv" stop="20261103070000 +0000">
+    <title lang="fr">Ahla Akla</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/6/15178614.jpg"/>
+  </programme>
+  <programme start="20261103070000 +0000" channel="ontv" stop="20261103080000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103080000 +0000" channel="ontv" stop="20261103090000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103090000 +0000" channel="ontv" stop="20261103093000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103093000 +0000" channel="ontv" stop="20261103110000 +0000">
+    <title lang="fr">Qoloub 'Amera</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261103110000 +0000" channel="ontv" stop="20261103120000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103120000 +0000" channel="ontv" stop="20261103130000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103130000 +0000" channel="ontv" stop="20261103153000 +0000">
+    <title lang="fr">Kelma Akhira</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/6/3/15183362.jpg"/>
+  </programme>
+  <programme start="20261103153000 +0000" channel="ontv" stop="20261103170000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103170000 +0000" channel="ontv" stop="20261103173000 +0000">
+    <title lang="fr">Style Talk</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/8/7/15201788.jpg"/>
+  </programme>
+  <programme start="20261103173000 +0000" channel="ontv" stop="20261103183000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103183000 +0000" channel="ontv" stop="20261103200000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103200000 +0000" channel="ontv" stop="20261103210000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103210000 +0000" channel="ontv" stop="20261103220000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261103220000 +0000" channel="ontv" stop="20261104023000 +0000">
+    <title lang="fr">Qoloub 'Amera</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/4/4/15195448.jpg"/>
+  </programme>
+  <programme start="20261104023000 +0000" channel="ontv" stop="20261104030000 +0000">
+    <title lang="fr">Zai El Ketab</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/1/15178140.jpg"/>
+  </programme>
+  <programme start="20261104030000 +0000" channel="ontv" stop="20261104040000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104040000 +0000" channel="ontv" stop="20261104050000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104050000 +0000" channel="ontv" stop="20261104060000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104060000 +0000" channel="ontv" stop="20261104070000 +0000">
+    <title lang="fr">Ahla Akla</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/7/4/15182479.jpg"/>
+  </programme>
+  <programme start="20261104070000 +0000" channel="ontv" stop="20261104080000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104080000 +0000" channel="ontv" stop="20261104090000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104090000 +0000" channel="ontv" stop="20261104093000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104093000 +0000" channel="ontv" stop="20261104110000 +0000">
+    <title lang="fr">Qoloub 'Amera</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261104110000 +0000" channel="ontv" stop="20261104120000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104120000 +0000" channel="ontv" stop="20261104130000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104130000 +0000" channel="ontv" stop="20261104160000 +0000">
+    <title lang="fr">Play</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/4/1/15200141.jpg"/>
+  </programme>
+  <programme start="20261104160000 +0000" channel="ontv" stop="20261104170000 +0000">
+    <title lang="fr">Negoum fi El Sama</title>
+    <category lang="fr">Divertissement</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/6/15179617.jpg"/>
+  </programme>
+  <programme start="20261104170000 +0000" channel="ontv" stop="20261104173000 +0000">
+    <title lang="fr">Missunderstand</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/5/8/15186851.jpg"/>
+  </programme>
+  <programme start="20261104173000 +0000" channel="ontv" stop="20261104183000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104183000 +0000" channel="ontv" stop="20261104200000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104200000 +0000" channel="ontv" stop="20261104210000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104210000 +0000" channel="ontv" stop="20261104213000 +0000">
+    <title lang="fr">Programme non communiqué</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15186830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/8/15186838.jpg"/>
+  </programme>
+  <programme start="20261104213000 +0000" channel="ontv" stop="20261105060000 +0000">
+    <title lang="fr">Missunderstand</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/6/2/15187264.jpg"/>
+  </programme>
+  <programme start="20261105060000 +0000" channel="ontv" stop="20261105090000 +0000">
+    <title lang="fr">ON TV</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261105090000 +0000" channel="ontv" stop="20261105120000 +0000">
+    <title lang="fr">ON TV</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/4/4/15195448.jpg"/>
+  </programme>
+  <programme start="20261105120000 +0000" channel="ontv" stop="20261105150000 +0000">
+    <title lang="fr">ON TV</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/5/15185560.jpg"/>
+  </programme>
+  <programme start="20261105150000 +0000" channel="ontv" stop="20261105180000 +0000">
+    <title lang="fr">ON TV</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/5/15185560.jpg"/>
+  </programme>
+  <programme start="20261105180000 +0000" channel="ontv" stop="20261105210000 +0000">
+    <title lang="fr">ON TV</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261105210000 +0000" channel="ontv" stop="20261106000000 +0000">
+    <title lang="fr">ON TV</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/6/4/15185468.jpg"/>
+  </programme>
   <programme start="20261102233000 +0000" channel="ucluruguay" stop="20261103003000 +0000">
     <title lang="es">Conversando la noche</title>
     <desc lang="es">Un programa de entrevistas en el que diversas personalidades reconocidas son invitadas a charlar y, de esta manera, el público puede conocer otras facetas de su vida así como también profundizar en sus obras y sus puntos de vista. Un programa de entrevistas en el que diversas personalidades reconocidas son invitadas a charlar y, de esta manera, el público puede conocer otras facetas de su vida así como también profundizar en sus obras y sus puntos de vista.</desc>
@@ -152357,6 +153637,387 @@ En Vivo</title>
       <value>6.0</value>
     </star-rating>
   </programme>
+  <programme start="20261103000000 +0000" channel="tracelatinainternacional" stop="20261103004500 +0000">
+    <title lang="fr">Top 10 Reggaeton</title>
+    <desc lang="fr">Le classement de 10 hits Reggaeton les plus populaires du moment.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/9/7/15192797.jpg"/>
+  </programme>
+  <programme start="20261103004500 +0000" channel="tracelatinainternacional" stop="20261103030000 +0000">
+    <title lang="fr">Latin night</title>
+    <desc lang="fr">Vous avez une insomnie ? Ou vous voulez passer la nuit en musique ? Regardez Latin NIGHT !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/8/15192821.jpg"/>
+  </programme>
+  <programme start="20261103030000 +0000" channel="tracelatinainternacional" stop="20261103060000 +0000">
+    <title lang="fr">Viva Latina</title>
+    <desc lang="fr">La musique ne s'arrête jamais sur TRACE Vanilla! Viav Latina est là pour vous faire profiter des meilleurs hits.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/9/7/15192794.jpg"/>
+  </programme>
+  <programme start="20261103060000 +0000" channel="tracelatinainternacional" stop="20261103080000 +0000">
+    <title lang="fr">Wake Up Trace Latina</title>
+    <desc lang="fr">De la musique pour bien commencer la matinée et se réchauffer pour le reste de la journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/9/7/15192793.jpg"/>
+  </programme>
+  <programme start="20261103080000 +0000" channel="tracelatinainternacional" stop="20261103100000 +0000">
+    <title lang="fr">Ola Latina</title>
+    <desc lang="fr">De la musique pour bien commencer la matinée et se réchauffer pour le reste de la journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/0/8/15192805.jpg"/>
+  </programme>
+  <programme start="20261103100000 +0000" channel="tracelatinainternacional" stop="20261103104500 +0000">
+    <title lang="fr">Hit 10</title>
+    <desc lang="fr">Le classement quotidien des 10 meilleurs titres urbains du moment, uniquement sur TRACE Latina.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/6/16142647.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/6/16142646.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/2/15703269.jpg"/>
+  </programme>
+  <programme start="20261103104500 +0000" channel="tracelatinainternacional" stop="20261103140000 +0000">
+    <title lang="fr">Fuego play</title>
+    <desc lang="fr">La musique ne s'arrête jamais sur TRACE LATINA ! Fuego play est là pour vous faire profiter des meilleurs hits Latino!</desc>
+    <category lang="fr">Variétés</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/9/7/15192795.jpg"/>
+  </programme>
+  <programme start="20261103140000 +0000" channel="tracelatinainternacional" stop="20261103144500 +0000">
+    <title lang="fr">Top 10 Reggaeton</title>
+    <desc lang="fr">Le classement de 10 hits Reggaeton les plus populaires du moment.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/9/7/15192797.jpg"/>
+  </programme>
+  <programme start="20261103144500 +0000" channel="tracelatinainternacional" stop="20261103150000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261103150000 +0000" channel="tracelatinainternacional" stop="20261103160000 +0000">
+    <title lang="fr">100% Ladies</title>
+    <desc lang="fr">Avec 100% LADIES, retrouvez une sélection des meilleures artistes féminines du moment ! Une heure 100% girl power !</desc>
+    <category lang="fr">Variétés</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/7/15192798.jpg"/>
+  </programme>
+  <programme start="20261103160000 +0000" channel="tracelatinainternacional" stop="20261103171500 +0000">
+    <title lang="fr">Latin vibes</title>
+    <desc lang="fr">Une heure non stop de hit latin!</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/7/15192799.jpg"/>
+  </programme>
+  <programme start="20261103171500 +0000" channel="tracelatinainternacional" stop="20261103180000 +0000">
+    <title lang="fr">Hit 10</title>
+    <desc lang="fr">Le classement quotidien des 10 meilleurs titres urbains du moment, uniquement sur TRACE Latina.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/6/16142647.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/6/16142646.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/2/15703269.jpg"/>
+  </programme>
+  <programme start="20261103180000 +0000" channel="tracelatinainternacional" stop="20261103190000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261103190000 +0000" channel="tracelatinainternacional" stop="20261103200000 +0000">
+    <title lang="fr">Novedades</title>
+    <desc lang="fr">Trace te propose une selection des meilleures nouveautées.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/1/8/15192810.jpg"/>
+  </programme>
+  <programme start="20261103200000 +0000" channel="tracelatinainternacional" stop="20261103204500 +0000">
+    <title lang="fr">Stream it</title>
+    <desc lang="fr">Le classement des 10 titres les plus téléchargés et streamés dans le monde cette semaine.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/7/16042737.jpg"/>
+  </programme>
+  <programme start="20261103204500 +0000" channel="tracelatinainternacional" stop="20261103210000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261103210000 +0000" channel="tracelatinainternacional" stop="20261103220000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261103220000 +0000" channel="tracelatinainternacional" stop="20261103230000 +0000">
+    <title lang="fr">Pop Vibes</title>
+    <desc lang="fr">Une heure de grands succès pop latino.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/8/15192813.jpg"/>
+  </programme>
+  <programme start="20261103230000 +0000" channel="tracelatinainternacional" stop="20261104000000 +0000">
+    <title lang="fr">Bachata vibes</title>
+    <desc lang="fr">Une heure des plus gros hits Bachata !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/7/7/15254778.jpg"/>
+  </programme>
+  <programme start="20261104000000 +0000" channel="tracelatinainternacional" stop="20261104004500 +0000">
+    <title lang="fr">Stream it</title>
+    <desc lang="fr">Le classement des 10 titres les plus téléchargés et streamés dans le monde cette semaine.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/7/16042737.jpg"/>
+  </programme>
+  <programme start="20261104004500 +0000" channel="tracelatinainternacional" stop="20261104030000 +0000">
+    <title lang="fr">Latin night</title>
+    <desc lang="fr">Vous avez une insomnie ? Ou vous voulez passer la nuit en musique ? Regardez Latin NIGHT !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/8/15192821.jpg"/>
+  </programme>
+  <programme start="20261104030000 +0000" channel="tracelatinainternacional" stop="20261104060000 +0000">
+    <title lang="fr">Viva Latina</title>
+    <desc lang="fr">La musique ne s'arrête jamais sur TRACE Vanilla! Viav Latina est là pour vous faire profiter des meilleurs hits.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/9/7/15192794.jpg"/>
+  </programme>
+  <programme start="20261104060000 +0000" channel="tracelatinainternacional" stop="20261104080000 +0000">
+    <title lang="fr">Wake Up Trace Latina</title>
+    <desc lang="fr">De la musique pour bien commencer la matinée et se réchauffer pour le reste de la journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/9/7/15192793.jpg"/>
+  </programme>
+  <programme start="20261104080000 +0000" channel="tracelatinainternacional" stop="20261104100000 +0000">
+    <title lang="fr">Ola Latina</title>
+    <desc lang="fr">De la musique pour bien commencer la matinée et se réchauffer pour le reste de la journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/0/8/15192805.jpg"/>
+  </programme>
+  <programme start="20261104100000 +0000" channel="tracelatinainternacional" stop="20261104114500 +0000">
+    <title lang="fr">Hit 30</title>
+    <desc lang="fr">Chaque semaine, retrouvez les 30 meilleurs titres urbains sur TRACE Latina.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/3/8/15192830.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/2/8/15192829.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/3/7/16042739.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/8/15192827.jpg"/>
+  </programme>
+  <programme start="20261104114500 +0000" channel="tracelatinainternacional" stop="20261104140000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">Les meilleurs hits de la semaine s'enchaînent pour rythmer ta journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261104140000 +0000" channel="tracelatinainternacional" stop="20261104144500 +0000">
+    <title lang="fr">Stream it</title>
+    <desc lang="fr">Le classement des 10 titres les plus téléchargés et streamés dans le monde cette semaine.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/7/16042737.jpg"/>
+  </programme>
+  <programme start="20261104144500 +0000" channel="tracelatinainternacional" stop="20261104150000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261104150000 +0000" channel="tracelatinainternacional" stop="20261104160000 +0000">
+    <title lang="fr">100% Ladies</title>
+    <desc lang="fr">Avec 100% LADIES, retrouvez une sélection des meilleures artistes féminines du moment ! Une heure 100% girl power !</desc>
+    <category lang="fr">Variétés</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/7/15192798.jpg"/>
+  </programme>
+  <programme start="20261104160000 +0000" channel="tracelatinainternacional" stop="20261104171500 +0000">
+    <title lang="fr">Latin vibes</title>
+    <desc lang="fr">Une heure non stop de hit latin!</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/7/15192799.jpg"/>
+  </programme>
+  <programme start="20261104171500 +0000" channel="tracelatinainternacional" stop="20261104180000 +0000">
+    <title lang="fr">Hit 10</title>
+    <desc lang="fr">Le classement quotidien des 10 meilleurs titres urbains du moment, uniquement sur TRACE Latina.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/6/16142647.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/6/16142646.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/2/15703269.jpg"/>
+  </programme>
+  <programme start="20261104180000 +0000" channel="tracelatinainternacional" stop="20261104190000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261104190000 +0000" channel="tracelatinainternacional" stop="20261104200000 +0000">
+    <title lang="fr">Novedades</title>
+    <desc lang="fr">Trace te propose une selection des meilleures nouveautées.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/1/8/15192810.jpg"/>
+  </programme>
+  <programme start="20261104200000 +0000" channel="tracelatinainternacional" stop="20261104204500 +0000">
+    <title lang="fr">Top 10 Urban Latin</title>
+    <desc lang="fr">Le classement de 10 hits Latino-Urbain les plus populaires du moment.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/8/15192824.jpg"/>
+  </programme>
+  <programme start="20261104204500 +0000" channel="tracelatinainternacional" stop="20261104210000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261104210000 +0000" channel="tracelatinainternacional" stop="20261104220000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261104220000 +0000" channel="tracelatinainternacional" stop="20261104230000 +0000">
+    <title lang="fr">Reggaeton vibes</title>
+    <desc lang="fr">Une heure des plus gros hits Reggaeton Latino!</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/2/8/15192826.jpg"/>
+  </programme>
+  <programme start="20261104230000 +0000" channel="tracelatinainternacional" stop="20261105000000 +0000">
+    <title lang="fr">Bachata vibes</title>
+    <desc lang="fr">Une heure des plus gros hits Bachata !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/7/7/15254778.jpg"/>
+  </programme>
+  <programme start="20261105000000 +0000" channel="tracelatinainternacional" stop="20261105004500 +0000">
+    <title lang="fr">Top 10 Urban Latin</title>
+    <desc lang="fr">Le classement de 10 hits Latino-Urbain les plus populaires du moment.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/8/15192824.jpg"/>
+  </programme>
+  <programme start="20261105004500 +0000" channel="tracelatinainternacional" stop="20261105030000 +0000">
+    <title lang="fr">Latin night</title>
+    <desc lang="fr">Vous avez une insomnie ? Ou vous voulez passer la nuit en musique ? Regardez Latin NIGHT !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/8/15192821.jpg"/>
+  </programme>
+  <programme start="20261105030000 +0000" channel="tracelatinainternacional" stop="20261105060000 +0000">
+    <title lang="fr">Viva Latina</title>
+    <desc lang="fr">La musique ne s'arrête jamais sur TRACE Vanilla! Viav Latina est là pour vous faire profiter des meilleurs hits.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/9/7/15192794.jpg"/>
+  </programme>
+  <programme start="20261105060000 +0000" channel="tracelatinainternacional" stop="20261105080000 +0000">
+    <title lang="fr">Wake Up Trace Latina</title>
+    <desc lang="fr">De la musique pour bien commencer la matinée et se réchauffer pour le reste de la journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/9/7/15192793.jpg"/>
+  </programme>
+  <programme start="20261105080000 +0000" channel="tracelatinainternacional" stop="20261105100000 +0000">
+    <title lang="fr">Ola Latina</title>
+    <desc lang="fr">De la musique pour bien commencer la matinée et se réchauffer pour le reste de la journée.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/0/8/15192805.jpg"/>
+  </programme>
+  <programme start="20261105100000 +0000" channel="tracelatinainternacional" stop="20261105104500 +0000">
+    <title lang="fr">Hit 10</title>
+    <desc lang="fr">Le classement quotidien des 10 meilleurs titres urbains du moment, uniquement sur TRACE Latina.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/6/16142647.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/6/16142646.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/2/15703269.jpg"/>
+  </programme>
+  <programme start="20261105104500 +0000" channel="tracelatinainternacional" stop="20261105140000 +0000">
+    <title lang="fr">Fuego play</title>
+    <desc lang="fr">La musique ne s'arrête jamais sur TRACE LATINA ! Fuego play est là pour vous faire profiter des meilleurs hits Latino!</desc>
+    <category lang="fr">Variétés</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/9/7/15192795.jpg"/>
+  </programme>
+  <programme start="20261105140000 +0000" channel="tracelatinainternacional" stop="20261105144500 +0000">
+    <title lang="fr">Top 10 Urban Latin</title>
+    <desc lang="fr">Le classement de 10 hits Latino-Urbain les plus populaires du moment.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/8/15192824.jpg"/>
+  </programme>
+  <programme start="20261105144500 +0000" channel="tracelatinainternacional" stop="20261105150000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261105150000 +0000" channel="tracelatinainternacional" stop="20261105160000 +0000">
+    <title lang="fr">100% Ladies</title>
+    <desc lang="fr">Avec 100% LADIES, retrouvez une sélection des meilleures artistes féminines du moment ! Une heure 100% girl power !</desc>
+    <category lang="fr">Variétés</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/9/7/15192798.jpg"/>
+  </programme>
+  <programme start="20261105160000 +0000" channel="tracelatinainternacional" stop="20261105171500 +0000">
+    <title lang="fr">Latin vibes</title>
+    <desc lang="fr">Une heure non stop de hit latin!</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/7/15192799.jpg"/>
+  </programme>
+  <programme start="20261105171500 +0000" channel="tracelatinainternacional" stop="20261105180000 +0000">
+    <title lang="fr">Hit 10</title>
+    <desc lang="fr">Le classement quotidien des 10 meilleurs titres urbains du moment, uniquement sur TRACE Latina.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/4/6/16142647.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/4/6/16142646.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/6/2/15703269.jpg"/>
+  </programme>
+  <programme start="20261105180000 +0000" channel="tracelatinainternacional" stop="20261105190000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261105190000 +0000" channel="tracelatinainternacional" stop="20261105200000 +0000">
+    <title lang="fr">Novedades</title>
+    <desc lang="fr">Trace te propose une selection des meilleures nouveautées.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/1/8/15192810.jpg"/>
+  </programme>
+  <programme start="20261105200000 +0000" channel="tracelatinainternacional" stop="20261105204500 +0000">
+    <title lang="fr">Top 10 Pop</title>
+    <desc lang="fr">Le classement de 10 hits POP les plus populaires du moment.</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/3/8/15192831.jpg"/>
+  </programme>
+  <programme start="20261105204500 +0000" channel="tracelatinainternacional" stop="20261105210000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261105210000 +0000" channel="tracelatinainternacional" stop="20261105220000 +0000">
+    <title lang="fr">Hits Non Stop</title>
+    <desc lang="fr">1 heure de hits non-stop pour embellir la journée avec HITS NON STOP !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/8/15192817.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/2/7/15253728.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/0/8/15192801.jpg"/>
+  </programme>
+  <programme start="20261105220000 +0000" channel="tracelatinainternacional" stop="20261105230000 +0000">
+    <title lang="fr">Dembow Vibes</title>
+    <desc lang="fr">Une heure des plus gros hits Dembow!</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/3/8/15192832.jpg"/>
+  </programme>
+  <programme start="20261105230000 +0000" channel="tracelatinainternacional" stop="20261106000000 +0000">
+    <title lang="fr">Bachata vibes</title>
+    <desc lang="fr">Une heure des plus gros hits Bachata !</desc>
+    <category lang="fr">Clips</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/7/7/15254778.jpg"/>
+  </programme>
   <programme start="20261102234500 +0000" channel="traceurbaninternacional" stop="20261103004500 +0000">
     <title lang="es">Travesía</title>
   </programme>
@@ -183671,6 +185332,986 @@ En Vivo</title>
   </programme>
   <programme start="20261105233000 +0000" channel="canal21televisionchichicasteca" stop="20261106000000 +0000">
     <title lang="es">16 veranos</title>
+  </programme>
+  <programme start="20261102220000 +0000" channel="canal32televisionchichicasteca" stop="20261103060000 +0000">
+    <title lang="fr">Rediffusion en boucle</title>
+    <category lang="fr">Emission spéciale</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/2/1/15187129.jpg"/>
+  </programme>
+  <programme start="20261103060000 +0000" channel="canal32televisionchichicasteca" stop="20261103073000 +0000">
+    <title lang="fr">Direct de la veille</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103073000 +0000" channel="canal32televisionchichicasteca" stop="20261103091300 +0000">
+    <title lang="fr">Magazine Télé-achat</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/5/0/15204051.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/2/0/15204023.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/0/15204015.jpg"/>
+  </programme>
+  <programme start="20261103091300 +0000" channel="canal32televisionchichicasteca" stop="20261103091900 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261103091900 +0000" channel="canal32televisionchichicasteca" stop="20261103093000 +0000">
+    <title lang="fr">Réussites : le portrait</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/0/15204012.jpg"/>
+  </programme>
+  <programme start="20261103093000 +0000" channel="canal32televisionchichicasteca" stop="20261103094300 +0000">
+    <title lang="fr">Grand tourisme</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/0/15204013.jpg"/>
+  </programme>
+  <programme start="20261103094300 +0000" channel="canal32televisionchichicasteca" stop="20261103094600 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261103094600 +0000" channel="canal32televisionchichicasteca" stop="20261103094900 +0000">
+    <title lang="fr">L'art de faire</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/0/15204040.jpg"/>
+  </programme>
+  <programme start="20261103094900 +0000" channel="canal32televisionchichicasteca" stop="20261103100000 +0000">
+    <title lang="fr">Passion bénévoles</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/0/15204016.jpg"/>
+  </programme>
+  <programme start="20261103100000 +0000" channel="canal32televisionchichicasteca" stop="20261103103000 +0000">
+    <title lang="fr">Les dossiers du jeudi</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/6/2/15183261.jpg"/>
+  </programme>
+  <programme start="20261103103000 +0000" channel="canal32televisionchichicasteca" stop="20261103104300 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/0/15204017.jpg"/>
+  </programme>
+  <programme start="20261103104300 +0000" channel="canal32televisionchichicasteca" stop="20261103110000 +0000">
+    <title lang="fr">C'est de la balle</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/8/15178870.jpg"/>
+  </programme>
+  <programme start="20261103110000 +0000" channel="canal32televisionchichicasteca" stop="20261103110400 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103110400 +0000" channel="canal32televisionchichicasteca" stop="20261103110600 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103110600 +0000" channel="canal32televisionchichicasteca" stop="20261103111000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261103111000 +0000" channel="canal32televisionchichicasteca" stop="20261103114000 +0000">
+    <title lang="fr">JT Sport</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/0/15204022.jpg"/>
+  </programme>
+  <programme start="20261103114000 +0000" channel="canal32televisionchichicasteca" stop="20261103114400 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261103114400 +0000" channel="canal32televisionchichicasteca" stop="20261103114600 +0000">
+    <title lang="fr">Passion bénévoles</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/0/15204016.jpg"/>
+  </programme>
+  <programme start="20261103114600 +0000" channel="canal32televisionchichicasteca" stop="20261103115000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261103115000 +0000" channel="canal32televisionchichicasteca" stop="20261103115500 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103115500 +0000" channel="canal32televisionchichicasteca" stop="20261103120000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103120000 +0000" channel="canal32televisionchichicasteca" stop="20261103121300 +0000">
+    <title lang="fr">Attitude montagne</title>
+    <category lang="fr">Magazine de la nature</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/1/15193124.jpg"/>
+  </programme>
+  <programme start="20261103121300 +0000" channel="canal32televisionchichicasteca" stop="20261103123000 +0000">
+    <title lang="fr">Mon meilleur match</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/0/15204021.jpg"/>
+  </programme>
+  <programme start="20261103123000 +0000" channel="canal32televisionchichicasteca" stop="20261103123500 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103123500 +0000" channel="canal32televisionchichicasteca" stop="20261103124000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103124000 +0000" channel="canal32televisionchichicasteca" stop="20261103125300 +0000">
+    <title lang="fr">Tribune libre</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/2/0/15204026.jpg"/>
+  </programme>
+  <programme start="20261103125300 +0000" channel="canal32televisionchichicasteca" stop="20261103130000 +0000">
+    <title lang="fr">Infos Troyes / L'objet d'une histoire / C'est mon quartier</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/0/15204027.jpg"/>
+  </programme>
+  <programme start="20261103130000 +0000" channel="canal32televisionchichicasteca" stop="20261103140000 +0000">
+    <title lang="fr">Magazine Télé-achat</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/5/0/15204051.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/2/0/15204023.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/0/15204015.jpg"/>
+  </programme>
+  <programme start="20261103140000 +0000" channel="canal32televisionchichicasteca" stop="20261103140400 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103140400 +0000" channel="canal32televisionchichicasteca" stop="20261103150000 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/0/15204017.jpg"/>
+  </programme>
+  <programme start="20261103150000 +0000" channel="canal32televisionchichicasteca" stop="20261103160000 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103160000 +0000" channel="canal32televisionchichicasteca" stop="20261103160600 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103160600 +0000" channel="canal32televisionchichicasteca" stop="20261103163000 +0000">
+    <title lang="fr">Attitude montagne</title>
+    <category lang="fr">Magazine de la nature</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/1/15205180.jpg"/>
+  </programme>
+  <programme start="20261103163000 +0000" channel="canal32televisionchichicasteca" stop="20261103170000 +0000">
+    <title lang="fr">Jour de match / Dossiers du jeudi</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/3/0/15204031.jpg"/>
+  </programme>
+  <programme start="20261103170000 +0000" channel="canal32televisionchichicasteca" stop="20261103171500 +0000">
+    <title lang="fr">JT Sport</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/0/15204022.jpg"/>
+  </programme>
+  <programme start="20261103171500 +0000" channel="canal32televisionchichicasteca" stop="20261103173000 +0000">
+    <title lang="fr">Jour de match / JT Sport</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/9/0/15192091.jpg"/>
+  </programme>
+  <programme start="20261103173000 +0000" channel="canal32televisionchichicasteca" stop="20261103173500 +0000">
+    <title lang="fr">Flash JT</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261103173500 +0000" channel="canal32televisionchichicasteca" stop="20261103174000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103174000 +0000" channel="canal32televisionchichicasteca" stop="20261103180000 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261103180000 +0000" channel="canal32televisionchichicasteca" stop="20261103183000 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261103183000 +0000" channel="canal32televisionchichicasteca" stop="20261103184500 +0000">
+    <title lang="fr">JT d'actualité</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/2/15175224.jpg"/>
+  </programme>
+  <programme start="20261103184500 +0000" channel="canal32televisionchichicasteca" stop="20261103185200 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103185200 +0000" channel="canal32televisionchichicasteca" stop="20261103185500 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261103185500 +0000" channel="canal32televisionchichicasteca" stop="20261103190000 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261103190000 +0000" channel="canal32televisionchichicasteca" stop="20261103190600 +0000">
+    <title lang="fr">Passion bénévoles</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/0/15204016.jpg"/>
+  </programme>
+  <programme start="20261103190600 +0000" channel="canal32televisionchichicasteca" stop="20261103191900 +0000">
+    <title lang="fr">Mon meilleur match</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/0/15204021.jpg"/>
+  </programme>
+  <programme start="20261103191900 +0000" channel="canal32televisionchichicasteca" stop="20261103193000 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261103193000 +0000" channel="canal32televisionchichicasteca" stop="20261103194000 +0000">
+    <title lang="fr">JT d'actualité</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/2/15175224.jpg"/>
+  </programme>
+  <programme start="20261103194000 +0000" channel="canal32televisionchichicasteca" stop="20261103195000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103195000 +0000" channel="canal32televisionchichicasteca" stop="20261103195200 +0000">
+    <title lang="fr">Jour de match / Cuisine et terroir / De l'Aube et d'ailleurs / Passion bénévole</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/5/0/15204050.jpg"/>
+  </programme>
+  <programme start="20261103195200 +0000" channel="canal32televisionchichicasteca" stop="20261103200000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261103200000 +0000" channel="canal32televisionchichicasteca" stop="20261103203000 +0000">
+    <title lang="fr">JT Sport</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/0/15204022.jpg"/>
+  </programme>
+  <programme start="20261103203000 +0000" channel="canal32televisionchichicasteca" stop="20261103204500 +0000">
+    <title lang="fr">JT d'actualité</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/2/15175224.jpg"/>
+  </programme>
+  <programme start="20261103204500 +0000" channel="canal32televisionchichicasteca" stop="20261103205500 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103205500 +0000" channel="canal32televisionchichicasteca" stop="20261103210300 +0000">
+    <title lang="fr">Tribune libre</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/2/0/15204026.jpg"/>
+  </programme>
+  <programme start="20261103210300 +0000" channel="canal32televisionchichicasteca" stop="20261103210600 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261103210600 +0000" channel="canal32televisionchichicasteca" stop="20261103211100 +0000">
+    <title lang="fr">Réussites : le portrait</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/0/15204012.jpg"/>
+  </programme>
+  <programme start="20261103211100 +0000" channel="canal32televisionchichicasteca" stop="20261103213000 +0000">
+    <title lang="fr">Grand tourisme</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/0/15204013.jpg"/>
+  </programme>
+  <programme start="20261103213000 +0000" channel="canal32televisionchichicasteca" stop="20261103214500 +0000">
+    <title lang="fr">JT d'actualité</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/2/15175224.jpg"/>
+  </programme>
+  <programme start="20261103214500 +0000" channel="canal32televisionchichicasteca" stop="20261103215500 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261103215500 +0000" channel="canal32televisionchichicasteca" stop="20261103220000 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261103220000 +0000" channel="canal32televisionchichicasteca" stop="20261104060000 +0000">
+    <title lang="fr">Rediffusion en boucle</title>
+    <category lang="fr">Emission spéciale</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/2/1/15187129.jpg"/>
+  </programme>
+  <programme start="20261104060000 +0000" channel="canal32televisionchichicasteca" stop="20261104063000 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261104063000 +0000" channel="canal32televisionchichicasteca" stop="20261104073000 +0000">
+    <title lang="fr">Direct de la veille</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261104073000 +0000" channel="canal32televisionchichicasteca" stop="20261104090000 +0000">
+    <title lang="fr">Magazine Télé-achat</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/5/0/15204051.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/2/0/15204023.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/0/15204015.jpg"/>
+  </programme>
+  <programme start="20261104090000 +0000" channel="canal32televisionchichicasteca" stop="20261104093000 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/0/15204017.jpg"/>
+  </programme>
+  <programme start="20261104093000 +0000" channel="canal32televisionchichicasteca" stop="20261104100000 +0000">
+    <title lang="fr">Attitude montagne</title>
+    <category lang="fr">Magazine de la nature</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/2/1/15193124.jpg"/>
+  </programme>
+  <programme start="20261104100000 +0000" channel="canal32televisionchichicasteca" stop="20261104104900 +0000">
+    <title lang="fr">JT Sport</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/2/0/15204022.jpg"/>
+  </programme>
+  <programme start="20261104104900 +0000" channel="canal32televisionchichicasteca" stop="20261104105200 +0000">
+    <title lang="fr">Réussites : le portrait</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/0/15204012.jpg"/>
+  </programme>
+  <programme start="20261104105200 +0000" channel="canal32televisionchichicasteca" stop="20261104110000 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261104110000 +0000" channel="canal32televisionchichicasteca" stop="20261104110500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104110500 +0000" channel="canal32televisionchichicasteca" stop="20261104110600 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104110600 +0000" channel="canal32televisionchichicasteca" stop="20261104111000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261104111000 +0000" channel="canal32televisionchichicasteca" stop="20261104114600 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261104114600 +0000" channel="canal32televisionchichicasteca" stop="20261104115000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261104115000 +0000" channel="canal32televisionchichicasteca" stop="20261104115500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104115500 +0000" channel="canal32televisionchichicasteca" stop="20261104120000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104120000 +0000" channel="canal32televisionchichicasteca" stop="20261104124000 +0000">
+    <title lang="fr">Grand tourisme</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/0/15204013.jpg"/>
+  </programme>
+  <programme start="20261104124000 +0000" channel="canal32televisionchichicasteca" stop="20261104125300 +0000">
+    <title lang="fr">C'est de la balle</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/8/15178870.jpg"/>
+  </programme>
+  <programme start="20261104125300 +0000" channel="canal32televisionchichicasteca" stop="20261104130000 +0000">
+    <title lang="fr">L'art de faire</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/0/15204040.jpg"/>
+  </programme>
+  <programme start="20261104130000 +0000" channel="canal32televisionchichicasteca" stop="20261104130600 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104130600 +0000" channel="canal32televisionchichicasteca" stop="20261104133800 +0000">
+    <title lang="fr">Les dossiers du jeudi</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/6/2/15183261.jpg"/>
+  </programme>
+  <programme start="20261104133800 +0000" channel="canal32televisionchichicasteca" stop="20261104135100 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261104135100 +0000" channel="canal32televisionchichicasteca" stop="20261104135900 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261104135900 +0000" channel="canal32televisionchichicasteca" stop="20261104140000 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261104140000 +0000" channel="canal32televisionchichicasteca" stop="20261104140600 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104140600 +0000" channel="canal32televisionchichicasteca" stop="20261104143600 +0000">
+    <title lang="fr">Attitude montagne</title>
+    <category lang="fr">Magazine de la nature</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/4/15193421.jpg"/>
+  </programme>
+  <programme start="20261104143600 +0000" channel="canal32televisionchichicasteca" stop="20261104144000 +0000">
+    <title lang="fr">Tribune libre</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/2/0/15204026.jpg"/>
+  </programme>
+  <programme start="20261104144000 +0000" channel="canal32televisionchichicasteca" stop="20261104144900 +0000">
+    <title lang="fr">Réussites : le portrait</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/0/15204012.jpg"/>
+  </programme>
+  <programme start="20261104144900 +0000" channel="canal32televisionchichicasteca" stop="20261104150000 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261104150000 +0000" channel="canal32televisionchichicasteca" stop="20261104150400 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104150400 +0000" channel="canal32televisionchichicasteca" stop="20261104160000 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/1/0/15204017.jpg"/>
+  </programme>
+  <programme start="20261104160000 +0000" channel="canal32televisionchichicasteca" stop="20261104160600 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104160600 +0000" channel="canal32televisionchichicasteca" stop="20261104161000 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261104161000 +0000" channel="canal32televisionchichicasteca" stop="20261104162300 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261104162300 +0000" channel="canal32televisionchichicasteca" stop="20261104163900 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261104163900 +0000" channel="canal32televisionchichicasteca" stop="20261104165300 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261104165300 +0000" channel="canal32televisionchichicasteca" stop="20261104170000 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261104170000 +0000" channel="canal32televisionchichicasteca" stop="20261104173000 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261104173000 +0000" channel="canal32televisionchichicasteca" stop="20261104173500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261104173500 +0000" channel="canal32televisionchichicasteca" stop="20261104173700 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104173700 +0000" channel="canal32televisionchichicasteca" stop="20261104174000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261104174000 +0000" channel="canal32televisionchichicasteca" stop="20261104180000 +0000">
+    <title lang="fr">Mon meilleur match</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/0/15204021.jpg"/>
+  </programme>
+  <programme start="20261104180000 +0000" channel="canal32televisionchichicasteca" stop="20261104183000 +0000">
+    <title lang="fr">Club Estac</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/3/15651338.jpg"/>
+  </programme>
+  <programme start="20261104183000 +0000" channel="canal32televisionchichicasteca" stop="20261104184500 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261104184500 +0000" channel="canal32televisionchichicasteca" stop="20261104185200 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104185200 +0000" channel="canal32televisionchichicasteca" stop="20261104185500 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261104185500 +0000" channel="canal32televisionchichicasteca" stop="20261104190000 +0000">
+    <title lang="fr">Info rétro</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/9/15204912.jpg"/>
+  </programme>
+  <programme start="20261104190000 +0000" channel="canal32televisionchichicasteca" stop="20261104191300 +0000">
+    <title lang="fr">C'est de la balle</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/8/15178870.jpg"/>
+  </programme>
+  <programme start="20261104191300 +0000" channel="canal32televisionchichicasteca" stop="20261104191500 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261104191500 +0000" channel="canal32televisionchichicasteca" stop="20261104192100 +0000">
+    <title lang="fr">Passion bénévoles</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/0/15204016.jpg"/>
+  </programme>
+  <programme start="20261104192100 +0000" channel="canal32televisionchichicasteca" stop="20261104193000 +0000">
+    <title lang="fr">Infos Troyes / L'objet d'une histoire / C'est mon quartier</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/0/15204027.jpg"/>
+  </programme>
+  <programme start="20261104193000 +0000" channel="canal32televisionchichicasteca" stop="20261104194000 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261104194000 +0000" channel="canal32televisionchichicasteca" stop="20261104195000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104195000 +0000" channel="canal32televisionchichicasteca" stop="20261104195200 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261104195200 +0000" channel="canal32televisionchichicasteca" stop="20261104200000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261104200000 +0000" channel="canal32televisionchichicasteca" stop="20261104203000 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261104203000 +0000" channel="canal32televisionchichicasteca" stop="20261104204500 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261104204500 +0000" channel="canal32televisionchichicasteca" stop="20261104205500 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104205500 +0000" channel="canal32televisionchichicasteca" stop="20261104210800 +0000">
+    <title lang="fr">Grand tourisme</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/0/15204013.jpg"/>
+  </programme>
+  <programme start="20261104210800 +0000" channel="canal32televisionchichicasteca" stop="20261104211600 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261104211600 +0000" channel="canal32televisionchichicasteca" stop="20261104212100 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261104212100 +0000" channel="canal32televisionchichicasteca" stop="20261104213000 +0000">
+    <title lang="fr">L'art de faire</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/0/15204040.jpg"/>
+  </programme>
+  <programme start="20261104213000 +0000" channel="canal32televisionchichicasteca" stop="20261104214500 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261104214500 +0000" channel="canal32televisionchichicasteca" stop="20261104215500 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261104215500 +0000" channel="canal32televisionchichicasteca" stop="20261104220000 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261104220000 +0000" channel="canal32televisionchichicasteca" stop="20261105060000 +0000">
+    <title lang="fr">Rediffusions</title>
+    <category lang="fr">Emission spéciale</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/2/5/15195525.jpg"/>
+  </programme>
+  <programme start="20261105060000 +0000" channel="canal32televisionchichicasteca" stop="20261105070000 +0000">
+    <title lang="fr">Club Estac</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/3/15651338.jpg"/>
+  </programme>
+  <programme start="20261105070000 +0000" channel="canal32televisionchichicasteca" stop="20261105073000 +0000">
+    <title lang="fr">Direct de la veille</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/1/0/15204011.jpg"/>
+  </programme>
+  <programme start="20261105073000 +0000" channel="canal32televisionchichicasteca" stop="20261105083000 +0000">
+    <title lang="fr">Magazine Télé-achat</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/5/0/15204051.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/2/0/15204023.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/0/15204015.jpg"/>
+  </programme>
+  <programme start="20261105083000 +0000" channel="canal32televisionchichicasteca" stop="20261105093000 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/9/15204953.jpg"/>
+  </programme>
+  <programme start="20261105093000 +0000" channel="canal32televisionchichicasteca" stop="20261105093600 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261105093600 +0000" channel="canal32televisionchichicasteca" stop="20261105093900 +0000">
+    <title lang="fr">L'art de faire</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/0/15204040.jpg"/>
+  </programme>
+  <programme start="20261105093900 +0000" channel="canal32televisionchichicasteca" stop="20261105094300 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261105094300 +0000" channel="canal32televisionchichicasteca" stop="20261105100000 +0000">
+    <title lang="fr">Mon meilleur match</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/0/15204021.jpg"/>
+  </programme>
+  <programme start="20261105100000 +0000" channel="canal32televisionchichicasteca" stop="20261105103000 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261105103000 +0000" channel="canal32televisionchichicasteca" stop="20261105110000 +0000">
+    <title lang="fr">Attitude montagne</title>
+    <category lang="fr">Magazine de la nature</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/8/1/15205180.jpg"/>
+  </programme>
+  <programme start="20261105110000 +0000" channel="canal32televisionchichicasteca" stop="20261105110500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105110500 +0000" channel="canal32televisionchichicasteca" stop="20261105111000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105111000 +0000" channel="canal32televisionchichicasteca" stop="20261105114000 +0000">
+    <title lang="fr">Club Estac</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/3/15651338.jpg"/>
+  </programme>
+  <programme start="20261105114000 +0000" channel="canal32televisionchichicasteca" stop="20261105114300 +0000">
+    <title lang="fr">Infos Troyes / L'objet d'une histoire / C'est mon quartier</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/0/15204027.jpg"/>
+  </programme>
+  <programme start="20261105114300 +0000" channel="canal32televisionchichicasteca" stop="20261105115000 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261105115000 +0000" channel="canal32televisionchichicasteca" stop="20261105121000 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105121000 +0000" channel="canal32televisionchichicasteca" stop="20261105121300 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105121300 +0000" channel="canal32televisionchichicasteca" stop="20261105121400 +0000">
+    <title lang="fr">C'est de la balle</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/8/15178870.jpg"/>
+  </programme>
+  <programme start="20261105121400 +0000" channel="canal32televisionchichicasteca" stop="20261105121500 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261105121500 +0000" channel="canal32televisionchichicasteca" stop="20261105123000 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261105123000 +0000" channel="canal32televisionchichicasteca" stop="20261105123500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105123500 +0000" channel="canal32televisionchichicasteca" stop="20261105124000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105124000 +0000" channel="canal32televisionchichicasteca" stop="20261105124300 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261105124300 +0000" channel="canal32televisionchichicasteca" stop="20261105130000 +0000">
+    <title lang="fr">Mon meilleur match</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/0/15204021.jpg"/>
+  </programme>
+  <programme start="20261105130000 +0000" channel="canal32televisionchichicasteca" stop="20261105140000 +0000">
+    <title lang="fr">Magazine Télé-achat</title>
+    <category lang="fr">Magazine de services</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/5/0/15204051.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/2/0/15204023.jpg"/>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/1/0/15204015.jpg"/>
+  </programme>
+  <programme start="20261105140000 +0000" channel="canal32televisionchichicasteca" stop="20261105140500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105140500 +0000" channel="canal32televisionchichicasteca" stop="20261105141900 +0000">
+    <title lang="fr">Mon meilleur match</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/2/0/15204021.jpg"/>
+  </programme>
+  <programme start="20261105141900 +0000" channel="canal32televisionchichicasteca" stop="20261105142000 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261105142000 +0000" channel="canal32televisionchichicasteca" stop="20261105142200 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261105142200 +0000" channel="canal32televisionchichicasteca" stop="20261105143000 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261105143000 +0000" channel="canal32televisionchichicasteca" stop="20261105150000 +0000">
+    <title lang="fr">Coup de jeune</title>
+    <category lang="fr">Emission jeunesse</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/3/0/15204036.jpg"/>
+  </programme>
+  <programme start="20261105150000 +0000" channel="canal32televisionchichicasteca" stop="20261105160000 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105160000 +0000" channel="canal32televisionchichicasteca" stop="20261105160400 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105160400 +0000" channel="canal32televisionchichicasteca" stop="20261105163000 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/9/15204953.jpg"/>
+  </programme>
+  <programme start="20261105163000 +0000" channel="canal32televisionchichicasteca" stop="20261105170000 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261105170000 +0000" channel="canal32televisionchichicasteca" stop="20261105173000 +0000">
+    <title lang="fr">Club Estac</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/3/15651338.jpg"/>
+  </programme>
+  <programme start="20261105173000 +0000" channel="canal32televisionchichicasteca" stop="20261105173500 +0000">
+    <title lang="fr">Journal flash</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/8/15182818.jpg"/>
+  </programme>
+  <programme start="20261105173500 +0000" channel="canal32televisionchichicasteca" stop="20261105173700 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105173700 +0000" channel="canal32televisionchichicasteca" stop="20261105174000 +0000">
+    <title lang="fr">Chez nos voisins</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/6/2/15183260.jpg"/>
+  </programme>
+  <programme start="20261105174000 +0000" channel="canal32televisionchichicasteca" stop="20261105174300 +0000">
+    <title lang="fr">Passion bénévoles</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/0/15204016.jpg"/>
+  </programme>
+  <programme start="20261105174300 +0000" channel="canal32televisionchichicasteca" stop="20261105174600 +0000">
+    <title lang="fr">Réussites : le portrait</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/0/15204012.jpg"/>
+  </programme>
+  <programme start="20261105174600 +0000" channel="canal32televisionchichicasteca" stop="20261105180000 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261105180000 +0000" channel="canal32televisionchichicasteca" stop="20261105183000 +0000">
+    <title lang="fr">Les dossiers du jeudi</title>
+    <category lang="fr">Magazine d'information</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/1/6/2/15183261.jpg"/>
+  </programme>
+  <programme start="20261105183000 +0000" channel="canal32televisionchichicasteca" stop="20261105184500 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261105184500 +0000" channel="canal32televisionchichicasteca" stop="20261105185200 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105185200 +0000" channel="canal32televisionchichicasteca" stop="20261105185500 +0000">
+    <title lang="fr">Emission spéciale</title>
+    <category lang="fr">Programme indéterminé</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/5/9/15204953.jpg"/>
+  </programme>
+  <programme start="20261105185500 +0000" channel="canal32televisionchichicasteca" stop="20261105190000 +0000">
+    <title lang="fr">Infos Troyes / L'objet d'une histoire / C'est mon quartier</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/2/0/15204027.jpg"/>
+  </programme>
+  <programme start="20261105190000 +0000" channel="canal32televisionchichicasteca" stop="20261105191300 +0000">
+    <title lang="fr">Infos Ciné</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/7/3/0/15204037.jpg"/>
+  </programme>
+  <programme start="20261105191300 +0000" channel="canal32televisionchichicasteca" stop="20261105191600 +0000">
+    <title lang="fr">Info rétro</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/9/15204912.jpg"/>
+  </programme>
+  <programme start="20261105191600 +0000" channel="canal32televisionchichicasteca" stop="20261105191900 +0000">
+    <title lang="fr">L'art de faire</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/0/15204040.jpg"/>
+  </programme>
+  <programme start="20261105191900 +0000" channel="canal32televisionchichicasteca" stop="20261105192200 +0000">
+    <title lang="fr">Il était une fois dans l'Aube</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/0/15204038.jpg"/>
+  </programme>
+  <programme start="20261105192200 +0000" channel="canal32televisionchichicasteca" stop="20261105193000 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261105193000 +0000" channel="canal32televisionchichicasteca" stop="20261105194000 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261105194000 +0000" channel="canal32televisionchichicasteca" stop="20261105200000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105200000 +0000" channel="canal32televisionchichicasteca" stop="20261105203000 +0000">
+    <title lang="fr">Club Estac</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/3/3/15651338.jpg"/>
+  </programme>
+  <programme start="20261105203000 +0000" channel="canal32televisionchichicasteca" stop="20261105204500 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261105204500 +0000" channel="canal32televisionchichicasteca" stop="20261105205200 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105205200 +0000" channel="canal32televisionchichicasteca" stop="20261105205500 +0000">
+    <title lang="fr">Le grand quizz</title>
+    <category lang="fr">Jeu</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/8/1/0/15204018.jpg"/>
+  </programme>
+  <programme start="20261105205500 +0000" channel="canal32televisionchichicasteca" stop="20261105210800 +0000">
+    <title lang="fr">C'est de la balle</title>
+    <category lang="fr">Magazine sportif</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/7/8/15178870.jpg"/>
+  </programme>
+  <programme start="20261105210800 +0000" channel="canal32televisionchichicasteca" stop="20261105211400 +0000">
+    <title lang="fr">Passion bénévoles</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/6/1/0/15204016.jpg"/>
+  </programme>
+  <programme start="20261105211400 +0000" channel="canal32televisionchichicasteca" stop="20261105211700 +0000">
+    <title lang="fr">La minute de l'immobilier</title>
+    <category lang="fr">Magazine de l'art de vivre</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/4/1/0/15204014.jpg"/>
+  </programme>
+  <programme start="20261105211700 +0000" channel="canal32televisionchichicasteca" stop="20261105213000 +0000">
+    <title lang="fr">Emission en alternance</title>
+    <category lang="fr">Magazine</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/9/5/15187599.jpg"/>
+  </programme>
+  <programme start="20261105213000 +0000" channel="canal32televisionchichicasteca" stop="20261105214500 +0000">
+    <title lang="fr">Journal Télévisé</title>
+    <category lang="fr">Journal</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/3/1/9/15204913.jpg"/>
+  </programme>
+  <programme start="20261105214500 +0000" channel="canal32televisionchichicasteca" stop="20261105215000 +0000">
+    <title lang="fr">Météo + Qualité de l'air</title>
+    <category lang="fr">Météo</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/9/1/0/15204019.jpg"/>
+  </programme>
+  <programme start="20261105215000 +0000" channel="canal32televisionchichicasteca" stop="20261105215500 +0000">
+    <title lang="fr">Réussites : le portrait</title>
+    <category lang="fr">Magazine de société</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/2/1/0/15204012.jpg"/>
+  </programme>
+  <programme start="20261105215500 +0000" channel="canal32televisionchichicasteca" stop="20261105220000 +0000">
+    <title lang="fr">L'art de faire</title>
+    <category lang="fr">Magazine culturel</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/0/4/0/15204040.jpg"/>
+  </programme>
+  <programme start="20261105220000 +0000" channel="canal32televisionchichicasteca" stop="20261106060000 +0000">
+    <title lang="fr">Rediffusions</title>
+    <category lang="fr">Emission spéciale</category>
+    <icon src="http://static-cdn.tv.sfr.net/data/img/pl/5/2/5/15195525.jpg"/>
   </programme>
   <programme start="20261102234500 +0000" channel="canal37televisionchichicasteca" stop="20261103005500 +0000">
     <title lang="es">NBA</title>
