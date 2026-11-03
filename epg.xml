@@ -645,7 +645,7 @@
     <display-name>Canal 5 HD (Nacional)[Opc. 1]</display-name>
     <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png"/>
   </channel>
-  <channel id="azteca7">
+  <channel id="Azteca7.mx">
     <display-name lang="es">Azteca 7</display-name>
     <display-name>Azteca 7 HD  (México)[Opc. 1]</display-name>
     <icon src="https://i.imgur.com/UtFXjIn.png"/>
@@ -17077,7 +17077,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p31402758_b_v12_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103000000 +0000" channel="azteca7" stop="20261103013000 +0000">
+  <programme start="20261103000000 +0000" channel="Azteca7.mx" stop="20261103013000 +0000">
     <title lang="en">Malcolm el de en medio</title>
     <desc lang="en">Un niño genio que se enfrenta a sus otros dos hermanos y a sus padres excéntricos en la vida familiar cotidiana.</desc>
     <credits>
@@ -17092,7 +17092,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103013000 +0000" channel="azteca7" stop="20261103023000 +0000">
+  <programme start="20261103013000 +0000" channel="Azteca7.mx" stop="20261103023000 +0000">
     <title lang="en">Un día para vivir</title>
     <desc lang="en">Una mujer desconocida trae una advertencia: tienen 24 horas para resolver sus secretos. Los protagonistas de cada historia hacen lo posible para ganar tiempo en una carrera contrarreloj.</desc>
     <credits>
@@ -17105,7 +17105,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20615912_b_v12_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103023000 +0000" channel="azteca7" stop="20261103033000 +0000">
+  <programme start="20261103023000 +0000" channel="Azteca7.mx" stop="20261103033000 +0000">
     <title lang="en">Un día para vivir</title>
     <desc lang="en">Una mujer desconocida trae una advertencia: tienen 24 horas para resolver sus secretos. Los protagonistas de cada historia hacen lo posible para ganar tiempo en una carrera contrarreloj.</desc>
     <credits>
@@ -17118,7 +17118,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20615912_b_v12_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103033000 +0000" channel="azteca7" stop="20261103043000 +0000">
+  <programme start="20261103033000 +0000" channel="Azteca7.mx" stop="20261103043000 +0000">
     <title lang="en">Dra. Lucía: Un don extraordinario</title>
     <desc lang="en">Tras un accidente, la Dra. Lucía Castillo, especialista en urgencias médico-quirúrgicas, puede conectarse a nivel psíquico con sus pacientes y salvar las vidas, aunque la suya corra peligro.</desc>
     <credits>
@@ -17134,7 +17134,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103043000 +0000" channel="azteca7" stop="20261103053000 +0000">
+  <programme start="20261103043000 +0000" channel="Azteca7.mx" stop="20261103053000 +0000">
     <title lang="en">Lotería del crimen</title>
     <desc lang="en">En Ciudad de México se acumulan día a día decenas de delitos atípicos y misteriosos que parecen imposibles de resolver. Solo un equipo es capaz de lograrlo, la Unidad de Inteligencia Criminal.</desc>
     <credits>
@@ -17149,7 +17149,7 @@ En Vivo</title>
       <value>TVMA</value>
     </rating>
   </programme>
-  <programme start="20261103053000 +0000" channel="azteca7" stop="20261103063000 +0000">
+  <programme start="20261103053000 +0000" channel="Azteca7.mx" stop="20261103063000 +0000">
     <title lang="en">Travesuras de amor</title>
     <desc lang="en">Un rico heredero de una poderosa corporación hotelera conoce a una mujer que se parece a su hermana perdida en un terremoto y le propone hacerse pasar por ella para cumplir la última voluntad de su abuelo, pero comienza a sentir atracción por ella.</desc>
     <credits>
@@ -17161,7 +17161,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p813767_st_v8_aa.jpg"/>
     <premiere lang="en"/>
   </programme>
-  <programme start="20261103063000 +0000" channel="azteca7" stop="20261103070000 +0000">
+  <programme start="20261103063000 +0000" channel="Azteca7.mx" stop="20261103070000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17171,7 +17171,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103070000 +0000" channel="azteca7" stop="20261103073000 +0000">
+  <programme start="20261103070000 +0000" channel="Azteca7.mx" stop="20261103073000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17181,7 +17181,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103073000 +0000" channel="azteca7" stop="20261103080000 +0000">
+  <programme start="20261103073000 +0000" channel="Azteca7.mx" stop="20261103080000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17191,7 +17191,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103080000 +0000" channel="azteca7" stop="20261103083000 +0000">
+  <programme start="20261103080000 +0000" channel="Azteca7.mx" stop="20261103083000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17201,7 +17201,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103083000 +0000" channel="azteca7" stop="20261103090000 +0000">
+  <programme start="20261103083000 +0000" channel="Azteca7.mx" stop="20261103090000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17211,7 +17211,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103090000 +0000" channel="azteca7" stop="20261103093000 +0000">
+  <programme start="20261103090000 +0000" channel="Azteca7.mx" stop="20261103093000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17221,7 +17221,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103093000 +0000" channel="azteca7" stop="20261103100000 +0000">
+  <programme start="20261103093000 +0000" channel="Azteca7.mx" stop="20261103100000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17231,7 +17231,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103100000 +0000" channel="azteca7" stop="20261103103000 +0000">
+  <programme start="20261103100000 +0000" channel="Azteca7.mx" stop="20261103103000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17241,7 +17241,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103103000 +0000" channel="azteca7" stop="20261103110000 +0000">
+  <programme start="20261103103000 +0000" channel="Azteca7.mx" stop="20261103110000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17251,7 +17251,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103110000 +0000" channel="azteca7" stop="20261103111500 +0000">
+  <programme start="20261103110000 +0000" channel="Azteca7.mx" stop="20261103111500 +0000">
     <title lang="en">Barras de ajuste</title>
     <desc lang="en">Programación por anunciarse.</desc>
     <category lang="en">Specials</category>
@@ -17259,14 +17259,14 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p8055910_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103111500 +0000" channel="azteca7" stop="20261103113000 +0000">
+  <programme start="20261103111500 +0000" channel="Azteca7.mx" stop="20261103113000 +0000">
     <title lang="en">RTC</title>
     <desc lang="en">Espacio del gobierno de México.</desc>
     <category lang="en">Regular</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p472462_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103113000 +0000" channel="azteca7" stop="20261103120000 +0000">
+  <programme start="20261103113000 +0000" channel="Azteca7.mx" stop="20261103120000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17276,7 +17276,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261103120000 +0000" channel="azteca7" stop="20261103123000 +0000">
+  <programme start="20261103120000 +0000" channel="Azteca7.mx" stop="20261103123000 +0000">
     <title lang="en">44 gatos</title>
     <desc lang="en">Lampo, Milady, Pilou y Polpetta son cuatro gatos que forman parte de una banda de música llamada Buffycats. Los cuatro amigos encuentran soluciones creativas para los problemas cotidianos y ayudan a otros gatos necesitados.</desc>
     <credits>
@@ -17292,13 +17292,13 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261103123000 +0000" channel="azteca7" stop="20261103130000 +0000">
+  <programme start="20261103123000 +0000" channel="Azteca7.mx" stop="20261103130000 +0000">
     <title lang="en">Om Nom</title>
     <category lang="en">Regular</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p12087422_b_h10_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103130000 +0000" channel="azteca7" stop="20261103133000 +0000">
+  <programme start="20261103130000 +0000" channel="Azteca7.mx" stop="20261103133000 +0000">
     <title lang="en">Daniel Tigre</title>
     <desc lang="en">Daniel Tigre, un pequeño de 4 años, y sus amigos tienen muchas interesantes aventuras de aprendizaje.</desc>
     <credits>
@@ -17314,7 +17314,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103133000 +0000" channel="azteca7" stop="20261103140000 +0000">
+  <programme start="20261103133000 +0000" channel="Azteca7.mx" stop="20261103140000 +0000">
     <title lang="en">Gigantosaurus</title>
     <desc lang="en">Cuatro curiosos amigos investigan el misterio del Giganotosaurus, el dinosaurio más grande y feroz de todos, y trabajan juntos para resolver problemas.</desc>
     <credits>
@@ -17330,7 +17330,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103140000 +0000" channel="azteca7" stop="20261103143000 +0000">
+  <programme start="20261103140000 +0000" channel="Azteca7.mx" stop="20261103143000 +0000">
     <title lang="en">Bluey</title>
     <desc lang="en">Las aventuras de Bluey, una cachorra que vive con su madre, padre y hermana. Su energía y su espíritu adorable generan todo tipo de situaciones divertidas e impredecibles.</desc>
     <credits>
@@ -17346,7 +17346,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261103143000 +0000" channel="azteca7" stop="20261103150000 +0000">
+  <programme start="20261103143000 +0000" channel="Azteca7.mx" stop="20261103150000 +0000">
     <title lang="en">Masha y el oso</title>
     <desc lang="en">Masha es una niña inquieta que explora el mundo. Un buen día, conoce a Oso, un animal de gran corazón que se convierte en su accidental compañero de aventuras.</desc>
     <credits>
@@ -17361,7 +17361,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103150000 +0000" channel="azteca7" stop="20261103153000 +0000">
+  <programme start="20261103150000 +0000" channel="Azteca7.mx" stop="20261103153000 +0000">
     <title lang="en">Snoopy, el astronauta</title>
     <credits>
       <actor>Nicole Byer</actor>
@@ -17376,7 +17376,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261103153000 +0000" channel="azteca7" stop="20261103160000 +0000">
+  <programme start="20261103153000 +0000" channel="Azteca7.mx" stop="20261103160000 +0000">
     <title lang="en">Princesita Sofía</title>
     <desc lang="en">Sofía es una chica normal cuya vida cambia repentinamente cuando su madre se casa con un rey, por lo que debe adaptarse a los protocolos de la vida real.</desc>
     <credits>
@@ -17392,7 +17392,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103160000 +0000" channel="azteca7" stop="20261103163000 +0000">
+  <programme start="20261103160000 +0000" channel="Azteca7.mx" stop="20261103163000 +0000">
     <title lang="en">Spidey y sus sorprendentes amigos</title>
     <desc lang="en">Spidey se une a Ghost-Spider y Miles Morales para formar el Equipo Spidey, con la ayuda del cómico, pero leal Spider-bot, Trace.</desc>
     <credits>
@@ -17408,7 +17408,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103163000 +0000" channel="azteca7" stop="20261103170000 +0000">
+  <programme start="20261103163000 +0000" channel="Azteca7.mx" stop="20261103170000 +0000">
     <title lang="en">Hotel Transylvania</title>
     <desc lang="en">Mavis explora una vida sin su padre, Drácula, cerca y descubre una de las pocas verdades comunes tanto para humanos como para monstruos: es difícil ser adolescente.</desc>
     <credits>
@@ -17424,7 +17424,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103170000 +0000" channel="azteca7" stop="20261103180000 +0000">
+  <programme start="20261103170000 +0000" channel="Azteca7.mx" stop="20261103180000 +0000">
     <title lang="en">El mundo de Craig</title>
     <desc lang="en">Craig y sus amigos, Kelsey y J.P., se adentran en un mundo salvaje dominado por tribus de niños que establecen sus propias leyes.</desc>
     <credits>
@@ -17440,7 +17440,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103180000 +0000" channel="azteca7" stop="20261103190000 +0000">
+  <programme start="20261103180000 +0000" channel="Azteca7.mx" stop="20261103190000 +0000">
     <title lang="en">Los padrinos mágicos</title>
     <desc lang="en">Las divertidas aventuras de un niño de diez años que tiene unos padrinos mágicos que le conceden todos sus deseos.</desc>
     <credits>
@@ -17453,7 +17453,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p15617075_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261103190000 +0000" channel="azteca7" stop="20261103200000 +0000">
+  <programme start="20261103190000 +0000" channel="Azteca7.mx" stop="20261103200000 +0000">
     <title lang="en">Las aventuras de Silvestre y Piolín</title>
     <desc lang="en">La Abuelita se lleva a Piolín y Silvestre por todo el mundo en la búsqueda de desaparecidos y crímenes sin resolver.</desc>
     <credits>
@@ -17469,7 +17469,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103200000 +0000" channel="azteca7" stop="20261103210000 +0000">
+  <programme start="20261103200000 +0000" channel="Azteca7.mx" stop="20261103210000 +0000">
     <title lang="en">El nuevo show del Pájaro Loco</title>
     <desc lang="en">Un pájaro chiflado que se enreda de todas las maneras en problemas divertidos.</desc>
     <credits>
@@ -17485,7 +17485,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261103210000 +0000" channel="azteca7" stop="20261103220000 +0000">
+  <programme start="20261103210000 +0000" channel="Azteca7.mx" stop="20261103220000 +0000">
     <title lang="en">El show de Garfield</title>
     <desc lang="en">Las travesuras de Garfield, un gato naranja y sardónico cuyas únicas aficiones son comer lasaña y dormir.</desc>
     <credits>
@@ -17501,7 +17501,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103220000 +0000" channel="azteca7" stop="20261103230000 +0000">
+  <programme start="20261103220000 +0000" channel="Azteca7.mx" stop="20261103230000 +0000">
     <title lang="en">Escandalosos</title>
     <desc lang="en">Tres hermanos osos tratan torpemente de encontrar su lugar en una sociedad civilizada, ya sea buscando comida, tratando de hacer amigos humanos o intentando hacerse famosos en Internet.</desc>
     <credits>
@@ -17517,7 +17517,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261103230000 +0000" channel="azteca7" stop="20261104000000 +0000">
+  <programme start="20261103230000 +0000" channel="Azteca7.mx" stop="20261104000000 +0000">
     <title lang="en">Los Simpson</title>
     <desc lang="en">En Springfield, los Simpson, una familia de clase trabajadora compuesta por Marge, Homero, Bart, Lisa y Maggie, vive aventuras satíricas.</desc>
     <credits>
@@ -17533,7 +17533,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104000000 +0000" channel="azteca7" stop="20261104013000 +0000">
+  <programme start="20261104000000 +0000" channel="Azteca7.mx" stop="20261104013000 +0000">
     <title lang="en">Malcolm el de en medio</title>
     <desc lang="en">Un niño genio que se enfrenta a sus otros dos hermanos y a sus padres excéntricos en la vida familiar cotidiana.</desc>
     <credits>
@@ -17548,7 +17548,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104013000 +0000" channel="azteca7" stop="20261104023000 +0000">
+  <programme start="20261104013000 +0000" channel="Azteca7.mx" stop="20261104023000 +0000">
     <title lang="en">Un día para vivir</title>
     <desc lang="en">Una mujer desconocida trae una advertencia: tienen 24 horas para resolver sus secretos. Los protagonistas de cada historia hacen lo posible para ganar tiempo en una carrera contrarreloj.</desc>
     <credits>
@@ -17561,7 +17561,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20615912_i_h8_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104023000 +0000" channel="azteca7" stop="20261104033000 +0000">
+  <programme start="20261104023000 +0000" channel="Azteca7.mx" stop="20261104033000 +0000">
     <title lang="en">Un día para vivir</title>
     <desc lang="en">Una mujer desconocida trae una advertencia: tienen 24 horas para resolver sus secretos. Los protagonistas de cada historia hacen lo posible para ganar tiempo en una carrera contrarreloj.</desc>
     <credits>
@@ -17574,7 +17574,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20615912_i_h8_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104033000 +0000" channel="azteca7" stop="20261104043000 +0000">
+  <programme start="20261104033000 +0000" channel="Azteca7.mx" stop="20261104043000 +0000">
     <title lang="en">Dra. Lucía: Un don extraordinario</title>
     <desc lang="en">Tras un accidente, la Dra. Lucía Castillo, especialista en urgencias médico-quirúrgicas, puede conectarse a nivel psíquico con sus pacientes y salvar las vidas, aunque la suya corra peligro.</desc>
     <credits>
@@ -17590,7 +17590,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104043000 +0000" channel="azteca7" stop="20261104053000 +0000">
+  <programme start="20261104043000 +0000" channel="Azteca7.mx" stop="20261104053000 +0000">
     <title lang="en">Lotería del crimen</title>
     <desc lang="en">En Ciudad de México se acumulan día a día decenas de delitos atípicos y misteriosos que parecen imposibles de resolver. Solo un equipo es capaz de lograrlo, la Unidad de Inteligencia Criminal.</desc>
     <credits>
@@ -17605,7 +17605,7 @@ En Vivo</title>
       <value>TVMA</value>
     </rating>
   </programme>
-  <programme start="20261104053000 +0000" channel="azteca7" stop="20261104063000 +0000">
+  <programme start="20261104053000 +0000" channel="Azteca7.mx" stop="20261104063000 +0000">
     <title lang="en">Travesuras de amor</title>
     <desc lang="en">Un rico heredero de una poderosa corporación hotelera conoce a una mujer que se parece a su hermana perdida en un terremoto y le propone hacerse pasar por ella para cumplir la última voluntad de su abuelo, pero comienza a sentir atracción por ella.</desc>
     <credits>
@@ -17617,7 +17617,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p813767_st_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104063000 +0000" channel="azteca7" stop="20261104070000 +0000">
+  <programme start="20261104063000 +0000" channel="Azteca7.mx" stop="20261104070000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17627,7 +17627,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104070000 +0000" channel="azteca7" stop="20261104073000 +0000">
+  <programme start="20261104070000 +0000" channel="Azteca7.mx" stop="20261104073000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17637,7 +17637,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104073000 +0000" channel="azteca7" stop="20261104080000 +0000">
+  <programme start="20261104073000 +0000" channel="Azteca7.mx" stop="20261104080000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17647,7 +17647,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104080000 +0000" channel="azteca7" stop="20261104083000 +0000">
+  <programme start="20261104080000 +0000" channel="Azteca7.mx" stop="20261104083000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17657,7 +17657,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104083000 +0000" channel="azteca7" stop="20261104090000 +0000">
+  <programme start="20261104083000 +0000" channel="Azteca7.mx" stop="20261104090000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17667,7 +17667,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104090000 +0000" channel="azteca7" stop="20261104093000 +0000">
+  <programme start="20261104090000 +0000" channel="Azteca7.mx" stop="20261104093000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17677,7 +17677,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104093000 +0000" channel="azteca7" stop="20261104100000 +0000">
+  <programme start="20261104093000 +0000" channel="Azteca7.mx" stop="20261104100000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17687,7 +17687,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104100000 +0000" channel="azteca7" stop="20261104103000 +0000">
+  <programme start="20261104100000 +0000" channel="Azteca7.mx" stop="20261104103000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17697,7 +17697,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104103000 +0000" channel="azteca7" stop="20261104110000 +0000">
+  <programme start="20261104103000 +0000" channel="Azteca7.mx" stop="20261104110000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17707,7 +17707,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104110000 +0000" channel="azteca7" stop="20261104111500 +0000">
+  <programme start="20261104110000 +0000" channel="Azteca7.mx" stop="20261104111500 +0000">
     <title lang="en">Barras de ajuste</title>
     <desc lang="en">Programación por anunciarse.</desc>
     <category lang="en">Specials</category>
@@ -17715,14 +17715,14 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p8055910_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104111500 +0000" channel="azteca7" stop="20261104113000 +0000">
+  <programme start="20261104111500 +0000" channel="Azteca7.mx" stop="20261104113000 +0000">
     <title lang="en">RTC</title>
     <desc lang="en">Espacio del gobierno de México.</desc>
     <category lang="en">Regular</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p472462_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104113000 +0000" channel="azteca7" stop="20261104120000 +0000">
+  <programme start="20261104113000 +0000" channel="Azteca7.mx" stop="20261104120000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -17732,7 +17732,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261104120000 +0000" channel="azteca7" stop="20261104123000 +0000">
+  <programme start="20261104120000 +0000" channel="Azteca7.mx" stop="20261104123000 +0000">
     <title lang="en">44 gatos</title>
     <desc lang="en">Lampo, Milady, Pilou y Polpetta son cuatro gatos que forman parte de una banda de música llamada Buffycats. Los cuatro amigos encuentran soluciones creativas para los problemas cotidianos y ayudan a otros gatos necesitados.</desc>
     <credits>
@@ -17748,13 +17748,13 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261104123000 +0000" channel="azteca7" stop="20261104130000 +0000">
+  <programme start="20261104123000 +0000" channel="Azteca7.mx" stop="20261104130000 +0000">
     <title lang="en">Om Nom</title>
     <category lang="en">Regular</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p12087422_b_h10_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104130000 +0000" channel="azteca7" stop="20261104133000 +0000">
+  <programme start="20261104130000 +0000" channel="Azteca7.mx" stop="20261104133000 +0000">
     <title lang="en">Daniel Tigre</title>
     <desc lang="en">Daniel Tigre, un pequeño de 4 años, y sus amigos tienen muchas interesantes aventuras de aprendizaje.</desc>
     <credits>
@@ -17770,7 +17770,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104133000 +0000" channel="azteca7" stop="20261104140000 +0000">
+  <programme start="20261104133000 +0000" channel="Azteca7.mx" stop="20261104140000 +0000">
     <title lang="en">Gigantosaurus</title>
     <desc lang="en">Cuatro curiosos amigos investigan el misterio del Giganotosaurus, el dinosaurio más grande y feroz de todos, y trabajan juntos para resolver problemas.</desc>
     <credits>
@@ -17786,7 +17786,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104140000 +0000" channel="azteca7" stop="20261104143000 +0000">
+  <programme start="20261104140000 +0000" channel="Azteca7.mx" stop="20261104143000 +0000">
     <title lang="en">Bluey</title>
     <desc lang="en">Las aventuras de Bluey, una cachorra que vive con su madre, padre y hermana. Su energía y su espíritu adorable generan todo tipo de situaciones divertidas e impredecibles.</desc>
     <credits>
@@ -17802,7 +17802,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261104143000 +0000" channel="azteca7" stop="20261104150000 +0000">
+  <programme start="20261104143000 +0000" channel="Azteca7.mx" stop="20261104150000 +0000">
     <title lang="en">Masha y el oso</title>
     <desc lang="en">Masha es una niña inquieta que explora el mundo. Un buen día, conoce a Oso, un animal de gran corazón que se convierte en su accidental compañero de aventuras.</desc>
     <credits>
@@ -17817,7 +17817,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104150000 +0000" channel="azteca7" stop="20261104153000 +0000">
+  <programme start="20261104150000 +0000" channel="Azteca7.mx" stop="20261104153000 +0000">
     <title lang="en">De campamento con Snoopy</title>
     <credits>
       <actor>Etienne Kellici</actor>
@@ -17832,7 +17832,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261104153000 +0000" channel="azteca7" stop="20261104160000 +0000">
+  <programme start="20261104153000 +0000" channel="Azteca7.mx" stop="20261104160000 +0000">
     <title lang="en">Princesita Sofía</title>
     <desc lang="en">Sofía es una chica normal cuya vida cambia repentinamente cuando su madre se casa con un rey, por lo que debe adaptarse a los protocolos de la vida real.</desc>
     <credits>
@@ -17848,7 +17848,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104160000 +0000" channel="azteca7" stop="20261104163000 +0000">
+  <programme start="20261104160000 +0000" channel="Azteca7.mx" stop="20261104163000 +0000">
     <title lang="en">Spidey y sus sorprendentes amigos</title>
     <desc lang="en">Spidey se une a Ghost-Spider y Miles Morales para formar el Equipo Spidey, con la ayuda del cómico, pero leal Spider-bot, Trace.</desc>
     <credits>
@@ -17864,7 +17864,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104163000 +0000" channel="azteca7" stop="20261104170000 +0000">
+  <programme start="20261104163000 +0000" channel="Azteca7.mx" stop="20261104170000 +0000">
     <title lang="en">Hotel Transylvania</title>
     <desc lang="en">Mavis explora una vida sin su padre, Drácula, cerca y descubre una de las pocas verdades comunes tanto para humanos como para monstruos: es difícil ser adolescente.</desc>
     <credits>
@@ -17880,7 +17880,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104170000 +0000" channel="azteca7" stop="20261104180000 +0000">
+  <programme start="20261104170000 +0000" channel="Azteca7.mx" stop="20261104180000 +0000">
     <title lang="en">El mundo de Craig</title>
     <desc lang="en">Craig y sus amigos, Kelsey y J.P., se adentran en un mundo salvaje dominado por tribus de niños que establecen sus propias leyes.</desc>
     <credits>
@@ -17896,7 +17896,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104180000 +0000" channel="azteca7" stop="20261104190000 +0000">
+  <programme start="20261104180000 +0000" channel="Azteca7.mx" stop="20261104190000 +0000">
     <title lang="en">Los padrinos mágicos</title>
     <desc lang="en">Las divertidas aventuras de un niño de diez años que tiene unos padrinos mágicos que le conceden todos sus deseos.</desc>
     <credits>
@@ -17909,7 +17909,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p15617075_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261104190000 +0000" channel="azteca7" stop="20261104200000 +0000">
+  <programme start="20261104190000 +0000" channel="Azteca7.mx" stop="20261104200000 +0000">
     <title lang="en">Las aventuras de Silvestre y Piolín</title>
     <desc lang="en">La Abuelita se lleva a Piolín y Silvestre por todo el mundo en la búsqueda de desaparecidos y crímenes sin resolver.</desc>
     <credits>
@@ -17925,7 +17925,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104200000 +0000" channel="azteca7" stop="20261104210000 +0000">
+  <programme start="20261104200000 +0000" channel="Azteca7.mx" stop="20261104210000 +0000">
     <title lang="en">El nuevo show del Pájaro Loco</title>
     <desc lang="en">Un pájaro chiflado que se enreda de todas las maneras en problemas divertidos.</desc>
     <credits>
@@ -17941,7 +17941,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261104210000 +0000" channel="azteca7" stop="20261104220000 +0000">
+  <programme start="20261104210000 +0000" channel="Azteca7.mx" stop="20261104220000 +0000">
     <title lang="en">El show de Garfield</title>
     <desc lang="en">Las travesuras de Garfield, un gato naranja y sardónico cuyas únicas aficiones son comer lasaña y dormir.</desc>
     <credits>
@@ -17957,7 +17957,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104220000 +0000" channel="azteca7" stop="20261104230000 +0000">
+  <programme start="20261104220000 +0000" channel="Azteca7.mx" stop="20261104230000 +0000">
     <title lang="en">Escandalosos</title>
     <desc lang="en">Tres hermanos osos tratan torpemente de encontrar su lugar en una sociedad civilizada, ya sea buscando comida, tratando de hacer amigos humanos o intentando hacerse famosos en Internet.</desc>
     <credits>
@@ -17973,7 +17973,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261104230000 +0000" channel="azteca7" stop="20261105000000 +0000">
+  <programme start="20261104230000 +0000" channel="Azteca7.mx" stop="20261105000000 +0000">
     <title lang="en">Los Simpson</title>
     <desc lang="en">En Springfield, los Simpson, una familia de clase trabajadora compuesta por Marge, Homero, Bart, Lisa y Maggie, vive aventuras satíricas.</desc>
     <credits>
@@ -17989,7 +17989,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105000000 +0000" channel="azteca7" stop="20261105013000 +0000">
+  <programme start="20261105000000 +0000" channel="Azteca7.mx" stop="20261105013000 +0000">
     <title lang="en">Malcolm el de en medio</title>
     <desc lang="en">Un niño genio que se enfrenta a sus otros dos hermanos y a sus padres excéntricos en la vida familiar cotidiana.</desc>
     <credits>
@@ -18004,7 +18004,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105013000 +0000" channel="azteca7" stop="20261105023000 +0000">
+  <programme start="20261105013000 +0000" channel="Azteca7.mx" stop="20261105023000 +0000">
     <title lang="en">Un día para vivir</title>
     <desc lang="en">Una mujer desconocida trae una advertencia: tienen 24 horas para resolver sus secretos. Los protagonistas de cada historia hacen lo posible para ganar tiempo en una carrera contrarreloj.</desc>
     <credits>
@@ -18017,7 +18017,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20615912_i_h8_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105023000 +0000" channel="azteca7" stop="20261105033000 +0000">
+  <programme start="20261105023000 +0000" channel="Azteca7.mx" stop="20261105033000 +0000">
     <title lang="en">Un día para vivir</title>
     <desc lang="en">Una mujer desconocida trae una advertencia: tienen 24 horas para resolver sus secretos. Los protagonistas de cada historia hacen lo posible para ganar tiempo en una carrera contrarreloj.</desc>
     <credits>
@@ -18030,7 +18030,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p20615912_i_h8_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105033000 +0000" channel="azteca7" stop="20261105043000 +0000">
+  <programme start="20261105033000 +0000" channel="Azteca7.mx" stop="20261105043000 +0000">
     <title lang="en">Dra. Lucía: Un don extraordinario</title>
     <desc lang="en">Tras un accidente, la Dra. Lucía Castillo, especialista en urgencias médico-quirúrgicas, puede conectarse a nivel psíquico con sus pacientes y salvar las vidas, aunque la suya corra peligro.</desc>
     <credits>
@@ -18046,7 +18046,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105043000 +0000" channel="azteca7" stop="20261105053000 +0000">
+  <programme start="20261105043000 +0000" channel="Azteca7.mx" stop="20261105053000 +0000">
     <title lang="en">Lotería del crimen</title>
     <desc lang="en">En Ciudad de México se acumulan día a día decenas de delitos atípicos y misteriosos que parecen imposibles de resolver. Solo un equipo es capaz de lograrlo, la Unidad de Inteligencia Criminal.</desc>
     <credits>
@@ -18061,7 +18061,7 @@ En Vivo</title>
       <value>TVMA</value>
     </rating>
   </programme>
-  <programme start="20261105053000 +0000" channel="azteca7" stop="20261105063000 +0000">
+  <programme start="20261105053000 +0000" channel="Azteca7.mx" stop="20261105063000 +0000">
     <title lang="en">Travesuras de amor</title>
     <desc lang="en">Un rico heredero de una poderosa corporación hotelera conoce a una mujer que se parece a su hermana perdida en un terremoto y le propone hacerse pasar por ella para cumplir la última voluntad de su abuelo, pero comienza a sentir atracción por ella.</desc>
     <credits>
@@ -18073,14 +18073,14 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p813767_st_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105063000 +0000" channel="azteca7" stop="20261105070000 +0000">
+  <programme start="20261105063000 +0000" channel="Azteca7.mx" stop="20261105070000 +0000">
     <title lang="en">Farmacias Similares</title>
     <category lang="en">Paid Program</category>
     <category lang="en">Shopping</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p10152698_b_v12_ac.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105070000 +0000" channel="azteca7" stop="20261105073000 +0000">
+  <programme start="20261105070000 +0000" channel="Azteca7.mx" stop="20261105073000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18090,7 +18090,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105073000 +0000" channel="azteca7" stop="20261105080000 +0000">
+  <programme start="20261105073000 +0000" channel="Azteca7.mx" stop="20261105080000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18100,7 +18100,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105080000 +0000" channel="azteca7" stop="20261105083000 +0000">
+  <programme start="20261105080000 +0000" channel="Azteca7.mx" stop="20261105083000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18110,7 +18110,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105083000 +0000" channel="azteca7" stop="20261105090000 +0000">
+  <programme start="20261105083000 +0000" channel="Azteca7.mx" stop="20261105090000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18120,7 +18120,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105090000 +0000" channel="azteca7" stop="20261105093000 +0000">
+  <programme start="20261105090000 +0000" channel="Azteca7.mx" stop="20261105093000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18130,7 +18130,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105093000 +0000" channel="azteca7" stop="20261105100000 +0000">
+  <programme start="20261105093000 +0000" channel="Azteca7.mx" stop="20261105100000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18140,7 +18140,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105100000 +0000" channel="azteca7" stop="20261105103000 +0000">
+  <programme start="20261105100000 +0000" channel="Azteca7.mx" stop="20261105103000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18150,7 +18150,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105103000 +0000" channel="azteca7" stop="20261105110000 +0000">
+  <programme start="20261105103000 +0000" channel="Azteca7.mx" stop="20261105110000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18160,7 +18160,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105110000 +0000" channel="azteca7" stop="20261105111500 +0000">
+  <programme start="20261105110000 +0000" channel="Azteca7.mx" stop="20261105111500 +0000">
     <title lang="en">Barras de ajuste</title>
     <desc lang="en">Programación por anunciarse.</desc>
     <category lang="en">Specials</category>
@@ -18168,14 +18168,14 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p8055910_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105111500 +0000" channel="azteca7" stop="20261105113000 +0000">
+  <programme start="20261105111500 +0000" channel="Azteca7.mx" stop="20261105113000 +0000">
     <title lang="en">RTC</title>
     <desc lang="en">Espacio del gobierno de México.</desc>
     <category lang="en">Regular</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p472462_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105113000 +0000" channel="azteca7" stop="20261105120000 +0000">
+  <programme start="20261105113000 +0000" channel="Azteca7.mx" stop="20261105120000 +0000">
     <title lang="en">Inova</title>
     <desc lang="en">Un espacio en el que se muestra una variedad de productos que el televidente puede adquirir para su hogar.</desc>
     <category lang="en">Paid Program</category>
@@ -18185,7 +18185,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261105120000 +0000" channel="azteca7" stop="20261105123000 +0000">
+  <programme start="20261105120000 +0000" channel="Azteca7.mx" stop="20261105123000 +0000">
     <title lang="en">44 gatos</title>
     <desc lang="en">Lampo, Milady, Pilou y Polpetta son cuatro gatos que forman parte de una banda de música llamada Buffycats. Los cuatro amigos encuentran soluciones creativas para los problemas cotidianos y ayudan a otros gatos necesitados.</desc>
     <credits>
@@ -18201,13 +18201,13 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261105123000 +0000" channel="azteca7" stop="20261105130000 +0000">
+  <programme start="20261105123000 +0000" channel="Azteca7.mx" stop="20261105130000 +0000">
     <title lang="en">Om Nom</title>
     <category lang="en">Regular</category>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p12087422_b_h10_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105130000 +0000" channel="azteca7" stop="20261105133000 +0000">
+  <programme start="20261105130000 +0000" channel="Azteca7.mx" stop="20261105133000 +0000">
     <title lang="en">Daniel Tigre</title>
     <desc lang="en">Daniel Tigre, un pequeño de 4 años, y sus amigos tienen muchas interesantes aventuras de aprendizaje.</desc>
     <credits>
@@ -18223,7 +18223,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105133000 +0000" channel="azteca7" stop="20261105140000 +0000">
+  <programme start="20261105133000 +0000" channel="Azteca7.mx" stop="20261105140000 +0000">
     <title lang="en">Gigantosaurus</title>
     <desc lang="en">Cuatro curiosos amigos investigan el misterio del Giganotosaurus, el dinosaurio más grande y feroz de todos, y trabajan juntos para resolver problemas.</desc>
     <credits>
@@ -18239,7 +18239,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105140000 +0000" channel="azteca7" stop="20261105143000 +0000">
+  <programme start="20261105140000 +0000" channel="Azteca7.mx" stop="20261105143000 +0000">
     <title lang="en">Bluey</title>
     <desc lang="en">Las aventuras de Bluey, una cachorra que vive con su madre, padre y hermana. Su energía y su espíritu adorable generan todo tipo de situaciones divertidas e impredecibles.</desc>
     <credits>
@@ -18255,7 +18255,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261105143000 +0000" channel="azteca7" stop="20261105150000 +0000">
+  <programme start="20261105143000 +0000" channel="Azteca7.mx" stop="20261105150000 +0000">
     <title lang="en">Masha y el oso</title>
     <desc lang="en">Masha es una niña inquieta que explora el mundo. Un buen día, conoce a Oso, un animal de gran corazón que se convierte en su accidental compañero de aventuras.</desc>
     <credits>
@@ -18270,7 +18270,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105150000 +0000" channel="azteca7" stop="20261105153000 +0000">
+  <programme start="20261105150000 +0000" channel="Azteca7.mx" stop="20261105153000 +0000">
     <title lang="en">Snoopy, el astronauta</title>
     <credits>
       <actor>Nicole Byer</actor>
@@ -18285,7 +18285,7 @@ En Vivo</title>
       <value>TVG</value>
     </rating>
   </programme>
-  <programme start="20261105153000 +0000" channel="azteca7" stop="20261105160000 +0000">
+  <programme start="20261105153000 +0000" channel="Azteca7.mx" stop="20261105160000 +0000">
     <title lang="en">Princesita Sofía</title>
     <desc lang="en">Sofía es una chica normal cuya vida cambia repentinamente cuando su madre se casa con un rey, por lo que debe adaptarse a los protocolos de la vida real.</desc>
     <credits>
@@ -18301,7 +18301,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105160000 +0000" channel="azteca7" stop="20261105163000 +0000">
+  <programme start="20261105160000 +0000" channel="Azteca7.mx" stop="20261105163000 +0000">
     <title lang="en">Spidey y sus sorprendentes amigos</title>
     <desc lang="en">Spidey se une a Ghost-Spider y Miles Morales para formar el Equipo Spidey, con la ayuda del cómico, pero leal Spider-bot, Trace.</desc>
     <credits>
@@ -18317,7 +18317,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105163000 +0000" channel="azteca7" stop="20261105170000 +0000">
+  <programme start="20261105163000 +0000" channel="Azteca7.mx" stop="20261105170000 +0000">
     <title lang="en">Hotel Transylvania</title>
     <desc lang="en">Mavis explora una vida sin su padre, Drácula, cerca y descubre una de las pocas verdades comunes tanto para humanos como para monstruos: es difícil ser adolescente.</desc>
     <credits>
@@ -18333,7 +18333,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105170000 +0000" channel="azteca7" stop="20261105180000 +0000">
+  <programme start="20261105170000 +0000" channel="Azteca7.mx" stop="20261105180000 +0000">
     <title lang="en">El mundo de Craig</title>
     <desc lang="en">Craig y sus amigos, Kelsey y J.P., se adentran en un mundo salvaje dominado por tribus de niños que establecen sus propias leyes.</desc>
     <credits>
@@ -18349,7 +18349,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105180000 +0000" channel="azteca7" stop="20261105190000 +0000">
+  <programme start="20261105180000 +0000" channel="Azteca7.mx" stop="20261105190000 +0000">
     <title lang="en">Los padrinos mágicos</title>
     <desc lang="en">Las divertidas aventuras de un niño de diez años que tiene unos padrinos mágicos que le conceden todos sus deseos.</desc>
     <credits>
@@ -18362,7 +18362,7 @@ En Vivo</title>
     <icon src="https://cdn.tvpassport.com/image/show/960x540/v2/p15617075_b_v8_aa.jpg"/>
     <previously-shown/>
   </programme>
-  <programme start="20261105190000 +0000" channel="azteca7" stop="20261105200000 +0000">
+  <programme start="20261105190000 +0000" channel="Azteca7.mx" stop="20261105200000 +0000">
     <title lang="en">Las aventuras de Silvestre y Piolín</title>
     <desc lang="en">La Abuelita se lleva a Piolín y Silvestre por todo el mundo en la búsqueda de desaparecidos y crímenes sin resolver.</desc>
     <credits>
@@ -18378,7 +18378,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105200000 +0000" channel="azteca7" stop="20261105210000 +0000">
+  <programme start="20261105200000 +0000" channel="Azteca7.mx" stop="20261105210000 +0000">
     <title lang="en">El nuevo show del Pájaro Loco</title>
     <desc lang="en">Un pájaro chiflado que se enreda de todas las maneras en problemas divertidos.</desc>
     <credits>
@@ -18394,7 +18394,7 @@ En Vivo</title>
       <value>TVY</value>
     </rating>
   </programme>
-  <programme start="20261105210000 +0000" channel="azteca7" stop="20261105220000 +0000">
+  <programme start="20261105210000 +0000" channel="Azteca7.mx" stop="20261105220000 +0000">
     <title lang="en">El show de Garfield</title>
     <desc lang="en">Las travesuras de Garfield, un gato naranja y sardónico cuyas únicas aficiones son comer lasaña y dormir.</desc>
     <credits>
@@ -18410,7 +18410,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105220000 +0000" channel="azteca7" stop="20261105230000 +0000">
+  <programme start="20261105220000 +0000" channel="Azteca7.mx" stop="20261105230000 +0000">
     <title lang="en">Escandalosos</title>
     <desc lang="en">Tres hermanos osos tratan torpemente de encontrar su lugar en una sociedad civilizada, ya sea buscando comida, tratando de hacer amigos humanos o intentando hacerse famosos en Internet.</desc>
     <credits>
@@ -18426,7 +18426,7 @@ En Vivo</title>
       <value>TVY7</value>
     </rating>
   </programme>
-  <programme start="20261105230000 +0000" channel="azteca7" stop="20261106000000 +0000">
+  <programme start="20261105230000 +0000" channel="Azteca7.mx" stop="20261106000000 +0000">
     <title lang="en">Los Simpson</title>
     <desc lang="en">En Springfield, los Simpson, una familia de clase trabajadora compuesta por Marge, Homero, Bart, Lisa y Maggie, vive aventuras satíricas.</desc>
     <credits>
@@ -18442,7 +18442,7 @@ En Vivo</title>
       <value>TVPG</value>
     </rating>
   </programme>
-  <programme start="20261106000000 +0000" channel="azteca7" stop="20261106013000 +0000">
+  <programme start="20261106000000 +0000" channel="Azteca7.mx" stop="20261106013000 +0000">
     <title lang="en">Malcolm el de en medio</title>
     <desc lang="en">Un niño genio que se enfrenta a sus otros dos hermanos y a sus padres excéntricos en la vida familiar cotidiana.</desc>
     <credits>
