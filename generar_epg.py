@@ -1268,19 +1268,11 @@ def emparejar_canales(
     #    asignan de mayor a menor puntaje.
     for canal in pendientes:
         canal_id = canal["id"]
-        principales = _variantes_tokens(canal.get("nombre", ""))
-        principal = principales[0] if principales else ()
-        # Un alias de una sola palabra ("FOX" dentro de "FOX (TUBI CEAM)",
-        # "TVO" dentro de "TVO [No 24/7]") emparejaria con cualquier canal
-        # parecido, asi que no puede resumir un nombre de tres o mas palabras.
-        alias = [
-            tokens
-            for tokens in _variantes_tokens(
-                canal.get("tvg_name", ""), canal.get("nombre_m3u", "")
-            )
-            if tokens not in principales and (len(tokens) > 1 or len(principal) <= 2)
-        ]
-        nuestras = principales + alias
+        nuestras = _variantes_tokens(
+            canal.get("nombre", ""),
+            canal.get("tvg_name", ""),
+            canal.get("nombre_m3u", ""),
+        )
         candidatos: set[str] = set()
         for tokens in nuestras:
             for token in tokens:

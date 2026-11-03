@@ -194,10 +194,8 @@ latinoamericanos genéricos, pero se puede pedir con `--epg-pais ...,FR`.
    del final, los códigos de país sueltos (`ESPN MX` = `ESPN`) y palabras sin
    valor (`Canal`, `de`, `TV`…). También se comparan las **partes** del
    `display-name` de la guía, porque muchas concatenan alias
-   (`Canal 2 de México (Canal Las Estrellas - XEW)`).
-   Los alias del M3U (`tvg-name` y nombre original) solo se admiten si tienen
-   **dos o más palabras**: un alias de una sola palabra (`FOX` dentro de
-   `FOX (TUBI CEAM)`) emparejaría con cualquier canal parecido de la guía.
+   (`Canal 2 de México (Canal Las Estrellas - XEW)`). También se comparan los
+   alias del M3U (`tvg-name` y nombre original).
 
 La coincidencia por nombre exige un **puntaje mínimo (0,75)**: el nombre corto
 debe cubrir al menos 3/4 del largo y aparecer de forma contigua. Así:
@@ -208,13 +206,19 @@ debe cubrir al menos 3/4 del largo y aparecer de forma contigua. Así:
 | `Las Estrellas FHD [LAT]` | `Canal 2 de México (Canal Las Estrellas - XEW)` | ✅ sí (alias entre paréntesis) |
 | `TV UNAM HD` | `Canal TVUNAM` | ✅ sí (`TV UNAM` = `TVUNAM`) |
 | `ESPN MX` | `ESPN` | ✅ sí (código de país descartado) |
-| `FOX TUBI CEAM` | `FOX` | ❌ no (el alias `FOX` es de una sola palabra) |
-| `TVO [No 24/7] (Quetzaltenango)` | `TVO HD` | ❌ no (el alias `TVO` es de una sola palabra) |
+| `FOX TUBI CEAM` | `FOX` | ⚠️ sí (falso positivo: el alias `FOX` está en el nombre) |
+| `TVO [No 24/7] (Quetzaltenango)` | `TVO HD` | ⚠️ sí (falso positivo: el alias `TVO` está en el nombre) |
 | `ESPN` | `ESPN 2` | ❌ no (cobertura 1/2) |
 | `Canal 7 HD` | `Canal 7 de México` | ✅ sí |
 | `Canal 7 HD` | `La 7` (España) | ❌ no (uno dice `canal`, el otro no) |
 | `Deportes 24/7` | `La 7` | ❌ no (no se divide por `/`) |
 | `Canal Local` | *(no está en la guía)* | ❌ no → sin programas |
+
+Los dos casos ⚠️ son el precio de cubrir los canales que llevan calificadores
+que la guía no repite (`Nacional`, `Geo-Blocked`, `No 24/7`, `Regional`,
+`v2`…): filtrar los alias de una sola palabra quitaría también ~50 canales
+legítimos (`Las Estrellas Nacional v1`, `UFC EE.UU`, `Teleantioquia Antioquia /
+Regional`…), así que se prefiere el par de falsos positivos.
 
 Además, **un canal de la guía no se reutiliza** para dos canales del M3U y la
 asignación se resuelve **por puntaje global**: primero se emparejan los nombres
