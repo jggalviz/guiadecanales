@@ -213,10 +213,11 @@ por resuelto cuando la guía le aportó `<programme>`: si una guía publica el
 `<channel>` pero sin parrilla (es lo que pasa con `DSPORTS`/`DSPORTS 2` en las
 guías de país), una fuente posterior sí puede emparejarlo. Si ninguna se puede
 usar, la guía se genera con la parrilla genérica para que el reproductor no quede
-sin datos. Con una lista de 1.431 canales, el conjunto por defecto (17 países +
-DSports + Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~30
-canales con programación frente a las guías latinoamericanas solas (`epg.xml`
-pasa de 257 a ~290 canales con EPG y de 8 a 10,5 MB). La guía de `FR` se incluye
+sin datos. Con una lista de 1.875 entradas, el conjunto por defecto (17 países +
+DSports + Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y publica
+**353 canales con programación real** (11,4 MB): 65 más que antes de añadir la
+guía de DSports y de dejar de dar por resuelto un canal cuando una guía solo lo
+lista sin parrilla. La guía de `FR` se incluye
 porque aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus
 canales `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque
 `CANAL+` se trata como **marca**, no como la palabra «canal» seguida de «live».
@@ -225,8 +226,13 @@ Cifras medidas del último run (1.875 entradas en la lista del proveedor):
 
 | Archivo | Resultado |
 | --- | --- |
-| `epg.xml` | 1.431 canales, **288 con EPG real**, 23.468 `<programme>`, 10,5 MB |
-| `lista.m3u` | **1.875 entradas**: 1.431 canales + **444 señales de respaldo** conservadas, 47 grupos, **0** `tvg-id` fuera de la guía |
+| `epg.xml` | 1.432 canales, **353 con EPG real**, 26.236 `<programme>`, 11,4 MB |
+| `lista.m3u` | **1.875 entradas**: 1.432 canales + **443 señales de respaldo** conservadas, 46 grupos, **0** `tvg-id` fuera de la guía |
+
+Con el mapeo de DSports, la lista publica sus señales con la parrilla real:
+`DSPORTS.(ARG).dtvsp` (`DSports` + `Opc. 2`…`Opc. 5`, 5 entradas) con 45
+`<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` + 2 respaldos) con 42 y
+`DSPORTS.+.HD.dtvsp` (`DSports +` + 1 respaldo) con 55.
 
 > Al mapear variantes (`Canal 5 Nacional`, `Las Estrellas Nacional v1/v2`…) el
 > número de canales puede bajar unas unidades: son el mismo canal, que antes se
