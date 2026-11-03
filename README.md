@@ -208,7 +208,7 @@ desactiva) y `EPG_HORAS`.
 Cada fuente se procesa en orden y **un fallo no detiene el proceso**: se avisa y
 se continúa con la siguiente (un error 404 no se reintenta). Si ninguna se puede
 usar, la guía se genera con la parrilla genérica para que el reproductor no quede
-sin datos. Con una lista de 1.433 canales, el conjunto por defecto (17 países +
+sin datos. Con una lista de 1.431 canales, el conjunto por defecto (17 países +
 Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~30 canales
 con programación frente a las guías latinoamericanas solas (`epg.xml` pasa de
 257 a ~290 canales con EPG y de 8 a 10,5 MB). La guía de `FR` se incluye porque
@@ -216,12 +216,16 @@ aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus canales
 `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque `CANAL+` se
 trata como **marca**, no como la palabra «canal» seguida de «live».
 
-Cifras medidas del último run (lista de 1.433 canales, 1.875 entradas):
+Cifras medidas del último run (1.875 entradas en la lista del proveedor):
 
 | Archivo | Resultado |
 | --- | --- |
-| `epg.xml` | 1.433 canales, **290 con EPG real**, 23.668 `<programme>`, 10,5 MB |
-| `lista.m3u` | **1.875 entradas** (1.433 canales + **442 señales de respaldo** conservadas), 47 grupos, 0 `tvg-id` fuera de la guía |
+| `epg.xml` | 1.431 canales, **288 con EPG real**, 23.468 `<programme>`, 10,5 MB |
+| `lista.m3u` | **1.875 entradas**: 1.431 canales + **444 señales de respaldo** conservadas, 47 grupos, **0** `tvg-id` fuera de la guía |
+
+> Al mapear variantes (`Canal 5 Nacional`, `Las Estrellas Nacional v1/v2`…) el
+> número de canales puede bajar unas unidades: son el mismo canal, que antes se
+> publicaba dos veces con ids distintos. La programación real no se pierde.
 
 ### Emparejamiento (canal del M3U ↔ canal de la guía)
 
