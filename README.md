@@ -17,7 +17,7 @@ guía EPG ──┘
 
 - ✅ **Descarga guías XMLTV reales** (por defecto una por país de
   [epgshare01](https://epgshare01.online/): `MX`, `ES`, `AR`, `CO`, `CL`, `PE`,
-  `EC`, `UY`, `CR`, `PA`, `DO`, `SV`, `PT`, `IT`, `FR`, `DE`; y la de **EE. UU.**
+  `EC`, `UY`, `CR`, `PA`, `DO`, `SV`, `PT`, `IT`, `DE`; y la de **EE. UU.**
   de [epg.pw](https://epg.pw/), que no existe en epgshare01), admite **gzip**,
   BOM y desfases horarios, y normaliza todas las fechas a **UTC (`+0000`)**.
 - ✅ **Guías extra automáticas** para los canales FAST que traen muchas listas
@@ -90,7 +90,7 @@ guiadecanales/
 python generar_epg.py --demo
 
 # Con tu lista real y las guías reales por país (por defecto
-# MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,FR,DE,US + Pluto/Samsung/Roku)
+# MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,US + Pluto/Samsung/Roku)
 python generar_epg.py --url "https://raw.githubusercontent.com/USUARIO/REPOSITORIO/main/lista.m3u"
 
 # Solo los países que te interesan (sin las guías extra FAST)
@@ -144,7 +144,7 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-t`, `--timeout` | Espera máxima de la descarga en segundos (30 por defecto). |
 | `-f`, `--fecha` | Fecha de inicio `YYYY-MM-DD` (por defecto, hoy). |
 | `-e`, `--epg` | Fuente EPG real (URL o ruta local, XML o `.gz`). Repetible o separada por comas. |
-| `--epg-pais` | Países ISO de las guías públicas (`MX,ES,AR`…). Por defecto `MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,FR,DE,US`. |
+| `--epg-pais` | Países ISO de las guías públicas (`MX,ES,AR`…). Por defecto `MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,US`. |
 | `--epg-archivo` | Guía XMLTV local para emparejar los canales (no se descarga nada). |
 | `--sin-epg` | No usar guías reales: solo parrilla genérica de 24 h. |
 | `--sin-extras` | No descargar las guías extra (Pluto TV, Samsung TV Plus y Roku). |
@@ -168,7 +168,7 @@ Variables de entorno equivalentes: `M3U_URL`, `EPG_SALIDA`, `EPG_REPO_URL`,
 
 | Fuente | Cómo se usa |
 | --- | --- |
-| **Guías públicas por país** (por defecto) | `https://epgshare01.online/epgshare01/epg_ripper_{PAIS}1.xml.gz` para cada código de `--epg-pais` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,FR,DE`). |
+| **Guías públicas por país** (por defecto) | `https://epgshare01.online/epgshare01/epg_ripper_{PAIS}1.xml.gz` para cada código de `--epg-pais` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE`). |
 | **Estados Unidos** | `US` no existe en epgshare01 (404), así que se descarga `https://epg.pw/xmltv/epg_US.xml` (~160 MB sin comprimir, ~5.500 canales); se puede cambiar con `EPG_URL_US`. |
 | **Guías extra** (se suman a las de país) | Pluto TV, Samsung TV Plus y Roku (`https://i.mjh.nz/...`), que cubren los canales FAST que traen muchas listas. `EPG_URLS_EXTRA` las cambia y `--sin-extras` las quita. |
 | Cualquier XMLTV | `--epg URL`, `--epg URL1,URL2`, `--epg-archivo guia.xml.gz` o `EPG_URL`. Con una fuente explícita **no** se añaden las extra. |
@@ -177,10 +177,12 @@ Variables de entorno equivalentes: `M3U_URL`, `EPG_SALIDA`, `EPG_REPO_URL`,
 Cada fuente se procesa en orden y **un fallo no detiene el proceso**: se avisa y
 se continúa con la siguiente (un error 404 no se reintenta). Si ninguna se puede
 usar, la guía se genera con la parrilla genérica para que el reproductor no quede
-sin datos. Con una lista de 1.433 canales, el conjunto por defecto (17 países +
-Pluto TV + Samsung TV Plus + Roku) tarda unos 45 s, empareja ~340 canales y
-publica unos 11 MB de `epg.xml`; las guías latinoamericanas solas dejaban ~250
-canales con programación.
+sin datos. Con una lista de 1.433 canales, el conjunto por defecto (16 países +
+Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~40 canales
+con programación frente a las guías latinoamericanas solas (`epg.xml` pasa de
+257 a ~295 canales con EPG y de 8 a 10 MB). `FR` no está en la lista por defecto
+porque su guía `CANAL+LIVE NN` provocaba falsos positivos con canales
+latinoamericanos genéricos, pero se puede pedir con `--epg-pais ...,FR`.
 
 ### Emparejamiento (canal del M3U ↔ canal de la guía)
 
@@ -193,6 +195,9 @@ canales con programación.
    valor (`Canal`, `de`, `TV`…). También se comparan las **partes** del
    `display-name` de la guía, porque muchas concatenan alias
    (`Canal 2 de México (Canal Las Estrellas - XEW)`).
+   Los alias del M3U (`tvg-name` y nombre original) solo se admiten si tienen
+   **dos o más palabras**: un alias de una sola palabra (`FOX` dentro de
+   `FOX (TUBI CEAM)`) emparejaría con cualquier canal parecido de la guía.
 
 La coincidencia por nombre exige un **puntaje mínimo (0,75)**: el nombre corto
 debe cubrir al menos 3/4 del largo y aparecer de forma contigua. Así:
@@ -203,6 +208,8 @@ debe cubrir al menos 3/4 del largo y aparecer de forma contigua. Así:
 | `Las Estrellas FHD [LAT]` | `Canal 2 de México (Canal Las Estrellas - XEW)` | ✅ sí (alias entre paréntesis) |
 | `TV UNAM HD` | `Canal TVUNAM` | ✅ sí (`TV UNAM` = `TVUNAM`) |
 | `ESPN MX` | `ESPN` | ✅ sí (código de país descartado) |
+| `FOX TUBI CEAM` | `FOX` | ❌ no (el alias `FOX` es de una sola palabra) |
+| `TVO [No 24/7] (Quetzaltenango)` | `TVO HD` | ❌ no (el alias `TVO` es de una sola palabra) |
 | `ESPN` | `ESPN 2` | ❌ no (cobertura 1/2) |
 | `Canal 7 HD` | `Canal 7 de México` | ✅ sí |
 | `Canal 7 HD` | `La 7` (España) | ❌ no (uno dice `canal`, el otro no) |
@@ -413,7 +420,7 @@ pruebas, regenera el `epg.xml` cada día y hace *commit* del resultado.
    crea `EPG_REPO_URL` con la URL pública de tu repositorio para que aparezca en
    `generator-info-url`.
 4. (Opcional) En la misma pantalla de *Variables* puedes ajustar las fuentes EPG:
-   `EPG_PAISES` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,FR,DE,US` por defecto),
+   `EPG_PAISES` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,US` por defecto),
    `EPG_URLS_EXTRA` (guías extra FAST; vacío = las de por defecto) y/o `EPG_URL`
    (URLs separadas por comas, sustituye por completo a los países). Sin valores
    se usan todas las guías públicas por defecto, incluida la de EE. UU.

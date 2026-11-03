@@ -212,7 +212,7 @@ PAISES_EPG_POR_DEFECTO = tuple(
     if codigo.strip()
 ) or (
     "MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO", "SV",
-    "PT", "IT", "FR", "DE", "US",
+    "PT", "IT", "DE", "US",
 )
 
 #: Guias por pais que no siguen :data:`PLANTILLA_EPG_PAIS`.
@@ -1268,11 +1268,19 @@ def emparejar_canales(
     #    asignan de mayor a menor puntaje.
     for canal in pendientes:
         canal_id = canal["id"]
-        nuestras = _variantes_tokens(
-            canal.get("nombre", ""),
-            canal.get("tvg_name", ""),
-            canal.get("nombre_m3u", ""),
-        )
+        principales = _variantes_tokens(canal.get("nombre", ""))
+        principal = principales[0] if principales else ()
+        # Un alias de una sola palabra ("FOX" dentro de "FOX (TUBI CEAM)",
+        # "TVO" dentro de "TVO [No 24/7]") emparejaria con cualquier canal
+        # parecido, asi que no puede resumir un nombre de tres o mas palabras.
+        alias = [
+            tokens
+            for tokens in _variantes_tokens(
+                canal.get("tvg_name", ""), canal.get("nombre_m3u", "")
+            )
+            if tokens not in principales and (len(tokens) > 1 or len(principal) <= 2)
+        ]
+        nuestras = principales + alias
         candidatos: set[str] = set()
         for tokens in nuestras:
             for token in tokens:

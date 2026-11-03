@@ -752,7 +752,7 @@ class FuentesEpgPorDefectoTests(unittest.TestCase):
 
     def test_los_paises_por_defecto_cubren_america_y_europa(self) -> None:
         paises = generar_epg.PAISES_EPG_POR_DEFECTO
-        for codigo in ("MX", "ES", "AR", "CO", "CL", "PE", "PT", "IT", "FR", "DE", "US"):
+        for codigo in ("MX", "ES", "AR", "CO", "CL", "PE", "PT", "IT", "DE", "US"):
             with self.subTest(codigo=codigo):
                 self.assertIn(codigo, paises)
         # La guia mas generica (EE. UU.) va al final para no robar canales.
@@ -798,6 +798,33 @@ class FuentesEpgPorDefectoTests(unittest.TestCase):
             fuentes,
             ["https://ejemplo.invalid/guia1.xml", "https://ejemplo.invalid/guia2.xml"],
         )
+
+    def test_un_alias_de_una_palabra_no_roba_canales(self) -> None:
+        # "FOX (TUBI CEAM)" no es la senal FOX de la guia: el alias "FOX"
+        # emparejaria con cualquier canal llamado FOX.
+        canales = [
+            {
+                "id": "foxtubiceam",
+                "nombre": "FOX TUBI CEAM",
+                "tvg_name": "FOX (TUBI CEAM)",
+                "nombre_m3u": "FOX (TUBI CEAM)",
+                "tvg_id": "",
+            },
+            {
+                "id": "lasestrellas",
+                "nombre": "Las Estrellas",
+                "tvg_name": "Las Estrellas HD",
+                "nombre_m3u": "Las Estrellas FHD [LAT]",
+                "tvg_id": "",
+            },
+        ]
+        fuente = {
+            "FOX.us": ["FOX"],
+            "Canal.2.de.Mexico.mx": ["Canal 2 de Mexico (Canal Las Estrellas - XEW)"],
+        }
+        mapa = generar_epg.emparejar_canales(canales, fuente)
+        self.assertNotIn("foxtubiceam", mapa)
+        self.assertEqual(mapa.get("lasestrellas"), "Canal.2.de.Mexico.mx")
 
     def test_un_404_no_se_reintenta(self) -> None:
         llamadas = []
