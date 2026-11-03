@@ -168,7 +168,7 @@ Variables de entorno equivalentes: `M3U_URL`, `EPG_SALIDA`, `EPG_REPO_URL`,
 
 | Fuente | Cómo se usa |
 | --- | --- |
-| **Guías públicas por país** (por defecto) | `https://epgshare01.online/epgshare01/epg_ripper_{PAIS}1.xml.gz` para cada código de `--epg-pais` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE`). |
+| **Guías públicas por país** (por defecto) | `https://epgshare01.online/epgshare01/epg_ripper_{PAIS}1.xml.gz` para cada código de `--epg-pais` (`MX,ES,AR,CO,CL,PE,EC,UY,CR,PA,DO,SV,PT,IT,DE,FR`). |
 | **Estados Unidos** | `US` no existe en epgshare01 (404), así que se descarga `https://epg.pw/xmltv/epg_US.xml` (~160 MB sin comprimir, ~5.500 canales); se puede cambiar con `EPG_URL_US`. |
 | **Guías extra** (se suman a las de país) | Pluto TV, Samsung TV Plus y Roku (`https://i.mjh.nz/...`), que cubren los canales FAST que traen muchas listas. `EPG_URLS_EXTRA` las cambia y `--sin-extras` las quita. |
 | Cualquier XMLTV | `--epg URL`, `--epg URL1,URL2`, `--epg-archivo guia.xml.gz` o `EPG_URL`. Con una fuente explícita **no** se añaden las extra. |
@@ -177,12 +177,13 @@ Variables de entorno equivalentes: `M3U_URL`, `EPG_SALIDA`, `EPG_REPO_URL`,
 Cada fuente se procesa en orden y **un fallo no detiene el proceso**: se avisa y
 se continúa con la siguiente (un error 404 no se reintenta). Si ninguna se puede
 usar, la guía se genera con la parrilla genérica para que el reproductor no quede
-sin datos. Con una lista de 1.433 canales, el conjunto por defecto (16 países +
-Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~40 canales
+sin datos. Con una lista de 1.433 canales, el conjunto por defecto (17 países +
+Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y añade ~30 canales
 con programación frente a las guías latinoamericanas solas (`epg.xml` pasa de
-257 a ~295 canales con EPG y de 8 a 10 MB). `FR` no está en la lista por defecto
-porque su guía `CANAL+LIVE NN` provocaba falsos positivos con canales
-latinoamericanos genéricos, pero se puede pedir con `--epg-pais ...,FR`.
+257 a ~290 canales con EPG y de 8 a 10 MB). La guía de `FR` se incluye porque
+aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus canales
+`CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque `CANAL+` se
+trata como **marca**, no como la palabra «canal» seguida de «live».
 
 ### Emparejamiento (canal del M3U ↔ canal de la guía)
 
@@ -209,6 +210,7 @@ debe cubrir al menos 3/4 del largo y aparecer de forma contigua. Así:
 | `FOX TUBI CEAM` | `FOX` | ⚠️ sí (falso positivo: el alias `FOX` está en el nombre) |
 | `TVO [No 24/7] (Quetzaltenango)` | `TVO HD` | ⚠️ sí (falso positivo: el alias `TVO` está en el nombre) |
 | `ESPN` | `ESPN 2` | ❌ no (cobertura 1/2) |
+| `Canal 12` | `CANAL+LIVE 12` (Francia) | ❌ no (`CANAL+` es una marca, no «canal» + «live») |
 | `Canal 7 HD` | `Canal 7 de México` | ✅ sí |
 | `Canal 7 HD` | `La 7` (España) | ❌ no (uno dice `canal`, el otro no) |
 | `Deportes 24/7` | `La 7` | ❌ no (no se divide por `/`) |

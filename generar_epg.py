@@ -212,7 +212,7 @@ PAISES_EPG_POR_DEFECTO = tuple(
     if codigo.strip()
 ) or (
     "MX", "ES", "AR", "CO", "CL", "PE", "EC", "UY", "CR", "PA", "DO", "SV",
-    "PT", "IT", "DE", "US",
+    "PT", "IT", "DE", "FR", "US",
 )
 
 #: Guias por pais que no siguen :data:`PLANTILLA_EPG_PAIS`.
@@ -904,6 +904,12 @@ _RE_PARTES_NOMBRE = re.compile(r"[\[\]\(\)\{\}|\u2013\u2014]|\s+-\s+")
 #: Token de comparacion: secuencia de letras o digitos ya normalizada.
 _RE_TOKEN_NOMBRE = re.compile(r"[a-z0-9]+")
 
+#: ``CANAL+`` es una marca francesa (``CANAL+LIVE 12``), no la palabra "canal"
+#: seguida de un simbolo: si se separa, ``CANAL+LIVE 12`` queda como
+#: ``("canal", "12")`` y roba los programas de "Canal 12", "CANAL 8 (Television
+#: Chichicasteca)"/... de la lista. Se unifica a ``canalplus`` antes de tokenizar.
+_RE_MARCA_CANAL_PLUS = re.compile(r"canal\s*(?:\+|plus)", re.IGNORECASE)
+
 #: Marcas de calidad que, solas, no identifican ningun canal ("Canal HD").
 _TOKENS_CALIDAD = frozenset({"hd", "fhd", "uhd", "qhd", "sd", "4k", "8k", "hdr", "hevc"})
 
@@ -1079,7 +1085,10 @@ def _tokens_nombre(texto: str) -> tuple[str, ...]:
     se unifican las grafias "TV UNAM"/"TVUNAM" y se ignoran los codigos de pais
     sueltos ("ESPN MX" -> ``("espn",)``).
     """
-    limpio = limpiar_nombre(_RE_PARTES_NOMBRE.sub(" ", texto or ""))
+    # "CANAL+LIVE 12" se unifica antes de limpiar: ``limpiar_nombre`` descarta
+    # el "+" y el nombre volveria a confundirse con "Canal 12".
+    texto = _RE_MARCA_CANAL_PLUS.sub("canalplus", texto or "")
+    limpio = limpiar_nombre(_RE_PARTES_NOMBRE.sub(" ", texto))
     tokens = _RE_TOKEN_NOMBRE.findall(_texto_normalizado(limpio))
     utiles: list[str] = []
     for token in tokens:

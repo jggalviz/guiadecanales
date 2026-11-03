@@ -602,6 +602,36 @@ class EmparejamientoDeCanalesTests(unittest.TestCase):
         valores = list(self._mapa().values())
         self.assertEqual(len(valores), len(set(valores)))
 
+    def test_canal_plus_es_una_marca_y_no_roba_canales(self) -> None:
+        # La guia francesa trae "CANAL+LIVE 12": si el "+" se trata como
+        # separador y "live" como relleno, queda ("canal", "12") y le roba los
+        # programas a "Canal 12".
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                "\n".join(
+                    [
+                        "#EXTM3U",
+                        '#EXTINF:-1 tvg-name="Canal 12",Canal 12 HD',
+                        "http://ejemplo.invalid/canal12/index.m3u8",
+                        '#EXTINF:-1 tvg-name="CANAL 8 (TELEVISION CHICHICASTECA)",'
+                        "CANAL 8 TELEVISION CHICHICASTECA",
+                        "http://ejemplo.invalid/canal8/index.m3u8",
+                        "",
+                    ]
+                )
+            )
+        )
+        fuente = {
+            "CANAL+LIVE.12.fr": ["CANAL+LIVE 12"],
+            "CANAL+LIVE.8.fr": ["CANAL+LIVE 8"],
+        }
+        self.assertEqual(generar_epg.emparejar_canales(canales, fuente), {})
+        # Con una guia que si es el canal, el emparejamiento sigue funcionando.
+        fuente["Canal.12.uy"] = ["Canal 12"]
+        self.assertEqual(
+            generar_epg.emparejar_canales(canales, fuente), {"canal12": "Canal.12.uy"}
+        )
+
     def test_codigos_de_pais_y_barras_no_confunden(self) -> None:
         canales = generar_epg.consolidar_canales(
             generar_epg.parsear_m3u(
