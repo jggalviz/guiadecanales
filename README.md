@@ -75,7 +75,7 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   `ESPN2.us`. Editable sin tocar el script y desactivable con `--sin-mapeo`.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`, `json`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **75 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **77 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -215,6 +215,13 @@ con programación frente a las guías latinoamericanas solas (`epg.xml` pasa de
 aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus canales
 `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque `CANAL+` se
 trata como **marca**, no como la palabra «canal» seguida de «live».
+
+Cifras medidas del último run (lista de 1.433 canales, 1.875 entradas):
+
+| Archivo | Resultado |
+| --- | --- |
+| `epg.xml` | 1.433 canales, **290 con EPG real**, 23.668 `<programme>`, 10,5 MB |
+| `lista.m3u` | **1.875 entradas** (1.433 canales + **442 señales de respaldo** conservadas), 47 grupos, 0 `tvg-id` fuera de la guía |
 
 ### Emparejamiento (canal del M3U ↔ canal de la guía)
 
@@ -361,6 +368,10 @@ nombre estándar:
 - Se busca con el nombre ya normalizado (sin `HD`, `[Opc.2]`, `(1080p)`…), pero
   **conservando el país**: `ESPN 2 (Netherlands)` no se confunde con `ESPN 2`
   (`ESPN2.us`). Las claves que empiezan por `$` o `_` se ignoran (documentación).
+- En un segundo intento se ignoran los **calificadores de señal** (`Nacional`,
+  `Regional`, `v1`, `v2`, `Espejo`, `Backup`…): `Canal 5 Nacional` y
+  `Las Estrellas Nacional V2` caen en `Canal5.mx` y `LasEstrellas.mx`. Un nombre
+  parecido pero distinto (`Canal 5 Del Pueblo Alcorta`) **no** se ve afectado.
 - Usa `--mapeo otra_ruta.json` para otro archivo o `--sin-mapeo` para desactivarlo.
 
 
@@ -506,12 +517,14 @@ archivo.
 
 Además, las pruebas de la **lista M3U propia** comprueban que: el `mapeo_canales.json`
 del repositorio es válido y `ESPN 2 HD`/`ESPN 2 (Opc.2)`/`ESPN2 HD - (Opc.3)`
-caen en `ESPN2.us`; el mapeo no roba el canal de otro país
-(`ESPN 2 (Netherlands)`); las señales de respaldo se conservan (una entrada por
-señal con el mismo `tvg-id`/`tvg-name`) junto con sus `#EXTVLCOPT`; cada `tvg-id`
-del M3U existe como `<channel>` del `epg.xml`; los atributos salen limpios; el
-orden es por grupo y nombre; y `main` escribe ambos archivos (`--sin-m3u` los
-separa).
+caen en `ESPN2.us`; las variantes con calificador (`Canal 5 Nacional`,
+`Las Estrellas Nacional V2`, `Azteca 7 Regional`) caen en su canal principal
+mientras `Canal 5 Del Pueblo Alcorta` se mantiene aparte; el mapeo no roba el
+canal de otro país (`ESPN 2 (Netherlands)`); las señales de respaldo se
+conservan (una entrada por señal con el mismo `tvg-id`/`tvg-name`) junto con sus
+`#EXTVLCOPT`; cada `tvg-id` del M3U existe como `<channel>` del `epg.xml`; los
+atributos salen limpios; el orden es por grupo y nombre; y `main` escribe ambos
+archivos (`--sin-m3u` los separa).
 
 ## Publicar en GitHub (pasos)
 

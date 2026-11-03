@@ -51,6 +51,7 @@
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png",
       "alias": [
         "Canal 5",
+        "Canal 5 Nacional",
         "Canal 5 HD",
         "Canal 5 (Opc.2)",
         "Canal 5 FHD - (Opc.3)"
@@ -60,6 +61,9 @@
       "nombre": "Las Estrellas",
       "alias": [
         "Las Estrellas",
+        "Las Estrellas Nacional",
+        "Las Estrellas Nacional v1",
+        "Las Estrellas Nacional V2",
         "Las Estrellas HD",
         "Las Estrellas (Opc.2)"
       ]
@@ -68,6 +72,7 @@
       "nombre": "Azteca 7",
       "alias": [
         "Azteca 7",
+        "Azteca 7 Nacional",
         "Azteca Siete",
         "Azteca 7 (Opc.2)"
       ]
@@ -76,6 +81,7 @@
       "nombre": "Azteca Uno",
       "alias": [
         "Azteca Uno",
+        "Azteca Uno Nacional",
         "Azteca 1",
         "Azteca Uno (Opc.2)"
       ]

@@ -329,19 +329,24 @@ http://ejemplo.invalid/canallocal/index.m3u8
 MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
     "Canal5.mx": {
         "nombre": "Canal 5",
-        "alias": ("Canal 5", "Canal5"),
+        "alias": ("Canal 5", "Canal5", "Canal 5 Nacional"),
     },
     "LasEstrellas.mx": {
         "nombre": "Las Estrellas",
-        "alias": ("Las Estrellas",),
+        "alias": (
+            "Las Estrellas",
+            "Las Estrellas Nacional",
+            "Las Estrellas Nacional v1",
+            "Las Estrellas Nacional V2",
+        ),
     },
     "Azteca7.mx": {
         "nombre": "Azteca 7",
-        "alias": ("Azteca 7", "Azteca Siete"),
+        "alias": ("Azteca 7", "Azteca Siete", "Azteca 7 Nacional"),
     },
     "AztecaUno.mx": {
         "nombre": "Azteca Uno",
-        "alias": ("Azteca Uno", "Azteca 1"),
+        "alias": ("Azteca Uno", "Azteca 1", "Azteca Uno Nacional"),
     },
     "ESPN.us": {
         "nombre": "ESPN",
@@ -871,15 +876,36 @@ def _normalizar_tvg_id(valor: str, conservar: bool = False) -> str:
     return limpio
 
 
-def _clave_mapeo(texto: str) -> str:
+#: Calificadores de señal que no identifican al canal y que, por tanto, se
+#: ignoran al buscar en el mapeo explicito: "Canal 5 Nacional" y
+#: "Las Estrellas Nacional V2" son el mismo canal que "Canal 5" y
+#: "Las Estrellas" (el calificador solo indica la señal o el servidor).
+_RE_CALIFICADOR_SENAL = re.compile(
+    r"\b(?:nacional|regional|internacional|local|principal|altern[oa]|"
+    r"espejo|mirror|backup|respaldo|se[ñn]al|feed|servidor|server|"
+    r"v\d+|version\s*\d+)\b",
+    re.IGNORECASE,
+)
+
+
+def _clave_mapeo(texto: str, sin_calificadores: bool = False) -> str:
     """Clave normalizada de un alias del mapeo explicito.
 
     Se calcula igual que el nombre limpio **sin** quitar el pais, de modo que
     ``"ESPN 2 (Opc.2)"`` -> ``espn2`` (el marcador de opcion se descarta) pero
     ``"ESPN 2 Netherlands"`` -> ``espn2netherlands`` y no roba el canal de
     ESPN 2 de Estados Unidos.
+
+    Con ``sin_calificadores=True`` se descartan ademas los calificadores de
+    senal (:data:`_RE_CALIFICADOR_SENAL`): ``"Canal 5 Nacional"`` -> ``canal5``.
+    Ese es el segundo intento de la busqueda, para que las variantes
+    "Nacional", "Regional", "v1", "v2"... tambien encuentren su canal.
     """
-    return generar_id(limpiar_nombre(str(texto or ""), quitar_region=False))
+    limpio = limpiar_nombre(str(texto or ""), quitar_region=False)
+    if sin_calificadores:
+        limpio = _RE_CALIFICADOR_SENAL.sub(" ", limpio)
+        limpio = _RE_ESPACIOS.sub(" ", limpio).strip()
+    return generar_id(limpio)
 
 
 def _entrada_mapeo(identificador: str, datos: object) -> dict[str, object]:
@@ -987,12 +1013,18 @@ def _indice_mapeo(mapeo: "Mapping[str, Mapping[str, object]]") -> dict[str, "Map
     indice: dict[str, Mapping[str, object]] = {}
     for entrada in mapeo.values():
         for alias in entrada.get("alias") or ():
-            clave = _clave_mapeo(str(alias))
+            for clave in (
+                _clave_mapeo(str(alias)),
+                _clave_mapeo(str(alias), sin_calificadores=True),
+            ):
+                if clave:
+                    indice.setdefault(clave, entrada)
+        for clave in (
+            generar_id(str(entrada.get("nombre", ""))),
+            _clave_mapeo(str(entrada.get("nombre", "")), sin_calificadores=True),
+        ):
             if clave:
                 indice.setdefault(clave, entrada)
-        clave = generar_id(str(entrada.get("nombre", "")))
-        if clave:
-            indice.setdefault(clave, entrada)
     return indice
 
 
@@ -1000,11 +1032,22 @@ def buscar_en_mapeo(
     indice: "Mapping[str, Mapping[str, object]]",
     *nombres: str,
 ) -> "Mapping[str, object] | None":
-    """Devuelve la entrada del mapeo que corresponde a alguno de los nombres."""
+    """Devuelve la entrada del mapeo que corresponde a alguno de los nombres.
+
+    Se prueba primero la clave exacta (nombre limpio sin calidad ni opcion) y
+    despues la variante sin calificadores de señal ("Nacional", "v2"...), de
+    modo que una misma señal con distintos sufijos acaba en el mismo canal.
+    """
     if not indice:
         return None
     for nombre in nombres:
-        for clave in (_clave_mapeo(nombre), generar_id(str(nombre or ""))):
+        if not str(nombre or "").strip():
+            continue
+        for clave in (
+            _clave_mapeo(nombre),
+            _clave_mapeo(nombre, sin_calificadores=True),
+            generar_id(str(nombre or "")),
+        ):
             if clave and clave in indice:
                 return indice[clave]
     return None
@@ -1084,6 +1127,7 @@ def consolidar_canales(
                 "tvg_id": tvg_id,
                 "tvg_name": tvg_name,
                 "nombre_m3u": nombre_original.strip(),
+                "mapeado": mapeado is not None,
                 "senal": {
                     "url": str(canal.get("url", "") or ""),
                     "opciones": tuple(canal.get("opciones") or ()),
@@ -1161,6 +1205,7 @@ def consolidar_canales(
             "grupo": registro["grupo"],
             "nombre_m3u": registro["nombre_m3u"],
             "origen": origen,
+            "mapeado": bool(registro.get("mapeado")),
             "senales": [],
         }
         agregar_senal(unicos[clave], registro["senal"])
@@ -2548,6 +2593,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     if espejos:
         aviso(f"      Senales de respaldo (Opc.2/espejo/backup) conservadas: {espejos}")
+    con_mapeo = sum(1 for canal in canales if canal.get("mapeado"))
+    if con_mapeo:
+        aviso(f"      Canales con tvg-id forzado por el mapeo: {con_mapeo}")
 
     # --- 4. Programacion real (EPG externo) --------------------------------
     if argumentos.fecha:

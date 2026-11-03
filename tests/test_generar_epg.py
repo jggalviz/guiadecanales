@@ -1131,5 +1131,54 @@ class ListaM3UTests(unittest.TestCase):
             self.assertFalse(os.path.exists(lista))
 
 
+M3U_CALIFICADORES = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 group-title="México",Canal 5 Nacional HD',
+        "http://ejemplo.invalid/c5-nacional/index.m3u8",
+        '#EXTINF:-1 group-title="México",Las Estrellas Nacional V2',
+        "http://ejemplo.invalid/le-v2/index.m3u8",
+        '#EXTINF:-1 group-title="México",Azteca 7 Regional (Opc.2)',
+        "http://ejemplo.invalid/a7-regional/index.m3u8",
+        '#EXTINF:-1 group-title="México",Azteca Uno Nacional v3',
+        "http://ejemplo.invalid/a1-v3/index.m3u8",
+        '#EXTINF:-1 group-title="México",Canal 5 Del Pueblo Alcorta',
+        "http://ejemplo.invalid/c5-pueblo/index.m3u8",
+        "",
+    ]
+)
+
+
+class MapeoConCalificadoresTests(unittest.TestCase):
+    """Comprueba que los calificadores de señal (Nacional, V2...) no rompen el mapeo."""
+
+    def setUp(self) -> None:
+        self.canales = {
+            canal["id"]: canal
+            for canal in generar_epg.consolidar_canales(
+                generar_epg.parsear_m3u(M3U_CALIFICADORES),
+                mapeo=generar_epg.cargar_mapeo_canales(""),
+            )
+        }
+
+    def test_las_variantes_nacional_y_vn_mapean_al_canal_principal(self) -> None:
+        esperados = {
+            "Canal5.mx": "Canal 5",
+            "LasEstrellas.mx": "Las Estrellas",
+            "Azteca7.mx": "Azteca 7",
+            "AztecaUno.mx": "Azteca Uno",
+        }
+        for identificador, nombre in esperados.items():
+            with self.subTest(canal=identificador):
+                self.assertIn(identificador, self.canales)
+                self.assertEqual(self.canales[identificador]["nombre"], nombre)
+                self.assertTrue(self.canales[identificador]["mapeado"])
+
+    def test_un_canal_parecido_no_se_roba(self) -> None:
+        # "Canal 5 Del Pueblo Alcorta" es otro canal: conserva su id propio.
+        self.assertIn("canal5delpuebloalcorta", self.canales)
+        self.assertFalse(self.canales["canal5delpuebloalcorta"]["mapeado"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
