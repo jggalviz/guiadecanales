@@ -1233,19 +1233,19 @@ https://b8ee598f.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdX
 https://jmp2.uk/stvp-ES200041FT
 #EXTINF:-1 tvg-id="serieskdrama" tvg-name="Series K-Drama" tvg-logo="https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ES200040YF_20260127T040143SQUARE.png" group-title="Doramas / Asia",Series K-Drama
 https://jmp2.uk/stvp-ES200040YF
-#EXTINF:-1 tvg-id="DSPORTS.(ARG).dtvsp" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports
 http://181.209.80.115:8000/play/dsports_hd
-#EXTINF:-1 tvg-id="DSPORTS.(ARG).dtvsp" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 2)
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 2)
 http://190.117.20.37:8000/play/a08d/index.m3u
-#EXTINF:-1 tvg-id="DSPORTS.(ARG).dtvsp" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 3)
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 3)
 http://181.224.255.210:8001/play/a0s8/index.m3u8?hls
-#EXTINF:-1 tvg-id="DSPORTS.(ARG).dtvsp" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 4)
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 4)
 http://45.186.254.75:8000/play/a0en/index.m3u8
-#EXTINF:-1 tvg-id="DSPORTS.(ARG).dtvsp" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 5)
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports (Opc. 5)
 http://157.100.9.51:8000/play/a26e
-#EXTINF:-1 tvg-id="DSPORTS.+.HD.dtvsp" tvg-name="DSports +" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports +
+#EXTINF:-1 tvg-id="[SPOPLH].DSports.+.HD.uy" tvg-name="DSports +" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports +
 http://201.240.104.137:8000/play/dtvmas/index.m3u8
-#EXTINF:-1 tvg-id="DSPORTS.+.HD.dtvsp" tvg-name="DSports +" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports + (Opc. 2)
+#EXTINF:-1 tvg-id="[SPOPLH].DSports.+.HD.uy" tvg-name="DSports +" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports + (Opc. 2)
 http://157.100.9.51:8000/play/a26d
 #EXTINF:-1 tvg-id="DSPORTS.2.HD.dtvsp" tvg-name="DSports 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="DSports",DSports 2
 http://201.240.104.137:8000/play/dtv2/index.m3u8
