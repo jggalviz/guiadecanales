@@ -289,6 +289,15 @@ mantiene por si vuelve a aparecer.
 > `lista.m3u` respecto a runs anteriores: antes se publicaban todos los espejos
 > (`Opc. 4`, `Opc. 5`…) y ahora solo la principal y dos respaldos.
 
+> Con la ingesta multi-fuente algunos `id` cambian de nombre: los canales que el
+> mapeo identifica con su `tvg-id` oficial pasan de un id generado a ese id
+> (`antena3` → `Antena.3.es`, `cinelatino` → `CineLatino.mx`,
+> `caracolinternacional` → `CaracolInternacional.co`, `espnco` → `ESPN.co`…) y
+> **conservan su programación** con el id nuevo. Cuando un canal aparece en
+> varias señales (`ETB1 ON` / `ETB 1 Geo-Blocked`), la guía se publica en la
+> señal que la aportó y las demás siguen publicándose sin programas: es
+> preferible a duplicar la misma parrilla bajo dos ids distintos.
+
 > El canal `FilmRise Series Gratis` perdió su EPG en este run (uno menos que
 > antes): Pluto TV ya no publica ningún canal `filmrise` en su guía (`i.mjh.nz`),
 > así que no es una regresión del mapeo.
