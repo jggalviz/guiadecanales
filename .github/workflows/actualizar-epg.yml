@@ -99,6 +99,9 @@ jobs:
           python - <<'PY'
           from xml.etree import ElementTree as ET
 
+          # Mismas reglas que el generador (jerarquia y alias de los grupos).
+          import generar_epg
+
           raiz = ET.parse("epg.xml").getroot()
           canales = {canal.get("id") for canal in raiz.findall("channel")}
           programas = raiz.findall("programme")
@@ -180,19 +183,12 @@ jobs:
           )
 
           # Categorias tematicas: el canal se repite en su grupo y en el tematico.
-          import unicodedata
-
-          def sin_acentos(texto: str) -> str:
-              return "".join(
-                  caracter
-                  for caracter in unicodedata.normalize("NFKD", texto)
-                  if not unicodedata.combining(caracter)
-              )
-
+          total_jerarquia = len(generar_epg.ORDEN_GRUPOS_M3U)
           tematicas = {}
           for extinf, _url in entradas:
               grupo = atributo(extinf, "group-title")
-              if sin_acentos(grupo).strip().casefold() in ("nba", "beisbol", "baseball"):
+              # Los grupos de la jerarquia (con sus alias) son las tematicas.
+              if generar_epg.orden_del_grupo(grupo)[0] < total_jerarquia:
                   tematicas.setdefault(grupo, set()).add(atributo(extinf, "tvg-id"))
           print(
               "categorias tematicas: "
@@ -204,6 +200,18 @@ jobs:
           for grupo, canales_tematicos in tematicas.items():
               fuera_tematica = sorted(canales_tematicos - canales)
               assert not fuera_tematica, f"{grupo}: tvg-id fuera de la guia: {fuera_tematica[:5]}"
+
+          # Orden jerarquico de los grupos (misma funcion que usa generar_epg.py).
+          orden_grupos = []
+          for extinf, _url in entradas:
+              grupo = atributo(extinf, "group-title")
+              if grupo not in orden_grupos:
+                  orden_grupos.append(grupo)
+
+          claves = [generar_epg.orden_del_grupo(grupo) for grupo in orden_grupos]
+          assert claves == sorted(claves), f"grupos fuera de la jerarquia: {orden_grupos[:20]}"
+          assert "" not in orden_grupos[:-1], "los canales sin grupo deben ir al final"
+          print("orden de grupos OK: " + " > ".join(orden_grupos[:16]))
           print(f"OK: {len(con_epg)} canales con programacion real de {len(canales)}")
           PY
 

@@ -42,14 +42,22 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   resto de Europa, Asia u Oceanía se descartan por completo (el país sale del
   sufijo del `tvg-id` o del nombre). `--sin-filtro-geografico` lo desactiva y la
   lista del proveedor nunca se filtra.
-- ✅ **Categorías temáticas `NBA` y `Béisbol`**: agrupan los canales que emiten
-  NBA en directo (`NBA TV`, `ESPN`, `ABC`, `TNT`, `DSports`, `Movistar
-  Deportes`, `DAZN`…) y los de béisbol (MLB, `MLB Network`, los feeds de **1
-  Baseball**, la **pelota venezolana**/LVBP —`Meridiano`, `IVC`, `ByM Sports`,
-  `Canal I`, `Promar`— y `FOX Deportes`). El canal se **duplica** en el grupo
-  temático conservando su `tvg-id`, `tvg-name` y señales, así que su EPG es la
-  misma en las dos entradas. Configurables en `categorias_tematicas.json`
-  (`--categorias`, `--sin-tematicas`).
+- ✅ **Categorías temáticas por competición y por marca**: además de `NBA` y
+  `Béisbol` (canales que emiten NBA en directo —`NBA TV`, `ESPN`, `ABC`, `TNT`,
+  `DSports`, `Movistar Deportes`, `DAZN`…— y los de béisbol: MLB, `MLB
+  Network`, los feeds de **1 Baseball**, la **pelota venezolana**/LVBP
+  —`Meridiano`, `IVC`, `ByM Sports`, `Canal I`, `Promar`— y `FOX Deportes`), se
+  publican los grupos `ESPN`, `DSports`, `Fox Sports`, `Documentary`,
+  `Entretenimiento Premium`, `Movistar Deportes`, `Sony Channels`, `Tigo
+  Sports / Fox`, `Sky Sports` y `Win Sports`. El canal se **duplica** en el
+  grupo temático conservando su `tvg-id`, `tvg-name` y señales, así que su EPG
+  es la misma en todas sus apariciones. Configurables en
+  `categorias_tematicas.json` (`--categorias`, `--sin-tematicas`).
+- ✅ **Orden estricto de los grupos de `lista.m3u`**: `ESPN`, `DSports`, `Fox
+  Sports`, `Béisbol`, `NBA`, `Documentary`, `Entretenimiento Premium`,
+  `Movistar Deportes`, `Sony Channels`, `Tigo Sports / Fox`, `Venezuela`,
+  `España`, `Sky Sports`, `Sports` y `Win Sports`; el resto de grupos se
+  publican después, en orden alfabético (y los canales sin grupo, al final).
 - ✅ **Límite de 3 señales por canal**: se publica la principal y **dos
   respaldos** (`Opc. 2` y `Opc. 3`); el resto de espejos redundantes se
   descarta para no inflar la lista (`--maximo-senales`, `M3U_MAXIMO_SENALES`).
@@ -101,10 +109,11 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   **fecha actual del sistema a las 00:00:00**.
 - ✅ UTF-8, declaración XML, `<!DOCTYPE tv SYSTEM "xmltv.dtd">` e indentación
   limpia de 2 espacios.
-- ✅ **Publica una lista M3U propia (`lista.m3u`)** ordenada por grupo y nombre,
-  con `tvg-id` (el mismo `<channel id="...">` del `epg.xml`), `tvg-name`
-  estándar, `tvg-logo` limpio y `group-title`, más `x-tvg-url`/`url-tvg` en la
-  cabecera.
+- ✅ **Publica una lista M3U propia (`lista.m3u`)** ordenada por la jerarquía de
+  grupos (`ESPN`, `DSports`, `Fox Sports`, `Béisbol`, `NBA`, `Documentary`, …) y
+  por nombre dentro de cada grupo, con `tvg-id` (el mismo
+  `<channel id="...">` del `epg.xml`), `tvg-name` estándar, `tvg-logo` limpio y
+  `group-title`, más `x-tvg-url`/`url-tvg` en la cabecera.
 - ✅ **No elimina los duplicados/espejos**: las señales de respaldo (`[Opc.2]`,
   `Backup`, `Espejo`, `Señal 2`…) se publican como entradas propias con el
   `tvg-id`/`tvg-name` de su canal principal (hasta **3 por canal**), así que
@@ -128,7 +137,7 @@ guiadecanales/
 ├── epg.xml                         # guía generada (se versiona para publicarla)
 ├── lista.m3u                       # lista propia generada, con el tvg-id de la guía
 ├── mapeo_canales.json              # alias -> tvg-id real de las señales difíciles
-├── categorias_tematicas.json       # grupos temáticos NBA y Béisbol (patrones)
+├── categorias_tematicas.json       # grupos temáticos (patrones de detección)
 ├── tests/
 │   └── test_generar_epg.py         # pruebas unitarias (unittest)
 ├── .github/workflows/actualizar-epg.yml   # regeneración diaria + commit automático
@@ -214,7 +223,7 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-m`, `--m3u-salida` | Lista M3U propia de salida (por defecto `lista.m3u`). |
 | `--sin-m3u` | No generar la lista M3U propia: solo el XMLTV. |
 | `--categorias` | JSON con las categorías temáticas (`categorias_tematicas.json` por defecto). |
-| `--sin-tematicas` | No añadir los grupos `NBA`/`Béisbol`: cada canal solo en su grupo original. |
+| `--sin-tematicas` | No añadir los grupos temáticos: cada canal solo en su grupo original. |
 | `--mapeo` | JSON con el mapeo alias → `tvg-id` real (por defecto `mapeo_canales.json`). |
 | `--sin-mapeo` | Ignorar el mapeo explícito (usa solo el `tvg-id`/nombre del M3U). |
 | `--epg-publica` | URL pública del `epg.xml` que se declara en la cabecera del M3U. |
@@ -439,13 +448,21 @@ http://proveedor.example/espn2-opc2/index.m3u8
 
 Qué hace exactamente:
 
-1. **Ordena** los canales por `group-title` y nombre (los que no tienen grupo, al
-   final), de modo que el orden es estable entre ejecuciones y los *diffs* del
+1. **Ordena** los canales según la jerarquía de grupos (`ESPN`, `DSports`, `Fox
+   Sports`, `Béisbol`, `NBA`, `Documentary`, `Entretenimiento Premium`,
+   `Movistar Deportes`, `Sony Channels`, `Tigo Sports / Fox`, `Venezuela`,
+   `España`, `Sky Sports`, `Sports`, `Win Sports`) y, dentro de cada grupo, por
+   nombre; el resto de grupos van después en orden alfabético y los canales sin
+   grupo, al final. Así el orden es estable entre ejecuciones y los *diffs* del
    repositorio son mínimos.
-2. **Limpia los atributos**: `tvg-id` (el `id` real del canal, idéntico al
+2. **Unifica los alias de grupo**: `FOX Sports`/`Fox Sports`, `D
+   Sports`/`DSports`, `Baseball`/`Béisbol`, `Documentales y
+   Cultura`/`Documentary` y `TV PREMIUM`/`Entretenimiento Premium` se publican
+   con un único `group-title` canónico.
+3. **Limpia los atributos**: `tvg-id` (el `id` real del canal, idéntico al
    `<channel id="...">` del `epg.xml`), `tvg-name` estándar, `tvg-logo` solo si es
    una URL `http(s)` válida y `group-title` sin mojibake ni comillas sueltas.
-3. **Conserva las señales de respaldo, con límite.** Los duplicados/espejos de
+4. **Conserva las señales de respaldo, con límite.** Los duplicados/espejos de
    distintos servidores (`[Opc.2]`, `[Opc.3]`, `Backup`, `Espejo`, `Señal 2`…)
    **no se eliminan**: se publican como entradas propias con el **mismo `tvg-id`
    y `tvg-name`** de su canal principal y un sufijo visible (`(Opc. 2)`,
@@ -454,14 +471,16 @@ Qué hace exactamente:
    inflar la lista con espejos redundantes o caídos (`--maximo-senales N`).
    Las señales de la lista del proveedor se conservan antes que las que llegan
    de las listas M3U de apoyo.
-4. **Conserva las opciones de reproducción** de cada entrada
+5. **Conserva las opciones de reproducción** de cada entrada
    (`#EXTVLCOPT:http-user-agent=...`, `#KODIPROP:...`, `#EXTGRP:...`), necesarias
    para los canales que exigen un user-agent o un referer concreto.
-5. **Añade las categorías temáticas** (`NBA`, `Béisbol`): el canal se publica
-   otra vez dentro del grupo temático con el **mismo `tvg-id`**, `tvg-name` y
-   señales, así que la EPG es idéntica en las dos entradas (ver
-   [Categorías temáticas](#categorías-temáticas-nba-y-béisbol)).
-6. **Declara la guía** en la cabecera (`x-tvg-url` y `url-tvg`), así que el
+6. **Añade las categorías temáticas** (`NBA`, `Béisbol`, `ESPN`, `DSports`, `Fox
+   Sports`, `Documentary`, `Entretenimiento Premium`, `Movistar Deportes`, `Sony
+   Channels`, `Tigo Sports / Fox`, `Sky Sports`, `Win Sports`): el canal se
+   publica otra vez dentro del grupo temático con el **mismo `tvg-id`**,
+   `tvg-name` y señales, así que la EPG es idéntica en todas sus apariciones
+   (ver [Categorías temáticas](#categorías-temáticas-nba-béisbol-y-marcas)).
+7. **Declara la guía** en la cabecera (`x-tvg-url` y `url-tvg`), así que el
    reproductor descarga la EPG automáticamente. La URL sale de `--epg-publica` o
    de `EPG_PUBLICA_URL` (por defecto, el `raw` de tu repositorio).
 
@@ -520,19 +539,30 @@ Reglas:
 5. **Una lista caída no rompe nada.** Si una lista de apoyo devuelve 404, no es
    M3U o no responde, se avisa y se continúa con el resto.
 
-### Categorías temáticas: `NBA` y `Béisbol`
+### Categorías temáticas: `NBA`, `Béisbol` y marcas
 
-El script agrupa los canales de las dos competiciones que más se piden en una
-categoría propia, **sin quitarlos de su grupo original**. Cada canal aparece
-dos veces en `lista.m3u` (una en su grupo y otra en el grupo temático) con el
+El script agrupa los canales de las competiciones y marcas que más se piden en una
+categoría propia, **sin quitarlos de su grupo original**. Cada canal aparece dos
+veces en `lista.m3u` (una en su grupo y otra en el grupo temático) con el
 **mismo `tvg-id`, el mismo `tvg-name` y las mismas señales**, así que la
-programación real es idéntica en las dos entradas y el reproductor no pierde la
-guía regional.
+programación real es idéntica en todas las entradas y el reproductor no pierde la
+guía regional. Los grupos temáticos se publican en las primeras posiciones de la
+lista (ver [orden de grupos](#orden-de-los-grupos-de-la-lista-m3u)).
 
 | Grupo | Qué agrupa | Patrones por defecto |
 | --- | --- | --- |
 | `NBA` | Canales que emiten partidos de la NBA en directo: la propia NBA y las cadenas con derechos en EE. UU., Latinoamérica y España | `*nba*` (NBA TV, NBA League Pass), `ESPN`, `ESPN 2`…`ESPN 7`, `ESPN Deportes`, `ESPN Premium`, `*espn*latin*`, `ABC`, `TNT`, `TNT Sports`, `TNT Sports Premium`, `DSports`, `DSports 2`, `DSports +`, `#Vamos`, `Movistar Deportes`, `DAZN 1`, `DAZN 2` |
 | `Béisbol` | MLB, plataformas especializadas (**1 Baseball**), pelota venezolana (LVBP) y las cadenas que emiten béisbol en la región | `*mlb*`, `*baseball*`, `*beisbol*`, `*pelota*`, `*lvbp*`, `MLB Network`, `FOX Deportes`, `Meridiano TV`, `IVC`, `ByM Sports`, `Canal I`, `Promar` |
+| `ESPN` | Todas las señales de la marca (los feeds regionales llegan con el `tvg-id` de su país) | `*espn*` |
+| `DSports` | DSports / DirecTV Sports | `*dsports*`, `*d sports*`, `DirecTV Sports`, `Directv Sports` |
+| `Fox Sports` | Fox Sports (incluido `FOX Sports México`) | `*fox sports*`, `*foxsports*`, `Fox Sport` |
+| `Documentary` | Documentales y cultura | `*documental*`, `*documentales*`, `*documentary*`, `*documentaries*`, `Discovery`, `*discovery channel*`, `*discovery science*`, `*discovery turbo*`, `*discovery world*`, `*discovery theater*`, `*discovery home*`, `*discovery investigation*`, `*discovery civilization*`, `*discovery plus*`, `History`, `*history*`, `H2`, `*nat geo*`, `National Geographic`, `Animal Planet`, `Investigation Discovery`, `Smithsonian`, `Curiosity`, `Love Nature`, `Odisea` |
+| `Entretenimiento Premium` | Grupos de la lista que ya se llamaban `TV PREMIUM`/`Premium` (el `group-title` se reescribe, el canal no se duplica) | alias de grupo `TV PREMIUM` |
+| `Movistar Deportes` | Señales de Movistar Deportes | `Movistar Deportes`, `Movistar Plus+ Deportes`, `*movistar*deportes*` |
+| `Sony Channels` | Sony Channel, Sony Movies, AXN… | `*sony*` |
+| `Tigo Sports / Fox` | Señales de Tigo Sports | `*tigo sports*`, `Tigo Sport` |
+| `Sky Sports` | Señales de Sky Sports | `*sky sports*`, `Sky Sport` |
+| `Win Sports` | Señales de Win Sports (Colombia) | `*win sports*`, `Win Sport` |
 
 Cómo se decide si un canal entra:
 
@@ -542,7 +572,8 @@ Cómo se decide si un canal entra:
 2. `*` es comodín de palabras completas: `*nba*` encuentra `NBA TV` y `NBA`,
    pero **no** `Dragon Ball` (contiene `nba` dentro de la palabra) ni `WNBA`.
    Sin comodines la coincidencia es exacta (`ESPN 2` no arrastra a
-   `ESPN 2 Latin America`).
+   `ESPN 2 Latin America`). Por eso las marcas en plural llevan su propio patrón
+   (`*win sports*` no casa con `Win Sport`).
 3. **Filtro geográfico**: un canal de país conocido fuera de EE. UU./España/
    Latinoamérica nunca entra en una categoría (`ESPN 2 Netherlands` se queda
    fuera de `NBA`).
@@ -563,6 +594,42 @@ Personalización (`categorias_tematicas.json`, o `--categorias otra.json`):
 
 Las categorías del JSON **sustituyen** a las del mismo nombre definidas en el
 código y las nuevas se suman. Se puede desactivar todo con `--sin-tematicas`.
+
+### Orden de los grupos de la lista M3U
+
+`lista.m3u` se publica con los `group-title` en un orden **fijo**, pensado para
+que el reproductor muestre primero lo que más se ve (`ORDEN_GRUPOS_M3U` en
+`generar_epg.py`):
+
+| # | `group-title` |
+| --- | --- |
+| 1 | `ESPN` |
+| 2 | `DSports` |
+| 3 | `Fox Sports` |
+| 4 | `Béisbol` |
+| 5 | `NBA` |
+| 6 | `Documentary` |
+| 7 | `Entretenimiento Premium` |
+| 8 | `Movistar Deportes` |
+| 9 | `Sony Channels` |
+| 10 | `Tigo Sports / Fox` |
+| 11 | `Venezuela` |
+| 12 | `España` |
+| 13 | `Sky Sports` |
+| 14 | `Sports` |
+| 15 | `Win Sports` |
+| 16+ | resto de grupos, en orden alfabético (y los canales sin grupo, al final) |
+
+Detalles:
+
+- La comparación ignora mayúsculas, acentos y símbolos, así que `FOX SPORTS`,
+  `Fox Sports` y `Fox-Sports` caen en la misma posición.
+- Los alias de grupo se reescriben al nombre canónico (`FOX Sports` → `Fox
+  Sports`, `D Sports` → `DSports`, `Baseball` → `Béisbol`, `Documentales y
+  Cultura` → `Documentary`, `TV PREMIUM` → `Entretenimiento Premium`), de modo
+  que no aparecen dos grupos para lo mismo.
+- Dentro de cada grupo los canales se ordenan por nombre y, si coincide, por
+  `id`; el resultado es estable entre ejecuciones.
 
 ### Mapeo explícito de señales difíciles (`mapeo_canales.json`)
 
@@ -802,8 +869,13 @@ mientras `Canal 5 Del Pueblo Alcorta` se mantiene aparte; el mapeo no roba el
 canal de otro país (`ESPN 2 (Netherlands)`); las señales de respaldo se
 conservan (una entrada por señal con el mismo `tvg-id`/`tvg-name`) junto con sus
 `#EXTVLCOPT`; cada `tvg-id` del M3U existe como `<channel>` del `epg.xml`; los
-atributos salen limpios; el orden es por grupo y nombre; y `main` escribe ambos
-archivos (`--sin-m3u` los separa).
+atributos salen limpios; el orden es por la jerarquía de grupos (`ESPN`,
+`DSports`, `Fox Sports`, `Béisbol`, `NBA`, `Documentary`, `Entretenimiento
+Premium`, `Movistar Deportes`, `Sony Channels`, `Tigo Sports / Fox`, `Venezuela`,
+`España`, `Sky Sports`, `Sports`, `Win Sports` y después el resto en orden
+alfabético, con los canales sin grupo al final), sin depender del orden de
+entrada y con los alias de grupo unificados; y `main` escribe ambos archivos
+(`--sin-m3u` los separa).
 
 Y las de **DSports** (`CoberturaDSportsTests`) cubren el caso real: `DSports`,
 `DSports HD`, `DSports (Opc. 2)`, `DSports 4K`, `DIRECTV Sports`… acaban en
@@ -833,6 +905,21 @@ atajos `iptv-org-*` se resuelven a sus URLs; España (`La.1.es`, `Antena.3.es`,
 `FOX.Sports.3.HD(FXS3HD).co`…) y US Latino (`Univision.us`, `Telemundo.us`…)
 reciben su `tvg-id`; el país se lee aunque el id lleve `@HD`; y los alias del
 mapeo permiten emparejar canales de la guía de EE. UU., que usa ids numéricos.
+
+Y las de **categorías temáticas y orden de grupos** (`OrdenDeGruposM3UTests`,
+`MarcasTematicasTests`) comprueban que: los `group-title` salen en la jerarquía
+pedida (`ESPN`, `DSports`, `Fox Sports`, `Béisbol`, `NBA`, `Documentary`,
+`Entretenimiento Premium`, `Movistar Deportes`, `Sony Channels`, `Tigo Sports /
+Fox`, `Venezuela`, `España`, `Sky Sports`, `Sports`, `Win Sports`) y el resto en
+orden alfabético, con los canales sin grupo al final; el resultado no depende del
+orden de entrada; los alias (`FOX Sports`, `D Sports`, `Baseball`, `Documentales
+y Cultura`, `TV PREMIUM`) se funden en el grupo canónico; cada marca (`ESPN`,
+`DSports`, `Fox Sports`, `Movistar Deportes`, `Sony`, `Tigo Sports`, `Sky
+Sports`, `Win Sports`) y los documentales (`Discovery`, `History`, `Nat Geo`…)
+entran en su categoría sin falsos positivos (`Discovery Kids`, `Sky News`, `Winx
+Club`); la copia temática conserva `tvg-id` y señal; el límite de 3 señales se
+respeta en cada grupo; y el `categorias_tematicas.json` del repositorio coincide
+con los patrones del código.
 
 ## Publicar en GitHub (pasos)
 
@@ -874,8 +961,11 @@ ambos archivos.
 > `#EXTM3U` con `x-tvg-url`, entradas con URL `http(s)`, `tvg-id` en todas las
 > entradas, **todos esos `tvg-id` presentes en el `epg.xml`**, **máximo 3
 > señales por canal y grupo** (las categorías temáticas repiten el canal con el
-> mismo `tvg-id`) y que los `tvg-id` de los grupos `NBA`/`Béisbol` existen en la
-> guía.
+> mismo `tvg-id`), que los `tvg-id` de los grupos temáticos (`NBA`, `Béisbol`,
+> `ESPN`, `DSports`, `Fox Sports`, `Documentary`, `Movistar Deportes`, `Sony
+> Channels`, `Tigo Sports / Fox`, `Sky Sports`, `Win Sports`) existen en la guía
+> y que los grupos salen en el orden de la jerarquía (el resto, en orden
+> alfabético).
 >
 > Si tu lista M3U es privada, guárdala en un secreto (`M3U_URL`): el script solo
 > necesita poder descargarla por HTTP(S).

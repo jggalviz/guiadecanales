@@ -1128,11 +1128,23 @@ class ListaM3UTests(unittest.TestCase):
         logos = [entrada["logo"] for entrada in self.entradas if entrada["logo"]]
         self.assertTrue(logos and all(logo.startswith("https://") for logo in logos))
 
-    def test_orden_por_grupo_y_nombre_y_sin_grupo_al_final(self) -> None:
-        grupos = [entrada["grupo"] for entrada in self.entradas]
-        self.assertEqual(grupos, sorted(grupos, key=lambda grupo: (grupo or "\uffff").casefold()))
-        # El canal sin grupo queda al final de la lista.
+    def test_orden_jerarquico_y_sin_grupo_al_final(self) -> None:
+        claves = [
+            (generar_epg.orden_del_grupo(entrada["grupo"]), entrada["nombre"].casefold())
+            for entrada in self.entradas
+        ]
+        # Los grupos salen en el orden de la jerarquia y, dentro de cada uno,
+        # los canales por nombre; el canal sin grupo queda al final.
+        self.assertEqual(claves, sorted(claves))
         self.assertEqual(self.entradas[-1]["nombre"], "Canal Local")
+        self.assertEqual(self.entradas[-1]["grupo"], "")
+        # ESPN y NBA son los grupos 1 y 5 de la jerarquia: van antes que los
+        # grupos que no estan en ella (Cine, Deportes).
+        self.assertEqual(self.entradas[0]["grupo"], "ESPN")
+        grupos = [entrada["grupo"] for entrada in self.entradas]
+        self.assertIn("NBA", grupos)
+        self.assertLess(grupos.index("NBA"), grupos.index("Cine"))
+        self.assertLess(grupos.index("NBA"), grupos.index("Deportes"))
         cine = [entrada["nombre"] for entrada in self.entradas if entrada["grupo"] == "Cine"]
         self.assertEqual(cine, ["Cine Latino", "Cine Latino (Opc. 2)"])
 
@@ -2097,11 +2109,29 @@ class CategoriasTematicasTests(unittest.TestCase):
         )
         return generar_epg.parsear_m3u(texto)
 
-    def test_las_categorias_por_defecto_son_nba_y_beisbol(self) -> None:
+    def test_las_categorias_por_defecto_incluyen_las_marcas(self) -> None:
         categorias = generar_epg.cargar_categorias_tematicas("")
-        self.assertEqual(set(categorias), {"NBA", "Béisbol"})
+        self.assertEqual(
+            set(categorias),
+            {
+                "NBA",
+                "Béisbol",
+                "ESPN",
+                "DSports",
+                "Fox Sports",
+                "Documentary",
+                "Movistar Deportes",
+                "Sony Channels",
+                "Tigo Sports / Fox",
+                "Sky Sports",
+                "Win Sports",
+            },
+        )
         self.assertIn("*nba*", categorias["NBA"])
         self.assertIn("*mlb*", categorias["Béisbol"])
+        self.assertIn("*sony*", categorias["Sony Channels"])
+        self.assertIn("*win sports*", categorias["Win Sports"])
+        self.assertIn("*sky sports*", categorias["Sky Sports"])
 
     def test_los_canales_de_la_nba_entran_en_su_categoria(self) -> None:
         for nombre in ("NBA TV", "ESPN 2", "DSports"):
@@ -2167,6 +2197,290 @@ class CategoriasTematicasTests(unittest.TestCase):
         self.assertEqual(resumen["NBA"], 3)
         self.assertEqual(resumen["Béisbol"], 4)
         self.assertEqual(generar_epg.resumen_tematicas(self.canales, {}), {})
+
+
+GRUPOS_JERARQUIA = [
+    ("Win Sports", "Canal 15"),
+    ("Zzz Desconocido", "Canal 17"),
+    ("Sony Channels", "Canal 09"),
+    ("Anime", "Canal 16"),
+    ("España", "Canal 12"),
+    ("Documentales y Cultura", "Canal 06"),
+    ("FOX Sports", "Canal 03"),
+    ("NBA", "Canal 05"),
+    ("ESPN", "Canal 01"),
+    ("Venezuela", "Canal 11"),
+    ("Baseball", "Canal 04"),
+    ("TV PREMIUM", "Canal 07"),
+    ("D Sports", "Canal 02"),
+    ("Sony Channel", "Canal 18"),
+    ("Movistar Deportes", "Canal 08"),
+    ("Tigo Sports / Fox", "Canal 10"),
+    ("Sky Sports", "Canal 13"),
+    ("Sports", "Canal 14"),
+    ("", "Canal 19"),
+]
+
+
+def _m3u_jerarquia(grupos: "list[tuple[str, str]] | None" = None) -> str:
+    """Construye una lista M3U desordenada con un canal por grupo."""
+    lineas = ["#EXTM3U"]
+    for grupo, nombre in GRUPOS_JERARQUIA if grupos is None else grupos:
+        atributos = f'group-title="{grupo}" ' if grupo else ""
+        lineas.append(f"#EXTINF:-1 {atributos},{nombre} HD")
+        lineas.append(f"http://jerarquia.invalid/{nombre.replace(' ', '-').lower()}")
+    lineas.append("")
+    return "\n".join(lineas)
+
+
+class OrdenDeGruposM3UTests(unittest.TestCase):
+    """Comprueba el orden estricto de los ``group-title`` de ``lista.m3u``."""
+
+    URL_EPG = "https://ejemplo.invalid/guiadecanales/epg.xml"
+
+    #: Orden pedido: la jerarquia y, despues, el resto en orden alfabetico.
+    ORDEN_ESPERADO = [
+        "ESPN",
+        "DSports",
+        "Fox Sports",
+        "Béisbol",
+        "NBA",
+        "Documentary",
+        "Entretenimiento Premium",
+        "Movistar Deportes",
+        "Sony Channels",
+        "Tigo Sports / Fox",
+        "Venezuela",
+        "España",
+        "Sky Sports",
+        "Sports",
+        "Win Sports",
+        "Anime",
+        "Zzz Desconocido",
+        "",
+    ]
+
+    def setUp(self) -> None:
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+        self.canales = self._canales(_m3u_jerarquia())
+
+    def _canales(self, m3u: str) -> list[dict[str, object]]:
+        return generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(m3u), mapeo=self.mapeo
+        )
+
+    def _entradas(self, canales=None, categorias: object = {}) -> list[dict[str, object]]:
+        texto = generar_epg.generar_m3u(
+            self.canales if canales is None else canales,
+            url_epg=self.URL_EPG,
+            categorias=categorias,
+        )
+        return generar_epg.parsear_m3u(texto)
+
+    def _grupos(self, canales=None, categorias: object = {}) -> list[str]:
+        return list(
+            dict.fromkeys(entrada["grupo"] for entrada in self._entradas(canales, categorias))
+        )
+
+    def test_la_jerarquia_es_la_pedida(self) -> None:
+        self.assertEqual(list(generar_epg.ORDEN_GRUPOS_M3U), self.ORDEN_ESPERADO[:15])
+
+    def test_orden_del_grupo_usa_la_jerarquia(self) -> None:
+        for posicion, grupo in enumerate(generar_epg.ORDEN_GRUPOS_M3U):
+            with self.subTest(grupo=grupo):
+                self.assertEqual(generar_epg.orden_del_grupo(grupo)[0], posicion)
+        # Sin distinguir mayusculas, acentos ni simbolos.
+        self.assertEqual(
+            generar_epg.orden_del_grupo("FOX SPORTS")[0],
+            generar_epg.orden_del_grupo("Fox Sports")[0],
+        )
+        self.assertEqual(
+            generar_epg.orden_del_grupo("D-Sports")[0],
+            generar_epg.orden_del_grupo("DSports")[0],
+        )
+        # Los grupos desconocidos comparten la ultima posicion y se ordenan
+        # entre ellos por su clave; los canales sin grupo van al final.
+        ultimo = len(generar_epg.ORDEN_GRUPOS_M3U)
+        self.assertEqual(generar_epg.orden_del_grupo("Anime"), (ultimo, "anime"))
+        self.assertEqual(generar_epg.orden_del_grupo(""), (ultimo + 1, ""))
+        # Un grupo sin letras ("-", "+") cuenta como grupo desconocido, no como
+        # canal sin grupo: nunca se publica despues de ellos.
+        self.assertEqual(generar_epg.orden_del_grupo("-"), (ultimo, ""))
+        self.assertGreater(
+            generar_epg.orden_del_grupo(""),
+            generar_epg.orden_del_grupo("-"),
+        )
+        self.assertGreater(
+            generar_epg.orden_del_grupo("Anime"),
+            generar_epg.orden_del_grupo("Win Sports"),
+        )
+
+    def test_los_grupos_salen_en_el_orden_estricto(self) -> None:
+        self.assertEqual(self._grupos(), self.ORDEN_ESPERADO)
+
+    def test_los_grupos_desconocidos_van_al_final_en_orden_alfabetico(self) -> None:
+        grupos = self._grupos()
+        self.assertEqual(grupos[-3:], ["Anime", "Zzz Desconocido", ""])
+        self.assertEqual(
+            grupos[: len(generar_epg.ORDEN_GRUPOS_M3U)],
+            list(generar_epg.ORDEN_GRUPOS_M3U),
+        )
+
+    def test_el_orden_no_depende_del_orden_de_entrada(self) -> None:
+        al_reves = self._canales(_m3u_jerarquia(list(reversed(GRUPOS_JERARQUIA))))
+        self.assertEqual(self._grupos(al_reves), self.ORDEN_ESPERADO)
+
+    def test_los_alias_se_funden_en_el_grupo_canonico(self) -> None:
+        grupos = self._grupos()
+        for canonico, alias in (
+            ("DSports", "D Sports"),
+            ("Fox Sports", "FOX Sports"),
+            ("Béisbol", "Baseball"),
+            ("Documentary", "Documentales y Cultura"),
+            ("Entretenimiento Premium", "TV PREMIUM"),
+        ):
+            with self.subTest(grupo=canonico):
+                self.assertIn(canonico, grupos)
+                self.assertNotIn(alias, grupos)
+        # ``Sony Channels`` y ``Sony Channel`` acaban en el mismo grupo.
+        sony = [e for e in self._entradas() if e["grupo"] == "Sony Channels"]
+        self.assertEqual(len(sony), 2)
+
+    def test_grupo_visible_es_idempotente(self) -> None:
+        casos = {
+            "Documentales y Cultura": "Documentary",
+            "FOX Sports": "Fox Sports",
+            "TV PREMIUM": "Entretenimiento Premium",
+            "Baseball (Béisbol)": "Béisbol",
+            "DirecTV Sports": "DSports",
+            "Deportes": "Deportes",
+            "": "",
+        }
+        for original, esperado in casos.items():
+            with self.subTest(grupo=original):
+                visible = generar_epg.grupo_visible(original)
+                self.assertEqual(visible, esperado)
+                self.assertEqual(generar_epg.grupo_visible(visible), esperado)
+
+    def test_las_categorias_tematicas_van_en_su_posicion(self) -> None:
+        canales = self._canales(
+            _m3u_jerarquia(
+                [
+                    ("Deportes", "ESPN 2"),
+                    ("Deportes", "MLB Network"),
+                    ("Anime", "Canal 16"),
+                ]
+            )
+        )
+        # ESPN y Béisbol abren la lista (posiciones 1 y 4 de la jerarquia) y
+        # NBA (posicion 5) tambien, porque ``ESPN 2`` juega en la NBA; el grupo
+        # original ``Deportes`` no esta en ella y va tras los desconocidos en
+        # orden alfabetico (Anime).
+        self.assertEqual(
+            self._grupos(canales, categorias=None),
+            ["ESPN", "Béisbol", "NBA", "Anime", "Deportes"],
+        )
+
+    def test_la_copia_tematica_conserva_el_tvg_id_y_se_publica_una_vez(self) -> None:
+        entradas = self._entradas(categorias=None)
+        # El canal que ya venia en ``NBA`` no se duplica en su propio grupo.
+        nba = [
+            entrada
+            for entrada in entradas
+            if entrada["grupo"] == "NBA"
+            and entrada["tvg_id"] == generar_epg.generar_id("Canal 05")
+        ]
+        self.assertEqual(len(nba), 1)
+        # Todas las apariciones de un canal conservan su ``tvg-id`` (y su EPG).
+        por_nombre: dict[str, set] = {}
+        for entrada in entradas:
+            por_nombre.setdefault(entrada["nombre"], set()).add(entrada["tvg_id"])
+        for nombre, ids in por_nombre.items():
+            with self.subTest(canal=nombre):
+                self.assertEqual(len(ids), 1)
+
+    def test_el_limite_de_tres_senales_se_respeta_en_cada_grupo(self) -> None:
+        conteo: dict[tuple[str, str], int] = {}
+        for entrada in self._entradas(categorias=None):
+            clave = (entrada["grupo"], entrada["tvg_id"])
+            conteo[clave] = conteo.get(clave, 0) + 1
+        self.assertLessEqual(max(conteo.values()), 3)
+
+
+class MarcasTematicasTests(unittest.TestCase):
+    """Comprueba las categorias tematicas nuevas (marcas y documentales)."""
+
+    CASOS = {
+        "ESPN 4": "ESPN",
+        "ESPN 2 Latin America": "ESPN",
+        "DSports 2": "DSports",
+        "D Sports": "DSports",
+        "DirecTV Sports": "DSports",
+        "Fox Sports 2": "Fox Sports",
+        "FOX Sports México": "Fox Sports",
+        "Fox Sport": "Fox Sports",
+        "Movistar Deportes": "Movistar Deportes",
+        "Movistar Plus+ Deportes": "Movistar Deportes",
+        "Sony Channel": "Sony Channels",
+        "Sony Movies": "Sony Channels",
+        "Tigo Sports": "Tigo Sports / Fox",
+        "Sky Sports F1": "Sky Sports",
+        "Win Sports+": "Win Sports",
+        "Discovery Channel": "Documentary",
+        "Discovery Home & Health": "Documentary",
+        "History 2": "Documentary",
+        "Nat Geo Wild": "Documentary",
+        "Investigation Discovery": "Documentary",
+    }
+
+    @staticmethod
+    def _canal(nombre: str, grupo: str = "Deportes") -> dict[str, object]:
+        return {"nombre": nombre, "grupo": grupo, "id": generar_epg.generar_id(nombre)}
+
+    def test_las_marcas_entran_en_su_categoria(self) -> None:
+        for nombre, esperado in self.CASOS.items():
+            with self.subTest(canal=nombre):
+                self.assertIn(esperado, generar_epg.categorias_del_canal(self._canal(nombre)))
+
+    def test_los_canales_sin_relacion_no_entran(self) -> None:
+        for nombre in (
+            "Discovery Kids",
+            "Sky News",
+            "Cine Premium",
+            "Winx Club",
+            "Cine Latino",
+            "Fox Deportes",
+        ):
+            with self.subTest(canal=nombre):
+                categorias = generar_epg.categorias_del_canal(self._canal(nombre))
+                for ajena in ("Documentary", "Sky Sports", "Win Sports", "Fox Sports"):
+                    self.assertNotIn(ajena, categorias)
+
+    def test_el_json_del_repositorio_coincide_con_el_codigo(self) -> None:
+        ruta = Path(__file__).resolve().parent.parent / generar_epg.ARCHIVO_CATEGORIAS_POR_DEFECTO
+        self.assertTrue(ruta.is_file(), f"falta {ruta}")
+        self.assertEqual(
+            generar_epg.cargar_categorias_tematicas(str(ruta)),
+            generar_epg.cargar_categorias_tematicas(""),
+        )
+
+    def test_la_copia_tematica_conserva_tvg_id_y_senales(self) -> None:
+        mapeo = generar_epg.cargar_mapeo_canales("")
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                _m3u_jerarquia([("Deportes", "Sony Channel"), ("Deportes", "Sky Sports F1")])
+            ),
+            mapeo=mapeo,
+        )
+        entradas = generar_epg.parsear_m3u(
+            generar_epg.generar_m3u(canales, url_epg="https://ejemplo.invalid/epg.xml")
+        )
+        original = [e for e in entradas if e["grupo"] == "Deportes" and e["nombre"] == "Sony Channel"]
+        copia = [e for e in entradas if e["grupo"] == "Sony Channels" and e["nombre"] == "Sony Channel"]
+        self.assertEqual((len(original), len(copia)), (1, 1))
+        self.assertEqual(original[0]["tvg_id"], copia[0]["tvg_id"])
+        self.assertEqual(original[0]["url"], copia[0]["url"])
+        self.assertIn("Sky Sports", {e["grupo"] for e in entradas})
 
 
 class CategoriasDesdeJsonTests(unittest.TestCase):

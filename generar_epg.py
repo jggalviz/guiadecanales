@@ -52,14 +52,18 @@ Flujo de la lista propia
    publica la senal principal y **dos respaldos** (``Opc. 2`` y ``Opc. 3``) con
    el ``tvg-id`` y el ``tvg-name`` de su canal principal; el resto se descarta
    para no inflar la lista (:data:`MAXIMO_SENALES_POR_CANAL`).
-4. Se ordenan los canales por grupo y nombre y se limpian los atributos
-   (``tvg-id``, ``tvg-name``, ``tvg-logo`` solo si es http(s), ``group-title``),
-   conservando los ``#EXTVLCOPT``/``#KODIPROP`` de la lista original.
-5. Se anaden las **categorias tematicas** (``NBA`` y ``Béisbol`` por defecto,
-   ver :data:`CATEGORIAS_TEMATICAS_POR_DEFECTO` y ``categorias_tematicas.json``):
-   el canal sigue en su grupo original y ademas aparece en el grupo tematico con
-   el **mismo** ``tvg-id``, ``tvg-name`` y senales, de modo que su EPG regional
-   se mantiene en las dos entradas.
+4. Se ordenan los canales por la **jerarquia de grupos** (:data:`ORDEN_GRUPOS_M3U`)
+   y, dentro de cada grupo, por nombre, y se limpian los atributos (``tvg-id``,
+   ``tvg-name``, ``tvg-logo`` solo si es http(s), ``group-title``), conservando
+   los ``#EXTVLCOPT``/``#KODIPROP`` de la lista original. Los grupos que no estan
+   en la jerarquia se publican despues, en orden alfabetico.
+5. Se anaden las **categorias tematicas** (``NBA``, ``Béisbol``, ``ESPN``,
+   ``DSports``, ``Fox Sports``, ``Documentary``, ``Movistar Deportes``, ``Sony
+   Channels``, ``Tigo Sports / Fox``, ``Sky Sports`` y ``Win Sports`` por
+   defecto, ver :data:`CATEGORIAS_TEMATICAS_POR_DEFECTO` y
+   ``categorias_tematicas.json``): el canal sigue en su grupo original y ademas
+   aparece en el grupo tematico con el **mismo** ``tvg-id``, ``tvg-name`` y
+   senales, de modo que su EPG regional se mantiene en las dos entradas.
 6. La cabecera declara la guia publicada (``x-tvg-url``/``url-tvg``) y la salida
    se escribe en ``lista.m3u`` junto al ``epg.xml``.
 
@@ -72,9 +76,15 @@ Caracteristicas
   estrategicos (Espana, DSports, ESPN, FOX Sports, NBA, Beisbol, TNT Sports,
   Latam y US Latino) y filtro geografico estricto (solo EE. UU., Espana y
   Latinoamerica).
-* Categorias tematicas **NBA** y **Béisbol** que agrupan los canales de NBA,
-  MLB, pelota venezolana (LVBP) y los feeds de 1 Baseball, duplicando el canal
-  en el grupo tematico sin perder su grupo original.
+* Categorias tematicas que agrupan por competicion y por marca (**NBA**,
+  **Béisbol**, **ESPN**, **DSports**, **Fox Sports**, **Documentary**,
+  **Entretenimiento Premium**, **Movistar Deportes**, **Sony Channels**,
+  **Tigo Sports / Fox**, **Sky Sports**, **Win Sports**), duplicando el canal en
+  el grupo tematico sin perder su grupo original.
+* Orden **estricto** de los grupos de ``lista.m3u`` (:data:`ORDEN_GRUPOS_M3U`):
+  ESPN, DSports, Fox Sports, Béisbol, NBA, Documentary, Entretenimiento Premium,
+  Movistar Deportes, Sony Channels, Tigo Sports / Fox, Venezuela, España, Sky
+  Sports, Sports y Win Sports; el resto, en orden alfabetico.
 * Limite estricto de **3 senales por canal** (principal + ``Opc. 2`` y
   ``Opc. 3``); las de la lista del proveedor tienen prioridad.
 * Descarga con User-Agent de navegador, reintentos, soporte de gzip y deteccion
@@ -934,6 +944,125 @@ CATEGORIAS_TEMATICAS_POR_DEFECTO: dict[str, tuple[str, ...]] = {
         "Promar",
         "Promar TV",
     ),
+    # Marcas y generos que muchas listas reparten en el grupo generico
+    # ``Deportes``/``Sports`` (o en el grupo del pais): se reagrupan para que el
+    # reproductor tenga una entrada por marca sin perder las originales.
+    # Los comodines exigen palabras completas, asi que se listan las variantes
+    # en singular y en plural (``*win sports*`` no casa con ``Win Sport``).
+    "ESPN": ("*espn*",),
+    "DSports": ("*dsports*", "*d sports*", "DirecTV Sports", "Directv Sports"),
+    "Fox Sports": ("*fox sports*", "*foxsports*", "Fox Sport"),
+    "Documentary": (
+        "*documental*",
+        "*documentales*",
+        "*documentary*",
+        "*documentaries*",
+        "Discovery",
+        "*discovery channel*",
+        "*discovery science*",
+        "*discovery turbo*",
+        "*discovery world*",
+        "*discovery theater*",
+        "*discovery theatre*",
+        "*discovery home*",
+        "*discovery investigation*",
+        "*discovery civilization*",
+        "*discovery plus*",
+        "History",
+        "*history*",
+        "H2",
+        "*nat geo*",
+        "National Geographic",
+        "*national geographic*",
+        "Animal Planet",
+        "*animal planet*",
+        "Investigation Discovery",
+        "*investigation discovery*",
+        "Smithsonian",
+        "*smithsonian*",
+        "Curiosity",
+        "*curiosity*",
+        "Love Nature",
+        "*love nature*",
+        "Odisea",
+        "*odisea*",
+    ),
+    "Movistar Deportes": (
+        "Movistar Deportes",
+        "Movistar Plus+ Deportes",
+        "*movistar*deportes*",
+    ),
+    "Sony Channels": ("*sony*",),
+    "Tigo Sports / Fox": ("*tigo sports*", "Tigo Sport"),
+    "Sky Sports": ("*sky sports*", "Sky Sport"),
+    "Win Sports": ("*win sports*", "Win Sport"),
+}
+
+
+# -----------------------------------------------------------------------------
+# Orden jerarquico de los grupos de lista.m3u
+# -----------------------------------------------------------------------------
+
+#: Orden **estricto** en el que se publican los ``group-title`` de ``lista.m3u``.
+#:
+#: Se comparan sin acentos, sin simbolos y en minusculas, asi que
+#: ``FOX Sports``/``Fox Sports`` o ``Dsports``/``DSports`` son el mismo grupo. Los
+#: grupos que no estan en esta lista se publican **despues**, en orden alfabetico
+#: (ver :func:`orden_del_grupo`). Los canales sin grupo van al final de todo.
+ORDEN_GRUPOS_M3U: tuple[str, ...] = (
+    "ESPN",
+    "DSports",
+    "Fox Sports",
+    "Béisbol",
+    "NBA",
+    "Documentary",
+    "Entretenimiento Premium",
+    "Movistar Deportes",
+    "Sony Channels",
+    "Tigo Sports / Fox",
+    "Venezuela",
+    "España",
+    "Sky Sports",
+    "Sports",
+    "Win Sports",
+)
+
+#: Nombres alternativos de cada grupo jerarquico: ``{nombre visible: (alias...)}``.
+#:
+#: Sirve para **agrupar** categorias que las listas escriben de varias formas
+#: (``Documentales y Cultura`` -> ``Documentary``, ``FOX Sports`` -> ``Fox
+#: Sports``, ``TV PREMIUM`` -> ``Entretenimiento Premium``) y para que un canal
+#: que ya viene en ese grupo no se duplique cuando la tematica lo alcanza. El
+#: nombre visible que se publica es siempre el de :data:`ORDEN_GRUPOS_M3U`.
+ALIAS_GRUPOS_M3U: dict[str, tuple[str, ...]] = {
+    "ESPN": ("ESPN HD", "ESPN Deportes HD"),
+    "DSports": ("Dsports", "D Sports", "DirecTV Sports", "Directv Sports"),
+    "Fox Sports": ("FOX Sports", "FoxSports", "Fox Sport", "FOX Sports HD"),
+    "Béisbol": ("Beisbol", "Baseball", "Baseball (Béisbol)", "Béisbol HD"),
+    "NBA": ("NBA TV", "NBA League Pass", "Nba"),
+    "Documentary": (
+        "Documentaries",
+        "Documental",
+        "Documentales",
+        "Documentales y Cultura",
+        "Documentales / Cultura",
+        "Documentary & Culture",
+        "Culturales",
+    ),
+    "Entretenimiento Premium": (
+        "Entertainment Premium",
+        "Premium Entertainment",
+        "TV PREMIUM",
+        "TV Premium",
+    ),
+    "Movistar Deportes": ("Movistar Plus+ Deportes", "Movistar Deportes HD"),
+    "Sony Channels": ("Sony Channel", "Sony", "Sony Entertainment"),
+    "Tigo Sports / Fox": ("Tigo Sports", "Tigo Sports Fox", "Tigo Sports / Fox HD"),
+    "Venezuela": ("Venezuela HD", "VE"),
+    "España": ("Espana", "Spain", "ES"),
+    "Sky Sports": ("Sky Sport", "Sky Sports HD"),
+    "Sports": ("Sport", "Sports HD"),
+    "Win Sports": ("Win Sport", "Win Sports HD"),
 }
 
 
@@ -3525,6 +3654,71 @@ def _logo_publicable(logo: object) -> str:
     return texto if texto.lower().startswith(("http://", "https://")) else ""
 
 
+def _clave_grupo(nombre: object) -> str:
+    """Clave normalizada de un ``group-title``.
+
+    Reutiliza :func:`_clave_tematica` (minusculas, sin acentos ni simbolos,
+    ``+`` -> ``plus``), de modo que ``FOX Sports``, ``fox sports`` y
+    ``Fox-Sports`` son la misma clave y ``DSports +`` no se confunde con
+    ``DSports``.
+    """
+    return _clave_tematica(str(nombre or ""))
+
+
+@lru_cache(maxsize=None)
+def _catalogo_grupos() -> dict[str, str]:
+    """``{clave normalizada: nombre visible}`` con los grupos jerarquicos.
+
+    Incluye el nombre canonico de :data:`ORDEN_GRUPOS_M3U` y todos sus alias de
+    :data:`ALIAS_GRUPOS_M3U`. Se cachea porque se consulta para cada bloque de la
+    lista (varios miles de veces por ejecucion).
+    """
+    catalogo: dict[str, str] = {}
+    for canonico, alternativas in ALIAS_GRUPOS_M3U.items():
+        for nombre in (canonico, *alternativas):
+            clave = _clave_grupo(nombre)
+            if clave:
+                catalogo.setdefault(clave, canonico)
+    return catalogo
+
+
+def grupo_visible(nombre: object) -> str:
+    """Nombre con el que se publica un ``group-title`` en ``lista.m3u``.
+
+    Los grupos jerarquicos y sus alias se unifican en el nombre canonico
+    (``Documentales y Cultura`` -> ``Documentary``, ``FOX Sports`` -> ``Fox
+    Sports``, ``TV PREMIUM`` -> ``Entretenimiento Premium``); el resto se publica
+    tal cual, solo saneado. Un grupo vacio se queda vacio (el canal se publica
+    sin ``group-title``).
+    """
+    limpio = _limpiar_atributo_m3u(nombre)
+    if not limpio:
+        return ""
+    return _catalogo_grupos().get(_clave_grupo(limpio), limpio)
+
+
+def orden_del_grupo(nombre: object) -> tuple[int, str]:
+    """Clave de orden de un ``group-title`` segun :data:`ORDEN_GRUPOS_M3U`.
+
+    Devuelve ``(posicion, clave)``: los grupos de la jerarquia ocupan las
+    posiciones ``0..len(ORDEN_GRUPOS_M3U)-1`` en el orden pedido y el resto
+    comparte la ultima posicion, asi que se publican despues **en orden
+    alfabetico**. Los canales sin grupo quedan al final de todo.
+
+    Un grupo sin letras (``"-"``, ``"+"``) comparte la posicion de los grupos
+    desconocidos con clave vacia; un grupo vacio es el unico que ocupa la
+    posicion siguiente, de modo que nada se publica despues de los canales sin
+    ``group-title``.
+    """
+    if not _limpiar_atributo_m3u(nombre):
+        return (len(ORDEN_GRUPOS_M3U) + 1, "")
+    clave = _clave_grupo(grupo_visible(nombre))
+    for posicion, canonico in enumerate(ORDEN_GRUPOS_M3U):
+        if _clave_grupo(canonico) == clave:
+            return (posicion, clave)
+    return (len(ORDEN_GRUPOS_M3U), clave)
+
+
 def _senales_del_canal(canal: Mapping[str, object]) -> list[dict[str, object]]:
     """Señales (URL + opciones) que hay que publicar de un canal."""
     senales = canal.get("senales") or []
@@ -3537,11 +3731,16 @@ def _senales_del_canal(canal: Mapping[str, object]) -> list[dict[str, object]]:
 def ordenar_canales_m3u(
     canales: "Sequence[Mapping[str, object]]",
 ) -> list[Mapping[str, object]]:
-    """Ordena los canales por grupo y nombre (los sin grupo, al final)."""
+    """Ordena los canales por la jerarquia de grupos y luego por nombre.
+
+    Se usa el mismo criterio que en la lista publicada
+    (:data:`ORDEN_GRUPOS_M3U` y, despues, orden alfabetico); los canales sin
+    grupo quedan al final.
+    """
     return sorted(
         canales,
         key=lambda canal: (
-            _limpiar_atributo_m3u(canal.get("grupo", "")).casefold() or "\uffff",
+            orden_del_grupo(canal.get("grupo", "")),
             _limpiar_atributo_m3u(canal.get("nombre", "")).casefold(),
             str(canal.get("id", "")).casefold(),
         ),
@@ -3561,6 +3760,12 @@ def _bloques_m3u(
     ``Béisbol``. Las copias llevan el mismo ``tvg-id``, el mismo ``tvg-name`` y
     las mismas senales que el original, asi que la programacion es identica en
     todas las apariciones y el limite de senales se respeta dentro de cada grupo.
+
+    El grupo se publica con su nombre canonico (:func:`grupo_visible`): asi
+    ``Documentales y Cultura`` se agrupa con ``Documentary`` y un canal que ya
+    venia en el grupo tematico no se duplica. Con ``ordenar`` los bloques salen
+    en el orden estricto de :data:`ORDEN_GRUPOS_M3U` y, los grupos que no estan
+    en la jerarquia, al final en orden alfabetico.
     """
     bloques: list[dict[str, object]] = []
     for canal in canales:
@@ -3569,11 +3774,14 @@ def _bloques_m3u(
             continue
         canal_id = _limpiar_atributo_m3u(canal.get("id", ""))
         nombre = _limpiar_atributo_m3u(canal.get("nombre", "")) or canal_id
-        grupo = _limpiar_atributo_m3u(canal.get("grupo", ""))
+        grupo = grupo_visible(canal.get("grupo", ""))
         grupos = [grupo]
+        claves = [_clave_grupo(grupo)]
         for tematica in categorias_del_canal(canal, categorias):
-            if not any(tematica.casefold() == visto.casefold() for visto in grupos):
-                grupos.append(tematica)
+            visible = grupo_visible(tematica)
+            if visible and _clave_grupo(visible) not in claves:
+                grupos.append(visible)
+                claves.append(_clave_grupo(visible))
         for indice, nombre_grupo in enumerate(grupos):
             bloques.append(
                 {
@@ -3590,7 +3798,7 @@ def _bloques_m3u(
     if ordenar:
         bloques.sort(
             key=lambda bloque: (
-                str(bloque["grupo"]).casefold() or "\uffff",
+                orden_del_grupo(bloque["grupo"]),
                 str(bloque["nombre"]).casefold(),
                 str(bloque["canal_id"]).casefold(),
             )

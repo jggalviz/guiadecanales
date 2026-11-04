@@ -42,6 +42,75 @@
       "Canal I",
       "Promar",
       "Promar TV"
+    ],
+    "ESPN": [
+      "*espn*"
+    ],
+    "DSports": [
+      "*dsports*",
+      "*d sports*",
+      "DirecTV Sports",
+      "Directv Sports"
+    ],
+    "Fox Sports": [
+      "*fox sports*",
+      "*foxsports*",
+      "Fox Sport"
+    ],
+    "Documentary": [
+      "*documental*",
+      "*documentales*",
+      "*documentary*",
+      "*documentaries*",
+      "Discovery",
+      "*discovery channel*",
+      "*discovery science*",
+      "*discovery turbo*",
+      "*discovery world*",
+      "*discovery theater*",
+      "*discovery theatre*",
+      "*discovery home*",
+      "*discovery investigation*",
+      "*discovery civilization*",
+      "*discovery plus*",
+      "History",
+      "*history*",
+      "H2",
+      "*nat geo*",
+      "National Geographic",
+      "*national geographic*",
+      "Animal Planet",
+      "*animal planet*",
+      "Investigation Discovery",
+      "*investigation discovery*",
+      "Smithsonian",
+      "*smithsonian*",
+      "Curiosity",
+      "*curiosity*",
+      "Love Nature",
+      "*love nature*",
+      "Odisea",
+      "*odisea*"
+    ],
+    "Movistar Deportes": [
+      "Movistar Deportes",
+      "Movistar Plus+ Deportes",
+      "*movistar*deportes*"
+    ],
+    "Sony Channels": [
+      "*sony*"
+    ],
+    "Tigo Sports / Fox": [
+      "*tigo sports*",
+      "Tigo Sport"
+    ],
+    "Sky Sports": [
+      "*sky sports*",
+      "Sky Sport"
+    ],
+    "Win Sports": [
+      "*win sports*",
+      "Win Sport"
     ]
   }
 }
