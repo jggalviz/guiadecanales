@@ -280,23 +280,36 @@ porque aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus
 canales `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque
 `CANAL+` se trata como **marca**, no como la palabra «canal» seguida de «live».
 
-Cifras medidas del último run, **con la ingesta multi-fuente activada**:
+Cifras medidas del último run, **con la ingesta multi-fuente y las categorías
+temáticas activadas**:
 
 | Archivo | Resultado |
 | --- | --- |
-| `epg.xml` | 2.538 canales, **510 con EPG real**, 27.497 `<programme>`, 12,2 MB |
-| `lista.m3u` | **3.011 entradas**: 2.538 canales + 473 señales de respaldo, **máximo 3 por canal**, 106 grupos, **0** `tvg-id` fuera de la guía |
+| `epg.xml` | 2.550 canales, **515 con EPG real**, 27.648 `<programme>`, 12,3 MB |
+| `lista.m3u` | **3.097 entradas**: 2.550 canales + 476 señales de respaldo + 71 entradas de las categorías temáticas (`NBA` 65, `Béisbol` 6), **máximo 3 por canal y grupo**, 110 grupos, **0** `tvg-id` fuera de la guía |
 
 Antes de activar las listas de apoyo eran 1.432 canales (352 con EPG real) y
 1.875 entradas: la ingesta añade unos 1.100 canales de España, Latam y US Latino
-y las guías por país dan EPG real a 158 canales más.
+y las guías por país dan EPG real a 163 canales más. La lista de deportes de
+**Tecnotv** (`tecnotv-deportes`) aporta sobre todo feeds de ESPN, `FOX Sports
+México`, `TNT Sports` y **`NBA TV`**, que es el canal que estrena la categoría
+`NBA` cuando el proveedor no lo publica.
 
 Cobertura de los bloques nuevos (programas publicados): España — `La.1.es` 35,
 `La.2.es` 60, `Antena.3.es` 42, `Telecinco.es` 45, `TV3.es` 44, `Canal.Sur.es`
 26, `La.1.Canarias.es` 35, `La.1.Catalunya.es` 33; US Latino — `Univision.us`
-50, `Telemundo.us` 31; ESPN 18 de 26 canales y FOX Sports 5 de 6
-(`FOX.SPORTS.PREMIUM.mx` 47); DSports 3 de 4 (`DSports` 37, `DSports 2` 33,
+50, `Telemundo.us` 31; ESPN 20 de 30 canales y FOX Sports/Deportes 10 de 20
+(`FoxDeportes.us` 53); DSports 3 de 4 (`DSports` 37, `DSports 2` 33,
 `DSports +` 41).
+
+Categorías temáticas publicadas: **`NBA`** agrupa 29 canales (65 entradas), de
+los que **17 tienen EPG real** (`NBA TV`, `ESPN`, `ESPN 2`…`ESPN 7`, `ESPN
+Colombia`, `ESPN Deportes`, `ESPN Perú`, `ESPN Premium`, `espn extra`, `TNT`,
+`DSports`, `DSports 2` y `DSports +`); los feeds `ESPN * Latin America`,
+`Movistar Deportes`, `TNT Sports` y `TNT Sports Premium` siguen sin parrilla
+publicada. **`Béisbol`** agrupa 6 canales (`MLB`, `MLB Strike Zone`, `FOX
+Deportes`, `Meridiano TV`, `Canal I` y `Promar`), con EPG real en `MLB` y `FOX
+Deportes` (53 programas); la pelota venezolana todavía no tiene guía pública.
 
 Con el mapeo de DSports, la lista publica sus señales con la parrilla real (y en
 la hora correcta): `[SPOARHD].DSports.Argentina.HD.uy` (`DSports` + `Opc. 2` y
@@ -444,7 +457,11 @@ Qué hace exactamente:
 4. **Conserva las opciones de reproducción** de cada entrada
    (`#EXTVLCOPT:http-user-agent=...`, `#KODIPROP:...`, `#EXTGRP:...`), necesarias
    para los canales que exigen un user-agent o un referer concreto.
-5. **Declara la guía** en la cabecera (`x-tvg-url` y `url-tvg`), así que el
+5. **Añade las categorías temáticas** (`NBA`, `Béisbol`): el canal se publica
+   otra vez dentro del grupo temático con el **mismo `tvg-id`**, `tvg-name` y
+   señales, así que la EPG es idéntica en las dos entradas (ver
+   [Categorías temáticas](#categorías-temáticas-nba-y-béisbol)).
+6. **Declara la guía** en la cabecera (`x-tvg-url` y `url-tvg`), así que el
    reproductor descarga la EPG automáticamente. La URL sale de `--epg-publica` o
    de `EPG_PUBLICA_URL` (por defecto, el `raw` de tu repositorio).
 
