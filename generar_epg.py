@@ -36,9 +36,12 @@ Flujo de la lista propia
 ------------------------
 1. Se descarga la lista del proveedor (``--url``) y, opcionalmente, se
    **fusionan listas M3U de apoyo** (``--m3u-extra`` / ``M3U_EXTRA_URL``): los
-   feeds publicos por pais y categoria de iptv-org y cualquier proveedor
-   secundario. De las listas de apoyo solo se aceptan los canales de los
-   bloques estrategicos (DSports, ESPN, FOX Sports, Espana, Latam y US Latino).
+   feeds publicos por pais y categoria de iptv-org, la lista de deportes de
+   Tecnotv (``tecnotv-deportes``) y cualquier proveedor secundario. De las
+   listas de apoyo solo se aceptan los canales de los bloques estrategicos
+   (DSports, ESPN, FOX Sports, NBA, Beisbol, TNT Sports, Espana, Latam y US
+   Latino) y se descartan los de paises fuera de **EE. UU., Espana y
+   Latinoamerica** (:func:`pais_permitido_m3u`).
 2. Un **mapeo explicito** (``mapeo_canales.json`` + :data:`MAPEO_CANALES_POR_DEFECTO`)
    fija el ``tvg-id`` real de las senales dificiles: ``ESPN 2 HD``,
    ``ESPN 2 (Opc.2)`` y ``ESPN2 HD - (Opc.3)`` acaban todas en ``ESPN2.us``, y
@@ -52,7 +55,12 @@ Flujo de la lista propia
 4. Se ordenan los canales por grupo y nombre y se limpian los atributos
    (``tvg-id``, ``tvg-name``, ``tvg-logo`` solo si es http(s), ``group-title``),
    conservando los ``#EXTVLCOPT``/``#KODIPROP`` de la lista original.
-5. La cabecera declara la guia publicada (``x-tvg-url``/``url-tvg``) y la salida
+5. Se anaden las **categorias tematicas** (``NBA`` y ``Béisbol`` por defecto,
+   ver :data:`CATEGORIAS_TEMATICAS_POR_DEFECTO` y ``categorias_tematicas.json``):
+   el canal sigue en su grupo original y ademas aparece en el grupo tematico con
+   el **mismo** ``tvg-id``, ``tvg-name`` y senales, de modo que su EPG regional
+   se mantiene en las dos entradas.
+6. La cabecera declara la guia publicada (``x-tvg-url``/``url-tvg``) y la salida
    se escribe en ``lista.m3u`` junto al ``epg.xml``.
 
 Caracteristicas
@@ -60,8 +68,13 @@ Caracteristicas
 * Solo librerias estandar de Python (3.9+): urllib.request, re, gzip, io, json,
   xml.etree.ElementTree, datetime, argparse, unicodedata, html.
 * Ingesta **multi-fuente**: fusion de la lista del proveedor con listas M3U
-  publicas (atajos ``iptv-org-*``) y filtro por bloques estrategicos (Espana,
-  DSports, ESPN, FOX Sports, Latam y US Latino).
+  publicas (atajos ``iptv-org-*`` y ``tecnotv-deportes``), filtro por bloques
+  estrategicos (Espana, DSports, ESPN, FOX Sports, NBA, Beisbol, TNT Sports,
+  Latam y US Latino) y filtro geografico estricto (solo EE. UU., Espana y
+  Latinoamerica).
+* Categorias tematicas **NBA** y **Béisbol** que agrupan los canales de NBA,
+  MLB, pelota venezolana (LVBP) y los feeds de 1 Baseball, duplicando el canal
+  en el grupo tematico sin perder su grupo original.
 * Limite estricto de **3 senales por canal** (principal + ``Opc. 2`` y
   ``Opc. 3``); las de la lista del proveedor tienen prioridad.
 * Descarga con User-Agent de navegador, reintentos, soporte de gzip y deteccion
@@ -86,8 +99,11 @@ Uso rapido
     python generar_epg.py                 # usa la constante URL_M3U o la variable M3U_URL
     python generar_epg.py -u "$M3U_URL" --epg-pais MX,ES,AR   # guias reales por pais
     python generar_epg.py -u "$M3U_URL" --m3u-extra iptv-org-es,iptv-org-deportes
+    python generar_epg.py -u "$M3U_URL" --m3u-extra tecnotv-deportes --sin-m3u-extra
     python generar_epg.py -u "$M3U_URL" --sin-m3u-extra --maximo-senales 2
     python generar_epg.py -u "$M3U_URL" --mapeo mapeo_canales.json
+    python generar_epg.py -u "$M3U_URL" --categorias categorias_tematicas.json
+    python generar_epg.py -u "$M3U_URL" --sin-tematicas      # sin grupos NBA/Béisbol
     python generar_epg.py -u "$M3U_URL" --epg https://ejemplo.com/guia.xml.gz
     python generar_epg.py -h              # ayuda completa
 
@@ -95,11 +111,13 @@ Variables de entorno
 --------------------
     M3U_URL            URL de la lista M3U (tiene prioridad sobre la constante).
     M3U_EXTRA_URL      Listas M3U de apoyo separadas por comas (atajos de
-                       iptv-org o URLs). Vacia usa las de por defecto;
-                       "ninguna" las desactiva.
+                       iptv-org, tecnotv-deportes o URLs). Vacia usa las de por
+                       defecto; "ninguna" las desactiva.
     M3U_MAXIMO_SENALES Senales publicadas por canal (3: principal + 2 respaldos).
     M3U_SALIDA         Ruta de la lista M3U propia (por defecto: lista.m3u).
     M3U_MAPEO          JSON con el mapeo explicito (por defecto: mapeo_canales.json).
+    M3U_CATEGORIAS     JSON con las categorias tematicas (por defecto:
+                       categorias_tematicas.json).
     EPG_SALIDA         Ruta del archivo de salida (por defecto: epg.xml).
     EPG_REPO_URL       URL del repositorio que se publica en <tv generator-info-url>.
     EPG_PUBLICA_URL    URL publica del epg.xml que se declara en la cabecera del M3U.
@@ -130,6 +148,7 @@ import urllib.parse
 import urllib.request
 from collections.abc import Callable, Mapping
 from datetime import date, datetime, timedelta, timezone
+from functools import lru_cache
 from xml.etree import ElementTree as ET
 
 # =============================================================================
@@ -816,6 +835,10 @@ FUENTES_M3U_EXTRA_CONOCIDAS = {
     "iptv-org-deportes": "https://iptv-org.github.io/iptv/categories/sports.m3u",
     "iptv-org-latam": "https://iptv-org.github.io/iptv/regions/latam.m3u",
     "iptv-org-espanol": "https://iptv-org.github.io/iptv/languages/spa.m3u",
+    # Lista de deportes de Tecnotv: feeds de ESPN (Mexico, Sur, Colombia), FOX
+    # Sports Mexico, DSports, TNT Sports, NBA TV, Telemundo... Es la fuente que
+    # alimenta la categoria tematica NBA cuando el proveedor no la publica.
+    "tecnotv-deportes": "https://tecnotv.club/kwf5/deportes.m3u",
 }
 
 #: Listas M3U extra que se fusionan con la lista principal del proveedor. Se
@@ -825,15 +848,94 @@ FUENTES_M3U_EXTRA_CONOCIDAS = {
 #:
 #: Por defecto se suman las listas publicas de iptv-org de los mercados que
 #: interesan (Espana, Mexico, Argentina, Colombia, Chile, Peru, la categoria de
-#: deportes y los canales de EE. UU. en espanol). El volumen se mantiene a raya
-#: porque de las listas extra solo se aceptan los canales de los bloques
-#: estrategicos (:func:`clasificar_canal_estrategico`) y porque cada canal
-#: publica como maximo :data:`MAXIMO_SENALES_POR_CANAL` senales.
+#: deportes y los canales de EE. UU. en espanol) y la lista de deportes de
+#: Tecnotv (``tecnotv-deportes``). El volumen se mantiene a raya porque de las
+#: listas extra solo se aceptan los canales de los bloques estrategicos
+#: (:func:`clasificar_canal_estrategico`), porque se descartan los canales de
+#: paises fuera de EE. UU./Espana/Latinoamerica
+#: (:func:`pais_permitido_m3u`) y porque cada canal publica como maximo
+#: :data:`MAXIMO_SENALES_POR_CANAL` senales.
 URLS_M3U_EXTRA_POR_DEFECTO = _lista_entorno(
     "M3U_EXTRA_URL",
     "iptv-org-es,iptv-org-mx,iptv-org-ar,iptv-org-co,"
-    "iptv-org-cl,iptv-org-pe,iptv-org-deportes,iptv-org-us",
+    "iptv-org-cl,iptv-org-pe,iptv-org-deportes,iptv-org-us,tecnotv-deportes",
 )
+
+
+# -----------------------------------------------------------------------------
+# Categorias tematicas (NBA y Beisbol)
+# -----------------------------------------------------------------------------
+
+#: Archivo JSON opcional con las categorias tematicas. Se busca en la raiz del
+#: repositorio, igual que ``mapeo_canales.json``, y se puede cambiar con
+#: ``--categorias`` o con la variable de entorno ``M3U_CATEGORIAS``.
+ARCHIVO_CATEGORIAS_POR_DEFECTO = "categorias_tematicas.json"
+
+#: Categorias tematicas por defecto: ``grupo visible -> patrones de canal``.
+#:
+#: Los patrones se comparan con la clave normalizada del canal (nombre, nombre
+#: original, ``tvg-name``, ``tvg-id`` y grupo, sin acentos ni simbolos) y admiten
+#: ``*`` como comodin (``*nba*``, ``*mlb*``, ``*espn*latin*``). Un patron sin
+#: comodines exige coincidencia exacta (``ESPN 2`` no arrastra a
+#: ``ESPN 2 Latin America``). Los canales de paises fuera de EE. UU., Espana y
+#: Latinoamerica nunca entran en una categoria tematica.
+#:
+#: Los canales de estas categorias se **duplican** en la lista publicada: siguen
+#: apareciendo en su grupo original y ademas en el grupo tematico, con el mismo
+#: ``tvg-id`` y las mismas senales (la guia es la misma en las dos entradas).
+#: Se pueden anadir o cambiar categorias en ``categorias_tematicas.json`` sin
+#: tocar el codigo (ver :func:`cargar_categorias_tematicas`).
+CATEGORIAS_TEMATICAS_POR_DEFECTO: dict[str, tuple[str, ...]] = {
+    # Canales que emiten partidos de la NBA en vivo: la propia NBA (NBA TV,
+    # NBA League Pass) y las cadenas con derechos en EE. UU., Latinoamerica y
+    # Espana (ESPN/ABC/TNT, DSports, Movistar, DAZN...).
+    "NBA": (
+        "*nba*",
+        "ESPN",
+        "ESPN 2",
+        "ESPN 3",
+        "ESPN 4",
+        "ESPN 5",
+        "ESPN 6",
+        "ESPN 7",
+        "ESPN Deportes",
+        "ESPN Premium",
+        "ESPN Extra",
+        "*espn*latin*",
+        "ABC",
+        "TNT",
+        "TNT Sports",
+        "TNT Sports Premium",
+        "DSports",
+        "DSports 2",
+        "DSports +",
+        "#Vamos",
+        "Movistar Deportes",
+        "Movistar Plus+ Deportes",
+        "DAZN 1",
+        "DAZN 2",
+    ),
+    # Beisbol: MLB (MLB Network y los feeds de la plataforma 1 Baseball), la
+    # pelota nacional de Venezuela (LVBP: Meridiano, IVC, ByM Sports, Canal I,
+    # Promar) y las cadenas que emiten MLB en Latinoamerica y EE. UU.
+    "Béisbol": (
+        "*mlb*",
+        "*baseball*",
+        "*beisbol*",
+        "*pelota*",
+        "*lvbp*",
+        "MLB Network",
+        "FOX Deportes",
+        "Meridiano TV",
+        "Meridiano",
+        "IVC",
+        "ByM Sports",
+        "Canal I",
+        "Promar",
+        "Promar TV",
+    ),
+}
+
 
 
 # =============================================================================
@@ -1124,30 +1226,38 @@ def resolver_fuentes_m3u(valores: "Sequence[str]") -> list[str]:
 def fusionar_listas_m3u(
     fuentes: "Sequence[tuple[str, str]]",
     filtrar_extra: bool = True,
+    filtrar_pais: bool = True,
 ) -> list[dict[str, object]]:
     """Fusiona varias listas M3U en una sola lista de canales.
 
     ``fuentes`` es una secuencia de ``(etiqueta, texto)`` donde la **primera**
     entrada es la lista principal (la del proveedor) y el resto son listas de
-    apoyo (iptv-org, proveedores secundarios...).
+    apoyo (iptv-org, Tecnotv, proveedores secundarios...).
 
     Cada canal resultante conserva ``origen_m3u`` (la etiqueta de su lista) y
     ``prioridad`` (0 para la principal, 1..n para las de apoyo), de modo que
     :func:`consolidar_canales` puede dar preferencia a la senal del proveedor y
     recortar despues los respaldos sobrantes.
 
-    Con ``filtrar_extra=True`` de las listas de apoyo solo se aceptan los
+    Con ``filtrar_pais=True`` se descartan los canales de las listas de apoyo
+    cuyo pais se conoce y no es EE. UU., Espana o Latinoamerica
+    (:func:`pais_permitido_m3u`); la lista principal nunca se filtra.
+
+    Con ``filtrar_extra=True`` de las listas de apoyo solo se aceptan ademas los
     canales de los bloques estrategicos (:func:`es_canal_estrategico`): asi una
-    lista generica de deportes no mete en la parrilla canales de otros mercados.
-    La lista principal nunca se filtra.
+    lista generica de deportes no mete en la parrilla canales de mercados que no
+    cubrimos.
     """
     fusionados: list[dict[str, object]] = []
     for indice, (etiqueta, texto) in enumerate(fuentes or ()):
         for canal in parsear_m3u(texto or ""):
             canal["origen_m3u"] = etiqueta
             canal["prioridad"] = indice
-            if indice and filtrar_extra and not es_canal_estrategico(canal):
-                continue
+            if indice:
+                if filtrar_pais and not pais_permitido_m3u(canal):
+                    continue
+                if filtrar_extra and not es_canal_estrategico(canal):
+                    continue
             fusionados.append(canal)
     return fusionados
 
@@ -1598,6 +1708,193 @@ def _indice_mapeo(mapeo: "Mapping[str, Mapping[str, object]]") -> dict[str, "Map
             if clave:
                 indice.setdefault(clave, entrada)
     return indice
+
+
+# =============================================================================
+# 4.bis CATEGORIAS TEMATICAS (NBA y BEISBOL)
+# =============================================================================
+
+def _clave_tematica(texto: str) -> str:
+    """Clave normalizada de un canal o de un patron de categoria tematica.
+
+    Queda en palabras separadas por espacios, en minusculas y sin acentos
+    (``"ESPN 2 HD [Opc.2]"`` -> ``espn 2 hd opc 2``), y el ``+`` se convierte en
+    ``plus`` para que ``"DSports +"`` (``dsports plus``) no choque con
+    ``"DSports"`` (``dsports``). Al conservar los espacios, los comodines de las
+    categorias pueden exigir palabras completas y no confundir ``NBA`` con
+    ``Dragon Ball`` (``drago-nba-ll``).
+    """
+    return _texto_normalizado(_RE_MAS_A_PLUS.sub(" plus ", str(texto or "")))
+
+
+@lru_cache(maxsize=None)
+def _patron_tematica(patron: str) -> str:
+    """Normaliza un patron de categoria conservando los comodines ``*``.
+
+    Los trozos se normalizan por separado para que los acentos y los simbolos no
+    rompan el comodin: ``"*béisbol*"`` -> ``"*beisbol*"`` y ``"*espn*latin*"``
+    conserva sus dos comodines. Se cachea porque se aplica al mismo puñado de
+    patrones para todos los canales de la lista.
+    """
+    partes = []
+    for parte in str(patron or "").split("*"):
+        parte = parte.strip()
+        partes.append(_clave_tematica(parte) if parte else "")
+    return "*".join(partes).strip()
+
+
+@lru_cache(maxsize=None)
+def _expresion_tematica(patron: str) -> "re.Pattern[str]":
+    """Convierte un patron con comodines en una expresion regular por palabras.
+
+    Cada trozo literal se rodea de limites de palabra, de modo que ``*nba*``
+    encuentra ``NBA TV`` y ``NBA`` pero no ``Dragon Ball`` (que contiene
+    ``nba`` dentro de una palabra) ni ``WNBA``.
+    """
+    partes = [re.escape(parte) for parte in patron.split("*") if parte]
+    cuerpo = ".*".join(rf"\b{parte}\b" for parte in partes)
+    if patron.startswith("*"):
+        cuerpo = ".*" + cuerpo
+    if patron.endswith("*"):
+        cuerpo = cuerpo + ".*"
+    return re.compile(cuerpo)
+
+
+def claves_del_canal(canal: "Mapping[str, object]") -> tuple[str, ...]:
+    """Claves normalizadas con las que se compara un canal en las categorias.
+
+    Se usan el nombre limpio, el ``tvg-name``, el ``tvg-id``, el nombre original
+    del M3U y el grupo de origen: asi un canal entra en ``NBA`` tanto si se llama
+    ``NBA TV`` como si su ``tvg-id`` es ``NBATV.us`` o si ya venia en un grupo
+    llamado ``NBA``.
+    """
+    claves: list[str] = []
+    for valor in (
+        canal.get("nombre"),
+        canal.get("tvg_name"),
+        canal.get("id"),
+        canal.get("nombre_m3u"),
+        canal.get("grupo"),
+    ):
+        texto = str(valor or "").strip()
+        if texto:
+            claves.append(_clave_tematica(texto))
+    return tuple(dict.fromkeys(clave for clave in claves if clave))
+
+
+def categorias_del_canal(
+    canal: "Mapping[str, object]",
+    categorias: "Mapping[str, Sequence[str]] | None" = None,
+    solo_pais_permitido: bool = True,
+) -> tuple[str, ...]:
+    """Categorias tematicas a las que pertenece un canal del M3U.
+
+    ``categorias`` es ``{nombre del grupo: patrones}``; sin argumento se usan
+    las de :data:`CATEGORIAS_TEMATICAS_POR_DEFECTO`. Los patrones admiten ``*``
+    como comodin (``*nba*``); sin comodines la coincidencia es exacta
+    (``ESPN 2`` no arrastra a ``ESPN 2 Latin America``).
+
+    Con ``solo_pais_permitido=True`` (por defecto) los canales de paises fuera
+    de EE. UU./Espana/Latinoamerica no entran en ninguna categoria: un
+    ``ESPN 2 Netherlands`` no debe aparecer en la categoria NBA.
+    """
+    mapa = CATEGORIAS_TEMATICAS_POR_DEFECTO if categorias is None else categorias
+    if not mapa:
+        return ()
+    if solo_pais_permitido and not pais_permitido_m3u(canal):
+        return ()
+    claves = claves_del_canal(canal)
+    if not claves:
+        return ()
+
+    encontradas: list[str] = []
+    for grupo, patrones in mapa.items():
+        for patron in patrones or ():
+            normalizado = _patron_tematica(str(patron))
+            if not normalizado:
+                continue
+            if "*" in normalizado:
+                expresion = _expresion_tematica(normalizado)
+                if any(expresion.search(clave) for clave in claves):
+                    encontradas.append(str(grupo))
+                    break
+            elif normalizado in claves:
+                encontradas.append(str(grupo))
+                break
+    return tuple(dict.fromkeys(encontradas))
+
+
+def cargar_categorias_tematicas(
+    ruta: str | None = None,
+) -> dict[str, tuple[str, ...]]:
+    """Devuelve las categorias tematicas: las de por defecto + las del JSON.
+
+    ``ruta`` es el archivo JSON con categorias adicionales (por defecto
+    :data:`ARCHIVO_CATEGORIAS_POR_DEFECTO`, en la raiz del repositorio). Admite
+    una clave ``"categorias"`` o directamente ``{grupo: [patrones]}``::
+
+        {
+          "categorias": {
+            "NBA": ["*nba*", "ESPN 2", "DSports"],
+            "Béisbol": ["*mlb*", "*baseball*", "*pelota*"]
+          }
+        }
+
+    Las categorias del JSON sustituyen a las del mismo nombre definidas en el
+    codigo y las nuevas se suman. Si el archivo no existe se devuelven solo las
+    de por defecto; un JSON invalido lanza :class:`ValueError` para que el
+    llamador pueda avisar y continuar.
+    """
+    categorias: dict[str, tuple[str, ...]] = {
+        str(nombre): tuple(patrones)
+        for nombre, patrones in CATEGORIAS_TEMATICAS_POR_DEFECTO.items()
+    }
+
+    ruta = (ruta if ruta is not None else ARCHIVO_CATEGORIAS_POR_DEFECTO) or ""
+    if not ruta or not os.path.isfile(ruta):
+        return categorias
+
+    with open(ruta, "r", encoding="utf-8") as archivo:
+        contenido = archivo.read()
+    try:
+        datos_json = json.loads(contenido)
+    except json.JSONDecodeError as error:
+        raise ValueError(f"{ruta}: JSON no valido ({error})") from error
+    if not isinstance(datos_json, dict):
+        raise ValueError(f"{ruta}: se esperaba un objeto JSON con las categorias")
+
+    categorias_json = datos_json.get("categorias", datos_json)
+    if not isinstance(categorias_json, dict):
+        raise ValueError(f"{ruta}: la clave 'categorias' debe ser un objeto JSON")
+
+    for nombre, patrones in categorias_json.items():
+        if not isinstance(nombre, str) or nombre.startswith(("$", "_")):
+            # Claves de documentacion del JSON (no son categorias).
+            continue
+        if isinstance(patrones, str):
+            patrones = [patrones]
+        if not isinstance(patrones, (list, tuple)):
+            raise ValueError(
+                f"{ruta}: los patrones de la categoria {nombre!r} deben ser una lista"
+            )
+        limpios = tuple(str(patron).strip() for patron in patrones if str(patron).strip())
+        if limpios:
+            categorias[nombre.strip()] = limpios
+    return categorias
+
+
+def resumen_tematicas(
+    canales: "Sequence[Mapping[str, object]]",
+    categorias: "Mapping[str, Sequence[str]] | None" = None,
+) -> dict[str, int]:
+    """Numero de canales que se publican en cada categoria tematica."""
+    conteo: dict[str, int] = {}
+    for canal in canales:
+        if not (canal.get("senales") or canal.get("url")):
+            continue
+        for grupo in categorias_del_canal(canal, categorias):
+            conteo[grupo] = conteo.get(grupo, 0) + 1
+    return dict(sorted(conteo.items()))
 
 
 def buscar_en_mapeo(
@@ -2207,6 +2504,30 @@ _PAISES_LATAM = frozenset(
     }
 )
 
+#: Paises que se aceptan en las listas M3U de apoyo: EE. UU. (``us``), Espana
+#: (``es``) y todos los mercados de Latinoamerica de :data:`_PAISES_LATAM`. El
+#: resto de regiones (Canada, Reino Unido, resto de Europa, Asia...) se descarta
+#: por completo, que es lo que mantiene la parrilla en los mercados cubiertos.
+PAISES_M3U_PERMITIDOS = frozenset({"us", "es"}) | _PAISES_LATAM
+
+
+def pais_permitido_m3u(canal: "Mapping[str, object]") -> bool:
+    """Indica si el canal es de EE. UU., Espana o Latinoamerica.
+
+    El pais se deduce del sufijo del ``tvg-id`` (``ESPN2.uk`` -> ``uk``) o del
+    pais escrito al final del nombre (:func:`_pais_del_canal`). Si no se puede
+    determinar se acepta el canal (``True``): en ese caso decide el filtro por
+    bloques estrategicos de :func:`clasificar_canal_estrategico`, porque
+    descartarlo todo lo que no declara pais eliminaria la mayoria de los canales
+    del proveedor y de las listas de deportes.
+
+    Con un pais conocido la regla es estricta: ``Sky Sports F1`` (``uk``),
+    ``ESPN 2 Netherlands`` (``nl``) o un canal canadiense (``ca``) se descartan.
+    """
+    pais = _pais_del_canal(canal)  # type: ignore[arg-type]
+    return not pais or pais in PAISES_M3U_PERMITIDOS
+
+
 #: Marcas que identifican un bloque estrategico aunque el canal venga de una
 #: lista generica (categoria de deportes, idioma espanol...). Se comparan con
 #: el texto ya normalizado por :func:`_texto_normalizado`.
@@ -2214,6 +2535,13 @@ _MARCAS_BLOQUES = (
     ("dsports", re.compile(r"\bd\s?sports\b|\bdirectv\s*sports\b")),
     ("espn", re.compile(r"\bespn\b")),
     ("fox-sports", re.compile(r"\bfox\s*sports?\b|\bfox\s*deportes\b")),
+    # Categorias tematicas: los canales de la NBA y del beisbol se aceptan de
+    # cualquier lista de apoyo aunque no pertenezcan a una cadena "estrategica"
+    # (NBA TV, MLB Network, feeds de 1 Baseball, pelota venezolana...).
+    ("nba", re.compile(r"\bnba\b")),
+    ("beisbol", re.compile(r"\b(?:mlb|baseball|beisbol|pelota(?:\s*nacional)?|lvbp)\b")),
+    # TNT Sports emite NBA y futbol en Latinoamerica (Argentina, Chile, Brasil).
+    ("tnt-sports", re.compile(r"\btnt\s*sports?\b")),
 )
 
 #: Cadenas inequivocamente espanolas: si un canal de una lista de apoyo no trae
@@ -2238,10 +2566,13 @@ _RE_MARCAS_US_LATINO = re.compile(
 def clasificar_canal_estrategico(canal: "Mapping[str, object]") -> tuple[str, ...]:
     """Devuelve los bloques estrategicos a los que pertenece un canal del M3U.
 
-    Los bloques son ``dsports``, ``espn``, ``fox-sports``, ``espana``,
-    ``latam`` y ``us-latino``. Se usan para decidir que canales se aceptan de
-    las listas M3U de apoyo (:func:`fusionar_listas_m3u`): una lista generica de
-    deportes no debe meter en la parrilla canales de mercados que no cubrimos.
+    Los bloques son ``dsports``, ``espn``, ``fox-sports``, ``nba``,
+    ``beisbol``, ``tnt-sports``, ``espana``, ``latam`` y ``us-latino``. Se usan
+    para decidir que canales se aceptan de las listas M3U de apoyo
+    (:func:`fusionar_listas_m3u`): una lista generica de deportes no debe meter
+    en la parrilla canales de mercados que no cubrimos. El filtro de pais
+    (:func:`pais_permitido_m3u`) es independiente y se aplica siempre a las
+    listas de apoyo.
 
     La marca manda sobre el pais (``DSports`` lo es en cualquier mercado) y el
     pais se toma del ``tvg-id`` (``La1.es@HD`` -> ``es``) o del nombre.
@@ -2962,9 +3293,10 @@ def _crear_parser() -> argparse.ArgumentParser:
             "Lista M3U adicional que se fusiona con la principal (se puede repetir "
             "o separar varias por comas). Admite atajos de iptv-org (iptv-org-es, "
             "iptv-org-mx, iptv-org-ar, iptv-org-co, iptv-org-cl, iptv-org-pe, "
-            "iptv-org-us, iptv-org-deportes, iptv-org-latam, iptv-org-espanol) y "
-            "rutas locales. Por defecto: M3U_EXTRA_URL o las listas publicas de "
-            "Espana, Mexico, Argentina, Colombia, Chile, Peru, deportes y US Latino."
+            "iptv-org-us, iptv-org-deportes, iptv-org-latam, iptv-org-espanol), "
+            "el atajo tecnotv-deportes y rutas locales. Por defecto: M3U_EXTRA_URL "
+            "o las listas publicas de Espana, Mexico, Argentina, Colombia, Chile, "
+            "Peru, deportes, US Latino y Tecnotv deportes."
         ),
     )
     parser.add_argument(
@@ -2978,7 +3310,34 @@ def _crear_parser() -> argparse.ArgumentParser:
         help=(
             "Aceptar todos los canales de las listas M3U adicionales. Por defecto "
             "solo se aceptan los de los bloques estrategicos (DSports, ESPN, Fox "
-            "Sports, Espana, Latam y US Latino)."
+            "Sports, NBA, Beisbol, TNT Sports, Espana, Latam y US Latino)."
+        ),
+    )
+    parser.add_argument(
+        "--sin-filtro-geografico",
+        action="store_true",
+        help=(
+            "No descartar por pais en las listas M3U adicionales. Por defecto solo "
+            "se aceptan canales de EE. UU., Espana y Latinoamerica: los de Canada, "
+            "Reino Unido, resto de Europa, Asia... se descartan."
+        ),
+    )
+    parser.add_argument(
+        "--categorias",
+        default=os.environ.get("M3U_CATEGORIAS", "").strip()
+        or ARCHIVO_CATEGORIAS_POR_DEFECTO,
+        metavar="RUTA",
+        help=(
+            "JSON con las categorias tematicas (NBA, Beisbol...) que se anaden a "
+            f"las de por defecto (por defecto: {ARCHIVO_CATEGORIAS_POR_DEFECTO})."
+        ),
+    )
+    parser.add_argument(
+        "--sin-tematicas",
+        action="store_true",
+        help=(
+            "No anadir las categorias tematicas a la lista M3U: cada canal aparece "
+            "solo en su grupo original."
         ),
     )
     parser.add_argument(
@@ -3189,9 +3548,60 @@ def ordenar_canales_m3u(
     )
 
 
+def _bloques_m3u(
+    canales: "Sequence[Mapping[str, object]]",
+    categorias: "Mapping[str, Sequence[str]] | None" = None,
+    ordenar: bool = True,
+) -> list[dict[str, object]]:
+    """Construye los bloques que se publican en la lista (grupo + canal).
+
+    Cada canal genera un bloque en su grupo original y **uno mas por cada
+    categoria tematica** a la que pertenece (:func:`categorias_del_canal`), de
+    modo que un mismo canal aparece en ``Deportes`` y tambien en ``NBA`` o
+    ``Béisbol``. Las copias llevan el mismo ``tvg-id``, el mismo ``tvg-name`` y
+    las mismas senales que el original, asi que la programacion es identica en
+    todas las apariciones y el limite de senales se respeta dentro de cada grupo.
+    """
+    bloques: list[dict[str, object]] = []
+    for canal in canales:
+        senales = _senales_del_canal(canal)
+        if not senales:
+            continue
+        canal_id = _limpiar_atributo_m3u(canal.get("id", ""))
+        nombre = _limpiar_atributo_m3u(canal.get("nombre", "")) or canal_id
+        grupo = _limpiar_atributo_m3u(canal.get("grupo", ""))
+        grupos = [grupo]
+        for tematica in categorias_del_canal(canal, categorias):
+            if not any(tematica.casefold() == visto.casefold() for visto in grupos):
+                grupos.append(tematica)
+        for indice, nombre_grupo in enumerate(grupos):
+            bloques.append(
+                {
+                    "canal_id": canal_id,
+                    "nombre": nombre,
+                    "tvg_name": _limpiar_atributo_m3u(canal.get("tvg_name", "")) or nombre,
+                    "logo": _logo_publicable(canal.get("logo", "")),
+                    "grupo": nombre_grupo,
+                    "tematica": "" if not indice else nombre_grupo,
+                    "senales": senales,
+                }
+            )
+
+    if ordenar:
+        bloques.sort(
+            key=lambda bloque: (
+                str(bloque["grupo"]).casefold() or "\uffff",
+                str(bloque["nombre"]).casefold(),
+                str(bloque["canal_id"]).casefold(),
+            )
+        )
+    return bloques
+
+
 def _entradas_m3u(
     canales: "Sequence[Mapping[str, object]]",
     ordenar: bool = True,
+    categorias: "Mapping[str, Sequence[str]] | None" = None,
 ) -> tuple[list[str], int, int, list[str]]:
     """Construye las lineas de las entradas y sus estadisticas.
 
@@ -3199,36 +3609,41 @@ def _entradas_m3u(
     publica **una entrada por señal** (HD, espejo, ``Opc.2``, ``Backup``...)
     con el mismo ``tvg-id`` del canal principal, de modo que el reproductor
     encuentra la programacion real en todas las opciones.
+
+    Con ``categorias`` los canales de NBA y Beisbol se publican **ademas**
+    dentro de su grupo tematico, sin perder su grupo original. Sin argumento se
+    usan las categorias de :data:`CATEGORIAS_TEMATICAS_POR_DEFECTO`.
     """
     lineas: list[str] = []
-    publicados = 0
     entradas = 0
-    sin_url: list[str] = []
 
-    for canal in ordenar_canales_m3u(canales) if ordenar else canales:
-        canal_id = _limpiar_atributo_m3u(canal.get("id", ""))
-        nombre = _limpiar_atributo_m3u(canal.get("nombre", "")) or canal_id
-        tvg_name = _limpiar_atributo_m3u(canal.get("tvg_name", "")) or nombre
-        logo = _logo_publicable(canal.get("logo", ""))
-        grupo = _limpiar_atributo_m3u(canal.get("grupo", ""))
-        senales = _senales_del_canal(canal)
-        if not senales:
-            sin_url.append(canal_id or nombre)
-            continue
+    sin_url = [
+        _limpiar_atributo_m3u(canal.get("id", ""))
+        or _limpiar_atributo_m3u(canal.get("nombre", ""))
+        for canal in canales
+        if not _senales_del_canal(canal)
+    ]
 
-        publicados += 1
-        for indice, senal in enumerate(senales):
-            visible = nombre
-            if indice:
-                visible = f"{nombre} ({ETIQUETA_SENAL_SECUNDARIA.format(numero=indice + 1)})"
-            atributos = [
-                f'tvg-id="{canal_id}"',
-                f'tvg-name="{tvg_name}"',
-            ]
-            if logo:
-                atributos.append(f'tvg-logo="{logo}"')
-            if grupo:
-                atributos.append(f'group-title="{grupo}"')
+    bloques = _bloques_m3u(canales, categorias, ordenar)
+    publicados = len({str(bloque["canal_id"]) for bloque in bloques})
+
+    for bloque in bloques:
+        canal_id = bloque["canal_id"]
+        nombre = bloque["nombre"]
+        grupo = bloque["grupo"]
+        tvg_name = bloque["tvg_name"]
+        logo = bloque["logo"]
+        atributos = [f'tvg-id="{canal_id}"', f'tvg-name="{tvg_name}"']
+        if logo:
+            atributos.append(f'tvg-logo="{logo}"')
+        if grupo:
+            atributos.append(f'group-title="{grupo}"')
+        for indice, senal in enumerate(bloque["senales"]):
+            visible = (
+                nombre
+                if not indice
+                else f"{nombre} ({ETIQUETA_SENAL_SECUNDARIA.format(numero=indice + 1)})"
+            )
             lineas.append(f"#EXTINF:-1 {' '.join(atributos)},{visible}")
             for opcion in senal.get("opciones") or ():
                 opcion = str(opcion).strip()
@@ -3244,6 +3659,7 @@ def generar_m3u(
     canales: "Sequence[Mapping[str, object]]",
     url_epg: str = "",
     ordenar: bool = True,
+    categorias: "Mapping[str, Sequence[str]] | None" = None,
 ) -> str:
     """Devuelve el texto de la lista M3U propia, sincronizada con el ``epg.xml``.
 
@@ -3252,8 +3668,14 @@ def generar_m3u(
     reproductor para pedir la programacion. En la cabecera se declara la URL
     publica de la guia (``x-tvg-url`` y ``url-tvg``) para que OTT Navigator,
     VLC, TiviMate... la descarguen automaticamente.
+
+    ``categorias`` anade los grupos tematicos (``NBA``, ``Béisbol``...): los
+    canales que encajan se publican tambien dentro de ellos conservando su
+    ``tvg-id``. Sin argumento se usan las de
+    :data:`CATEGORIAS_TEMATICAS_POR_DEFECTO`; pasa ``{}`` para publicar solo los
+    grupos originales.
     """
-    lineas, _publicados, _entradas, _sin_url = _entradas_m3u(canales, ordenar)
+    lineas, _publicados, _entradas, _sin_url = _entradas_m3u(canales, ordenar, categorias)
     url_epg = (url_epg or "").strip()
     if url_epg:
         cabecera = f'#EXTM3U x-tvg-url="{url_epg}" url-tvg="{url_epg}"'
@@ -3269,9 +3691,10 @@ def escribir_m3u(
     destino: str,
     url_epg: str = "",
     ordenar: bool = True,
+    categorias: "Mapping[str, Sequence[str]] | None" = None,
 ) -> tuple[int, int, list[str]]:
     """Escribe la lista M3U propia y devuelve ``(canales, entradas, sin_url)``."""
-    lineas, publicados, entradas, sin_url = _entradas_m3u(canales, ordenar)
+    lineas, publicados, entradas, sin_url = _entradas_m3u(canales, ordenar, categorias)
     url_epg = (url_epg or "").strip()
     if url_epg:
         cabecera = f'#EXTM3U x-tvg-url="{url_epg}" url-tvg="{url_epg}"'
@@ -3388,7 +3811,8 @@ def main(argv: list[str] | None = None) -> int:
         if fuentes_m3u:
             aviso(
                 f"      Listas M3U de apoyo: {len(fuentes_m3u)} "
-                "(Espana, Latam y US Latino; variable M3U_EXTRA_URL)"
+                "(solo canales de EE. UU., Espana y Latinoamerica; "
+                "variable M3U_EXTRA_URL)"
             )
 
     # --- 2. Analisis del M3U (principal + listas de apoyo) ------------------
@@ -3405,6 +3829,7 @@ def main(argv: list[str] | None = None) -> int:
     canales_brutos = fusionar_listas_m3u(
         [(origen, texto_m3u), *de_apoyo],
         filtrar_extra=not argumentos.m3u_extra_todo,
+        filtrar_pais=not argumentos.sin_filtro_geografico,
     )
     entradas_principal = len(parsear_m3u(texto_m3u))
     if de_apoyo:
@@ -3549,9 +3974,19 @@ def main(argv: list[str] | None = None) -> int:
     lista_m3u = ""
     m3u_canales = m3u_entradas = 0
     m3u_sin_url: list[str] = []
+    categorias: dict[str, tuple[str, ...]] = {}
     if argumentos.sin_m3u:
         aviso("[7/7] Lista M3U propia desactivada (--sin-m3u).")
     else:
+        if not argumentos.sin_tematicas:
+            try:
+                categorias = cargar_categorias_tematicas(argumentos.categorias)
+            except (OSError, ValueError) as error:
+                aviso(
+                    "      Aviso: no se pudieron cargar las categorias tematicas "
+                    f"({error}); se usan las de por defecto."
+                )
+                categorias = dict(CATEGORIAS_TEMATICAS_POR_DEFECTO)
         lista_m3u = os.path.abspath(argumentos.m3u_salida)
         aviso(f"[7/7] Escribiendo {lista_m3u} (tvg-id sincronizado con la guia) ...")
         try:
@@ -3559,6 +3994,7 @@ def main(argv: list[str] | None = None) -> int:
                 canales,
                 lista_m3u,
                 url_epg=argumentos.epg_publica,
+                categorias=categorias,
             )
         except OSError as error:
             raise SystemExit(f"No se pudo escribir la lista M3U: {error}") from error
@@ -3566,6 +4002,9 @@ def main(argv: list[str] | None = None) -> int:
             f"      Entradas publicadas: {m3u_entradas} "
             f"({m3u_canales} canales, senales de respaldo incluidas)"
         )
+        tematicas = resumen_tematicas(canales, categorias)
+        for grupo, total in tematicas.items():
+            aviso(f"      Categoria tematica '{grupo}': {total} canales (con sus senales)")
         if m3u_sin_url:
             aviso(f"      Canales omitidos por no tener URL: {len(m3u_sin_url)}")
 
@@ -3596,6 +4035,11 @@ def main(argv: list[str] | None = None) -> int:
             f" Lista M3U generada  : {lista_m3u} ({m3u_entradas} entradas, "
             f"{m3u_canales} canales)"
         )
+        if categorias:
+            resumen = ", ".join(
+                f"{grupo}={total}" for grupo, total in resumen_tematicas(canales, categorias).items()
+            )
+            aviso(f" Categorias tematicas: {resumen or 'ninguna'}")
         if argumentos.epg_publica:
             aviso(f" Guia declarada      : {argumentos.epg_publica}")
     aviso("")

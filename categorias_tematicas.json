@@ -1,0 +1,47 @@
+{
+  "_nota": "Categorias tematicas de la lista M3U. Cada grupo se publica ademas del grupo original del canal (el mismo tvg-id y las mismas senales), asi que la EPG regional no cambia. Los patrones se comparan con el nombre limpio, el tvg-name, el tvg-id y el grupo del canal, sin acentos ni simbolos; '*' es comodin ('*nba*') y sin comodin la coincidencia es exacta ('ESPN 2' no arrastra a 'ESPN 2 Latin America'). Los canales de paises fuera de EE. UU., Espana y Latinoamerica nunca entran.",
+  "categorias": {
+    "NBA": [
+      "*nba*",
+      "ESPN",
+      "ESPN 2",
+      "ESPN 3",
+      "ESPN 4",
+      "ESPN 5",
+      "ESPN 6",
+      "ESPN 7",
+      "ESPN Deportes",
+      "ESPN Premium",
+      "ESPN Extra",
+      "*espn*latin*",
+      "ABC",
+      "TNT",
+      "TNT Sports",
+      "TNT Sports Premium",
+      "DSports",
+      "DSports 2",
+      "DSports +",
+      "#Vamos",
+      "Movistar Deportes",
+      "Movistar Plus+ Deportes",
+      "DAZN 1",
+      "DAZN 2"
+    ],
+    "Béisbol": [
+      "*mlb*",
+      "*baseball*",
+      "*beisbol*",
+      "*pelota*",
+      "*lvbp*",
+      "MLB Network",
+      "FOX Deportes",
+      "Meridiano TV",
+      "Meridiano",
+      "IVC",
+      "ByM Sports",
+      "Canal I",
+      "Promar",
+      "Promar TV"
+    ]
+  }
+}

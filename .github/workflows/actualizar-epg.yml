@@ -15,6 +15,7 @@ on:
     paths:
       - "generar_epg.py"
       - "mapeo_canales.json"
+      - "categorias_tematicas.json"
       - "tests/**"
       - ".github/workflows/actualizar-epg.yml"
 
@@ -76,10 +77,17 @@ jobs:
           # Listas M3U de apoyo que se fusionan con la del proveedor para
           # completar Espana, Latam y US Latino. Admite atajos de iptv-org
           # (iptv-org-es, iptv-org-mx, iptv-org-ar, iptv-org-co, iptv-org-cl,
-          # iptv-org-pe, iptv-org-us, iptv-org-deportes...) o URLs propias
-          # separadas por comas. Vacía o sin definir deja las de por defecto;
-          # el valor "ninguna" las desactiva (equivale a --sin-m3u-extra).
+          # iptv-org-pe, iptv-org-us, iptv-org-deportes...), el atajo
+          # tecnotv-deportes (lista de deportes con NBA TV, ESPN y FOX Sports
+          # Mexico) o URLs propias separadas por comas. De las listas de apoyo
+          # solo se aceptan canales de EE. UU., Espana y Latinoamerica. Vacía o
+          # sin definir deja las de por defecto; el valor "ninguna" las
+          # desactiva (equivale a --sin-m3u-extra).
           M3U_EXTRA_URL: ${{ vars.M3U_EXTRA_URL }}
+          # JSON con las categorias tematicas NBA y Beisbol (por defecto
+          # categorias_tematicas.json). Vacio o sin definir usa el del
+          # repositorio.
+          M3U_CATEGORIAS: ${{ vars.M3U_CATEGORIAS }}
           # Maximo de senales publicadas por canal: 1 principal + N-1 respaldos
           # (3 por defecto). Vacio o sin definir deja 3.
           M3U_MAXIMO_SENALES: ${{ vars.M3U_MAXIMO_SENALES }}
@@ -147,25 +155,55 @@ jobs:
           assert not fuera, f"tvg-id del M3U que no existen en epg.xml: {fuera[:5]}"
 
           urls = [url for _extinf, url in entradas]
-          duplicadas = {url for url in urls if urls.count(url) > 1}
-          if duplicadas:
-              # No es un error: la lista original puede repetir una URL.
-              print(f"aviso: {len(duplicadas)} URLs repetidas en la lista")
+          repetidas = {url for url in urls if urls.count(url) > 1}
+          if repetidas:
+              # No es un error: el canal se repite por sus respaldos y por las
+              # categorias tematicas (misma URL en varios grupos).
+              print(f"aviso: {len(repetidas)} URLs repetidas (respaldo/tematica)")
 
-          respaldos = len(entradas) - len(ids_m3u)
-          print(
-              f"lista.m3u: entradas={len(entradas)} canales={len(ids_m3u)} "
-              f"senales_respaldo={respaldos}"
-          )
-
-          # Limite estricto: 1 principal + 2 respaldos por canal.
-          por_canal = {}
+          # Limite estricto: 1 principal + 2 respaldos por canal y grupo. Las
+          # categorias tematicas (NBA, Beisbol) repiten el canal con el mismo
+          # tvg-id, asi que el limite se comprueba por (grupo, canal).
+          por_grupo = {}
           for extinf, _url in entradas:
               identificador = atributo(extinf, "tvg-id")
-              por_canal[identificador] = por_canal.get(identificador, 0) + 1
-          excedidos = {canal: total for canal, total in por_canal.items() if total > 3}
-          assert not excedidos, f"canales con mas de 3 senales: {list(excedidos.items())[:5]}"
-          print(f"maximo de senales por canal: {max(por_canal.values())} (limite 3)")
+              grupo = atributo(extinf, "group-title")
+              por_grupo[(grupo, identificador)] = por_grupo.get((grupo, identificador), 0) + 1
+          excedidos = {clave: total for clave, total in por_grupo.items() if total > 3}
+          assert not excedidos, f"canales con mas de 3 senales en un grupo: {list(excedidos.items())[:5]}"
+          print(f"maximo de senales por canal y grupo: {max(por_grupo.values())} (limite 3)")
+
+          respaldos = len(entradas) - len(por_grupo)
+          print(
+              f"lista.m3u: entradas={len(entradas)} canales={len(ids_m3u)} "
+              f"canales_por_grupo={len(por_grupo)} senales_respaldo={respaldos}"
+          )
+
+          # Categorias tematicas: el canal se repite en su grupo y en el tematico.
+          import unicodedata
+
+          def sin_acentos(texto: str) -> str:
+              return "".join(
+                  caracter
+                  for caracter in unicodedata.normalize("NFKD", texto)
+                  if not unicodedata.combining(caracter)
+              )
+
+          tematicas = {}
+          for extinf, _url in entradas:
+              grupo = atributo(extinf, "group-title")
+              if sin_acentos(grupo).strip().casefold() in ("nba", "beisbol", "baseball"):
+                  tematicas.setdefault(grupo, set()).add(atributo(extinf, "tvg-id"))
+          print(
+              "categorias tematicas: "
+              + ", ".join(
+                  f"{grupo}={len(canales_tematicos)} canales"
+                  for grupo, canales_tematicos in tematicas.items()
+              )
+          )
+          for grupo, canales_tematicos in tematicas.items():
+              fuera_tematica = sorted(canales_tematicos - canales)
+              assert not fuera_tematica, f"{grupo}: tvg-id fuera de la guia: {fuera_tematica[:5]}"
           print(f"OK: {len(con_epg)} canales con programacion real de {len(canales)}")
           PY
 

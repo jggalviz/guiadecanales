@@ -1086,7 +1086,11 @@ class ListaM3UTests(unittest.TestCase):
         self.assertIn(f'url-tvg="{self.url_epg}"', cabecera)
 
     def test_publica_una_entrada_por_senal_de_respaldo(self) -> None:
-        espn2 = [entrada for entrada in self.entradas if entrada["tvg_id"] == "ESPN2.us"]
+        espn2 = [
+            entrada
+            for entrada in self.entradas
+            if entrada["tvg_id"] == "ESPN2.us" and entrada["grupo"] == "Deportes"
+        ]
         self.assertEqual(len(espn2), 3)
         # Mismo tvg-id y tvg-name en todas: la EPG es la misma en las 3 opciones.
         self.assertEqual({entrada["tvg_name"] for entrada in espn2}, {"ESPN 2"})
@@ -1102,7 +1106,7 @@ class ListaM3UTests(unittest.TestCase):
         nombres = [
             generar_epg._extraer_nombre(linea)
             for linea in self._lineas_extinf()
-            if 'tvg-id="ESPN2.us"' in linea
+            if 'tvg-id="ESPN2.us"' in linea and 'group-title="Deportes"' in linea
         ]
         self.assertEqual(nombres, ["ESPN 2", "ESPN 2 (Opc. 2)", "ESPN 2 (Opc. 3)"])
 
@@ -1678,7 +1682,9 @@ class LimiteDeSenalesTests(unittest.TestCase):
 
     def test_la_lista_m3u_publica_tres_entradas_por_canal(self) -> None:
         texto = generar_epg.generar_m3u(
-            self._consolidar(), url_epg="https://ejemplo.invalid/epg.xml"
+            self._consolidar(),
+            url_epg="https://ejemplo.invalid/epg.xml",
+            categorias={},
         )
         entradas = generar_epg.parsear_m3u(texto)
         self.assertEqual(len(entradas), 3)
@@ -1727,9 +1733,18 @@ class IngestaMultiFuenteTests(unittest.TestCase):
         self.assertIn("http://principal.invalid/cinelatino", urls)
 
     def test_el_filtro_se_puede_desactivar(self) -> None:
-        urls = {canal["url"] for canal in self._fusionar(filtrar_extra=False)}
-        self.assertIn("http://apoyo.invalid/skyf1", urls)
-        self.assertIn("http://apoyo.invalid/hbo", urls)
+        # El filtro geografico es independiente del de bloques: solo al apagar
+        # los dos se recuperan los canales de fuera de EE. UU./Espana/Latam.
+        solo_bloques = {canal["url"] for canal in self._fusionar(filtrar_pais=False)}
+        self.assertNotIn("http://apoyo.invalid/skyf1", solo_bloques)
+        self.assertNotIn("http://apoyo.invalid/hbo", solo_bloques)
+
+        todo = {
+            canal["url"]
+            for canal in self._fusionar(filtrar_extra=False, filtrar_pais=False)
+        }
+        self.assertIn("http://apoyo.invalid/skyf1", todo)
+        self.assertIn("http://apoyo.invalid/hbo", todo)
 
     def test_cada_canal_recuerda_su_lista_y_su_prioridad(self) -> None:
         canales = {canal["url"]: canal for canal in self._fusionar()}
@@ -1981,6 +1996,329 @@ class MapeoRegionalTests(unittest.TestCase):
         # Los alias del JSON se suman a los del codigo.
         self.assertIn("Univision East HD", mapeo["Univision.us"]["alias"])
         self.assertIn("ESPN Colombia HD", mapeo["ESPN.co"]["alias"])
+
+
+M3U_TEMATICAS = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 group-title="Deportes",NBA TV HD',
+        "http://tematicas.invalid/nbatv",
+        '#EXTINF:-1 tvg-id="ESPN2.us@HD" group-title="Deportes",ESPN 2 HD',
+        "http://tematicas.invalid/espn2",
+        '#EXTINF:-1 group-title="DSports",DSports HD',
+        "http://tematicas.invalid/dsports",
+        '#EXTINF:-1 tvg-id="MLBNetwork.us" group-title="Deportes",MLB Network HD',
+        "http://tematicas.invalid/mlbnetwork",
+        '#EXTINF:-1 group-title="Deportes",1 Baseball 2 HD',
+        "http://tematicas.invalid/unbaseball2",
+        '#EXTINF:-1 tvg-id="MeridianoTV.ve" group-title="Venezuela",Meridiano TV',
+        "http://tematicas.invalid/meridiano",
+        '#EXTINF:-1 group-title="Venezuela",Canal I HD',
+        "http://tematicas.invalid/canali",
+        '#EXTINF:-1 tvg-id="ESPN2.nl@HD" group-title="Sports",ESPN 2 Netherlands HD',
+        "http://tematicas.invalid/espn2-nl",
+        '#EXTINF:-1 group-title="Cine",Cine Latino HD',
+        "http://tematicas.invalid/cinelatino",
+        "",
+    ]
+)
+
+M3U_GRUPO_NBA = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 group-title="NBA",NBA TV',
+        "http://tematicas.invalid/nbatv-grupo",
+        "",
+    ]
+)
+
+M3U_APOYO_PAISES = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="ESPN.us@HD",ESPN HD',
+        "http://paises.invalid/us-espn",
+        '#EXTINF:-1 tvg-id="La1.es@HD",La 1 HD',
+        "http://paises.invalid/es-la1",
+        '#EXTINF:-1 tvg-id="ESPN2.mx@HD",ESPN 2 HD',
+        "http://paises.invalid/mx-espn2",
+        '#EXTINF:-1 tvg-id="FoxSports1.ar",Fox Sports 1 HD',
+        "http://paises.invalid/ar-fox1",
+        '#EXTINF:-1 tvg-id="ESPN2.uk@HD",ESPN 2 HD',
+        "http://paises.invalid/uk-espn2",
+        '#EXTINF:-1 tvg-id="ESPN2.nl@HD",ESPN 2 HD',
+        "http://paises.invalid/nl-espn2",
+        '#EXTINF:-1 tvg-id="FoxSports.ca",Fox Sports 1 HD',
+        "http://paises.invalid/ca-fox1",
+        '#EXTINF:-1 tvg-id="FoxSports.de",Fox Sports 1 HD',
+        "http://paises.invalid/de-fox1",
+        '#EXTINF:-1 tvg-id="ESPN2.pt",ESPN 2',
+        "http://paises.invalid/pt-espn2",
+        "#EXTINF:-1,ESPN 2 HD",
+        "http://paises.invalid/sin-pais",
+        "",
+    ]
+)
+
+M3U_TECNOTV = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 group-title="TV PREMIUM",TELEMUNDO 2',
+        "http://tecnotv.invalid/telemundo2",
+        "#EXTINF:-1,ESPN 2 HD",
+        "http://tecnotv.invalid/espn2",
+        "#EXTINF:-1,NBA TV",
+        "http://tecnotv.invalid/nbatv",
+        "#EXTINF:-1,MLB NETWORK",
+        "http://tecnotv.invalid/mlbnetwork",
+        "#EXTINF:-1,EWTN",
+        "http://tecnotv.invalid/ewtn",
+        "#EXTINF:-1,FORMULA 1",
+        "http://tecnotv.invalid/formula1",
+        "",
+    ]
+)
+
+
+class CategoriasTematicasTests(unittest.TestCase):
+    """Comprueba las categorias tematicas NBA y Beisbol de la lista M3U."""
+
+    URL_EPG = "https://ejemplo.invalid/guiadecanales/epg.xml"
+
+    def setUp(self) -> None:
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+        self.canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_TEMATICAS), mapeo=self.mapeo
+        )
+        self.por_nombre = {canal["nombre"]: canal for canal in self.canales}
+
+    def _entradas(self, categorias: object = None) -> list[dict[str, object]]:
+        texto = generar_epg.generar_m3u(
+            self.canales, url_epg=self.URL_EPG, categorias=categorias
+        )
+        return generar_epg.parsear_m3u(texto)
+
+    def test_las_categorias_por_defecto_son_nba_y_beisbol(self) -> None:
+        categorias = generar_epg.cargar_categorias_tematicas("")
+        self.assertEqual(set(categorias), {"NBA", "Béisbol"})
+        self.assertIn("*nba*", categorias["NBA"])
+        self.assertIn("*mlb*", categorias["Béisbol"])
+
+    def test_los_canales_de_la_nba_entran_en_su_categoria(self) -> None:
+        for nombre in ("NBA TV", "ESPN 2", "DSports"):
+            with self.subTest(canal=nombre):
+                categorias = generar_epg.categorias_del_canal(self.por_nombre[nombre])
+                self.assertIn("NBA", categorias)
+
+    def test_los_canales_de_beisbol_entran_en_su_categoria(self) -> None:
+        for nombre in ("MLB Network", "1 Baseball 2", "Meridiano TV", "Canal I"):
+            with self.subTest(canal=nombre):
+                categorias = generar_epg.categorias_del_canal(self.por_nombre[nombre])
+                self.assertIn("Béisbol", categorias)
+
+    def test_un_canal_de_otro_pais_no_entra_en_las_categorias(self) -> None:
+        # ESPN 2 Netherlands es un canal europeo: no debe aparecer en la NBA.
+        self.assertEqual(
+            generar_epg.categorias_del_canal(self.por_nombre["ESPN 2 Netherlands"]), ()
+        )
+
+    def test_un_canal_sin_relacion_no_entra_en_ninguna_categoria(self) -> None:
+        self.assertEqual(
+            generar_epg.categorias_del_canal(self.por_nombre["Cine Latino"]), ()
+        )
+
+    def test_la_lista_duplica_el_canal_en_el_grupo_tematico(self) -> None:
+        entradas = self._entradas()
+        grupos = {(entrada["grupo"], entrada["tvg_id"]) for entrada in entradas}
+        self.assertIn(("Deportes", "ESPN2.us"), grupos)
+        self.assertIn(("NBA", "ESPN2.us"), grupos)
+        # La copia conserva el tvg-id y el tvg-name: la guia es la misma.
+        copia = [e for e in entradas if e["grupo"] == "NBA" and e["tvg_id"] == "ESPN2.us"]
+        self.assertEqual(len(copia), 1)
+        self.assertEqual(copia[0]["tvg_name"], "ESPN 2")
+        self.assertEqual(copia[0]["url"], "http://tematicas.invalid/espn2")
+
+    def test_el_grupo_original_se_conserva(self) -> None:
+        entradas = self._entradas()
+        self.assertIn(
+            ("Deportes", "http://tematicas.invalid/espn2"),
+            {(e["grupo"], e["url"]) for e in entradas},
+        )
+        self.assertIn("NBA", {e["grupo"] for e in entradas})
+        self.assertIn("Béisbol", {e["grupo"] for e in entradas})
+
+    def test_sin_categorias_no_se_duplica_ningun_canal(self) -> None:
+        entradas = self._entradas(categorias={})
+        self.assertNotIn("NBA", {e["grupo"] for e in entradas})
+        self.assertNotIn("Béisbol", {e["grupo"] for e in entradas})
+        self.assertEqual(len(entradas), len(self.canales))
+
+    def test_un_canal_que_ya_esta_en_el_grupo_tematico_no_se_duplica(self) -> None:
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_GRUPO_NBA), mapeo=self.mapeo
+        )
+        entradas = generar_epg.parsear_m3u(
+            generar_epg.generar_m3u(canales, url_epg=self.URL_EPG)
+        )
+        self.assertEqual(len(entradas), 1)
+        self.assertEqual(entradas[0]["grupo"], "NBA")
+
+    def test_el_resumen_cuenta_los_canales_por_categoria(self) -> None:
+        resumen = generar_epg.resumen_tematicas(self.canales)
+        self.assertEqual(resumen["NBA"], 3)
+        self.assertEqual(resumen["Béisbol"], 4)
+        self.assertEqual(generar_epg.resumen_tematicas(self.canales, {}), {})
+
+
+class CategoriasDesdeJsonTests(unittest.TestCase):
+    """Comprueba la carga de categorias desde ``categorias_tematicas.json``."""
+
+    def test_el_json_del_repositorio_declara_nba_y_beisbol(self) -> None:
+        raiz = Path(__file__).resolve().parent.parent
+        categorias = generar_epg.cargar_categorias_tematicas(
+            str(raiz / "categorias_tematicas.json")
+        )
+        self.assertIn("NBA", categorias)
+        self.assertIn("Béisbol", categorias)
+        self.assertTrue(all(str(patron).strip() for patron in categorias["NBA"]))
+
+    def test_el_json_anade_categorias_nuevas_y_sustituye_las_existentes(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = os.path.join(carpeta, "categorias.json")
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write(
+                    '{"categorias": {"NBA": ["*nba*"], "Fútbol": ["*la liga*", "TUDN"]}}'
+                )
+            categorias = generar_epg.cargar_categorias_tematicas(ruta)
+        self.assertEqual(categorias["NBA"], ("*nba*",))
+        self.assertEqual(categorias["Fútbol"], ("*la liga*", "TUDN"))
+        self.assertIn("Béisbol", categorias)  # las de por defecto se conservan
+
+    def test_un_json_invalido_lanza_value_error(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = os.path.join(carpeta, "categorias.json")
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write("{esto no es json}")
+            with self.assertRaises(ValueError):
+                generar_epg.cargar_categorias_tematicas(ruta)
+
+    def test_una_categoria_nueva_del_json_se_publica_en_la_lista(self) -> None:
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_TEMATICAS),
+            mapeo=generar_epg.cargar_mapeo_canales(""),
+        )
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = os.path.join(carpeta, "categorias.json")
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write('{"categorias": {"Cine": ["Cine Latino"]}}')
+            categorias = generar_epg.cargar_categorias_tematicas(ruta)
+        entradas = generar_epg.parsear_m3u(
+            generar_epg.generar_m3u(canales, categorias=categorias)
+        )
+        # El canal ya estaba en el grupo "Cine": no se duplica.
+        self.assertEqual(
+            [e["url"] for e in entradas if e["grupo"] == "Cine"],
+            ["http://tematicas.invalid/cinelatino"],
+        )
+
+
+class FiltroGeograficoM3UTests(unittest.TestCase):
+    """Comprueba el filtro de pais de las listas M3U de apoyo."""
+
+    def test_solo_se_aceptan_eeuu_espana_y_latinoamerica(self) -> None:
+        canales = generar_epg.fusionar_listas_m3u(
+            [("principal", "#EXTM3U"), ("apoyo", M3U_APOYO_PAISES)]
+        )
+        urls = {canal["url"] for canal in canales}
+        for permitida in ("us-espn", "es-la1", "mx-espn2", "ar-fox1", "sin-pais"):
+            with self.subTest(canal=permitida):
+                self.assertIn(f"http://paises.invalid/{permitida}", urls)
+        for descartada in ("uk-espn2", "nl-espn2", "ca-fox1", "de-fox1", "pt-espn2"):
+            with self.subTest(canal=descartada):
+                self.assertNotIn(f"http://paises.invalid/{descartada}", urls)
+
+    def test_pais_permitido_m3u_usa_el_tvg_id_y_el_nombre(self) -> None:
+        self.assertTrue(generar_epg.pais_permitido_m3u({"tvg_id": "ESPN.us"}))
+        self.assertTrue(generar_epg.pais_permitido_m3u({"tvg_id": "La1.es"}))
+        self.assertTrue(generar_epg.pais_permitido_m3u({"tvg_id": "Canal5.mx"}))
+        self.assertTrue(generar_epg.pais_permitido_m3u({"tvg_id": "MeridianoTV.ve"}))
+        self.assertFalse(generar_epg.pais_permitido_m3u({"tvg_id": "ESPN2.uk"}))
+        self.assertFalse(generar_epg.pais_permitido_m3u({"tvg_id": "ESPN2.nl"}))
+        self.assertFalse(generar_epg.pais_permitido_m3u({"tvg_id": "HBO.pl"}))
+        # Sin pais declarado se acepta y decide el filtro de bloques.
+        self.assertTrue(generar_epg.pais_permitido_m3u({"nombre": "ESPN 2 HD"}))
+
+    def test_el_filtro_geografico_se_puede_desactivar(self) -> None:
+        canales = generar_epg.fusionar_listas_m3u(
+            [("principal", "#EXTM3U"), ("apoyo", M3U_APOYO_PAISES)],
+            filtrar_pais=False,
+        )
+        urls = {canal["url"] for canal in canales}
+        self.assertIn("http://paises.invalid/uk-espn2", urls)
+        self.assertIn("http://paises.invalid/nl-espn2", urls)
+
+    def test_el_filtro_geografico_actua_aunque_se_acepte_todo(self) -> None:
+        canales = generar_epg.fusionar_listas_m3u(
+            [("principal", "#EXTM3U"), ("apoyo", M3U_APOYO_PAISES)],
+            filtrar_extra=False,
+        )
+        urls = {canal["url"] for canal in canales}
+        self.assertIn("http://paises.invalid/us-espn", urls)
+        self.assertNotIn("http://paises.invalid/uk-espn2", urls)
+
+    def test_la_lista_principal_no_se_filtra_por_pais(self) -> None:
+        principal = "\n".join(
+            [
+                "#EXTM3U",
+                '#EXTINF:-1 tvg-id="SkySportsF1.uk@HD",Sky Sports F1',
+                "http://principal.invalid/skyf1",
+                "",
+            ]
+        )
+        canales = generar_epg.fusionar_listas_m3u([("principal", principal)])
+        self.assertEqual(
+            [canal["url"] for canal in canales], ["http://principal.invalid/skyf1"]
+        )
+
+    def test_la_lista_de_tecnotv_aporta_nba_y_espn(self) -> None:
+        canales = generar_epg.fusionar_listas_m3u(
+            [("principal", "#EXTM3U"), ("tecnotv-deportes", M3U_TECNOTV)]
+        )
+        urls = {canal["url"] for canal in canales}
+        for aceptada in ("telemundo2", "espn2", "nbatv", "mlbnetwork"):
+            with self.subTest(canal=aceptada):
+                self.assertIn(f"http://tecnotv.invalid/{aceptada}", urls)
+        for descartada in ("ewtn", "formula1"):
+            with self.subTest(canal=descartada):
+                self.assertNotIn(f"http://tecnotv.invalid/{descartada}", urls)
+
+    def test_nba_y_beisbol_son_bloques_estrategicos(self) -> None:
+        self.assertIn(
+            "nba", generar_epg.clasificar_canal_estrategico({"nombre": "NBA TV"})
+        )
+        self.assertIn(
+            "beisbol",
+            generar_epg.clasificar_canal_estrategico({"nombre": "MLB Network"}),
+        )
+        self.assertIn(
+            "beisbol",
+            generar_epg.clasificar_canal_estrategico({"nombre": "Pelota Nacional"}),
+        )
+        self.assertIn(
+            "tnt-sports",
+            generar_epg.clasificar_canal_estrategico({"nombre": "TNT Sports Premium"}),
+        )
+
+    def test_el_atajo_de_tecnotv_apunta_a_su_lista(self) -> None:
+        self.assertEqual(
+            generar_epg.resolver_fuentes_m3u(["tecnotv-deportes"]),
+            ["https://tecnotv.club/kwf5/deportes.m3u"],
+        )
+        self.assertIn(
+            "https://tecnotv.club/kwf5/deportes.m3u",
+            generar_epg.resolver_fuentes_m3u(
+                list(generar_epg.URLS_M3U_EXTRA_POR_DEFECTO)
+            ),
+        )
 
 
 if __name__ == "__main__":

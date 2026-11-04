@@ -28,13 +28,28 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   BOM y desfases horarios, y normaliza todas las fechas a **UTC (`+0000`)**.
 - ✅ **Ingesta multi-fuente**: además de la lista del proveedor (`--url`),
   fusiona **listas M3U de apoyo** con `--m3u-extra` o `M3U_EXTRA_URL` (atajos de
-  `iptv-org` por país/categoría y URLs propias). Por defecto suma las de
-  **España**, **México**, **Argentina**, **Colombia**, **Chile**, **Perú**, la
-  categoría de **deportes** y los canales de **EE. UU. en español**
-  (DirecTV/Xfinity/Dish Latino). De las listas de apoyo solo se aceptan los
-  canales de los **bloques estratégicos** (`DSports`, `ESPN`, `FOX Sports`,
-  España, Latam y US Latino); `--sin-m3u-extra` lo desactiva y
-  `--m3u-extra-todo` acepta todos.
+  `iptv-org` por país/categoría, el atajo `tecnotv-deportes` y URLs propias). Por
+  defecto suma las de **España**, **México**, **Argentina**, **Colombia**,
+  **Chile**, **Perú**, la categoría de **deportes** de iptv-org, los canales de
+  **EE. UU. en español** (DirecTV/Xfinity/Dish Latino) y la lista de **deportes
+  de Tecnotv** (`NBA TV`, `ESPN`, `FOX Sports México`, `TNT Sports`…). De las
+  listas de apoyo solo se aceptan los canales de los **bloques estratégicos**
+  (`DSports`, `ESPN`, `FOX Sports`, `NBA`, `Béisbol`, `TNT Sports`, España,
+  Latam y US Latino); `--sin-m3u-extra` lo desactiva y `--m3u-extra-todo` acepta
+  todos.
+- ✅ **Filtro geográfico estricto** en las listas de apoyo: solo se ingieren
+  canales de **EE. UU., España y Latinoamérica**. Los de Canadá, Reino Unido,
+  resto de Europa, Asia u Oceanía se descartan por completo (el país sale del
+  sufijo del `tvg-id` o del nombre). `--sin-filtro-geografico` lo desactiva y la
+  lista del proveedor nunca se filtra.
+- ✅ **Categorías temáticas `NBA` y `Béisbol`**: agrupan los canales que emiten
+  NBA en directo (`NBA TV`, `ESPN`, `ABC`, `TNT`, `DSports`, `Movistar
+  Deportes`, `DAZN`…) y los de béisbol (MLB, `MLB Network`, los feeds de **1
+  Baseball**, la **pelota venezolana**/LVBP —`Meridiano`, `IVC`, `ByM Sports`,
+  `Canal I`, `Promar`— y `FOX Deportes`). El canal se **duplica** en el grupo
+  temático conservando su `tvg-id`, `tvg-name` y señales, así que su EPG es la
+  misma en las dos entradas. Configurables en `categorias_tematicas.json`
+  (`--categorias`, `--sin-tematicas`).
 - ✅ **Límite de 3 señales por canal**: se publica la principal y **dos
   respaldos** (`Opc. 2` y `Opc. 3`); el resto de espejos redundantes se
   descarta para no inflar la lista (`--maximo-senales`, `M3U_MAXIMO_SENALES`).
@@ -99,7 +114,7 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   `ESPN2.us`. Editable sin tocar el script y desactivable con `--sin-mapeo`.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`, `json`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **117 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **139 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -113,6 +128,7 @@ guiadecanales/
 ├── epg.xml                         # guía generada (se versiona para publicarla)
 ├── lista.m3u                       # lista propia generada, con el tvg-id de la guía
 ├── mapeo_canales.json              # alias -> tvg-id real de las señales difíciles
+├── categorias_tematicas.json       # grupos temáticos NBA y Béisbol (patrones)
 ├── tests/
 │   └── test_generar_epg.py         # pruebas unitarias (unittest)
 ├── .github/workflows/actualizar-epg.yml   # regeneración diaria + commit automático
@@ -189,13 +205,16 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | Opción | Descripción |
 | --- | --- |
 | `-u`, `--url` | URL `raw` de la lista M3U. |
-| `--m3u-extra` | Lista M3U adicional (repetible o separada por comas). Admite atajos `iptv-org-es`, `-mx`, `-ar`, `-co`, `-cl`, `-pe`, `-us`, `-deportes`, `-latam`, `-espanol` y rutas locales. |
+| `--m3u-extra` | Lista M3U adicional (repetible o separada por comas). Admite atajos `iptv-org-es`, `-mx`, `-ar`, `-co`, `-cl`, `-pe`, `-us`, `-deportes`, `-latam`, `-espanol`, el atajo `tecnotv-deportes` y rutas locales. |
 | `--sin-m3u-extra` | No fusionar listas de apoyo: solo la lista principal. |
-| `--m3u-extra-todo` | Aceptar todos los canales de las listas de apoyo (por defecto solo los bloques estratégicos). |
+| `--m3u-extra-todo` | Aceptar todos los canales de las listas de apoyo (por defecto solo los bloques estratégicos). El filtro geográfico se sigue aplicando. |
+| `--sin-filtro-geografico` | No descartar por país en las listas de apoyo (por defecto solo EE. UU., España y Latinoamérica). |
 | `--maximo-senales` | Señales publicadas por canal, principal incluida (3 por defecto). |
 | `-s`, `--salida` | Archivo XMLTV de salida (por defecto `epg.xml`). |
 | `-m`, `--m3u-salida` | Lista M3U propia de salida (por defecto `lista.m3u`). |
 | `--sin-m3u` | No generar la lista M3U propia: solo el XMLTV. |
+| `--categorias` | JSON con las categorías temáticas (`categorias_tematicas.json` por defecto). |
+| `--sin-tematicas` | No añadir los grupos `NBA`/`Béisbol`: cada canal solo en su grupo original. |
 | `--mapeo` | JSON con el mapeo alias → `tvg-id` real (por defecto `mapeo_canales.json`). |
 | `--sin-mapeo` | Ignorar el mapeo explícito (usa solo el `tvg-id`/nombre del M3U). |
 | `--epg-publica` | URL pública del `epg.xml` que se declara en la cabecera del M3U. |
@@ -216,6 +235,7 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-q`, `--silencioso` | Muestra solo los errores. |
 
 Variables de entorno equivalentes: `M3U_URL`, `M3U_SALIDA`, `M3U_MAPEO`,
+`M3U_CATEGORIAS` (categorías temáticas; por defecto `categorias_tematicas.json`),
 `M3U_EXTRA_URL` (listas M3U de apoyo, separadas por comas; vacía o sin definir
 deja las de por defecto), `M3U_MAXIMO_SENALES` (3),
 `EPG_SALIDA`, `EPG_REPO_URL`, `EPG_PUBLICA_URL`, `EPG_URL` (fuentes separadas
@@ -436,39 +456,96 @@ señales de respaldo:
 
 ```powershell
 # Por defecto ya se suman las listas de iptv-org de España, México, Argentina,
-# Colombia, Chile, Perú, la categoría de deportes y los canales de EE. UU.
+# Colombia, Chile, Perú, la categoría de deportes, los canales de EE. UU. y la
+# lista de deportes de Tecnotv (NBA TV, ESPN, FOX Sports México, TNT Sports...).
 python generar_epg.py -u "$env:M3U_URL"
 
 # Elegir las fuentes por atajo (o por URL, o por ruta local)
 python generar_epg.py -u "$env:M3U_URL" --m3u-extra iptv-org-es,iptv-org-deportes
+python generar_epg.py -u "$env:M3U_URL" --m3u-extra tecnotv-deportes
 python generar_epg.py -u "$env:M3U_URL" --m3u-extra "https://ejemplo.com/otra.m3u"
 
-# Sin listas de apoyo, o aceptando todos sus canales
+# Sin listas de apoyo, o aceptando todos sus canales (y sin filtro de país)
 python generar_epg.py -u "$env:M3U_URL" --sin-m3u-extra
 python generar_epg.py -u "$env:M3U_URL" --m3u-extra-todo
+python generar_epg.py -u "$env:M3U_URL" --m3u-extra-todo --sin-filtro-geografico
 ```
 
 Reglas:
 
 1. **La lista del proveedor manda.** Sus canales y señales se procesan primero
    y sobreviven al recorte de los 3 respaldos.
-2. **Filtro por bloques estratégicos.** De las listas de apoyo solo se aceptan
-   canales de estos bloques (`--m3u-extra-todo` lo desactiva):
+2. **Filtro geográfico estricto.** De las listas de apoyo solo se ingieren
+   canales de **EE. UU., España y Latinoamérica**. El país se deduce del sufijo
+   del `tvg-id` (`ESPN2.uk` → `uk`) o del nombre (`ESPN 2 Netherlands` → `nl`);
+   si el canal no declara país se acepta y decide el filtro de bloques. Se
+   descartan Canadá, Reino Unido, el resto de Europa, Asia y Oceanía
+   (`--sin-filtro-geografico` lo desactiva; la lista del proveedor nunca se
+   filtra).
+3. **Filtro por bloques estratégicos.** De las listas de apoyo solo se aceptan
+   además canales de estos bloques (`--m3u-extra-todo` lo desactiva):
 
    | Bloque | Cómo se detecta |
    | --- | --- |
    | `dsports` | `DSports`, `D Sports`, `DIRECTV Sports` |
    | `espn` | `ESPN`, `ESPN 2`… en cualquier mercado |
    | `fox-sports` | `FOX Sports`, `FOX Deportes`, `FOX Sport` |
+   | `nba` | `NBA`, `NBA TV`, `NBA League Pass` |
+   | `beisbol` | `MLB`, `MLB Network`, `Baseball`, `Béisbol`, `Pelota`, `LVBP` |
+   | `tnt-sports` | `TNT Sports`, `TNT Sports Premium` |
    | `espana` | `tvg-id` terminado en `.es` o cadenas españolas (La 1, Antena 3, Telecinco, TV3, Canal Sur, ETB, Telemadrid…) |
    | `latam` | `tvg-id` de `MX`, `AR`, `CO`, `CL`, `PE`, `UY`, `EC`, `VE`, `BO`, `PY`, `DO`, `PA`, `CR`, `SV`, `GT`, `HN`, `NI`, `PR`, `CU`, `BR` |
    | `us-latino` | `tvg-id` `.us` y cadenas hispanas (Univision, Telemundo, UniMás, Galavisión, Estrella TV, TUDN, Fox Deportes, Mega TV…) |
 
-3. **Deduplicación estricta.** El mismo canal que aparece en dos listas se
+4. **Deduplicación estricta.** El mismo canal que aparece en dos listas se
    publica **una sola vez**, con las señales en orden de prioridad y como
    máximo 3 entradas.
-4. **Una lista caída no rompe nada.** Si una lista de apoyo devuelve 404, no es
+5. **Una lista caída no rompe nada.** Si una lista de apoyo devuelve 404, no es
    M3U o no responde, se avisa y se continúa con el resto.
+
+### Categorías temáticas: `NBA` y `Béisbol`
+
+El script agrupa los canales de las dos competiciones que más se piden en una
+categoría propia, **sin quitarlos de su grupo original**. Cada canal aparece
+dos veces en `lista.m3u` (una en su grupo y otra en el grupo temático) con el
+**mismo `tvg-id`, el mismo `tvg-name` y las mismas señales**, así que la
+programación real es idéntica en las dos entradas y el reproductor no pierde la
+guía regional.
+
+| Grupo | Qué agrupa | Patrones por defecto |
+| --- | --- | --- |
+| `NBA` | Canales que emiten partidos de la NBA en directo: la propia NBA y las cadenas con derechos en EE. UU., Latinoamérica y España | `*nba*` (NBA TV, NBA League Pass), `ESPN`, `ESPN 2`…`ESPN 7`, `ESPN Deportes`, `ESPN Premium`, `*espn*latin*`, `ABC`, `TNT`, `TNT Sports`, `TNT Sports Premium`, `DSports`, `DSports 2`, `DSports +`, `#Vamos`, `Movistar Deportes`, `DAZN 1`, `DAZN 2` |
+| `Béisbol` | MLB, plataformas especializadas (**1 Baseball**), pelota venezolana (LVBP) y las cadenas que emiten béisbol en la región | `*mlb*`, `*baseball*`, `*beisbol*`, `*pelota*`, `*lvbp*`, `MLB Network`, `FOX Deportes`, `Meridiano TV`, `IVC`, `ByM Sports`, `Canal I`, `Promar` |
+
+Cómo se decide si un canal entra:
+
+1. Se comparan el **nombre limpio**, el `tvg-name`, el `tvg-id`, el nombre
+   original del M3U y el propio `group-title` del canal, normalizados (sin
+   acentos ni símbolos, con `+` → `plus`).
+2. `*` es comodín de palabras completas: `*nba*` encuentra `NBA TV` y `NBA`,
+   pero **no** `Dragon Ball` (contiene `nba` dentro de la palabra) ni `WNBA`.
+   Sin comodines la coincidencia es exacta (`ESPN 2` no arrastra a
+   `ESPN 2 Latin America`).
+3. **Filtro geográfico**: un canal de país conocido fuera de EE. UU./España/
+   Latinoamérica nunca entra en una categoría (`ESPN 2 Netherlands` se queda
+   fuera de `NBA`).
+4. Si el canal ya venía en un grupo con ese mismo nombre (`NBA`), no se
+   duplica. El límite de **3 señales** se mantiene dentro de cada grupo.
+
+Personalización (`categorias_tematicas.json`, o `--categorias otra.json`):
+
+```json
+{
+  "categorias": {
+    "NBA": ["*nba*", "ESPN 2", "DSports"],
+    "Béisbol": ["*mlb*", "*baseball*", "MLB Network", "Pelota Nacional"],
+    "Fútbol": ["*la liga*", "TUDN"]
+  }
+}
+```
+
+Las categorías del JSON **sustituyen** a las del mismo nombre definidas en el
+código y las nuevas se suman. Se puede desactivar todo con `--sin-tematicas`.
 
 ### Mapeo explícito de señales difíciles (`mapeo_canales.json`)
 
@@ -778,7 +855,10 @@ ambos archivos.
 > inexistente**, que cada programa tiene `<title>` y que no hay dos programas
 > del mismo canal a la misma hora. Además valida la `lista.m3u`: cabecera
 > `#EXTM3U` con `x-tvg-url`, entradas con URL `http(s)`, `tvg-id` en todas las
-> entradas y **todos esos `tvg-id` presentes en el `epg.xml`**.
+> entradas, **todos esos `tvg-id` presentes en el `epg.xml`**, **máximo 3
+> señales por canal y grupo** (las categorías temáticas repiten el canal con el
+> mismo `tvg-id`) y que los `tvg-id` de los grupos `NBA`/`Béisbol` existen en la
+> guía.
 >
 > Si tu lista M3U es privada, guárdala en un secreto (`M3U_URL`): el script solo
 > necesita poder descargarla por HTTP(S).
