@@ -99,7 +99,7 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   `ESPN2.us`. Editable sin tocar el script y desactivable con `--sin-mapeo`.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`, `json`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **114 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **117 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -260,23 +260,32 @@ porque aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus
 canales `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque
 `CANAL+` se trata como **marca**, no como la palabra «canal» seguida de «live».
 
-Cifras medidas del último run **antes** de activar las listas M3U de apoyo
-(1.875 entradas en la lista del proveedor). Con `M3U_EXTRA_URL` la lista crece
-con los canales estratégicos de España, Latam y US Latino:
+Cifras medidas del último run, **con la ingesta multi-fuente activada**:
 
 | Archivo | Resultado |
 | --- | --- |
-| `epg.xml` | 1.432 canales, **352 con EPG real**, 26.130 `<programme>`, 11,4 MB |
-| `lista.m3u` | **1.875 entradas**: 1.432 canales + **443 señales de respaldo** conservadas, 46 grupos, **0** `tvg-id` fuera de la guía |
+| `epg.xml` | 2.538 canales, **510 con EPG real**, 27.497 `<programme>`, 12,2 MB |
+| `lista.m3u` | **3.011 entradas**: 2.538 canales + 473 señales de respaldo, **máximo 3 por canal**, 106 grupos, **0** `tvg-id` fuera de la guía |
+
+Antes de activar las listas de apoyo eran 1.432 canales (352 con EPG real) y
+1.875 entradas: la ingesta añade unos 1.100 canales de España, Latam y US Latino
+y las guías por país dan EPG real a 158 canales más.
+
+Cobertura de los bloques nuevos (programas publicados): España — `La.1.es` 35,
+`La.2.es` 60, `Antena.3.es` 42, `Telecinco.es` 45, `TV3.es` 44, `Canal.Sur.es`
+26, `La.1.Canarias.es` 35, `La.1.Catalunya.es` 33; US Latino — `Univision.us`
+50, `Telemundo.us` 31; ESPN 18 de 26 canales y FOX Sports 5 de 6
+(`FOX.SPORTS.PREMIUM.mx` 47); DSports 3 de 4 (`DSports` 37, `DSports 2` 33,
+`DSports +` 41).
 
 Con el mapeo de DSports, la lista publica sus señales con la parrilla real (y en
 la hora correcta): `[SPOARHD].DSports.Argentina.HD.uy` (`DSports` + `Opc. 2` y
-`Opc. 3`, 3 entradas) con 49 `<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` +
-2 respaldos) con 46 y `[SPOPLH].DSports.+.HD.uy` (`DSports +` + 1 respaldo) con
-55. `DSports Motor` no está en la lista actual del proveedor; su mapeo se
+`Opc. 3`, 3 entradas) con 37 `<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` +
+2 respaldos) con 33 y `[SPOPLH].DSports.+.HD.uy` (`DSports +` + 1 respaldo) con
+41. `DSports Motor` no está en la lista actual del proveedor; su mapeo se
 mantiene por si vuelve a aparecer.
 
-> El límite de **3 señales por canal** puede reducir el número de entradas de
+> El límite de **3 señales por canal** reduce el número de entradas de
 > `lista.m3u` respecto a runs anteriores: antes se publicaban todos los espejos
 > (`Opc. 4`, `Opc. 5`…) y ahora solo la principal y dos respaldos.
 
