@@ -26,6 +26,26 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   `EC`, `UY`, `CR`, `PA`, `DO`, `SV`, `PT`, `IT`, `DE`; y la de **EE. UU.**
   de [epg.pw](https://epg.pw/), que no existe en epgshare01), admite **gzip**,
   BOM y desfases horarios, y normaliza todas las fechas a **UTC (`+0000`)**.
+- ✅ **Ingesta multi-fuente**: además de la lista del proveedor (`--url`),
+  fusiona **listas M3U de apoyo** con `--m3u-extra` o `M3U_EXTRA_URL` (atajos de
+  `iptv-org` por país/categoría y URLs propias). Por defecto suma las de
+  **España**, **México**, **Argentina**, **Colombia**, **Chile**, **Perú**, la
+  categoría de **deportes** y los canales de **EE. UU. en español**
+  (DirecTV/Xfinity/Dish Latino). De las listas de apoyo solo se aceptan los
+  canales de los **bloques estratégicos** (`DSports`, `ESPN`, `FOX Sports`,
+  España, Latam y US Latino); `--sin-m3u-extra` lo desactiva y
+  `--m3u-extra-todo` acepta todos.
+- ✅ **Límite de 3 señales por canal**: se publica la principal y **dos
+  respaldos** (`Opc. 2` y `Opc. 3`); el resto de espejos redundantes se
+  descarta para no inflar la lista (`--maximo-senales`, `M3U_MAXIMO_SENALES`).
+  Las señales de la lista del proveedor siempre tienen prioridad sobre las de
+  las listas de apoyo.
+- ✅ **Mapeo regional de guías**: `mapeo_canales.json` fija los `tvg-id`
+  oficiales de España (`La.1.es`, `Antena.3.es`, `TV3.es`, `Canal.Sur.es`…),
+  DSports, los feeds regionales de ESPN (`ESPN.co`, `ESPN.MX.mx`,
+  `Canal.ESPN.3.(Argentina).ar`, `ESPN.2.(ESPN2.Peru).pe`…) y FOX Sports
+  (`FOX.SPORTS.mx`, `FOX.Sports.2.HD(FSP2HD).co`…), y los de US Latino
+  (`Univision.us`, `Telemundo.us`, `Galavision.us`, `FoxDeportes.us`…).
 - ✅ **Guías extra automáticas** para los canales FAST que traen muchas listas
   (Pluto TV, Samsung TV Plus y Roku, vía `i.mjh.nz`) **y para DSports/DIRECTV
   Sports**: la de **Uruguay** (`epg_ripper_UY1`, parrilla de `DSports` y
@@ -71,15 +91,15 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   estándar, `tvg-logo` limpio y `group-title`, más `x-tvg-url`/`url-tvg` en la
   cabecera.
 - ✅ **No elimina los duplicados/espejos**: las señales de respaldo (`[Opc.2]`,
-  `Backup`, `Espejo`, `Señal 2`…) se conservan como entradas propias con el
-  `tvg-id`/`tvg-name` de su canal principal, así que todas muestran la misma
-  programación real.
+  `Backup`, `Espejo`, `Señal 2`…) se publican como entradas propias con el
+  `tvg-id`/`tvg-name` de su canal principal (hasta **3 por canal**), así que
+  todas muestran la misma programación real.
 - ✅ **Mapeo explícito de señales difíciles** en `mapeo_canales.json` (o en el
   código): `ESPN 2 HD`, `ESPN 2 (Opc.2)` y `ESPN2 HD - (Opc.3)` apuntan todos a
   `ESPN2.us`. Editable sin tocar el script y desactivable con `--sin-mapeo`.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`, `json`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **77 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **114 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
 
 ## Requisitos
 
@@ -169,6 +189,10 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | Opción | Descripción |
 | --- | --- |
 | `-u`, `--url` | URL `raw` de la lista M3U. |
+| `--m3u-extra` | Lista M3U adicional (repetible o separada por comas). Admite atajos `iptv-org-es`, `-mx`, `-ar`, `-co`, `-cl`, `-pe`, `-us`, `-deportes`, `-latam`, `-espanol` y rutas locales. |
+| `--sin-m3u-extra` | No fusionar listas de apoyo: solo la lista principal. |
+| `--m3u-extra-todo` | Aceptar todos los canales de las listas de apoyo (por defecto solo los bloques estratégicos). |
+| `--maximo-senales` | Señales publicadas por canal, principal incluida (3 por defecto). |
 | `-s`, `--salida` | Archivo XMLTV de salida (por defecto `epg.xml`). |
 | `-m`, `--m3u-salida` | Lista M3U propia de salida (por defecto `lista.m3u`). |
 | `--sin-m3u` | No generar la lista M3U propia: solo el XMLTV. |
@@ -192,6 +216,8 @@ Puedes indicarla de tres formas (de mayor a menor prioridad):
 | `-q`, `--silencioso` | Muestra solo los errores. |
 
 Variables de entorno equivalentes: `M3U_URL`, `M3U_SALIDA`, `M3U_MAPEO`,
+`M3U_EXTRA_URL` (listas M3U de apoyo, separadas por comas; vacía o sin definir
+deja las de por defecto), `M3U_MAXIMO_SENALES` (3),
 `EPG_SALIDA`, `EPG_REPO_URL`, `EPG_PUBLICA_URL`, `EPG_URL` (fuentes separadas
 por comas), `EPG_PAISES`, `EPG_URL_PLANTILLA` (plantilla con `{pais}`),
 `EPG_URL_US` (guía de EE. UU.), `EPG_URLS_EXTRA` (guías extra; vacía o sin
@@ -234,7 +260,9 @@ porque aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus
 canales `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque
 `CANAL+` se trata como **marca**, no como la palabra «canal» seguida de «live».
 
-Cifras medidas del último run (1.875 entradas en la lista del proveedor):
+Cifras medidas del último run **antes** de activar las listas M3U de apoyo
+(1.875 entradas en la lista del proveedor). Con `M3U_EXTRA_URL` la lista crece
+con los canales estratégicos de España, Latam y US Latino:
 
 | Archivo | Resultado |
 | --- | --- |
@@ -242,11 +270,15 @@ Cifras medidas del último run (1.875 entradas en la lista del proveedor):
 | `lista.m3u` | **1.875 entradas**: 1.432 canales + **443 señales de respaldo** conservadas, 46 grupos, **0** `tvg-id` fuera de la guía |
 
 Con el mapeo de DSports, la lista publica sus señales con la parrilla real (y en
-la hora correcta): `[SPOARHD].DSports.Argentina.HD.uy` (`DSports` + `Opc. 2`…
-`Opc. 5`, 5 entradas) con 49 `<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` +
+la hora correcta): `[SPOARHD].DSports.Argentina.HD.uy` (`DSports` + `Opc. 2` y
+`Opc. 3`, 3 entradas) con 49 `<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` +
 2 respaldos) con 46 y `[SPOPLH].DSports.+.HD.uy` (`DSports +` + 1 respaldo) con
 55. `DSports Motor` no está en la lista actual del proveedor; su mapeo se
 mantiene por si vuelve a aparecer.
+
+> El límite de **3 señales por canal** puede reducir el número de entradas de
+> `lista.m3u` respecto a runs anteriores: antes se publicaban todos los espejos
+> (`Opc. 4`, `Opc. 5`…) y ahora solo la principal y dos respaldos.
 
 > El canal `FilmRise Series Gratis` perdió su EPG en este run (uno menos que
 > antes): Pluto TV ya no publica ningún canal `filmrise` en su guía (`i.mjh.nz`),
@@ -362,19 +394,63 @@ Qué hace exactamente:
 2. **Limpia los atributos**: `tvg-id` (el `id` real del canal, idéntico al
    `<channel id="...">` del `epg.xml`), `tvg-name` estándar, `tvg-logo` solo si es
    una URL `http(s)` válida y `group-title` sin mojibake ni comillas sueltas.
-3. **Conserva las señales de respaldo.** Los duplicados/espejos de distintos
-   servidores (`[Opc.2]`, `[Opc.3]`, `Backup`, `Espejo`, `Señal 2`…) **no se
-   eliminan**: se publican como entradas propias con el **mismo `tvg-id` y
-   `tvg-name`** de su canal principal y un sufijo visible (`(Opc. 2)`, `(Opc. 3)`)
-   para distinguirlas en el reproductor. Así OTT Navigator muestra la
-   programación real en **todas** las opciones y puedes cambiar de servidor sin
-   perder la EPG.
+3. **Conserva las señales de respaldo, con límite.** Los duplicados/espejos de
+   distintos servidores (`[Opc.2]`, `[Opc.3]`, `Backup`, `Espejo`, `Señal 2`…)
+   **no se eliminan**: se publican como entradas propias con el **mismo `tvg-id`
+   y `tvg-name`** de su canal principal y un sufijo visible (`(Opc. 2)`,
+   `(Opc. 3)`) para distinguirlas en el reproductor. El máximo es **3 entradas
+   por canal** (la principal + 2 respaldos): las demás se descartan para no
+   inflar la lista con espejos redundantes o caídos (`--maximo-senales N`).
+   Las señales de la lista del proveedor se conservan antes que las que llegan
+   de las listas M3U de apoyo.
 4. **Conserva las opciones de reproducción** de cada entrada
    (`#EXTVLCOPT:http-user-agent=...`, `#KODIPROP:...`, `#EXTGRP:...`), necesarias
    para los canales que exigen un user-agent o un referer concreto.
 5. **Declara la guía** en la cabecera (`x-tvg-url` y `url-tvg`), así que el
    reproductor descarga la EPG automáticamente. La URL sale de `--epg-publica` o
    de `EPG_PUBLICA_URL` (por defecto, el `raw` de tu repositorio).
+
+### Ingesta multi-fuente (listas M3U de apoyo)
+
+Además de la lista del proveedor, el script puede **fusionar listas M3U
+públicas** para completar la parrilla con los canales estratégicos y sus
+señales de respaldo:
+
+```powershell
+# Por defecto ya se suman las listas de iptv-org de España, México, Argentina,
+# Colombia, Chile, Perú, la categoría de deportes y los canales de EE. UU.
+python generar_epg.py -u "$env:M3U_URL"
+
+# Elegir las fuentes por atajo (o por URL, o por ruta local)
+python generar_epg.py -u "$env:M3U_URL" --m3u-extra iptv-org-es,iptv-org-deportes
+python generar_epg.py -u "$env:M3U_URL" --m3u-extra "https://ejemplo.com/otra.m3u"
+
+# Sin listas de apoyo, o aceptando todos sus canales
+python generar_epg.py -u "$env:M3U_URL" --sin-m3u-extra
+python generar_epg.py -u "$env:M3U_URL" --m3u-extra-todo
+```
+
+Reglas:
+
+1. **La lista del proveedor manda.** Sus canales y señales se procesan primero
+   y sobreviven al recorte de los 3 respaldos.
+2. **Filtro por bloques estratégicos.** De las listas de apoyo solo se aceptan
+   canales de estos bloques (`--m3u-extra-todo` lo desactiva):
+
+   | Bloque | Cómo se detecta |
+   | --- | --- |
+   | `dsports` | `DSports`, `D Sports`, `DIRECTV Sports` |
+   | `espn` | `ESPN`, `ESPN 2`… en cualquier mercado |
+   | `fox-sports` | `FOX Sports`, `FOX Deportes`, `FOX Sport` |
+   | `espana` | `tvg-id` terminado en `.es` o cadenas españolas (La 1, Antena 3, Telecinco, TV3, Canal Sur, ETB, Telemadrid…) |
+   | `latam` | `tvg-id` de `MX`, `AR`, `CO`, `CL`, `PE`, `UY`, `EC`, `VE`, `BO`, `PY`, `DO`, `PA`, `CR`, `SV`, `GT`, `HN`, `NI`, `PR`, `CU`, `BR` |
+   | `us-latino` | `tvg-id` `.us` y cadenas hispanas (Univision, Telemundo, UniMás, Galavisión, Estrella TV, TUDN, Fox Deportes, Mega TV…) |
+
+3. **Deduplicación estricta.** El mismo canal que aparece en dos listas se
+   publica **una sola vez**, con las señales en orden de prioridad y como
+   máximo 3 entradas.
+4. **Una lista caída no rompe nada.** Si una lista de apoyo devuelve 404, no es
+   M3U o no responde, se avisa y se continúa con el resto.
 
 ### Mapeo explícito de señales difíciles (`mapeo_canales.json`)
 
@@ -436,6 +512,34 @@ la señal argentina con las horas en UTC correctas, y a la guía dedicada
 - `DSports Fight`, `DSports Radio` o `DSports Uruguay` se quedan con su id
   propio: no hay fuente pública con su parrilla y no se les asigna la de otro
   canal.
+
+#### España, ESPN/FOX regionales y US Latino
+
+Los `tvg-id` son los que publican realmente las guías por país
+(`epg_ripper_ES1`, `_MX1`, `_AR1`, `_CO1`, `_PE1`), verificados contra ellas, y
+en US Latino los de iptv-org (la guía de EE. UU. publica ids numéricos, así que
+el enlace se hace por los alias largos, que son sus `display-name`).
+
+| `tvg-id` | Nombre estándar | Alias principales |
+| --- | --- | --- |
+| `La.1.es` | `La 1` | `La 1`, `La1`, `La Primera`, `TVE 1` |
+| `La.2.es` | `La 2` | `La 2`, `La2`, `TVE 2` |
+| `Antena.3.es` | `Antena 3` | `Antena 3`, `Antena3`, `A3` |
+| `Cuatro.es` / `Telecinco.es` / `laSexta.es` | `Cuatro`, `Telecinco`, `laSexta` | `Cuatro`, `Telecinco`, `Tele 5`, `laSexta`, `La Sexta` |
+| `Neox.es`, `Nova.es`, `Energy.es`, `Divinity.es` | `Neox`, `Nova`, `Energy`, `Divinity` | los mismos nombres con `HD`/`(Opc. 2)` |
+| `TV3.es`, `Canal.33.es`, `Esport.3.es` | `TV3`, `Canal 33`, `Esport3` | `TV3`, `TV3 CAT`, `Canal 33`, `Esport 3` |
+| `Canal.Sur.es`, `ETB.1.es`, `ETB.2.es`, `Telemadrid.es`, `TVG.es`, `tvG2.es`, `IB3.es`, `TPA.es`, `La.7.es`, `À.Punt.es`, `CyLTV.Global.es`, `Canal.Extremadura.TV.es`, `Castilla-La.Mancha.Media.es`, `Aragón.Televisión.es` | autonómicas | `Canal Sur`, `ETB1`, `Telemadrid`, `TVG`, `TVG2`, `IB3`, `TPA`, `La 7`, `À Punt`, `CyLTV`, `CMM`… |
+| `GOL.PLAY.es`, `DAZN.LaLiga.es`, `DAZN.F1.es`, `M+.Deportes.es`, `M+.Vamos.es` | pago/deportes ES | `GOL PLAY`, `DAZN LaLiga`, `DAZN F1`, `M+ Deportes`, `#Vamos` |
+| `ESPN.co`, `ESPN.2.co`, `ESPN.3.co` | `ESPN Colombia`… | `ESPN Colombia`, `ESPN 2 CO` |
+| `ESPN.MX.mx`, `ESPN.2.mx`, `ESPN.3.mx`, `ESPN.5.mx` | `ESPN México`… | `ESPN México`, `ESPN MX` |
+| `Canal.ESPN.(Argentina).ar`, `Canal.ESPN.3.(Argentina).ar` | `ESPN Argentina`, `ESPN 3 Argentina` | `ESPN ARG` |
+| `ESPN.HD.(ESPN.HD).pe`, `ESPN.2.(ESPN2.Peru).pe`, `ESPN.3.HD.(ESPN.3.HD).pe` | `ESPN Perú`… | `ESPN Perú`, `ESPN PE` |
+| `FOX.SPORTS.mx`, `FOX.SPORTS.2.mx`, `FOX.SPORTS.3.mx`, `FOX.SPORTS.PREMIUM.mx` | `FOX Sports México`… | `Fox Sports México`, `Fox Sports Premium` |
+| `FOX.Sports.2.HD(FSP2HD).co`, `FOX.Sports.3.HD(FXS3HD).co` | `FOX Sports 2/3 Colombia` | `Fox Sports 2 CO` |
+| `FOX.SPORTS.HD.(FoxSportsHD).pe` (+2/3) | `FOX Sports Perú`… | `Fox Sports Perú` |
+| `FoxDeportes.us` | `FOX Deportes` | `Fox Deportes` |
+| `Univision.us`, `UniMas.us`, `Galavision.us`, `Telemundo.us` | `Univision`, `UniMás`, `Galavisión`, `Telemundo` | `Univision Network HD`, `UniMas East`, `Galavision West`, `Telemundo East` |
+| `EstrellaTV.us`, `TUDN.us`, `MegaTV.us`, `ElRey.us` | `Estrella TV`, `TUDN USA`, `Mega TV`, `El Rey` | `EstrellaTV`, `TUDN Estados Unidos`, `Mega TV`, `El Rey Network` |
 
 
 
@@ -601,6 +705,22 @@ Uruguay va antes que la dedicada entre las fuentes por defecto (también cuando
 `EPG_URLS_EXTRA` llega vacía); y el desfase `-0500` de `DIRECTVSPORTS1` se corrige
 con `AJUSTES_HORARIO_FUENTE` (un `23:00 -0500` vuelve a ser `23:00 UTC`) sin
 tocar las demás fuentes.
+
+Y las de **ingesta multi-fuente y mapeo regional** (`IngestaMultiFuenteTests`,
+`LimiteDeSenalesTests`, `MapeoRegionalTests`) comprueban que: la lista del
+proveedor se fusiona con las de apoyo conservando `origen_m3u` y `prioridad`;
+el filtro de bloques descarta canales de otros mercados (`Sky Sports F1`,
+`HBO Polska`) y acepta los estratégicos (`DSports 2`, `ESPN 2`, `La 1`,
+`Univision`); el mismo canal de dos listas queda en una sola entrada con la
+señal del proveedor primero; el límite publica como máximo 3 entradas
+(principal + `Opc. 2` + `Opc. 3`), es configurable y anota los descartes; una
+lista de apoyo rota (404 o descarga abortada) no interrumpe la generación; los
+atajos `iptv-org-*` se resuelven a sus URLs; España (`La.1.es`, `Antena.3.es`,
+`TV3.es`, `Canal.Sur.es`…), ESPN/FOX regionales (`ESPN.2.co`, `ESPN.MX.mx`,
+`Canal.ESPN.3.(Argentina).ar`, `FOX.SPORTS.PREMIUM.mx`,
+`FOX.Sports.3.HD(FXS3HD).co`…) y US Latino (`Univision.us`, `Telemundo.us`…)
+reciben su `tvg-id`; el país se lee aunque el id lleve `@HD`; y los alias del
+mapeo permiten emparejar canales de la guía de EE. UU., que usa ids numéricos.
 
 ## Publicar en GitHub (pasos)
 

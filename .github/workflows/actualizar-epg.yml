@@ -73,6 +73,16 @@ jobs:
           # Opcional: sustituir por completo las fuentes por URLs propias
           # (separadas por comas). Si se define, no se usan los paises.
           EPG_URL: ${{ vars.EPG_URL }}
+          # Listas M3U de apoyo que se fusionan con la del proveedor para
+          # completar Espana, Latam y US Latino. Admite atajos de iptv-org
+          # (iptv-org-es, iptv-org-mx, iptv-org-ar, iptv-org-co, iptv-org-cl,
+          # iptv-org-pe, iptv-org-us, iptv-org-deportes...) o URLs propias
+          # separadas por comas. Vacía o sin definir deja las de por defecto;
+          # el valor "ninguna" las desactiva (equivale a --sin-m3u-extra).
+          M3U_EXTRA_URL: ${{ vars.M3U_EXTRA_URL }}
+          # Maximo de senales publicadas por canal: 1 principal + N-1 respaldos
+          # (3 por defecto). Vacio o sin definir deja 3.
+          M3U_MAXIMO_SENALES: ${{ vars.M3U_MAXIMO_SENALES }}
         run: python generar_epg.py --salida epg.xml --m3u-salida lista.m3u
 
       - name: Verificar que el XMLTV y la lista M3U son validos y estan sincronizados
@@ -147,6 +157,15 @@ jobs:
               f"lista.m3u: entradas={len(entradas)} canales={len(ids_m3u)} "
               f"senales_respaldo={respaldos}"
           )
+
+          # Limite estricto: 1 principal + 2 respaldos por canal.
+          por_canal = {}
+          for extinf, _url in entradas:
+              identificador = atributo(extinf, "tvg-id")
+              por_canal[identificador] = por_canal.get(identificador, 0) + 1
+          excedidos = {canal: total for canal, total in por_canal.items() if total > 3}
+          assert not excedidos, f"canales con mas de 3 senales: {list(excedidos.items())[:5]}"
+          print(f"maximo de senales por canal: {max(por_canal.values())} (limite 3)")
           print(f"OK: {len(con_epg)} canales con programacion real de {len(canales)}")
           PY
 

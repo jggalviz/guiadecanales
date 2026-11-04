@@ -5,15 +5,16 @@
  generar_epg.py  |  Generador de EPG (XMLTV) a partir de una lista M3U remota
 ===============================================================================
 
-Descarga una lista M3U, extrae de cada canal el nombre (texto que va despues de
-la ultima coma del #EXTINF) y sus atributos ``tvg-id``, ``tvg-name`` y
-``tvg-logo``, unifica las senales repetidas (SD / HD / FHD / [Opc.2] / pais...)
-y genera un ``epg.xml`` en formato XMLTV con la **programacion real** descargada
-de guias XMLTV publicas (por defecto una guia por pais de epgshare01).
+Descarga una lista M3U (y, opcionalmente, listas M3U de apoyo), extrae de cada
+canal el nombre (texto que va despues de la ultima coma del #EXTINF) y sus
+atributos ``tvg-id``, ``tvg-name`` y ``tvg-logo``, unifica las senales repetidas
+(SD / HD / FHD / [Opc.2] / pais...) y genera un ``epg.xml`` en formato XMLTV con
+la **programacion real** descargada de guias XMLTV publicas (por defecto una
+guia por pais de epgshare01).
 
 Ademas publica ``lista.m3u``: una lista propia (ordenada, con atributos limpios,
-``tvg-id`` sincronizado con la guia y todas las senales de respaldo) que se puede
-usar directamente en OTT Navigator, VLC, TiviMate, IPTV Smarters...
+``tvg-id`` sincronizado con la guia y hasta dos senales de respaldo) que se
+puede usar directamente en OTT Navigator, VLC, TiviMate, IPTV Smarters...
 
 Flujo de la programacion
 ------------------------
@@ -33,22 +34,36 @@ Flujo de la programacion
 
 Flujo de la lista propia
 ------------------------
-1. Un **mapeo explicito** (``mapeo_canales.json`` + :data:`MAPEO_CANALES_POR_DEFECTO`)
+1. Se descarga la lista del proveedor (``--url``) y, opcionalmente, se
+   **fusionan listas M3U de apoyo** (``--m3u-extra`` / ``M3U_EXTRA_URL``): los
+   feeds publicos por pais y categoria de iptv-org y cualquier proveedor
+   secundario. De las listas de apoyo solo se aceptan los canales de los
+   bloques estrategicos (DSports, ESPN, FOX Sports, Espana, Latam y US Latino).
+2. Un **mapeo explicito** (``mapeo_canales.json`` + :data:`MAPEO_CANALES_POR_DEFECTO`)
    fija el ``tvg-id`` real de las senales dificiles: ``ESPN 2 HD``,
-   ``ESPN 2 (Opc.2)`` y ``ESPN2 HD - (Opc.3)`` acaban todas en ``ESPN2.us``.
-2. Los **duplicados/espejos no se eliminan**: cada senal (``Opc.2``, ``Backup``,
-   ``Espejo``...) se publica como una entrada propia con el ``tvg-id`` y el
-   ``tvg-name`` de su canal principal, asi que muestra la misma programacion.
-3. Se ordenan los canales por grupo y nombre y se limpian los atributos
+   ``ESPN 2 (Opc.2)`` y ``ESPN2 HD - (Opc.3)`` acaban todas en ``ESPN2.us``, y
+   los canales de Espana, los feeds regionales de ESPN/FOX Sports y los de
+   US Latino en el id de su guia (``La.1.es``, ``ESPN.2.co``,
+   ``FOX.SPORTS.mx``, ``Univision.us``...).
+3. Los **duplicados/espejos no se eliminan**, pero se limitan: cada canal
+   publica la senal principal y **dos respaldos** (``Opc. 2`` y ``Opc. 3``) con
+   el ``tvg-id`` y el ``tvg-name`` de su canal principal; el resto se descarta
+   para no inflar la lista (:data:`MAXIMO_SENALES_POR_CANAL`).
+4. Se ordenan los canales por grupo y nombre y se limpian los atributos
    (``tvg-id``, ``tvg-name``, ``tvg-logo`` solo si es http(s), ``group-title``),
    conservando los ``#EXTVLCOPT``/``#KODIPROP`` de la lista original.
-4. La cabecera declara la guia publicada (``x-tvg-url``/``url-tvg``) y la salida
+5. La cabecera declara la guia publicada (``x-tvg-url``/``url-tvg``) y la salida
    se escribe en ``lista.m3u`` junto al ``epg.xml``.
 
 Caracteristicas
 ---------------
 * Solo librerias estandar de Python (3.9+): urllib.request, re, gzip, io, json,
   xml.etree.ElementTree, datetime, argparse, unicodedata, html.
+* Ingesta **multi-fuente**: fusion de la lista del proveedor con listas M3U
+  publicas (atajos ``iptv-org-*``) y filtro por bloques estrategicos (Espana,
+  DSports, ESPN, FOX Sports, Latam y US Latino).
+* Limite estricto de **3 senales por canal** (principal + ``Opc. 2`` y
+  ``Opc. 3``); las de la lista del proveedor tienen prioridad.
 * Descarga con User-Agent de navegador, reintentos, soporte de gzip y deteccion
   de codificacion.
 * Saneado de mojibake al leer la lista: ``MÚxico`` -> ``México``, ``Espa±a`` ->
@@ -70,6 +85,8 @@ Uso rapido
     python generar_epg.py --url "https://raw.githubusercontent.com/USUARIO/REPO/RAMA/lista.m3u"
     python generar_epg.py                 # usa la constante URL_M3U o la variable M3U_URL
     python generar_epg.py -u "$M3U_URL" --epg-pais MX,ES,AR   # guias reales por pais
+    python generar_epg.py -u "$M3U_URL" --m3u-extra iptv-org-es,iptv-org-deportes
+    python generar_epg.py -u "$M3U_URL" --sin-m3u-extra --maximo-senales 2
     python generar_epg.py -u "$M3U_URL" --mapeo mapeo_canales.json
     python generar_epg.py -u "$M3U_URL" --epg https://ejemplo.com/guia.xml.gz
     python generar_epg.py -h              # ayuda completa
@@ -77,6 +94,10 @@ Uso rapido
 Variables de entorno
 --------------------
     M3U_URL            URL de la lista M3U (tiene prioridad sobre la constante).
+    M3U_EXTRA_URL      Listas M3U de apoyo separadas por comas (atajos de
+                       iptv-org o URLs). Vacia usa las de por defecto;
+                       "ninguna" las desactiva.
+    M3U_MAXIMO_SENALES Senales publicadas por canal (3: principal + 2 respaldos).
     M3U_SALIDA         Ruta de la lista M3U propia (por defecto: lista.m3u).
     M3U_MAPEO          JSON con el mapeo explicito (por defecto: mapeo_canales.json).
     EPG_SALIDA         Ruta del archivo de salida (por defecto: epg.xml).
@@ -107,7 +128,7 @@ import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from datetime import date, datetime, timedelta, timezone
 from xml.etree import ElementTree as ET
 
@@ -488,6 +509,220 @@ MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
         "nombre": "DSports Motor",
         "alias": ("DSports Motor", "DIRECTV Sports Motor"),
     },
+    # --- Espana: cadenas nacionales y autonomicas -------------------------
+    # Ids reales de la guia publica de Espana (``epg_ripper_ES1``), que separa
+    # con puntos (``La.1.es``). Con estos alias el ``tvg-id`` del M3U y el de la
+    # guia coinciden aunque la lista escriba "La1.es".
+    "La.1.es": {
+        "nombre": "La 1",
+        "alias": ("La 1", "La1", "La Primera", "TVE 1", "TVE1"),
+    },
+    "La.2.es": {"nombre": "La 2", "alias": ("La 2", "La2", "TVE 2", "TVE2")},
+    "Antena.3.es": {
+        "nombre": "Antena 3",
+        "alias": ("Antena 3", "Antena3", "A3"),
+    },
+    "Cuatro.es": {"nombre": "Cuatro", "alias": ("Cuatro",)},
+    "Telecinco.es": {"nombre": "Telecinco", "alias": ("Telecinco", "Tele 5")},
+    "laSexta.es": {"nombre": "laSexta", "alias": ("laSexta", "La Sexta")},
+    "Neox.es": {"nombre": "Neox", "alias": ("Neox",)},
+    "Nova.es": {"nombre": "Nova", "alias": ("Nova España", "Nova Spain")},
+    "Energy.es": {"nombre": "Energy", "alias": ("Energy España", "Energy Spain")},
+    "Divinity.es": {"nombre": "Divinity", "alias": ("Divinity",)},
+    "FDF.Telecinco.es": {
+        "nombre": "FDF",
+        "alias": ("FDF", "FDF Telecinco", "Factoría de Ficción"),
+    },
+    "DMAX.es": {"nombre": "DMAX", "alias": ("DMAX España", "DMAX Spain")},
+    "DKISS.es": {"nombre": "DKISS", "alias": ("DKISS",)},
+    "Boing.es": {"nombre": "Boing", "alias": ("Boing España", "Boing Spain")},
+    "Paramount.Network.es": {
+        "nombre": "Paramount Network",
+        "alias": ("Paramount Network España", "Paramount Network Spain"),
+    },
+    "TRECE.es": {"nombre": "TRECE", "alias": ("TRECE", "Trece España")},
+    "Clan.TVE.es": {
+        "nombre": "Clan",
+        "alias": ("Clan TVE", "Clan", "Clan Internacional"),
+    },
+    "Teledeporte.es": {"nombre": "Teledeporte", "alias": ("Teledeporte", "TDP")},
+    "Canal.24.horas.es": {
+        "nombre": "Canal 24 Horas",
+        "alias": ("Canal 24 Horas", "24 Horas", "24h TVE"),
+    },
+    "GOL.PLAY.es": {"nombre": "GOL PLAY", "alias": ("GOL PLAY", "Gol Play")},
+    "DAZN.LaLiga.es": {"nombre": "DAZN LaLiga", "alias": ("DAZN LaLiga",)},
+    "DAZN.F1.es": {"nombre": "DAZN F1", "alias": ("DAZN F1",)},
+    "M+.Deportes.es": {
+        "nombre": "M+ Deportes",
+        "alias": ("M+ Deportes", "Movistar Deportes España"),
+    },
+    "M+.Vamos.es": {"nombre": "M+ Vamos", "alias": ("M+ Vamos", "#Vamos")},
+    "Movistar.Deportes.1.es": {
+        "nombre": "Movistar Deportes 1",
+        "alias": ("Movistar Deportes 1", "Movistar Deportes España"),
+    },
+    "TV3.es": {"nombre": "TV3", "alias": ("TV3", "TV3 Cataluña", "TV3 CAT")},
+    "Canal.33.es": {"nombre": "Canal 33", "alias": ("Canal 33",)},
+    "Esport.3.es": {"nombre": "Esport3", "alias": ("Esport3", "Esport 3")},
+    "Canal.Sur.es": {"nombre": "Canal Sur", "alias": ("Canal Sur", "Canal Sur Andalucía")},
+    "ETB.1.es": {"nombre": "ETB 1", "alias": ("ETB 1", "ETB1", "EITB 1")},
+    "ETB.2.es": {"nombre": "ETB 2", "alias": ("ETB 2", "ETB2", "EITB 2")},
+    "Telemadrid.es": {"nombre": "Telemadrid", "alias": ("Telemadrid",)},
+    "TVG.es": {"nombre": "TVG", "alias": ("TVG", "Televisión de Galicia")},
+    "tvG2.es": {"nombre": "tvG2", "alias": ("tvG2", "TVG2")},
+    "IB3.es": {"nombre": "IB3", "alias": ("IB3",)},
+    "TPA.es": {
+        "nombre": "TPA",
+        "alias": ("TPA", "Televisión del Principado de Asturias"),
+    },
+    "CyLTV.Global.es": {
+        "nombre": "CyLTV",
+        "alias": ("CyLTV", "CyL TV", "Castilla y León TV"),
+    },
+    "Canal.Extremadura.TV.es": {
+        "nombre": "Canal Extremadura",
+        "alias": ("Canal Extremadura", "Canal Extremadura TV"),
+    },
+    "La.7.es": {"nombre": "La 7", "alias": ("La 7", "La 7 Rioja")},
+    "À.Punt.es": {"nombre": "À Punt", "alias": ("À Punt", "A Punt")},
+    "Aragón.Televisión.es": {
+        "nombre": "Aragón TV",
+        "alias": ("Aragón TV", "Aragon TV"),
+    },
+    "Castilla-La.Mancha.Media.es": {
+        "nombre": "Castilla-La Mancha Media",
+        "alias": ("Castilla-La Mancha Media", "CMM", "CMM TV"),
+    },
+    "FOX.es": {"nombre": "FOX España", "alias": ("FOX España", "FOX Spain")},
+    # --- ESPN: senales y feeds regionales ---------------------------------
+    # Los ids con puntos y parentesis son los que publican las guias por pais
+    # (``epg_ripper_CO1``, ``epg_ripper_MX1``...): con el alias se fija el
+    # ``tvg-id`` regional exacto y el reproductor pide su parrilla.
+    "ESPN.co": {"nombre": "ESPN Colombia", "alias": ("ESPN Colombia", "ESPN CO")},
+    "ESPN.2.co": {
+        "nombre": "ESPN 2 Colombia",
+        "alias": ("ESPN 2 Colombia", "ESPN 2 CO"),
+    },
+    "ESPN.3.co": {
+        "nombre": "ESPN 3 Colombia",
+        "alias": ("ESPN 3 Colombia", "ESPN 3 CO"),
+    },
+    "ESPN.MX.mx": {
+        "nombre": "ESPN México",
+        "alias": ("ESPN México", "ESPN Mexico", "ESPN MX"),
+    },
+    "ESPN.2.mx": {"nombre": "ESPN 2 México", "alias": ("ESPN 2 México", "ESPN 2 MX")},
+    "ESPN.3.mx": {"nombre": "ESPN 3 México", "alias": ("ESPN 3 México", "ESPN 3 MX")},
+    "ESPN.5.mx": {"nombre": "ESPN 5 México", "alias": ("ESPN 5 México", "ESPN 5 MX")},
+    "Canal.ESPN.(Argentina).ar": {
+        "nombre": "ESPN Argentina",
+        "alias": ("ESPN Argentina", "ESPN ARG"),
+    },
+    "Canal.ESPN.3.(Argentina).ar": {
+        "nombre": "ESPN 3 Argentina",
+        "alias": ("ESPN 3 Argentina", "ESPN 3 ARG"),
+    },
+    "ESPN.HD.(ESPN.HD).pe": {
+        "nombre": "ESPN Perú",
+        "alias": ("ESPN Perú", "ESPN Peru", "ESPN PE"),
+    },
+    "ESPN.2.(ESPN2.Peru).pe": {
+        "nombre": "ESPN 2 Perú",
+        "alias": ("ESPN 2 Perú", "ESPN 2 Peru", "ESPN 2 PE"),
+    },
+    "ESPN.3.HD.(ESPN.3.HD).pe": {
+        "nombre": "ESPN 3 Perú",
+        "alias": ("ESPN 3 Perú", "ESPN 3 Peru", "ESPN 3 PE"),
+    },
+    # --- FOX Sports: senales y feeds regionales ---------------------------
+    "FOX.SPORTS.mx": {
+        "nombre": "FOX Sports México",
+        "alias": ("FOX Sports México", "FOX Sports Mexico", "FOX Sports MX"),
+    },
+    "FOX.SPORTS.2.mx": {
+        "nombre": "FOX Sports 2 México",
+        "alias": ("FOX Sports 2 México", "FOX Sports 2 MX"),
+    },
+    "FOX.SPORTS.3.mx": {
+        "nombre": "FOX Sports 3 México",
+        "alias": ("FOX Sports 3 México", "FOX Sports 3 MX"),
+    },
+    "FOX.SPORTS.PREMIUM.mx": {
+        "nombre": "FOX Sports Premium",
+        "alias": (
+            "FOX Sports Premium",
+            "FOX Sport Premium",
+            "FOX Sports Premium México",
+        ),
+    },
+    "FOX.Sports.2.HD(FSP2HD).co": {
+        "nombre": "FOX Sports 2 Colombia",
+        "alias": ("FOX Sports 2 Colombia", "FOX Sports 2 CO"),
+    },
+    "FOX.Sports.3.HD(FXS3HD).co": {
+        "nombre": "FOX Sports 3 Colombia",
+        "alias": ("FOX Sports 3 Colombia", "FOX Sports 3 CO"),
+    },
+    "FOX.SPORTS.HD.(FoxSportsHD).pe": {
+        "nombre": "FOX Sports Perú",
+        "alias": ("FOX Sports Perú", "FOX Sports Peru", "FOX Sports PE"),
+    },
+    "FOX.SPORTS.2.HD.(FoxSports2HD).pe": {
+        "nombre": "FOX Sports 2 Perú",
+        "alias": ("FOX Sports 2 Perú", "FOX Sports 2 Peru"),
+    },
+    "FOX.SPORTS.3.HD.(FoxSports3HD).pe": {
+        "nombre": "FOX Sports 3 Perú",
+        "alias": ("FOX Sports 3 Perú", "FOX Sports 3 Peru"),
+    },
+    "FoxDeportes.us": {
+        "nombre": "FOX Deportes",
+        "alias": ("FOX Deportes", "Fox Deportes"),
+    },
+    # --- US Latino: paquetes en espanol de DirecTV/Xfinity/Dish Latino ----
+    # La guia de EE. UU. (epg.pw) publica ids numericos, asi que el enlace con
+    # estos canales se hace por nombre: los alias largos ("Univision Network
+    # HD") son los display-name con los que la guia los identifica.
+    "Univision.us": {
+        "nombre": "Univision",
+        "alias": (
+            "Univision",
+            "Univisión",
+            "Univision Network",
+            "Univision Network HD",
+            "Univision East",
+            "Univision West",
+        ),
+    },
+    "UniMas.us": {
+        "nombre": "UniMás",
+        "alias": ("UniMás", "UniMas", "UniMas East", "UniMas HD"),
+    },
+    "Galavision.us": {
+        "nombre": "Galavisión",
+        "alias": (
+            "Galavisión",
+            "Galavision",
+            "Galavision East",
+            "Galavision West",
+            "Galavision Cable Network",
+        ),
+    },
+    "Telemundo.us": {
+        "nombre": "Telemundo",
+        "alias": ("Telemundo", "Telemundo East", "Telemundo West"),
+    },
+    "EstrellaTV.us": {
+        "nombre": "Estrella TV",
+        "alias": ("Estrella TV", "EstrellaTV"),
+    },
+    "TUDN.us": {
+        "nombre": "TUDN USA",
+        "alias": ("TUDN USA", "TUDN Estados Unidos"),
+    },
+    "MegaTV.us": {"nombre": "Mega TV", "alias": ("Mega TV", "MegaTV", "Mega TV USA")},
+    "ElRey.us": {"nombre": "El Rey", "alias": ("El Rey", "El Rey Network")},
 }
 
 #: Archivo JSON opcional que amplia :data:`MAPEO_CANALES_POR_DEFECTO`. Se busca
@@ -510,6 +745,55 @@ URL_EPG_PUBLICA = os.environ.get("EPG_PUBLICA_URL", "").strip() or (
 #: ``Opc.2``, ``Backup``...) para distinguirlas en el reproductor sin cambiar el
 #: ``tvg-id`` ni el ``tvg-name`` con el que se pide la programacion.
 ETIQUETA_SENAL_SECUNDARIA = "Opc. {numero}"
+
+#: Maximo de senales que se publican por canal: la principal mas dos respaldos
+#: (``Opc. 2`` y ``Opc. 3``). Las demas variantes del mismo canal se descartan
+#: para no inflar la lista con espejos redundantes o caidos. Se puede cambiar
+#: con ``--maximo-senales`` o con la variable ``M3U_MAXIMO_SENALES``.
+MAXIMO_SENALES_POR_CANAL = max(
+    1, _entero_entorno("M3U_MAXIMO_SENALES", 3)
+)
+
+# -----------------------------------------------------------------------------
+# Fuentes M3U adicionales (Espana, Latam y US Latino)
+# -----------------------------------------------------------------------------
+
+#: Atajos de las listas M3U publicas que se pueden pedir por nombre en lugar de
+#: la URL completa: ``--m3u-extra iptv-org-es,iptv-org-deportes`` o
+#: ``M3U_EXTRA_URL=iptv-org-mx,iptv-org-us``. Los feeds por pais y por
+#: categoria de iptv-org son estables, publicos y se actualizan a diario.
+FUENTES_M3U_EXTRA_CONOCIDAS = {
+    "iptv-org-es": "https://iptv-org.github.io/iptv/countries/es.m3u",
+    "iptv-org-mx": "https://iptv-org.github.io/iptv/countries/mx.m3u",
+    "iptv-org-ar": "https://iptv-org.github.io/iptv/countries/ar.m3u",
+    "iptv-org-co": "https://iptv-org.github.io/iptv/countries/co.m3u",
+    "iptv-org-cl": "https://iptv-org.github.io/iptv/countries/cl.m3u",
+    "iptv-org-pe": "https://iptv-org.github.io/iptv/countries/pe.m3u",
+    "iptv-org-uy": "https://iptv-org.github.io/iptv/countries/uy.m3u",
+    "iptv-org-ec": "https://iptv-org.github.io/iptv/countries/ec.m3u",
+    "iptv-org-ve": "https://iptv-org.github.io/iptv/countries/ve.m3u",
+    "iptv-org-us": "https://iptv-org.github.io/iptv/countries/us.m3u",
+    "iptv-org-deportes": "https://iptv-org.github.io/iptv/categories/sports.m3u",
+    "iptv-org-latam": "https://iptv-org.github.io/iptv/regions/latam.m3u",
+    "iptv-org-espanol": "https://iptv-org.github.io/iptv/languages/spa.m3u",
+}
+
+#: Listas M3U extra que se fusionan con la lista principal del proveedor. Se
+#: pueden cambiar con ``--m3u-extra`` o con ``M3U_EXTRA_URL`` (lista separada
+#: por comas, con atajos de :data:`FUENTES_M3U_EXTRA_CONOCIDAS` o URLs propias)
+#: y desactivar con ``--sin-m3u-extra``.
+#:
+#: Por defecto se suman las listas publicas de iptv-org de los mercados que
+#: interesan (Espana, Mexico, Argentina, Colombia, Chile, Peru, la categoria de
+#: deportes y los canales de EE. UU. en espanol). El volumen se mantiene a raya
+#: porque de las listas extra solo se aceptan los canales de los bloques
+#: estrategicos (:func:`clasificar_canal_estrategico`) y porque cada canal
+#: publica como maximo :data:`MAXIMO_SENALES_POR_CANAL` senales.
+URLS_M3U_EXTRA_POR_DEFECTO = _lista_entorno(
+    "M3U_EXTRA_URL",
+    "iptv-org-es,iptv-org-mx,iptv-org-ar,iptv-org-co,"
+    "iptv-org-cl,iptv-org-pe,iptv-org-deportes,iptv-org-us",
+)
 
 
 # =============================================================================
@@ -772,6 +1056,92 @@ def parsear_m3u(texto: str) -> list[dict[str, object]]:
         opciones = []
 
     return canales
+
+
+def resolver_fuentes_m3u(valores: "Sequence[str]") -> list[str]:
+    """Convierte los atajos de :data:`FUENTES_M3U_EXTRA_CONOCIDAS` en URLs.
+
+    Admite URLs completas, rutas locales y atajos (``iptv-org-es``); los valores
+    se pueden pasar sueltos o separados por comas. Se descartan los repetidos y
+    los vacios, conservando el orden pedido (que es el de prioridad). El valor
+    ``ninguna`` (o ``none``/``-``) desactiva las listas de apoyo, que es la
+    forma de apagarlas desde una variable de entorno del workflow.
+    """
+    fuentes: list[str] = []
+    for valor in valores or ():
+        for parte in str(valor or "").split(","):
+            parte = parte.strip()
+            if not parte:
+                continue
+            if parte.lower() in ("ninguna", "none", "-", "off", "no"):
+                return []
+            url = FUENTES_M3U_EXTRA_CONOCIDAS.get(parte.lower(), parte)
+            if url not in fuentes:
+                fuentes.append(url)
+    return fuentes
+
+
+def fusionar_listas_m3u(
+    fuentes: "Sequence[tuple[str, str]]",
+    filtrar_extra: bool = True,
+) -> list[dict[str, object]]:
+    """Fusiona varias listas M3U en una sola lista de canales.
+
+    ``fuentes`` es una secuencia de ``(etiqueta, texto)`` donde la **primera**
+    entrada es la lista principal (la del proveedor) y el resto son listas de
+    apoyo (iptv-org, proveedores secundarios...).
+
+    Cada canal resultante conserva ``origen_m3u`` (la etiqueta de su lista) y
+    ``prioridad`` (0 para la principal, 1..n para las de apoyo), de modo que
+    :func:`consolidar_canales` puede dar preferencia a la senal del proveedor y
+    recortar despues los respaldos sobrantes.
+
+    Con ``filtrar_extra=True`` de las listas de apoyo solo se aceptan los
+    canales de los bloques estrategicos (:func:`es_canal_estrategico`): asi una
+    lista generica de deportes no mete en la parrilla canales de otros mercados.
+    La lista principal nunca se filtra.
+    """
+    fusionados: list[dict[str, object]] = []
+    for indice, (etiqueta, texto) in enumerate(fuentes or ()):
+        for canal in parsear_m3u(texto or ""):
+            canal["origen_m3u"] = etiqueta
+            canal["prioridad"] = indice
+            if indice and filtrar_extra and not es_canal_estrategico(canal):
+                continue
+            fusionados.append(canal)
+    return fusionados
+
+
+def cargar_fuentes_m3u(
+    fuentes: "Sequence[str]",
+    timeout: int = TIMEOUT_SEGUNDOS,
+    reintentos: int = REINTENTOS,
+    aviso: "Callable[[str], None] | None" = None,
+) -> list[tuple[str, str]]:
+    """Descarga (o lee) las listas M3U de apoyo sin abortar si alguna falla.
+
+    Devuelve ``[(etiqueta, texto), ...]`` con las que se pudieron cargar. Una
+    fuente rota (404, timeout, HTML en vez de M3U) se avisa y se omite: la
+    generacion sigue con la lista principal y el resto de apoyos.
+    """
+    avisar = aviso or (lambda mensaje: None)
+    cargadas: list[tuple[str, str]] = []
+    for fuente in fuentes or ():
+        try:
+            if fuente.lower().startswith(("http://", "https://")):
+                texto = descargar_m3u(fuente, timeout=timeout, reintentos=reintentos)
+            else:
+                with open(fuente, "r", encoding="utf-8", errors="replace") as archivo:
+                    texto = archivo.read()
+            if "#EXTINF" not in texto.upper():
+                raise ValueError("el contenido no parece una lista M3U")
+            cargadas.append((fuente, texto))
+            avisar(f"      + {fuente}: {len(parsear_m3u(texto))} entradas")
+        except (OSError, ValueError, RuntimeError, SystemExit) as error:
+            # ``descargar_m3u`` aborta con SystemExit tras agotar los reintentos:
+            # en una lista de apoyo eso no debe tumbar la generacion.
+            avisar(f"      Aviso: se omite la lista M3U extra {fuente} ({error})")
+    return cargadas
 
 
 # =============================================================================
@@ -1182,11 +1552,57 @@ def buscar_en_mapeo(
 
 
 
+def _prioridad_canal(canal: "Mapping[str, object]") -> int:
+    """Prioridad de la lista de origen del canal (0 = lista principal del M3U)."""
+    try:
+        return max(0, int(canal.get("prioridad", 0) or 0))
+    except (TypeError, ValueError):
+        return 0
+
+
+def _limitar_senales(canal: dict[str, object], maximo: int) -> int:
+    """Recorta las senales del canal a ``maximo`` y devuelve cuantas descarto.
+
+    Se conservan primero las de la lista principal (``prioridad`` 0) y despues
+    las de las listas de apoyo, respetando el orden original dentro de cada
+    grupo. El numero de descartes se anota en ``descartadas``.
+    """
+    senales = canal.get("senales") or []
+    if not isinstance(senales, list):
+        return 0
+    if len(senales) <= maximo:
+        canal["descartadas"] = 0
+        return 0
+    ordenadas = sorted(
+        enumerate(senales),
+        key=lambda par: (_prioridad_canal(par[1]), par[0]),
+    )
+    canal["senales"] = [senal for _posicion, senal in ordenadas[:maximo]]
+    descartadas = len(senales) - len(canal["senales"])
+    canal["descartadas"] = descartadas
+    return descartadas
+
+
+def _pais_compatible(
+    existente: "Mapping[str, object]", registro: "Mapping[str, object]"
+) -> bool:
+    """Indica si dos registros del mismo nombre pueden ser el mismo canal.
+
+    Se exige que el pais no se contradiga: ``Canal 12`` de El Salvador no se
+    fusiona con ``Canal12.es``, pero si uno de los dos no declara pais se
+    fusionan (es el caso habitual de la lista del proveedor, que no lo trae).
+    """
+    pais_existente = _pais_del_canal(existente)  # type: ignore[arg-type]
+    pais_nuevo = _pais_del_canal(registro)  # type: ignore[arg-type]
+    return not pais_existente or not pais_nuevo or pais_existente == pais_nuevo
+
+
 def consolidar_canales(
     canales: Iterable[Mapping[str, object]],
     usar_tvg_id: bool = True,
     conservar_tvg_id: bool = False,
     mapeo: "Mapping[str, Mapping[str, object]] | None" = None,
+    maximo_senales: int = MAXIMO_SENALES_POR_CANAL,
 ) -> list[dict[str, object]]:
     """Limpia los nombres, unifica senales repetidas y asigna un id unico.
 
@@ -1208,16 +1624,22 @@ def consolidar_canales(
     Sports"), salvo que dos senales del mismo nombre solo se diferencien en el
     pais: en ese caso se conserva para no fusionar canales distintos.
 
-    Cada canal conserva en ``senales`` **todas** las entradas de la lista
-    original que representan el mismo canal (HD, espejos, ``Opc.2``,
-    ``Backup``...), con su URL y sus opciones, para que la lista M3U propia las
-    publique todas con el mismo ``tvg-id`` en vez de descartarlas.
+    Cada canal conserva en ``senales`` las entradas de la lista original que
+    representan el mismo canal (HD, espejos, ``Opc.2``, ``Backup``...), con su
+    URL y sus opciones, para que la lista M3U propia las publique con el mismo
+    ``tvg-id``. El numero de senales se limita a ``maximo_senales`` (3 por
+    defecto: la principal y dos respaldos): las que sobran se descartan para no
+    inflar la lista con espejos redundantes o caidos, y el descarte se anota en
+    ``descartadas``. Las senales de la lista principal (``prioridad`` 0) se
+    conservan siempre antes que las de las listas de apoyo.
     """
     indice_mapeo = _indice_mapeo(mapeo) if mapeo else {}
+    maximo_senales = max(1, int(maximo_senales))
     registros: list[dict[str, object]] = []
     for canal in canales:
         nombre_original = str(canal.get("nombre", "") or "")
         tvg_name_original = str(canal.get("tvg_name", "") or "")
+        prioridad = _prioridad_canal(canal)
         mapeado = buscar_en_mapeo(
             indice_mapeo,
             nombre_original,
@@ -1231,6 +1653,7 @@ def consolidar_canales(
             tvg_id = str(mapeado["id"])
             tvg_name = str(mapeado["nombre"])
             logo = str(mapeado.get("logo") or canal.get("logo") or "")
+            alias = tuple(str(alias) for alias in (mapeado.get("alias") or ()))
         else:
             amplio = limpiar_nombre(nombre_original, quitar_region=True)
             estricto = limpiar_nombre(nombre_original, quitar_region=False)
@@ -1243,6 +1666,7 @@ def consolidar_canales(
             )
             tvg_name = tvg_name_original
             logo = str(canal.get("logo", "") or "")
+            alias = ()
 
         registros.append(
             {
@@ -1256,10 +1680,13 @@ def consolidar_canales(
                 "tvg_name": tvg_name,
                 "nombre_m3u": nombre_original.strip(),
                 "mapeado": mapeado is not None,
+                "alias": alias,
                 "senal": {
                     "url": str(canal.get("url", "") or ""),
                     "opciones": tuple(canal.get("opciones") or ()),
                     "nombre_m3u": nombre_original.strip(),
+                    "prioridad": prioridad,
+                    "origen_m3u": str(canal.get("origen_m3u", "") or ""),
                 },
             }
         )
@@ -1305,6 +1732,24 @@ def consolidar_canales(
         if registro["tvg_id"]:
             clave = registro["tvg_id"]
             origen = "tvg-id"
+            # El mismo canal pudo entrar antes desde otra lista sin tvg-id (su
+            # id se genero con el nombre): se traslada a la clave canonica para
+            # no publicarlo dos veces. Solo se fusiona si el pais no contradice.
+            previa = id_por_nombre.get(id_nombre)
+            if (
+                previa
+                and previa != clave
+                and previa in unicos
+                and not unicos[previa]["tvg_id"]
+                and _pais_compatible(unicos[previa], registro)
+            ):
+                unicos[clave] = unicos.pop(previa)
+                unicos[clave]["id"] = clave
+                unicos[clave]["tvg_id"] = clave
+                unicos[clave]["origen"] = "tvg-id"
+                for nombre_clave, valor in list(id_por_nombre.items()):
+                    if valor == previa:
+                        id_por_nombre[nombre_clave] = clave
         else:
             # Sin tvg-id: si el nombre ya pertenece a un canal registrado
             # (que si tenia tvg-id), se reutiliza esa entrada.
@@ -1334,10 +1779,15 @@ def consolidar_canales(
             "nombre_m3u": registro["nombre_m3u"],
             "origen": origen,
             "mapeado": bool(registro.get("mapeado")),
+            "alias": tuple(registro.get("alias") or ()),
             "senales": [],
+            "descartadas": 0,
         }
         agregar_senal(unicos[clave], registro["senal"])
         id_por_nombre.setdefault(id_nombre, clave)
+
+    for canal in unicos.values():
+        _limitar_senales(canal, maximo_senales)
 
     return list(unicos.values())
 
@@ -1639,8 +2089,13 @@ def _clave_id(texto: str) -> str:
 
 
 def _pais_de_id(identificador: str) -> str:
-    """Devuelve el codigo de pais del final de un id (``canal5.mx`` -> ``mx``)."""
-    identificador = (identificador or "").strip()
+    """Devuelve el codigo de pais del final de un id (``canal5.mx`` -> ``mx``).
+
+    Se descarta antes el sufijo de calidad/feed (``ESPN2.us@HD`` -> ``us``),
+    que es como publican los ids las listas de iptv-org: sin este paso el pais
+    se perdia y el emparejamiento no podia desempatar por mercado.
+    """
+    identificador = (identificador or "").strip().split("@", 1)[0]
     if "." not in identificador:
         return ""
     sufijo = identificador.rsplit(".", 1)[-1].lower()
@@ -1666,6 +2121,82 @@ def _pais_de_fuente(identificador: str, nombres: "Sequence[str]") -> str:
         if codigo:
             return codigo
     return _pais_de_id(identificador)
+
+
+#: Mercados de Latinoamerica que se aceptan enteros cuando llegan desde una
+#: lista M3U de apoyo (son los paises con guia EPG propia en
+#: :data:`PAISES_EPG_POR_DEFECTO`).
+_PAISES_LATAM = frozenset(
+    {
+        "mx", "ar", "co", "cl", "pe", "uy", "ec", "ve", "py", "bo", "br",
+        "pa", "cr", "gt", "hn", "sv", "ni", "do", "pr", "cu",
+    }
+)
+
+#: Marcas que identifican un bloque estrategico aunque el canal venga de una
+#: lista generica (categoria de deportes, idioma espanol...). Se comparan con
+#: el texto ya normalizado por :func:`_texto_normalizado`.
+_MARCAS_BLOQUES = (
+    ("dsports", re.compile(r"\bd\s?sports\b|\bdirectv\s*sports\b")),
+    ("espn", re.compile(r"\bespn\b")),
+    ("fox-sports", re.compile(r"\bfox\s*sports?\b|\bfox\s*deportes\b")),
+)
+
+#: Cadenas inequivocamente espanolas: si un canal de una lista de apoyo no trae
+#: pais en el ``tvg-id`` pero se llama asi, se acepta como bloque de Espana.
+_RE_TEXTO_ESPANA = re.compile(
+    r"\b(?:la\s*1|la\s*2|la\s*primera|antena\s*3|telecinco|cuatro|lasexta|"
+    r"la\s*sexta|neox|nova|divinity|energy|boing|dmax|dkiss|trece|rtve|tve|"
+    r"clan|teledeporte|24\s*horas|tv3|canal\s*33|esport\s*3|canal\s*sur|"
+    r"etb|eitb|telemadrid|tvg|ib3|tpa|cyl\s*tv|punt|castilla|extremadura)\b"
+)
+
+#: Cadenas hispanas de EE. UU. (paquetes DirecTV/Xfinity/Dish Latino): son las
+#: que interesan del bloque ``us-latino`` y las que publica la guia de EE. UU.
+_RE_MARCAS_US_LATINO = re.compile(
+    r"\b(?:univision|unimas|telemundo|galavision|estrella|tudn|pasiones|"
+    r"mega\s*tv|fox\s*deportes|espn\s*deportes|discovery\s+(?:en|familia)|"
+    r"ntn\s*24|caracol|sur\s*peru|el\s*rey|venevision|ve\s*plus|"
+    r"nuestra\s*tv|multimedios|latin[oa]?|espanol|spanish|hispanic)\b"
+)
+
+
+def clasificar_canal_estrategico(canal: "Mapping[str, object]") -> tuple[str, ...]:
+    """Devuelve los bloques estrategicos a los que pertenece un canal del M3U.
+
+    Los bloques son ``dsports``, ``espn``, ``fox-sports``, ``espana``,
+    ``latam`` y ``us-latino``. Se usan para decidir que canales se aceptan de
+    las listas M3U de apoyo (:func:`fusionar_listas_m3u`): una lista generica de
+    deportes no debe meter en la parrilla canales de mercados que no cubrimos.
+
+    La marca manda sobre el pais (``DSports`` lo es en cualquier mercado) y el
+    pais se toma del ``tvg-id`` (``La1.es@HD`` -> ``es``) o del nombre.
+    """
+    texto = _texto_normalizado(
+        " ".join(
+            str(canal.get(clave) or "")
+            for clave in ("nombre", "tvg_name", "grupo", "nombre_m3u")
+        )
+    )
+    bloques: list[str] = [
+        nombre for nombre, patron in _MARCAS_BLOQUES if patron.search(texto)
+    ]
+
+    pais = _pais_del_canal(canal)  # type: ignore[arg-type]
+    if pais == "es" or (not pais and _RE_TEXTO_ESPANA.search(texto)):
+        bloques.append("espana")
+    elif pais in _PAISES_LATAM:
+        bloques.append("latam")
+
+    if pais in ("", "us") and _RE_MARCAS_US_LATINO.search(texto):
+        bloques.append("us-latino")
+
+    return tuple(dict.fromkeys(bloques))
+
+
+def es_canal_estrategico(canal: "Mapping[str, object]") -> bool:
+    """Indica si el canal pertenece a algun bloque estrategico."""
+    return bool(clasificar_canal_estrategico(canal))
 
 
 def _puntaje_coincidencia(nuestros: tuple[str, ...], ajenos: tuple[str, ...]) -> float:
@@ -1799,6 +2330,7 @@ def emparejar_canales(
             canal.get("nombre", ""),
             canal.get("tvg_name", ""),
             canal.get("nombre_m3u", ""),
+            *(canal.get("alias") or ()),
         )
         candidatos: set[str] = set()
         for tokens in nuestras:
@@ -2136,16 +2668,23 @@ def _semilla(canal_id: str) -> int:
     return sum(ord(caracter) for caracter in canal_id)
 
 
+#: Alias del mapeo explicito que se publican como ``<display-name>`` extra.
+MAXIMO_ALIAS_DISPLAY = 4
+
+
 def _nombres_alternativos(canal: Mapping[str, str]) -> list[str]:
     """Alias que ayudan al reproductor a emparejar la guia con la lista.
 
-    Se publican como ``<display-name>`` adicionales: el ``tvg-name`` del M3U y
-    el nombre original de la entrada (``ESPN 2 HD [LAT]``), que es justo el que
-    muestran muchos reproductores al emparejar por nombre.
+    Se publican como ``<display-name>`` adicionales: el ``tvg-name`` del M3U, el
+    nombre original de la entrada (``ESPN 2 HD [LAT]``) y los alias del mapeo
+    explicito (``Univision Network HD``, ``La 1 HD``...), que son los nombres
+    con los que las guias publicas etiquetan el mismo canal. Se limita a
+    :data:`MAXIMO_ALIAS_DISPLAY` alias del mapeo para no inflar el XMLTV.
     """
     principal = canal.get("nombre", "")
     alias: list[str] = []
-    for candidato in (canal.get("tvg_name", ""), canal.get("nombre_m3u", "")):
+    del_mapeo = [str(valor) for valor in (canal.get("alias") or ()) if str(valor).strip()]
+    for candidato in (canal.get("tvg_name", ""), canal.get("nombre_m3u", ""), *del_mapeo):
         candidato = (candidato or "").strip()
         if not candidato:
             continue
@@ -2154,7 +2693,8 @@ def _nombres_alternativos(canal: Mapping[str, str]) -> list[str]:
         if any(candidato.lower() == previo.lower() for previo in alias):
             continue
         alias.append(candidato)
-    return alias
+    maximo = MAXIMO_ALIAS_DISPLAY + 2  # tvg-name + nombre del M3U + alias del mapeo
+    return alias[:maximo]
 
 
 def _agregar_programas_reales(
@@ -2338,6 +2878,44 @@ def _crear_parser() -> argparse.ArgumentParser:
         "-u", "--url",
         default=URL_M3U,
         help="URL 'raw' de la lista M3U (por defecto: constante URL_M3U o variable M3U_URL).",
+    )
+    parser.add_argument(
+        "--m3u-extra",
+        action="append",
+        default=None,
+        metavar="URL",
+        help=(
+            "Lista M3U adicional que se fusiona con la principal (se puede repetir "
+            "o separar varias por comas). Admite atajos de iptv-org (iptv-org-es, "
+            "iptv-org-mx, iptv-org-ar, iptv-org-co, iptv-org-cl, iptv-org-pe, "
+            "iptv-org-us, iptv-org-deportes, iptv-org-latam, iptv-org-espanol) y "
+            "rutas locales. Por defecto: M3U_EXTRA_URL o las listas publicas de "
+            "Espana, Mexico, Argentina, Colombia, Chile, Peru, deportes y US Latino."
+        ),
+    )
+    parser.add_argument(
+        "--sin-m3u-extra",
+        action="store_true",
+        help="No fusionar listas M3U adicionales: usar solo la lista principal.",
+    )
+    parser.add_argument(
+        "--m3u-extra-todo",
+        action="store_true",
+        help=(
+            "Aceptar todos los canales de las listas M3U adicionales. Por defecto "
+            "solo se aceptan los de los bloques estrategicos (DSports, ESPN, Fox "
+            "Sports, Espana, Latam y US Latino)."
+        ),
+    )
+    parser.add_argument(
+        "--maximo-senales",
+        type=int,
+        default=MAXIMO_SENALES_POR_CANAL,
+        metavar="N",
+        help=(
+            "Senales que se publican por canal: la principal y N-1 respaldos "
+            f"(por defecto: {MAXIMO_SENALES_POR_CANAL})."
+        ),
     )
     parser.add_argument(
         "-s", "--salida",
@@ -2681,6 +3259,20 @@ def _fuentes_epg_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
     return fuentes
 
 
+def _fuentes_m3u_extra_desde_argumentos(argumentos: argparse.Namespace) -> list[str]:
+    """Listas M3U de apoyo que hay que fusionar con la principal.
+
+    Prioridad: ``--m3u-extra`` (repetible, admite comas y atajos) >
+    ``--sin-m3u-extra`` (nada) > :data:`URLS_M3U_EXTRA_POR_DEFECTO` (que sale de
+    ``M3U_EXTRA_URL`` o de las listas publicas de iptv-org).
+    """
+    if getattr(argumentos, "sin_m3u_extra", False):
+        return []
+    if argumentos.m3u_extra:
+        return resolver_fuentes_m3u(argumentos.m3u_extra)
+    return resolver_fuentes_m3u(URLS_M3U_EXTRA_POR_DEFECTO)
+
+
 def main(argv: list[str] | None = None) -> int:
     """Flujo completo: M3U -> canales -> EPG real -> emparejamiento -> XMLTV."""
     argumentos = _crear_parser().parse_args(argv)
@@ -2695,6 +3287,7 @@ def main(argv: list[str] | None = None) -> int:
     aviso("=" * 70)
 
     # --- 1. Origen de datos -------------------------------------------------
+    fuentes_m3u: list[str] = []
     if argumentos.demo:
         aviso("[1/7] Usando la lista M3U de ejemplo (--demo), sin descargar nada.")
         texto_m3u = M3U_DE_EJEMPLO
@@ -2717,10 +3310,36 @@ def main(argv: list[str] | None = None) -> int:
         aviso(f"[1/7] Descargando la lista M3U desde {url} ...")
         texto_m3u = descargar_m3u(url, timeout=argumentos.timeout)
         origen = url
+        fuentes_m3u = _fuentes_m3u_extra_desde_argumentos(argumentos)
+        if fuentes_m3u:
+            aviso(
+                f"      Listas M3U de apoyo: {len(fuentes_m3u)} "
+                "(Espana, Latam y US Latino; variable M3U_EXTRA_URL)"
+            )
 
-    # --- 2. Analisis del M3U ------------------------------------------------
+    # --- 2. Analisis del M3U (principal + listas de apoyo) ------------------
     aviso("[2/7] Analizando el archivo M3U (nombre + tvg-logo) ...")
-    canales_brutos = parsear_m3u(texto_m3u)
+    de_apoyo = (
+        cargar_fuentes_m3u(
+            fuentes_m3u,
+            timeout=argumentos.timeout,
+            aviso=aviso,
+        )
+        if fuentes_m3u
+        else []
+    )
+    canales_brutos = fusionar_listas_m3u(
+        [(origen, texto_m3u), *de_apoyo],
+        filtrar_extra=not argumentos.m3u_extra_todo,
+    )
+    entradas_principal = len(parsear_m3u(texto_m3u))
+    if de_apoyo:
+        aceptadas = len(canales_brutos) - entradas_principal
+        aviso(
+            f"      Entradas de la lista principal: {entradas_principal} | "
+            f"aceptadas de las listas de apoyo: {max(0, aceptadas)} "
+            f"(de {sum(len(parsear_m3u(texto)) for _etiqueta, texto in de_apoyo)} leidas)"
+        )
     if not canales_brutos:
         raise SystemExit(
             "No se encontro ningun canal valido en la lista M3U.\n"
@@ -2747,6 +3366,7 @@ def main(argv: list[str] | None = None) -> int:
         usar_tvg_id=not argumentos.sin_tvg_id,
         conservar_tvg_id=argumentos.conservar_tvg_id,
         mapeo=mapeo or None,
+        maximo_senales=max(1, argumentos.maximo_senales),
     )
     con_tvg_id = sum(1 for canal in canales if canal["origen"] == "tvg-id")
     espejos = sum(len(canal["senales"]) - 1 for canal in canales if len(canal["senales"]) > 1)
@@ -2756,7 +3376,13 @@ def main(argv: list[str] | None = None) -> int:
         f"generados desde el nombre: {len(canales) - con_tvg_id}"
     )
     if espejos:
-        aviso(f"      Senales de respaldo (Opc.2/espejo/backup) conservadas: {espejos}")
+        aviso(
+            f"      Senales de respaldo (Opc. 2/Opc. 3) conservadas: {espejos} "
+            f"(maximo {max(1, argumentos.maximo_senales)} por canal)"
+        )
+    descartadas = sum(int(canal.get("descartadas") or 0) for canal in canales)
+    if descartadas:
+        aviso(f"      Senales redundantes descartadas por el limite: {descartadas}")
     con_mapeo = sum(1 for canal in canales if canal.get("mapeado"))
     if con_mapeo:
         aviso(f"      Canales con tvg-id forzado por el mapeo: {con_mapeo}")

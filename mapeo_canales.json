@@ -165,6 +165,340 @@
         "DSports Motor Backup",
         "DIRECTV Sports Motor"
       ]
+    },
+    "La.1.es": {
+      "nombre": "La 1",
+      "alias": [
+        "La 1",
+        "La1",
+        "La Primera",
+        "TVE 1",
+        "TVE1",
+        "La 1 HD",
+        "La 1 UHD",
+        "La 1 (Opc.2)"
+      ]
+    },
+    "La.2.es": {
+      "nombre": "La 2",
+      "alias": ["La 2", "La2", "TVE 2", "TVE2", "La 2 HD"]
+    },
+    "Antena.3.es": {
+      "nombre": "Antena 3",
+      "alias": ["Antena 3", "Antena3", "A3", "Antena 3 HD", "Antena 3 (Opc.2)"]
+    },
+    "Cuatro.es": {
+      "nombre": "Cuatro",
+      "alias": ["Cuatro", "Cuatro HD", "Cuatro (Opc.2)"]
+    },
+    "Telecinco.es": {
+      "nombre": "Telecinco",
+      "alias": ["Telecinco", "Tele 5", "Telecinco HD", "Telecinco (Opc.2)"]
+    },
+    "laSexta.es": {
+      "nombre": "laSexta",
+      "alias": ["laSexta", "La Sexta", "laSexta HD", "laSexta (Opc.2)"]
+    },
+    "Neox.es": {
+      "nombre": "Neox",
+      "alias": ["Neox", "Neox HD", "Neox (Opc.2)"]
+    },
+    "Nova.es": {
+      "nombre": "Nova",
+      "alias": ["Nova España", "Nova Spain", "Nova HD"]
+    },
+    "Energy.es": {
+      "nombre": "Energy",
+      "alias": ["Energy España", "Energy Spain", "Energy HD"]
+    },
+    "Divinity.es": {
+      "nombre": "Divinity",
+      "alias": ["Divinity", "Divinity HD"]
+    },
+    "FDF.Telecinco.es": {
+      "nombre": "FDF",
+      "alias": ["FDF", "FDF Telecinco", "Factoría de Ficción", "FDF HD"]
+    },
+    "DMAX.es": {
+      "nombre": "DMAX",
+      "alias": ["DMAX España", "DMAX Spain", "DMAX HD"]
+    },
+    "DKISS.es": {
+      "nombre": "DKISS",
+      "alias": ["DKISS", "DKISS HD"]
+    },
+    "Boing.es": {
+      "nombre": "Boing",
+      "alias": ["Boing España", "Boing Spain"]
+    },
+    "Paramount.Network.es": {
+      "nombre": "Paramount Network",
+      "alias": ["Paramount Network España", "Paramount Network Spain"]
+    },
+    "TRECE.es": {
+      "nombre": "TRECE",
+      "alias": ["TRECE", "Trece España", "TRECE HD"]
+    },
+    "Clan.TVE.es": {
+      "nombre": "Clan",
+      "alias": ["Clan TVE", "Clan", "Clan Internacional", "Clan HD"]
+    },
+    "Teledeporte.es": {
+      "nombre": "Teledeporte",
+      "alias": ["Teledeporte", "TDP", "Teledeporte HD"]
+    },
+    "Canal.24.horas.es": {
+      "nombre": "Canal 24 Horas",
+      "alias": ["Canal 24 Horas", "24 Horas", "24h TVE", "Canal 24h"]
+    },
+    "GOL.PLAY.es": {
+      "nombre": "GOL PLAY",
+      "alias": ["GOL PLAY", "Gol Play", "GOL PLAY HD"]
+    },
+    "DAZN.LaLiga.es": {
+      "nombre": "DAZN LaLiga",
+      "alias": ["DAZN LaLiga", "DAZN Laliga", "DAZN LaLiga HD"]
+    },
+    "DAZN.F1.es": {
+      "nombre": "DAZN F1",
+      "alias": ["DAZN F1", "DAZN F1 HD"]
+    },
+    "M+.Deportes.es": {
+      "nombre": "M+ Deportes",
+      "alias": ["M+ Deportes", "Movistar Deportes España", "M+ Deportes HD"]
+    },
+    "M+.Vamos.es": {
+      "nombre": "M+ Vamos",
+      "alias": ["M+ Vamos", "#Vamos", "Vamos por M+"]
+    },
+    "Movistar.Deportes.1.es": {
+      "nombre": "Movistar Deportes 1",
+      "alias": ["Movistar Deportes 1", "Movistar Deportes España"]
+    },
+    "TV3.es": {
+      "nombre": "TV3",
+      "alias": ["TV3", "TV3 Cataluña", "TV3 CAT", "TV3 HD"]
+    },
+    "Canal.33.es": {
+      "nombre": "Canal 33",
+      "alias": ["Canal 33", "Canal 33 Cataluña", "Canal 33 HD"]
+    },
+    "Esport.3.es": {
+      "nombre": "Esport3",
+      "alias": ["Esport3", "Esport 3", "Esport3 HD"]
+    },
+    "Canal.Sur.es": {
+      "nombre": "Canal Sur",
+      "alias": ["Canal Sur", "Canal Sur Andalucía", "Canal Sur HD"]
+    },
+    "ETB.1.es": {
+      "nombre": "ETB 1",
+      "alias": ["ETB 1", "ETB1", "EITB 1"]
+    },
+    "ETB.2.es": {
+      "nombre": "ETB 2",
+      "alias": ["ETB 2", "ETB2", "EITB 2"]
+    },
+    "Telemadrid.es": {
+      "nombre": "Telemadrid",
+      "alias": ["Telemadrid", "Telemadrid HD"]
+    },
+    "TVG.es": {
+      "nombre": "TVG",
+      "alias": ["TVG", "Televisión de Galicia", "TVG HD"]
+    },
+    "tvG2.es": {
+      "nombre": "tvG2",
+      "alias": ["tvG2", "TVG2"]
+    },
+    "IB3.es": {
+      "nombre": "IB3",
+      "alias": ["IB3", "IB3 HD"]
+    },
+    "TPA.es": {
+      "nombre": "TPA",
+      "alias": ["TPA", "Televisión del Principado de Asturias"]
+    },
+    "CyLTV.Global.es": {
+      "nombre": "CyLTV",
+      "alias": ["CyLTV", "CyL TV", "Castilla y León TV"]
+    },
+    "Canal.Extremadura.TV.es": {
+      "nombre": "Canal Extremadura",
+      "alias": ["Canal Extremadura", "Canal Extremadura TV"]
+    },
+    "La.7.es": {
+      "nombre": "La 7",
+      "alias": ["La 7", "La 7 Rioja"]
+    },
+    "À.Punt.es": {
+      "nombre": "À Punt",
+      "alias": ["À Punt", "A Punt", "Punt"]
+    },
+    "Aragón.Televisión.es": {
+      "nombre": "Aragón TV",
+      "alias": ["Aragón TV", "Aragon TV"]
+    },
+    "Castilla-La.Mancha.Media.es": {
+      "nombre": "Castilla-La Mancha Media",
+      "alias": ["Castilla-La Mancha Media", "CMM", "CMM TV"]
+    },
+    "FOX.es": {
+      "nombre": "FOX España",
+      "alias": ["FOX España", "FOX Spain"]
+    },
+    "ESPN.co": {
+      "nombre": "ESPN Colombia",
+      "alias": ["ESPN Colombia", "ESPN CO", "ESPN Colombia HD"]
+    },
+    "ESPN.2.co": {
+      "nombre": "ESPN 2 Colombia",
+      "alias": ["ESPN 2 Colombia", "ESPN 2 CO", "ESPN 2 Colombia HD"]
+    },
+    "ESPN.3.co": {
+      "nombre": "ESPN 3 Colombia",
+      "alias": ["ESPN 3 Colombia", "ESPN 3 CO", "ESPN 3 Colombia HD"]
+    },
+    "ESPN.MX.mx": {
+      "nombre": "ESPN México",
+      "alias": ["ESPN México", "ESPN Mexico", "ESPN MX", "ESPN México HD"]
+    },
+    "ESPN.2.mx": {
+      "nombre": "ESPN 2 México",
+      "alias": ["ESPN 2 México", "ESPN 2 MX", "ESPN 2 México HD"]
+    },
+    "ESPN.3.mx": {
+      "nombre": "ESPN 3 México",
+      "alias": ["ESPN 3 México", "ESPN 3 MX"]
+    },
+    "ESPN.5.mx": {
+      "nombre": "ESPN 5 México",
+      "alias": ["ESPN 5 México", "ESPN 5 MX"]
+    },
+    "Canal.ESPN.(Argentina).ar": {
+      "nombre": "ESPN Argentina",
+      "alias": ["ESPN Argentina", "ESPN ARG", "ESPN Argentina HD"]
+    },
+    "Canal.ESPN.3.(Argentina).ar": {
+      "nombre": "ESPN 3 Argentina",
+      "alias": ["ESPN 3 Argentina", "ESPN 3 ARG"]
+    },
+    "ESPN.HD.(ESPN.HD).pe": {
+      "nombre": "ESPN Perú",
+      "alias": ["ESPN Perú", "ESPN Peru", "ESPN PE", "ESPN Perú HD"]
+    },
+    "ESPN.2.(ESPN2.Peru).pe": {
+      "nombre": "ESPN 2 Perú",
+      "alias": ["ESPN 2 Perú", "ESPN 2 Peru", "ESPN 2 PE"]
+    },
+    "ESPN.3.HD.(ESPN.3.HD).pe": {
+      "nombre": "ESPN 3 Perú",
+      "alias": ["ESPN 3 Perú", "ESPN 3 Peru", "ESPN 3 PE"]
+    },
+    "FOX.SPORTS.mx": {
+      "nombre": "FOX Sports México",
+      "alias": [
+        "FOX Sports México",
+        "FOX Sports Mexico",
+        "FOX Sports MX",
+        "FOX Sports México HD"
+      ]
+    },
+    "FOX.SPORTS.2.mx": {
+      "nombre": "FOX Sports 2 México",
+      "alias": ["FOX Sports 2 México", "FOX Sports 2 MX", "FOX Sports 2 México HD"]
+    },
+    "FOX.SPORTS.3.mx": {
+      "nombre": "FOX Sports 3 México",
+      "alias": ["FOX Sports 3 México", "FOX Sports 3 MX"]
+    },
+    "FOX.SPORTS.PREMIUM.mx": {
+      "nombre": "FOX Sports Premium",
+      "alias": [
+        "FOX Sports Premium",
+        "FOX Sport Premium",
+        "FOX Sport Premiumm",
+        "FOX Sports Premium México",
+        "FOX Sports Premium HD"
+      ]
+    },
+    "FOX.Sports.2.HD(FSP2HD).co": {
+      "nombre": "FOX Sports 2 Colombia",
+      "alias": ["FOX Sports 2 Colombia", "FOX Sports 2 CO"]
+    },
+    "FOX.Sports.3.HD(FXS3HD).co": {
+      "nombre": "FOX Sports 3 Colombia",
+      "alias": ["FOX Sports 3 Colombia", "FOX Sports 3 CO"]
+    },
+    "FOX.SPORTS.HD.(FoxSportsHD).pe": {
+      "nombre": "FOX Sports Perú",
+      "alias": ["FOX Sports Perú", "FOX Sports Peru", "FOX Sports PE"]
+    },
+    "FOX.SPORTS.2.HD.(FoxSports2HD).pe": {
+      "nombre": "FOX Sports 2 Perú",
+      "alias": ["FOX Sports 2 Perú", "FOX Sports 2 Peru"]
+    },
+    "FOX.SPORTS.3.HD.(FoxSports3HD).pe": {
+      "nombre": "FOX Sports 3 Perú",
+      "alias": ["FOX Sports 3 Perú", "FOX Sports 3 Peru"]
+    },
+    "FoxDeportes.us": {
+      "nombre": "FOX Deportes",
+      "alias": ["FOX Deportes", "Fox Deportes", "FOX Deportes HD"]
+    },
+    "Univision.us": {
+      "nombre": "Univision",
+      "alias": [
+        "Univision",
+        "Univisión",
+        "Univision Network",
+        "Univision Network HD",
+        "Univision East",
+        "Univision East HD",
+        "Univision West",
+        "Univision (Opc.2)"
+      ]
+    },
+    "UniMas.us": {
+      "nombre": "UniMás",
+      "alias": ["UniMás", "UniMas", "UniMas East", "UniMas HD", "UniMás HD"]
+    },
+    "Galavision.us": {
+      "nombre": "Galavisión",
+      "alias": [
+        "Galavisión",
+        "Galavision",
+        "Galavision East",
+        "Galavision West",
+        "Galavision Cable Network",
+        "Galavision HD"
+      ]
+    },
+    "Telemundo.us": {
+      "nombre": "Telemundo",
+      "alias": [
+        "Telemundo",
+        "Telemundo East",
+        "Telemundo West",
+        "Telemundo HD",
+        "Telemundo (Opc.2)"
+      ]
+    },
+    "EstrellaTV.us": {
+      "nombre": "Estrella TV",
+      "alias": ["Estrella TV", "EstrellaTV", "Estrella TV HD"]
+    },
+    "TUDN.us": {
+      "nombre": "TUDN USA",
+      "alias": ["TUDN USA", "TUDN Estados Unidos", "TUDN US"]
+    },
+    "MegaTV.us": {
+      "nombre": "Mega TV",
+      "alias": ["Mega TV", "MegaTV", "Mega TV USA"]
+    },
+    "ElRey.us": {
+      "nombre": "El Rey",
+      "alias": ["El Rey", "El Rey Network"]
     }
   }
 }

@@ -1364,9 +1364,10 @@ class CoberturaDSportsTests(unittest.TestCase):
     def test_cada_variante_llega_al_tvg_id_de_la_guia_deportiva(self) -> None:
         # DSports y DSports + usan los ids de la guia de Uruguay, la unica que
         # publica su parrilla con las horas correctas; DSports 2 y Motor siguen
-        # en la guia dedicada, que es la unica que los trae.
+        # en la guia dedicada, que es la unica que los trae. El numero de
+        # senales se recorta al limite (1 principal + 2 respaldos).
         esperados = {
-            "[SPOARHD].DSports.Argentina.HD.uy": ("DSports", 5),
+            "[SPOARHD].DSports.Argentina.HD.uy": ("DSports", 3),
             "DSPORTS.2.HD.dtvsp": ("DSports 2", 3),
             "[SPOPLH].DSports.+.HD.uy": ("DSports +", 2),
             "DSports.Motor.dtvsp": ("DSports Motor", 1),
@@ -1378,6 +1379,8 @@ class CoberturaDSportsTests(unittest.TestCase):
                 self.assertEqual(self.por_id[identificador]["tvg_id"], identificador)
                 self.assertTrue(self.por_id[identificador]["mapeado"])
                 self.assertEqual(len(self.por_id[identificador]["senales"]), senales)
+        # Las variantes que sobran se descartan en vez de inflar la lista.
+        self.assertEqual(self.por_id["[SPOARHD].DSports.Argentina.HD.uy"]["descartadas"], 2)
 
     def test_dsports_plus_no_se_confunde_con_dsports(self) -> None:
         # El "+" se descartaba al generar la clave: "DSports +" acababa siendo
@@ -1548,6 +1551,400 @@ class CoberturaDSportsTests(unittest.TestCase):
             {canal["id"] for canal in otra_vez},
             {canal["id"] for canal in self.canales},
         )
+
+
+M3U_PRINCIPAL_MULTI = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="dsports" tvg-name="DSports" group-title="Deportes",DSports HD',
+        "http://principal.invalid/dsports",
+        '#EXTINF:-1 group-title="Deportes",DSports 2 HD',
+        "http://principal.invalid/dsports2",
+        '#EXTINF:-1 group-title="Deportes",ESPN 2 HD',
+        "http://principal.invalid/espn2",
+        '#EXTINF:-1 group-title="General",La 1 HD',
+        "http://principal.invalid/la1",
+        '#EXTINF:-1 group-title="General",Univision',
+        "http://principal.invalid/univision",
+        '#EXTINF:-1 group-title="Cine",Cine Latino HD',
+        "http://principal.invalid/cinelatino",
+        "",
+    ]
+)
+
+M3U_APOYO_MULTI = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="DSports2.ar@HD" group-title="Sports",DSports 2 HD',
+        "http://apoyo.invalid/dsports2",
+        '#EXTINF:-1 tvg-id="ESPN2.us@HD" group-title="Sports",ESPN 2 HD',
+        "http://apoyo.invalid/espn2",
+        '#EXTINF:-1 tvg-id="FoxSports1.mx@HD" group-title="Sports",Fox Sports 1 México',
+        "http://apoyo.invalid/fox1",
+        '#EXTINF:-1 tvg-id="La1.es@HD" group-title="General",La 1 HD',
+        "http://apoyo.invalid/la1",
+        '#EXTINF:-1 tvg-id="Univision.us@East" group-title="General",Univision',
+        "http://apoyo.invalid/univision",
+        '#EXTINF:-1 tvg-id="SkySportsF1.uk@HD" group-title="Sports",Sky Sports F1',
+        "http://apoyo.invalid/skyf1",
+        '#EXTINF:-1 tvg-id="HBO.pl@HD" group-title="Movies",HBO Polska',
+        "http://apoyo.invalid/hbo",
+        "",
+    ]
+)
+
+M3U_CON_SEIS_SENALES = "\n".join(
+    [
+        "#EXTM3U",
+        '#EXTINF:-1 tvg-id="dsports" group-title="Deportes",DSports HD',
+        "http://principal.invalid/dsports-1",
+        '#EXTINF:-1 group-title="Deportes",DSports HD (Opc. 2)',
+        "http://principal.invalid/dsports-2",
+        '#EXTINF:-1 group-title="Deportes",DSports (Opc. 3)',
+        "http://principal.invalid/dsports-3",
+        '#EXTINF:-1 group-title="Deportes",DSports (Opc. 4)',
+        "http://principal.invalid/dsports-4",
+        '#EXTINF:-1 group-title="Deportes",DSports Espejo',
+        "http://principal.invalid/dsports-5",
+        '#EXTINF:-1 group-title="Deportes",DSports Backup',
+        "http://principal.invalid/dsports-6",
+        "",
+    ]
+)
+
+
+class LimiteDeSenalesTests(unittest.TestCase):
+    """Comprueba el limite de 3 senales por canal (1 principal + 2 respaldos)."""
+
+    def setUp(self) -> None:
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+
+    def _consolidar(self, **opciones: object) -> list[dict[str, object]]:
+        return generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(M3U_CON_SEIS_SENALES),
+            mapeo=self.mapeo,
+            **opciones,
+        )
+
+    def test_publica_como_maximo_tres_senales(self) -> None:
+        canal = self._consolidar()[0]
+        self.assertEqual(len(canal["senales"]), 3)
+        self.assertEqual(canal["descartadas"], 3)
+
+    def test_la_senal_principal_se_conserva_primero(self) -> None:
+        canal = self._consolidar()[0]
+        urls = [senal["url"] for senal in canal["senales"]]
+        self.assertEqual(urls[0], "http://principal.invalid/dsports-1")
+        self.assertEqual(
+            urls,
+            [
+                "http://principal.invalid/dsports-1",
+                "http://principal.invalid/dsports-2",
+                "http://principal.invalid/dsports-3",
+            ],
+        )
+
+    def test_el_limite_es_configurable(self) -> None:
+        canal = self._consolidar(maximo_senales=2)[0]
+        self.assertEqual(len(canal["senales"]), 2)
+        self.assertEqual(canal["descartadas"], 4)
+        solo_principal = self._consolidar(maximo_senales=1)[0]
+        self.assertEqual(len(solo_principal["senales"]), 1)
+        self.assertEqual(solo_principal["descartadas"], 5)
+
+    def test_un_valor_invalido_nunca_deja_el_canal_vacio(self) -> None:
+        canal = self._consolidar(maximo_senales=0)[0]
+        self.assertEqual(len(canal["senales"]), 1)
+
+    def test_la_lista_m3u_publica_tres_entradas_por_canal(self) -> None:
+        texto = generar_epg.generar_m3u(
+            self._consolidar(), url_epg="https://ejemplo.invalid/epg.xml"
+        )
+        entradas = generar_epg.parsear_m3u(texto)
+        self.assertEqual(len(entradas), 3)
+        nombres = [entrada["nombre"] for entrada in entradas]
+        self.assertEqual(
+            nombres, ["DSports", "DSports (Opc. 2)", "DSports (Opc. 3)"]
+        )
+        self.assertEqual(
+            {entrada["tvg_id"] for entrada in entradas},
+            {"[SPOARHD].DSports.Argentina.HD.uy"},
+        )
+
+
+class IngestaMultiFuenteTests(unittest.TestCase):
+    """Comprueba la fusion de varias listas M3U y el filtro por bloques."""
+
+    def setUp(self) -> None:
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+
+    def _fusionar(self, **opciones: object) -> list[dict[str, object]]:
+        return generar_epg.fusionar_listas_m3u(
+            [
+                ("principal", M3U_PRINCIPAL_MULTI),
+                ("apoyo", M3U_APOYO_MULTI),
+            ],
+            **opciones,
+        )
+
+    def test_fusiona_la_lista_principal_con_las_de_apoyo(self) -> None:
+        canales = self._fusionar()
+        urls = {canal["url"] for canal in canales}
+        # Se conservan los canales de la lista principal...
+        self.assertIn("http://principal.invalid/cinelatino", urls)
+        self.assertIn("http://principal.invalid/la1", urls)
+        # ...y los de la lista de apoyo de los bloques estrategicos.
+        self.assertIn("http://apoyo.invalid/fox1", urls)
+        self.assertIn("http://apoyo.invalid/dsports2", urls)
+
+    def test_el_filtro_de_bloques_descarta_canales_de_otros_mercados(self) -> None:
+        urls = {canal["url"] for canal in self._fusionar()}
+        self.assertNotIn("http://apoyo.invalid/skyf1", urls)
+        self.assertNotIn("http://apoyo.invalid/hbo", urls)
+
+    def test_la_lista_principal_nunca_se_filtra(self) -> None:
+        urls = {canal["url"] for canal in self._fusionar()}
+        self.assertIn("http://principal.invalid/cinelatino", urls)
+
+    def test_el_filtro_se_puede_desactivar(self) -> None:
+        urls = {canal["url"] for canal in self._fusionar(filtrar_extra=False)}
+        self.assertIn("http://apoyo.invalid/skyf1", urls)
+        self.assertIn("http://apoyo.invalid/hbo", urls)
+
+    def test_cada_canal_recuerda_su_lista_y_su_prioridad(self) -> None:
+        canales = {canal["url"]: canal for canal in self._fusionar()}
+        principal = canales["http://principal.invalid/la1"]
+        apoyo = canales["http://apoyo.invalid/la1"]
+        self.assertEqual(
+            (principal["origen_m3u"], principal["prioridad"]), ("principal", 0)
+        )
+        self.assertEqual((apoyo["origen_m3u"], apoyo["prioridad"]), ("apoyo", 1))
+
+    def test_el_mismo_canal_de_dos_listas_queda_en_una_entrada(self) -> None:
+        canales = {
+            canal["id"]: canal
+            for canal in generar_epg.consolidar_canales(
+                self._fusionar(), mapeo=self.mapeo
+            )
+        }
+        self.assertEqual(canales["La.1.es"]["nombre"], "La 1")
+        self.assertEqual(len(canales["La.1.es"]["senales"]), 2)
+        # La senal de la lista principal va primero y no se pierde al recortar.
+        self.assertEqual(
+            canales["La.1.es"]["senales"][0]["url"], "http://principal.invalid/la1"
+        )
+        self.assertEqual(
+            canales["La.1.es"]["senales"][1]["url"], "http://apoyo.invalid/la1"
+        )
+
+    def test_las_senales_de_la_principal_sobreviven_al_limite(self) -> None:
+        # "DSports 2" llega desde las dos listas: la del proveedor manda.
+        canales = {
+            canal["id"]: canal
+            for canal in generar_epg.consolidar_canales(
+                self._fusionar(), mapeo=self.mapeo, maximo_senales=1
+            )
+        }
+        senales = canales["DSPORTS.2.HD.dtvsp"]["senales"]
+        self.assertEqual(len(senales), 1)
+        self.assertEqual(senales[0]["url"], "http://principal.invalid/dsports2")
+
+    def test_resolver_fuentes_m3u_traduce_los_atajos(self) -> None:
+        fuentes = generar_epg.resolver_fuentes_m3u(
+            [
+                "iptv-org-es, iptv-org-deportes",
+                "iptv-org-es",
+                "https://ejemplo.invalid/x.m3u",
+            ]
+        )
+        self.assertEqual(
+            fuentes,
+            [
+                "https://iptv-org.github.io/iptv/countries/es.m3u",
+                "https://iptv-org.github.io/iptv/categories/sports.m3u",
+                "https://ejemplo.invalid/x.m3u",
+            ],
+        )
+
+    def test_las_listas_de_apoyo_se_pueden_desactivar(self) -> None:
+        parser = generar_epg._crear_parser()
+        sin_extra = parser.parse_args(["--sin-m3u-extra"])
+        self.assertEqual(
+            generar_epg._fuentes_m3u_extra_desde_argumentos(sin_extra), []
+        )
+        por_defecto = parser.parse_args([])
+        self.assertTrue(generar_epg._fuentes_m3u_extra_desde_argumentos(por_defecto))
+        explicita = parser.parse_args(["--m3u-extra", "iptv-org-us"])
+        self.assertEqual(
+            generar_epg._fuentes_m3u_extra_desde_argumentos(explicita),
+            ["https://iptv-org.github.io/iptv/countries/us.m3u"],
+        )
+        apagada = parser.parse_args(["--m3u-extra", "ninguna"])
+        self.assertEqual(
+            generar_epg._fuentes_m3u_extra_desde_argumentos(apagada), []
+        )
+
+    def test_una_lista_de_apoyo_rota_no_interrumpe_la_generacion(self) -> None:
+        avisos: list[str] = []
+        with mock.patch.object(
+            generar_epg, "descargar_m3u", side_effect=OSError("404 Not Found")
+        ):
+            cargadas = generar_epg.cargar_fuentes_m3u(
+                ["https://ejemplo.invalid/rota.m3u"], aviso=avisos.append
+            )
+        self.assertEqual(cargadas, [])
+        self.assertTrue(any("se omite la lista M3U extra" in aviso for aviso in avisos))
+
+    def test_una_descarga_abortada_tampoco_interrumpe(self) -> None:
+        # ``descargar_m3u`` termina con SystemExit cuando agota los reintentos.
+        avisos: list[str] = []
+        with mock.patch.object(
+            generar_epg,
+            "descargar_m3u",
+            side_effect=SystemExit("No se pudo descargar la lista M3U."),
+        ):
+            cargadas = generar_epg.cargar_fuentes_m3u(
+                ["https://ejemplo.invalid/caida.m3u"], aviso=avisos.append
+            )
+        self.assertEqual(cargadas, [])
+        self.assertTrue(any("se omite la lista M3U extra" in aviso for aviso in avisos))
+
+    def test_una_fuente_local_se_lee_del_disco(self) -> None:
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = os.path.join(carpeta, "apoyo.m3u")
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write(M3U_APOYO_MULTI)
+            cargadas = generar_epg.cargar_fuentes_m3u([ruta])
+        self.assertEqual(len(cargadas), 1)
+        self.assertIn("http://apoyo.invalid/fox1", cargadas[0][1])
+
+
+class MapeoRegionalTests(unittest.TestCase):
+    """Comprueba los tvg-id regionales de Espana, Latam y US Latino."""
+
+    def setUp(self) -> None:
+        self.mapeo = generar_epg.cargar_mapeo_canales("")
+        self.indice = generar_epg._indice_mapeo(self.mapeo)
+
+    def _id(self, alias: str) -> str:
+        entrada = generar_epg.buscar_en_mapeo(self.indice, alias)
+        return str(entrada["id"]) if entrada else ""
+
+    def test_espana_asigna_los_ids_de_la_guia_es(self) -> None:
+        esperados = {
+            "La 1 HD": "La.1.es",
+            "La 2": "La.2.es",
+            "Antena 3 HD": "Antena.3.es",
+            "Cuatro": "Cuatro.es",
+            "Telecinco HD": "Telecinco.es",
+            "laSexta": "laSexta.es",
+            "Neox": "Neox.es",
+            "TV3 HD": "TV3.es",
+            "Canal Sur": "Canal.Sur.es",
+            "ETB2": "ETB.2.es",
+            "Telemadrid": "Telemadrid.es",
+            "GOL PLAY": "GOL.PLAY.es",
+            "Teledeporte": "Teledeporte.es",
+        }
+        for alias, identificador in esperados.items():
+            with self.subTest(alias=alias):
+                self.assertEqual(self._id(alias), identificador)
+
+    def test_espn_y_fox_regionales_usan_el_id_de_su_pais(self) -> None:
+        esperados = {
+            "ESPN Colombia": "ESPN.co",
+            "ESPN 2 CO": "ESPN.2.co",
+            "ESPN México": "ESPN.MX.mx",
+            "ESPN 2 MX": "ESPN.2.mx",
+            "ESPN 3 ARG": "Canal.ESPN.3.(Argentina).ar",
+            "ESPN 2 Perú": "ESPN.2.(ESPN2.Peru).pe",
+            "Fox Sports 2 México": "FOX.SPORTS.2.mx",
+            "Fox Sports Premium": "FOX.SPORTS.PREMIUM.mx",
+            "Fox Sports 3 Colombia": "FOX.Sports.3.HD(FXS3HD).co",
+            "Fox Sports Perú": "FOX.SPORTS.HD.(FoxSportsHD).pe",
+            "Fox Deportes": "FoxDeportes.us",
+        }
+        for alias, identificador in esperados.items():
+            with self.subTest(alias=alias):
+                self.assertEqual(self._id(alias), identificador)
+
+    def test_los_ids_regionales_apuntan_al_pais_correcto(self) -> None:
+        esperados = {
+            "La.1.es": "es",
+            "Antena.3.es": "es",
+            "ESPN.2.co": "co",
+            "ESPN.2.mx": "mx",
+            "Canal.ESPN.3.(Argentina).ar": "ar",
+            "ESPN.2.(ESPN2.Peru).pe": "pe",
+            "Univision.us": "us",
+        }
+        for identificador, pais in esperados.items():
+            with self.subTest(canal=identificador):
+                self.assertEqual(generar_epg._pais_de_id(identificador), pais)
+
+    def test_el_pais_se_lee_aunque_el_id_lleve_calidad(self) -> None:
+        self.assertEqual(generar_epg._pais_de_id("ESPN2.us@HD"), "us")
+        self.assertEqual(generar_epg._pais_de_id("La1.es@FHD"), "es")
+        self.assertEqual(generar_epg._pais_de_id("canal5"), "")
+        self.assertEqual(generar_epg._pais_de_id(""), "")
+
+    def test_us_latino_asigna_los_ids_oficiales(self) -> None:
+        esperados = {
+            "Univision": "Univision.us",
+            "Univision Network HD": "Univision.us",
+            "UniMás": "UniMas.us",
+            "Galavision East": "Galavision.us",
+            "Telemundo HD": "Telemundo.us",
+            "Estrella TV": "EstrellaTV.us",
+            "Mega TV": "MegaTV.us",
+            "El Rey": "ElRey.us",
+        }
+        for alias, identificador in esperados.items():
+            with self.subTest(alias=alias):
+                self.assertEqual(self._id(alias), identificador)
+
+    def test_los_alias_del_mapeo_emparejan_con_la_guia(self) -> None:
+        # La guia de EE. UU. publica ids numericos: el canal solo se puede
+        # enlazar por nombre, y el alias "Univision Network HD" es el que lo
+        # identifica frente al display-name de la guia.
+        canales = generar_epg.consolidar_canales(
+            generar_epg.parsear_m3u(
+                "\n".join(
+                    [
+                        "#EXTM3U",
+                        '#EXTINF:-1 group-title="General",Univision HD',
+                        "http://ejemplo.invalid/univision",
+                        "",
+                    ]
+                )
+            ),
+            mapeo=self.mapeo,
+        )
+        self.assertEqual(canales[0]["id"], "Univision.us")
+        mapa = generar_epg.emparejar_canales(
+            canales, {"464782": ["Univision Network HD"]}
+        )
+        self.assertEqual(mapa, {"Univision.us": "464782"})
+
+    def test_el_mapeo_del_repositorio_cubre_los_bloques_nuevos(self) -> None:
+        mapeo = generar_epg.cargar_mapeo_canales(generar_epg.ARCHIVO_MAPEO_POR_DEFECTO)
+        for identificador in (
+            "La.1.es",
+            "Antena.3.es",
+            "TV3.es",
+            "ESPN.2.co",
+            "ESPN.MX.mx",
+            "FOX.SPORTS.PREMIUM.mx",
+            "FOX.SPORTS.HD.(FoxSportsHD).pe",
+            "Univision.us",
+            "Telemundo.us",
+            "FoxDeportes.us",
+        ):
+            with self.subTest(canal=identificador):
+                self.assertIn(identificador, mapeo)
+        # Los alias del JSON se suman a los del codigo.
+        self.assertIn("Univision East HD", mapeo["Univision.us"]["alias"])
+        self.assertIn("ESPN Colombia HD", mapeo["ESPN.co"]["alias"])
 
 
 if __name__ == "__main__":
