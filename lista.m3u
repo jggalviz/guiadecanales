@@ -1455,6 +1455,8 @@ https://183.bozztv.com/giatv/giatv-teleposadastv/teleposadastv/playlist.m3u8
 #EXTINF:-1 tvg-id="telecreativalanusno247" tvg-name="Telecreativa Lanus No 24/7" tvg-logo="https://i.imgur.com/PjlAB6x.jpg" group-title="Argentina",Telecreativa Lanus No 24/7
 https://panel.host-live.com:19360/8012/8012.m3u8
 #EXTINF:-1 tvg-id="Telefe.ar" tvg-name="Telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
+#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 #EXTVLCOPT:http-referrer=https://www.mitelefe.com/
 https://telefe.argtelemax.workers.dev/
 #EXTINF:-1 tvg-id="Telefe.ar" tvg-name="Telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe (Opc. 2)
@@ -1477,7 +1479,8 @@ https://smt-usr-edge01.sensa.com.ar/output/ARR2/TelefeRosarioH/playlist.m3u8
 #EXTINF:-1 tvg-id="telefesaltano247" tvg-name="Telefe Salta No 24/7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe Salta No 24/7
 https://canal11saltatv.unpocodeawita.workers.dev/
 #EXTINF:-1 tvg-id="telefetucumanno247" tvg-name="Telefe Tucuman No 24/7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe Tucuman No 24/7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
+#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 #EXTVLCOPT:http-referrer=https://www.elocho.tv/el-ocho-en-vivo.html
 https://g5.vxral-slo.transport.edge-access.net/a05/ngrp:elochotv-100168_all/Playlist.m3u8?sense=true
 #EXTINF:-1 tvg-id="tnbuenosairesno247" tvg-name="TN Buenos Aires No 24/7]" tvg-logo="https://i.imgur.com/vFwPhPS.png" group-title="Argentina",TN Buenos Aires No 24/7]
@@ -1673,6 +1676,8 @@ https://live20.bozztv.com/akamaissh101/ssh101/canal69tv/playlist.m3u8
 https://streaming.hostpannel.lat/hls/video_156/index.m3u8
 #EXTINF:-1 tvg-id="canalteleclasica" tvg-name="Canal Teleclasica" tvg-logo="https://i.imgur.com/G6SnV75.png" group-title="Cine / Películas",Canal Teleclasica
 https://vtm1.msinteractiva.com/teleclasica/teleclasica/playlist.m3u8
+#EXTINF:-1 tvg-id="canaltelemaxrdno247repdominicana" tvg-name="Canal Telemax RD No 24/7 Rep. Dominicana" tvg-logo="https://www.vivalivetv.com/public/files/shows/0/1/2812-294x165-FFFFFF.jpg" group-title="Cine / Películas",Canal Telemax RD No 24/7 Rep. Dominicana
+https://edge.essastream.com/telemax/index.m3u8
 #EXTINF:-1 tvg-id="cindielite" tvg-name="Cindie Lite" tvg-logo="https://i.ibb.co/NnCr3L6G/25faaf3db0e171a0cee03bbc6d9981b0.png" group-title="Cine / Películas",Cindie Lite
 https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/387.m3u8
 #EXTINF:-1 tvg-id="cinedehorror" tvg-name="Cine de Horror" tvg-logo="https://i.ibb.co/kV2YQv6r/Logo-cine-de-horror-Mayo5.png" group-title="Cine / Películas",Cine de Horror
@@ -2076,6 +2081,8 @@ https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8
 #EXTINF:-1 tvg-id="bluradiono247nacional" tvg-name="Blu Radio No 24/7 Nacional" tvg-logo="https://i.imgur.com/w2t8CGT.png" group-title="Colombia",Blu Radio No 24/7 Nacional
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 CrKey/1.44.191160
 https://mdstrm.com/live-stream-playlist/58d1921a72e2b22e2905e493.m3u8
+#EXTINF:-1 tvg-id="canal8tvcundinamarca" tvg-name="Canal 8 TV+ Cundinamarca" tvg-logo="https://i.imgur.com/peOIG1F.png" group-title="Colombia",Canal 8 TV+ Cundinamarca
+https://movil.ejeserver.com/live/canal8tv.m3u8
 #EXTINF:-1 tvg-id="canalcalimatvurestvno247calivalledelcauca" tvg-name="Canal Calima TV URESTV No 24/7 Cali / Valle del Cauca" tvg-logo="https://i.imgur.com/6YxtyUR.jpeg" group-title="Colombia",Canal Calima TV URESTV No 24/7 Cali / Valle del Cauca
 https://movil.ejeserver.com/live/calimatv.m3u8?r=748
 #EXTINF:-1 tvg-id="canalcapitalgeoblocked" tvg-name="Canal Capital Geo-Blocked" tvg-logo="https://cdn.colombia.com/canales/canal-capital-3233-th.jpg" group-title="Colombia",Canal Capital Geo-Blocked
@@ -2110,6 +2117,8 @@ http://152.231.29.139:8000/play/a0jz/index.m3u8
 http://181.78.8.199:8000/play/a0hw/index.m3u8
 #EXTINF:-1 tvg-id="caracol2" tvg-name="Caracol2" tvg-logo="https://i.imgur.com/Fww94l9.png" group-title="Colombia",Caracol2 (Opc. 3)
 http://190.60.48.149:8000/play/CARACOL_HD_2
+#EXTINF:-1 tvg-id="cncbugavisionbugavalledelcauca" tvg-name="CNC Bugavisión Buga - Valle del Cauca" tvg-logo="https://i.imgur.com/zJAwnvd.png" group-title="Colombia",CNC Bugavisión Buga - Valle del Cauca
+https://movil.ejeserver.com/live/cncbuga.m3u8
 #EXTINF:-1 tvg-id="cncsantanderdequilichaocauca" tvg-name="CNC Santander de Quilichao Cauca" tvg-logo="https://i.imgur.com/LNl2o9q.jpg" group-title="Colombia",CNC Santander de Quilichao Cauca
 http://181.79.86.130:8000/play/a02o/index.m3u8
 #EXTINF:-1 tvg-id="cncsantanderdequilichaocauca" tvg-name="CNC Santander de Quilichao Cauca" tvg-logo="https://i.imgur.com/LNl2o9q.jpg" group-title="Colombia",CNC Santander de Quilichao Cauca (Opc. 2)
@@ -2187,6 +2196,8 @@ https://cloud6.livescast.com:3900/live/tevecolombialive.m3u8
 http://179.1.5.146:8080/asucap_srt.html
 #EXTINF:-1 tvg-id="ultracasanaretvno247" tvg-name="Ultra Casanare TV No 24/7" tvg-logo="https://i.imgur.com/1voWgLI.png" group-title="Colombia",Ultra Casanare TV No 24/7
 https://eu1.servers10.com:8081/8072/index.m3u8
+#EXTINF:-1 tvg-id="umctvnacional" tvg-name="UMC TV Nacional" tvg-logo="https://i.imgur.com/YQUK4wO.png" group-title="Colombia",UMC TV Nacional
+https://streaming5.globalhostla.com/rtplive/unamirad/playlist.m3u8
 #EXTINF:-1 tvg-id="vivetvcolombiano247nacional" tvg-name="Vive TV Colombia No 24/7 Nacional" tvg-logo="https://i.imgur.com/25CFHpB.png" group-title="Colombia",Vive TV Colombia No 24/7 Nacional
 https://stream.vivetvcolombia.com/vivetv/index.m3u8
 #EXTINF:-1 tvg-id="13Humor.cl" tvg-name="13 Humor" tvg-logo="https://i.imgur.com/KvMuTzN.png" group-title="Comedy",13 Humor
@@ -2233,6 +2244,8 @@ http://45.5.117.187:8000/play/a02v/index.m3u8
 https://d3xpfoln9sj56.cloudfront.net/ts:abr.m3u8
 #EXTINF:-1 tvg-id="canal8multimediosnacional" tvg-name="Canal 8 Multimedios Nacional" tvg-logo="https://i.imgur.com/nefPi2Y.png" group-title="Costa Rica",Canal 8 Multimedios Nacional
 https://mdstrm.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8
+#EXTINF:-1 tvg-id="cedrostvno247" tvg-name="CEDROS TV No 24/7" tvg-logo="https://i.ibb.co/FLjdHy3V/Cedros-TV-1.png" group-title="Costa Rica",CEDROS TV No 24/7
+https://eu1.servers10.com:8081/cedrostv/index.m3u8
 #EXTINF:-1 tvg-id="colosaltvciudadneily" tvg-name="Colosal TV Ciudad Neily" tvg-logo="https://i.imgur.com/0DZB3eB.png" group-title="Costa Rica",Colosal TV Ciudad Neily
 http://tv.ticosmedia.com:1935/COLOSAL/COLOSAL/playlist.m3u8
 #EXTINF:-1 tvg-id="conexionpositivatelevision" tvg-name="Conexion Positiva Television" tvg-logo="https://i.ibb.co/HSSyRDs/conexion-positiva.png" group-title="Costa Rica",Conexion Positiva Television
@@ -2604,6 +2617,8 @@ https://video.compuwebecuador.com:3323/stream/play.m3u8
 http://205.235.6.29:8000/play/a0z2/index.m3u8?hls
 #EXTINF:-1 tvg-id="vitotvoguayasgeoblocked" tvg-name="VitoTVO Guayas Geo-Blocked" tvg-logo="https://i.imgur.com/QoJ2gD0.png" group-title="Ecuador",VitoTVO Guayas Geo-Blocked
 http://iptv.vitotvo.video.makrodigital.com:8081/vitotvo/iptv/playlist.m3u8
+#EXTINF:-1 tvg-id="zaracaytvno247santodomingo" tvg-name="Zaracay TV No 24/7 Santo Domingo" tvg-logo="https://i.imgur.com/6q0Gp9R.png" group-title="Ecuador",Zaracay TV No 24/7 Santo Domingo
+http://181.119.97.124:8000/play/zaracaytv/index.m3u8
 #EXTINF:-1 tvg-id="CanalUniversidad.ar" tvg-name="Canal Universidad" tvg-logo="https://i.imgur.com/trmPKYw.png" group-title="Education",Canal Universidad
 https://videostream.shockmedia.com.ar/hls/canaluniversidadmdp/canaluniversidadmdp.m3u8
 #EXTINF:-1 tvg-id="GVision.cl" tvg-name="GVision" tvg-logo="https://i.imgur.com/jUPHG21.png" group-title="Education",GVision
@@ -2962,6 +2977,8 @@ https://59ec5453559f0.streamlock.net/energytvlatino/smil:WEB/playlist.m3u8
 https://59ec5453559f0.streamlock.net/energytvDJ/smil:WEB/playlist.m3u8
 #EXTINF:-1 tvg-id="energytvmusic" tvg-name="Energy TV Music" tvg-logo="https://energy-tv.com/assets/img/canales/CanalMusic.jpg" group-title="Entretenimiento / Cine / Series",Energy TV Music
 https://59ec5453559f0.streamlock.net/energytvmusic/smil:WEB/playlist.m3u8
+#EXTINF:-1 tvg-id="fabulosaestereo1005fm" tvg-name="Fabulosa Estéreo 100.5 FM" tvg-logo="https://i.imgur.com/YFmzkOp.png" group-title="Entretenimiento / Cine / Series",Fabulosa Estéreo 100.5 FM
+https://www.streaming507.net:19360/videofabulosa/videofabulosa.m3u8
 #EXTINF:-1 tvg-id="failarmy" tvg-name="FailArmy" tvg-logo="https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ESBA1400006NP_20260210T035845SQUARE.png" group-title="Entretenimiento / Cine / Series",FailArmy
 https://jmp2.uk/stvp-ESBA1400006NP
 #EXTINF:-1 tvg-id="filmrisecrimenesverdaderos" tvg-name="FilmRise Crímenes Verdaderos" tvg-logo="https://canvas-lb.tubitv.com/opts/RpUdI1HHOi0oMA==/8605b3b6-3605-44ef-b0d0-89a85b409bf6/CHgQeDoFMS4xLjlAAQ==" group-title="Entretenimiento / Cine / Series",FilmRise Crímenes Verdaderos
@@ -3056,8 +3073,6 @@ https://stream.enlineatv.net/hls/retrotv/1_2/index.m3u8
 https://videoserver.tmcreativos.com:19360/rnyurimaguas/rnyurimaguas.m3u8
 #EXTINF:-1 tvg-id="rselvatvperupucallpaucayali" tvg-name="RSelvaTV Perú - Pucallpa - Ucayali" tvg-logo="https://i.imgur.com/DAK5ZnD.png" group-title="Entretenimiento / Cine / Series",RSelvaTV Perú - Pucallpa - Ucayali
 https://live.obslivestream.com/selvatv/index.m3u8
-#EXTINF:-1 tvg-id="swatenespanolyoutube" tvg-name="S.W.A.T. en Español Youtube" tvg-logo="https://yt3.ggpht.com/ShL7scnGnSjjH31BDwawE3ZqhUYWlIpfOoPaOp3aGIEbkLnuW1IH6wrW461MOf90wnbnJzBffA=s48-c-k-c0x00ffffff-no-rj" group-title="Entretenimiento / Cine / Series",S.W.A.T. en Español Youtube
-https://www.youtube.com/watch?v=qTqJCHP7sZ4
 #EXTINF:-1 tvg-id="sarapiquitvcostaricaheredia" tvg-name="Sarapiquí TV Costa Rica - Heredia" tvg-logo="https://i.imgur.com/obTnd32.png" group-title="Entretenimiento / Cine / Series",Sarapiquí TV Costa Rica - Heredia
 http://tiquiciatv.com:1935/stv/web/playlist.m3u8
 #EXTINF:-1 tvg-id="sumaq" tvg-name="SumaQ" group-title="Entretenimiento / Cine / Series",SumaQ
@@ -3130,8 +3145,6 @@ https://cloudvideo.servers10.com:8081/8130/index.m3u8
 https://edge.essastream.com/xtratv/index.m3u8
 #EXTINF:-1 tvg-id="xtrematv" tvg-name="XtremaTV" tvg-logo="https://i.postimg.cc/7LHJJ9X0/3.png" group-title="Entretenimiento / Cine / Series",XtremaTV
 https://stmv6.voxtvhd.com.br/canal1/canal1/playlist.m3u8
-#EXTINF:-1 tvg-id="scoobydoomisteriossayoutube" tvg-name="¡Scooby-Doo! Misterios, S.A. YouTube" tvg-logo="https://www.pngall.com/wp-content/uploads/8/The-Simpsons-Logo-PNG.png" group-title="Entretenimiento / Cine / Series",¡Scooby-Doo! Misterios, S.A. YouTube
-https://www.youtube.com/watch?v=1e5d4mBbBxU
 #EXTINF:-1 tvg-id="CanalIPe.pe" tvg-name="Canal IPe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Identidad_Peruana_ipe_2020.png/960px-Identidad_Peruana_ipe_2020.png" group-title="Family",Canal IPe
 http://187.102.210.46/IPE/index.m3u8
 #EXTINF:-1 tvg-id="MCITelevision.co" tvg-name="MCI Television" tvg-logo="https://pbs.twimg.com/profile_images/1836009952420274177/FfYonU6r_400x400.jpg" group-title="Family;General;Movies",MCI Television
