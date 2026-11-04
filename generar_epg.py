@@ -515,9 +515,49 @@ MAPEO_CANALES_POR_DEFECTO: dict[str, dict[str, object]] = {
     # guia coinciden aunque la lista escriba "La1.es".
     "La.1.es": {
         "nombre": "La 1",
-        "alias": ("La 1", "La1", "La Primera", "TVE 1", "TVE1"),
+        "alias": (
+            "La 1",
+            "La1",
+            "La Primera",
+            "TVE 1",
+            "TVE1",
+            "La 1 de TVE",
+            "La 1 TVE",
+            "La 1 de TVE Nacional",
+        ),
     },
-    "La.2.es": {"nombre": "La 2", "alias": ("La 2", "La2", "TVE 2", "TVE2")},
+    "La.2.es": {
+        "nombre": "La 2",
+        "alias": ("La 2", "La2", "TVE 2", "TVE2", "La 2 de TVE", "La 2 TVE"),
+    },
+    "La.1.Canarias.es": {
+        "nombre": "La 1 Canarias",
+        "alias": ("La 1 Canarias", "La1 Canarias", "La 1 Canarias HD"),
+    },
+    "La.1.Catalunya.es": {
+        "nombre": "La 1 Catalunya",
+        "alias": (
+            "La 1 Catalunya",
+            "La 1 Cataluña",
+            "La1 Catalunya",
+            "La 1 Catalunya Cataluña",
+            "La 1 Cataluya Cataluña",
+        ),
+    },
+    "La.2.Canarias.es": {
+        "nombre": "La 2 Canarias",
+        "alias": ("La 2 Canarias", "La2 Canarias"),
+    },
+    "La.2.Catalunya.es": {
+        "nombre": "La 2 Catalunya",
+        "alias": (
+            "La 2 Catalunya",
+            "La 2 Cataluña",
+            "La2 Catalunya",
+            "La 2 Catalunya Cataluña",
+            "La 2 Cataluya Cataluña",
+        ),
+    },
     "Antena.3.es": {
         "nombre": "Antena 3",
         "alias": ("Antena 3", "Antena3", "A3"),
@@ -1296,6 +1336,38 @@ def _quitar_region_final(nombre: str) -> str:
     return nombre
 
 
+def _quitar_palabra_final_repetida(nombre: str) -> str:
+    """Elimina la ultima palabra si ya aparece antes en el nombre.
+
+    Las listas suelen repetir la region al final (``Misiones Cuatro Misiones``,
+    ``La 1 Canarias Canarias``) cuando el nombre original la llevaba entre
+    parentesis. Quitarla deja el nombre reconocible y emparejable con su alias.
+    """
+    palabras = nombre.split()
+    if len(palabras) < 3:
+        return nombre
+    previas = {palabra.casefold() for palabra in palabras[:-1]}
+    if palabras[-1].casefold() in previas:
+        return " ".join(palabras[:-1])
+    return nombre
+
+
+def _colapsar_palabras_repetidas(nombre: str) -> str:
+    """Elimina palabras repetidas consecutivas (``La 1 Canarias Canarias``).
+
+    Muchas listas repiten la region al limpiar el parentesco del nombre
+    (``La 1 Canarias (Canarias)``); al unificar queda ``La 1 Canarias Canarias``,
+    que ya no coincide con el alias del mapeo. Se colapsa la repeticion para que
+    el nombre siga siendo reconocible y emparejable.
+    """
+    palabras: list[str] = []
+    for palabra in nombre.split():
+        if palabras and palabra.casefold() == palabras[-1].casefold():
+            continue
+        palabras.append(palabra)
+    return " ".join(palabras)
+
+
 def limpiar_nombre(nombre: str, quitar_region: bool = True) -> str:
     """Unifica el nombre de un canal eliminando duplicados y marcas de calidad.
 
@@ -1327,6 +1399,8 @@ def limpiar_nombre(nombre: str, quitar_region: bool = True) -> str:
     if quitar_region:
         limpio = _quitar_region_final(limpio)
         limpio = _RE_ESPACIOS.sub(" ", limpio).strip(" -\u2013\u2014_:;,./*#°")
+    limpio = _quitar_palabra_final_repetida(limpio)
+    limpio = _colapsar_palabras_repetidas(limpio)
     return limpio or nombre.strip()
 
 

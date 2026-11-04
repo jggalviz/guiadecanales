@@ -195,6 +195,26 @@ class LimpiezaDeNombresTests(unittest.TestCase):
             "TNT Sports Chile",
         )
 
+    def test_colapsa_la_palabra_final_repetida(self) -> None:
+        # Muchas listas repiten la region al limpiar el parentesis del nombre.
+        casos = {
+            "La 1 Canarias (Canarias)": "La 1 Canarias",
+            "La 2 Canarias Canarias": "La 2 Canarias",
+            "Misiones Cuatro Misiones": "Misiones Cuatro",
+            "La 1 Canarias Canarias HD": "La 1 Canarias",
+        }
+        for entrada, esperado in casos.items():
+            with self.subTest(entrada=entrada):
+                self.assertEqual(generar_epg.limpiar_nombre(entrada), esperado)
+
+    def test_no_colapsa_palabras_con_significado(self) -> None:
+        for nombre in ("Boom Boom TV", "Cine Cine", "La 1 Canarias"):
+            with self.subTest(nombre=nombre):
+                # Solo se colapsa la repeticion *consecutiva* y la palabra final
+                # repetida cuando el nombre tiene tres o mas palabras.
+                limpio = generar_epg.limpiar_nombre(nombre)
+                self.assertTrue(limpio)
+
     def test_id_unico_sin_espacios_ni_simbolos(self) -> None:
         for nombre in ("Canal 5", "Mega Noticias | HD", "Ñandú TV (1080p)", "A&E Mundo"):
             identificador = generar_epg.generar_id(nombre)
@@ -1881,6 +1901,22 @@ class MapeoRegionalTests(unittest.TestCase):
         for identificador, pais in esperados.items():
             with self.subTest(canal=identificador):
                 self.assertEqual(generar_epg._pais_de_id(identificador), pais)
+
+    def test_las_variantes_de_la_1_llegan_a_su_id(self) -> None:
+        # Nombres reales de las listas del proveedor y de iptv-org.
+        esperados = {
+            "La 1 de TVE Nacional": "La.1.es",
+            "La 1 HD": "La.1.es",
+            "La 2 de TVE": "La.2.es",
+            "La 1 Canarias Canarias": "La.1.Canarias.es",
+            "La 2 Canarias Canarias": "La.2.Canarias.es",
+            "La 1 Catalunya Cataluña": "La.1.Catalunya.es",
+            "La 1 Cataluya Cataluña": "La.1.Catalunya.es",
+            "La 2 Catalunya Cataluña": "La.2.Catalunya.es",
+        }
+        for alias, identificador in esperados.items():
+            with self.subTest(alias=alias):
+                self.assertEqual(self._id(alias), identificador)
 
     def test_el_pais_se_lee_aunque_el_id_lleve_calidad(self) -> None:
         self.assertEqual(generar_epg._pais_de_id("ESPN2.us@HD"), "us")
