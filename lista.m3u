@@ -1,5 +1,9 @@
 #EXTM3U x-tvg-url="https://github.com/jggalviz/guiadecanales/raw/main/epg.xml" url-tvg="https://github.com/jggalviz/guiadecanales/raw/main/epg.xml"
 # Lista generada por guiadecanales-epg (generar_epg.py)
+#EXTINF:-1 tvg-id="espn2latin" tvg-name="ESPN 2 Latin" group-title="-",ESPN 2 Latin
+http://tecnotv.club/kwf5/phpcode/lista4.php?c=a08c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="telemundo1" tvg-name="Telemundo 1" group-title="-",Telemundo 1
+http://tecnotv.club/kwf5/phpcode/lista4.php?c=a01l&token=tecnotokenplustv230516F&f=.m3u8
 #EXTINF:-1 tvg-id="AnimeVision.es" tvg-name="Anime Vision" tvg-logo="https://i.imgur.com/pUpKznl.png" group-title="Animation",Anime Vision
 https://d1ujfw1zyymzyd.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-a6fukwkbxmex8/live/fast-channel-animevision-64527ec0/fast-channel-animevision-64527ec0.m3u8
 #EXTINF:-1 tvg-id="AnimeVisionClassics.es" tvg-name="Anime Vision Classics" tvg-logo="https://i.imgur.com/mTaiEE1.png" group-title="Animation",Anime Vision Classics
@@ -278,6 +282,18 @@ http://190.104.15.135/0.ts
 https://streaming013.gestec-video.com/hls/negociostv.m3u8
 #EXTINF:-1 tvg-id="Tevex.cl" tvg-name="Tevex" tvg-logo="https://i.imgur.com/FnInQRd.png" group-title="Business",Tevex
 https://v2.tustreaming.cl/tevex/index.m3u8
+#EXTINF:-1 tvg-id="canali" tvg-name="Canal I" group-title="Béisbol",Canal I
+https://streaming.canal-i.com/canal-i/live/master.m3u8
+#EXTINF:-1 tvg-id="FoxDeportes.us" tvg-name="FOX Deportes" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/FOX_Deportes_logo.png/960px-FOX_Deportes_logo.png" group-title="Béisbol",FOX Deportes
+http://23.237.104.106:8080/USA_FOX_DEPORTES/index.m3u8
+#EXTINF:-1 tvg-id="MeridianoTV.ve" tvg-name="Meridiano TV" tvg-logo="https://i.imgur.com/I6gsUqD.png" group-title="Béisbol",Meridiano TV
+http://181.78.8.199:8000/play/a0fr/index.m3u8
+#EXTINF:-1 tvg-id="MLB.us" tvg-name="MLB" tvg-logo="https://i.imgur.com/ym3su2J.png" group-title="Béisbol",MLB
+https://jmp2.uk/plu-5e66968a70f34c0007d050be.m3u8
+#EXTINF:-1 tvg-id="MLBStrikeZone.us" tvg-name="MLB Strike Zone" tvg-logo="https://i.imgur.com/uMI1ySO.png" group-title="Béisbol",MLB Strike Zone
+http://23.237.104.106:8080/USA_MLB_STRIKE_ZONE/index.m3u8
+#EXTINF:-1 tvg-id="promar" tvg-name="Promar" tvg-logo="https://cdn.m3u.cl/logo/146_Promar_TV.png" group-title="Béisbol",Promar
+https://vcp.myplaytv.com/promar/promar/playlist.m3u8
 #EXTINF:-1 tvg-id="canelaaccionmexicana" tvg-name="Canela Acción Mexicana" tvg-logo="https://image-resizer-cloud-cdn.cms.api.canela.tv/image/3052A289-026D-43E2-A4E5-577140AAA881/0-16x9.jpg?width=160&updatedTime=0&dt=Web" group-title="Canela TV",Canela Acción Mexicana
 https://amg00658-amg00658c104-canelatv-international-7980.playouts.now.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="canelacinepicante" tvg-name="Canela Cine Picante" tvg-logo="https://image-resizer-cloud-cdn.cms.api.canela.tv/image/3052A289-026D-43E2-A4E5-577140AAA880/0-16x9.jpg?width=160&updatedTime=0&dt=Web" group-title="Canela TV",Canela Cine Picante
@@ -2531,6 +2547,8 @@ http://181.224.255.210:8001/play/a0oj/index.m3u8?hls
 http://190.61.101.11:7050/play/a05d/index.m3u8?hls
 #EXTINF:-1 tvg-id="espn3" tvg-name="ESPN 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="ESPN",ESPN 3 (Opc. 2)
 http://181.225.73.159:8000/play/a03f/index.m3u8
+#EXTINF:-1 tvg-id="espn3" tvg-name="ESPN 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="ESPN",ESPN 3 (Opc. 3)
+http://tecnotv.club/kwf5/phpcode/ssiptv.php?c=a02d&token=tecnotokenplustv230516F&f=.m3u8
 #EXTINF:-1 tvg-id="espn4" tvg-name="ESPN 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="ESPN",ESPN 4
 http://190.61.101.11:7050/play/a08p/index.m3u8?hls
 #EXTINF:-1 tvg-id="espn4" tvg-name="ESPN 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="ESPN",ESPN 4 (Opc. 2)
@@ -2557,6 +2575,8 @@ http://200.59.191.177:8000/play/a0p2/index.m3u8?hls
 http://181.224.255.210:8001/play/a0m5/index.m3u8?hls
 #EXTINF:-1 tvg-id="ESPN.co" tvg-name="ESPN Colombia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="ESPN",ESPN Colombia
 http://181.79.87.130:8000/play/a02i/index.m3u8
+#EXTINF:-1 tvg-id="ESPN.co" tvg-name="ESPN Colombia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="ESPN",ESPN Colombia (Opc. 2)
+http://tecnotv.club/kwf5/phpcode/lista2.php?c=a04f&f=.m3u8&token=tecnotokenplustv230516F
 #EXTINF:-1 tvg-id="ESPN.HD.(ESPN.HD).pe" tvg-name="ESPN Perú" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="ESPN",ESPN Perú
 http://181.224.255.210:8001/play/a0sa/index.m3u8?hls
 #EXTINF:-1 tvg-id="ESPNPremium.ar" tvg-name="ESPN Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/ESPN_Premium_logo.svg/960px-ESPN_Premium_logo.svg.png" group-title="ESPN",ESPN Premium
@@ -4579,6 +4599,140 @@ https://vivo.solumedia.com:19360/vorterixmza/vorterixmza.m3u8
 https://streamyes.alsolnet.com/vorterixvillademerlo/live/playlist.m3u8
 #EXTINF:-1 tvg-id="xpectragroovetophits" tvg-name="Xpectra Groove Top Hits" tvg-logo="https://i.postimg.cc/3NhbpWfh/2.png" group-title="Música",Xpectra Groove Top Hits
 https://stmv6.voxtvhd.com.br/spectratophits/spectratophits/playlist.m3u8
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports
+http://181.209.80.115:8000/play/dsports_hd
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports (Opc. 2)
+http://190.117.20.37:8000/play/a08d/index.m3u
+#EXTINF:-1 tvg-id="[SPOARHD].DSports.Argentina.HD.uy" tvg-name="DSports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports (Opc. 3)
+http://181.224.255.210:8001/play/a0s8/index.m3u8?hls
+#EXTINF:-1 tvg-id="[SPOPLH].DSports.+.HD.uy" tvg-name="DSports +" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports +
+http://201.240.104.137:8000/play/dtvmas/index.m3u8
+#EXTINF:-1 tvg-id="[SPOPLH].DSports.+.HD.uy" tvg-name="DSports +" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports + (Opc. 2)
+http://157.100.9.51:8000/play/a26d
+#EXTINF:-1 tvg-id="DSPORTS.2.HD.dtvsp" tvg-name="DSports 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports 2
+http://201.240.104.137:8000/play/dtv2/index.m3u8
+#EXTINF:-1 tvg-id="DSPORTS.2.HD.dtvsp" tvg-name="DSports 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports 2 (Opc. 2)
+http://157.100.9.51:8000/play/a25d
+#EXTINF:-1 tvg-id="DSPORTS.2.HD.dtvsp" tvg-name="DSports 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png" group-title="NBA",DSports 2 (Opc. 3)
+http://38.3.176.165:15002/play/a19q/index.m3u8
+#EXTINF:-1 tvg-id="ESPN.us" tvg-name="ESPN" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN
+http://190.61.101.11:7050/play/a09k/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN.us" tvg-name="ESPN" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN (Opc. 2)
+http://181.119.177.253:8000/play/a0ck/index.m3u8
+#EXTINF:-1 tvg-id="ESPN.us" tvg-name="ESPN" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN (Opc. 3)
+http://181.224.255.210:8001/play/a0sd/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN2.us" tvg-name="ESPN 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="NBA",ESPN 2
+http://190.61.101.11:7050/play/a05c/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN2.us" tvg-name="ESPN 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="NBA",ESPN 2 (Opc. 2)
+http://181.119.177.253:8000/play/a0cl/index.m3u8
+#EXTINF:-1 tvg-id="ESPN2.us" tvg-name="ESPN 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="NBA",ESPN 2 (Opc. 3)
+http://181.224.255.210:8001/play/a0oj/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn2latin" tvg-name="ESPN 2 Latin" group-title="NBA",ESPN 2 Latin
+http://tecnotv.club/kwf5/phpcode/lista4.php?c=a08c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="ESPN2LatinAmerica.us" tvg-name="ESPN 2 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="NBA",ESPN 2 Latin America Argentina
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 VLC/3.0.18 LibVLC/3.0.18
+https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/espn2-mux/playlist.m3u8
+#EXTINF:-1 tvg-id="ESPN2LatinAmerica.us" tvg-name="ESPN 2 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="NBA",ESPN 2 Latin America Argentina (Opc. 2)
+http://190.61.47.54:8000/play/a005/index.m3u8
+#EXTINF:-1 tvg-id="ESPN2LatinAmerica.us" tvg-name="ESPN 2 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="NBA",ESPN 2 Latin America Argentina (Opc. 3)
+https://barinaslive1.boldmss.com/ESPN_2/ESPN_2.isml/ESPN_2.m3u8
+#EXTINF:-1 tvg-id="espn3" tvg-name="ESPN 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="NBA",ESPN 3
+http://190.61.101.11:7050/play/a05d/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn3" tvg-name="ESPN 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="NBA",ESPN 3 (Opc. 2)
+http://181.225.73.159:8000/play/a03f/index.m3u8
+#EXTINF:-1 tvg-id="espn3" tvg-name="ESPN 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="NBA",ESPN 3 (Opc. 3)
+http://tecnotv.club/kwf5/phpcode/ssiptv.php?c=a02d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="ESPN3LatinAmerica.us" tvg-name="ESPN 3 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="NBA",ESPN 3 Latin America Argentina
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 VLC/3.0.18 LibVLC/3.0.18
+https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/espn3-mux/playlist.m3u8
+#EXTINF:-1 tvg-id="ESPN3LatinAmerica.us" tvg-name="ESPN 3 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="NBA",ESPN 3 Latin America Argentina (Opc. 2)
+https://barinaslive1.boldmss.com/ESPN_3/ESPN_3.isml/ESPN_3.m3u8
+#EXTINF:-1 tvg-id="espn4" tvg-name="ESPN 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="NBA",ESPN 4
+http://190.61.101.11:7050/play/a08p/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn4" tvg-name="ESPN 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="NBA",ESPN 4 (Opc. 2)
+http://200.59.191.177:8000/play/a0pz/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn4" tvg-name="ESPN 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="NBA",ESPN 4 (Opc. 3)
+http://181.224.255.210:8001/play/a0og/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN4LatinAmerica.us" tvg-name="ESPN 4 Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="NBA",ESPN 4 Latin America
+https://barinaslive1.boldmss.com/ESPN_4/ESPN_4.isml/ESPN_4.m3u8
+#EXTINF:-1 tvg-id="espn5" tvg-name="ESPN 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 5
+http://190.61.101.11:7050/play/a06j/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn5" tvg-name="ESPN 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 5 (Opc. 2)
+http://181.119.177.253:8000/play/a04y/index.m3u8
+#EXTINF:-1 tvg-id="espn5" tvg-name="ESPN 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 5 (Opc. 3)
+http://181.224.255.210:8001/play/a0pr/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN5LatinAmerica.us" tvg-name="ESPN 5 Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/ESPN_5_logo.svg/960px-ESPN_5_logo.svg.png" group-title="NBA",ESPN 5 Latin America
+https://barinaslive1.boldmss.com/ESPN_5/ESPN_5.isml/ESPN_5.m3u8
+#EXTINF:-1 tvg-id="espn6" tvg-name="ESPN 6" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 6
+http://190.61.101.11:7050/play/a05e/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn6" tvg-name="ESPN 6" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 6 (Opc. 2)
+http://186.148.196.100:8000/play/a02q
+#EXTINF:-1 tvg-id="espn6" tvg-name="ESPN 6" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 6 (Opc. 3)
+http://181.224.255.210:8001/play/a0eq/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN6LatinAmerica.us" tvg-name="ESPN 6 Latin America" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/ESPN_6_logo.svg/960px-ESPN_6_logo.svg.png" group-title="NBA",ESPN 6 Latin America
+https://barinaslive1.boldmss.com/ESPN_6/ESPN_6.isml/ESPN_6.m3u8
+#EXTINF:-1 tvg-id="espn7" tvg-name="ESPN 7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 7
+http://205.235.6.29:8000/play/a0zv/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn7" tvg-name="ESPN 7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 7 (Opc. 2)
+http://200.59.191.177:8000/play/a0p2/index.m3u8?hls
+#EXTINF:-1 tvg-id="espn7" tvg-name="ESPN 7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN 7 (Opc. 3)
+http://181.224.255.210:8001/play/a0m5/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPN7LatinAmerica.us" tvg-name="ESPN 7 Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/ESPN_7_logo.svg/960px-ESPN_7_logo.svg.png" group-title="NBA",ESPN 7 Latin America
+https://barinaslive1.boldmss.com/ESPN_7/ESPN_7.isml/ESPN_7.m3u8
+#EXTINF:-1 tvg-id="ESPN.co" tvg-name="ESPN Colombia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN Colombia
+http://181.79.87.130:8000/play/a02i/index.m3u8
+#EXTINF:-1 tvg-id="ESPN.co" tvg-name="ESPN Colombia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN Colombia (Opc. 2)
+http://tecnotv.club/kwf5/phpcode/lista2.php?c=a04f&f=.m3u8&token=tecnotokenplustv230516F
+#EXTINF:-1 tvg-id="ESPNDeportes.us" tvg-name="ESPN Deportes" tvg-logo="https://imgx.fubo.tv/station_logos/espn-hd-deportes_c.png" group-title="NBA",ESPN Deportes
+http://168.228.44.241:9998/play/a0dz/index.m3u8
+#EXTINF:-1 tvg-id="espnextra" tvg-name="espn extra" group-title="NBA",espn extra
+http://tecnotv.club/kwf5/phpcode/lista1.php?c=a0kf&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="ESPNExtraLatinAmerica.us" tvg-name="ESPN Extra Latin America" tvg-logo="https://i.imgur.com/8P8N2Ov.png" group-title="NBA",ESPN Extra Latin America
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36
+https://barinaslive1.boldmss.com/ESPN/ESPN.isml/ESPN.mpd?
+#EXTINF:-1 tvg-id="ESPNLatinAmerica.us" tvg-name="ESPN Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN Latin America Mexico
+http://168.228.44.241:9997/play/a06p/index.m3u8
+#EXTINF:-1 tvg-id="ESPNLatinAmerica.us" tvg-name="ESPN Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN Latin America Mexico (Opc. 2)
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 VLC/3.0.18 LibVLC/3.0.18
+https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/espn-mux/chunks.m3u8
+#EXTINF:-1 tvg-id="ESPNLatinAmerica.us" tvg-name="ESPN Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN Latin America Mexico (Opc. 3)
+http://190.61.47.54:8000/play/a004/index.m3u8
+#EXTINF:-1 tvg-id="ESPN.HD.(ESPN.HD).pe" tvg-name="ESPN Perú" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="NBA",ESPN Perú
+http://181.224.255.210:8001/play/a0sa/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPNPremium.ar" tvg-name="ESPN Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/ESPN_Premium_logo.svg/960px-ESPN_Premium_logo.svg.png" group-title="NBA",ESPN Premium
+http://205.235.6.29:8000/play/a0wl/index.m3u8?hls
+#EXTINF:-1 tvg-id="ESPNPremium.ar" tvg-name="ESPN Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/ESPN_Premium_logo.svg/960px-ESPN_Premium_logo.svg.png" group-title="NBA",ESPN Premium (Opc. 2)
+http://181.119.84.106:8000/play/a0qw/index.m3u8
+#EXTINF:-1 tvg-id="ESPNPremium.ar" tvg-name="ESPN Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/ESPN_Premium_logo.svg/960px-ESPN_Premium_logo.svg.png" group-title="NBA",ESPN Premium (Opc. 3)
+http://158.172.155.130:8000/play/a0ao/index.m3u8
+#EXTINF:-1 tvg-id="MovistarDeportes.pe" tvg-name="Movistar Deportes" tvg-logo="https://i.imgur.com/yGQGDoi.png" group-title="NBA",Movistar Deportes
+http://190.108.83.69:8000/play/a07o/index.m3u8
+#EXTINF:-1 tvg-id="MovistarDeportes.pe" tvg-name="Movistar Deportes" tvg-logo="https://i.imgur.com/yGQGDoi.png" group-title="NBA",Movistar Deportes (Opc. 2)
+http://157.100.9.51:8000/play/a22s
+#EXTINF:-1 tvg-id="MovistarDeportes.pe" tvg-name="Movistar Deportes" tvg-logo="https://i.imgur.com/yGQGDoi.png" group-title="NBA",Movistar Deportes (Opc. 3)
+http://205.235.6.29:8000/play/a0zd/index.m3u8?hls
+#EXTINF:-1 tvg-id="NBATV.us" tvg-name="NBA TV" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/NBA_TV.svg/960px-NBA_TV.svg.png" group-title="NBA",NBA TV
+http://23.237.104.106:8080/USA_NBA/index.m3u8
+#EXTINF:-1 tvg-id="NBATV.us" tvg-name="NBA TV" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/NBA_TV.svg/960px-NBA_TV.svg.png" group-title="NBA",NBA TV (Opc. 2)
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=74&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="tnt" tvg-name="TNT" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/TNT_Logo_2016.svg/960px-TNT_Logo_2016.svg.png" group-title="NBA",TNT
+http://181.78.73.153:8000/play/a0at/index.m3u8
+#EXTINF:-1 tvg-id="tnt" tvg-name="TNT" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/TNT_Logo_2016.svg/960px-TNT_Logo_2016.svg.png" group-title="NBA",TNT (Opc. 2)
+http://205.235.6.29:8000/play/a0yr/index.m3u8?hls
+#EXTINF:-1 tvg-id="tnt" tvg-name="TNT" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/TNT_Logo_2016.svg/960px-TNT_Logo_2016.svg.png" group-title="NBA",TNT (Opc. 3)
+http://45.5.118.152:8000/play/a0di/index.m3u8
+#EXTINF:-1 tvg-id="tntsports" tvg-name="TNT Sports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="NBA",TNT Sports
+http://181.79.87.131:8000/play/a0e0/index.m3u8
+#EXTINF:-1 tvg-id="tntsports" tvg-name="TNT Sports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="NBA",TNT Sports (Opc. 2)
+http://205.235.6.29:8000/play/a0xa/index.m3u8?hls
+#EXTINF:-1 tvg-id="tntsports" tvg-name="TNT Sports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="NBA",TNT Sports (Opc. 3)
+http://181.78.79.131:8000/play/a0mo
+#EXTINF:-1 tvg-id="tntsportspremium" tvg-name="TNT Sports Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="NBA",TNT Sports Premium
+http://205.235.6.29:8000/play/a104/index.m3u8?hls
+#EXTINF:-1 tvg-id="tntsportspremium" tvg-name="TNT Sports Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="NBA",TNT Sports Premium (Opc. 2)
+http://200.59.191.177:8000/play/a0o9/index.m3u8?hls
+#EXTINF:-1 tvg-id="tntsportspremium" tvg-name="TNT Sports Premium" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="NBA",TNT Sports Premium (Opc. 3)
+http://190.108.83.69:8000/play/a03i/index.m3u8
 #EXTINF:-1 tvg-id="101tvMalaga.es" tvg-name="101tv Malaga" tvg-logo="https://i.imgur.com/GzI3RC4.png" group-title="News",101tv Malaga
 #EXTVLCOPT:http-referrer=https://player.instantvideocloud.net/
 https://liveingesta318.cdnmedia.tv/101weblive/smil:malaga.smil/playlist.m3u8
@@ -4703,8 +4857,6 @@ https://directes-tv-int.3catdirectes.cat/live-origin/canal324-hls/master.m3u8
 https://ztnr.rtve.es/ztnr/1694255.m3u8
 #EXTINF:-1 tvg-id="CanalSurNoticias.es" tvg-name="Canal Sur Noticias" tvg-logo="https://i.imgur.com/A3JscwS.png" group-title="News;Public",Canal Sur Noticias
 https://cdnlive.codev8.net/rtvalive/smil:channel42.smil/playlist.m3u8
-#EXTINF:-1 tvg-id="FoxSportsNews.au" tvg-name="Fox Sports News" tvg-logo="https://i.imgur.com/FhMQrJk.png" group-title="News;Sports",Fox Sports News
-https://skynewsau-live-premium.akamaized.net/hls/live/2105307/foxsportsnews/live_1080p.m3u8
 #EXTINF:-1 tvg-id="AgriculturaTV.cl" tvg-name="Agricultura TV" tvg-logo="https://i.imgur.com/sxrYc3Q.png" group-title="Outdoor",Agricultura TV
 https://redirector.rudo.video/hls-video/ey6283je82983je9823je8jowowiekldk9838274/921tv/921tv.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="AgroTV.pe" tvg-name="Agro TV" tvg-logo="https://i.imgur.com/1uLGa3w.png" group-title="Outdoor",Agro TV
@@ -5438,9 +5590,6 @@ https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/espn2-mux/playlist.m3u8
 http://190.61.47.54:8000/play/a005/index.m3u8
 #EXTINF:-1 tvg-id="ESPN2LatinAmerica.us" tvg-name="ESPN 2 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="Sports",ESPN 2 Latin America Argentina (Opc. 3)
 https://barinaslive1.boldmss.com/ESPN_2/ESPN_2.isml/ESPN_2.m3u8
-#EXTINF:-1 tvg-id="ESPN2.nl" tvg-name="ESPN 2 Netherlands" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="Sports",ESPN 2 Netherlands
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
-https://lb.iptvnetwork.net/ls28/10042/playlist.m3u8
 #EXTINF:-1 tvg-id="ESPN3.br" tvg-name="ESPN 3 Brazil" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Sports",ESPN 3 Brazil
 http://190.83.2.182:8090/ESPN3/index.m3u8
 #EXTINF:-1 tvg-id="ESPN3LatinAmerica.us" tvg-name="ESPN 3 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Sports",ESPN 3 Latin America Argentina
@@ -5448,16 +5597,10 @@ http://190.83.2.182:8090/ESPN3/index.m3u8
 https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/espn3-mux/playlist.m3u8
 #EXTINF:-1 tvg-id="ESPN3LatinAmerica.us" tvg-name="ESPN 3 Latin America Argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Sports",ESPN 3 Latin America Argentina (Opc. 2)
 https://barinaslive1.boldmss.com/ESPN_3/ESPN_3.isml/ESPN_3.m3u8
-#EXTINF:-1 tvg-id="ESPN3.nl" tvg-name="ESPN 3 Netherlands" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Sports",ESPN 3 Netherlands
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
-https://lb.iptvnetwork.net/ls28/10043/playlist.m3u8
 #EXTINF:-1 tvg-id="ESPN4.br" tvg-name="ESPN 4 Brazil" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="Sports",ESPN 4 Brazil
 http://181.78.197.59:8000/play/a07n/index.m3u8
 #EXTINF:-1 tvg-id="ESPN4LatinAmerica.us" tvg-name="ESPN 4 Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="Sports",ESPN 4 Latin America
 https://barinaslive1.boldmss.com/ESPN_4/ESPN_4.isml/ESPN_4.m3u8
-#EXTINF:-1 tvg-id="ESPN4.nl" tvg-name="ESPN 4 Netherlands" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="Sports",ESPN 4 Netherlands
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
-https://lb.iptvnetwork.net/ls28/10044/playlist.m3u8
 #EXTINF:-1 tvg-id="ESPN5LatinAmerica.us" tvg-name="ESPN 5 Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/ESPN_5_logo.svg/960px-ESPN_5_logo.svg.png" group-title="Sports",ESPN 5 Latin America
 https://barinaslive1.boldmss.com/ESPN_5/ESPN_5.isml/ESPN_5.m3u8
 #EXTINF:-1 tvg-id="ESPN6LatinAmerica.us" tvg-name="ESPN 6 Latin America" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/ESPN_6_logo.svg/960px-ESPN_6_logo.svg.png" group-title="Sports",ESPN 6 Latin America
@@ -5478,9 +5621,6 @@ http://168.228.44.241:9997/play/a06p/index.m3u8
 https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/espn-mux/chunks.m3u8
 #EXTINF:-1 tvg-id="ESPNLatinAmerica.us" tvg-name="ESPN Latin America" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="Sports",ESPN Latin America Mexico (Opc. 3)
 http://190.61.47.54:8000/play/a004/index.m3u8
-#EXTINF:-1 tvg-id="ESPN.nl" tvg-name="ESPN Netherlands" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png" group-title="Sports",ESPN Netherlands
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
-https://lb.iptvnetwork.net/ls28/10041/playlist.m3u8
 #EXTINF:-1 tvg-id="FoxDeportes.us" tvg-name="FOX Deportes" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/FOX_Deportes_logo.png/960px-FOX_Deportes_logo.png" group-title="Sports",FOX Deportes
 http://23.237.104.106:8080/USA_FOX_DEPORTES/index.m3u8
 #EXTINF:-1 tvg-id="FoxSports1.us" tvg-name="Fox Sports 1" tvg-logo="https://i.imgur.com/O9BapV9.png" group-title="Sports",Fox Sports 1
@@ -5493,12 +5633,20 @@ http://45.228.234.9:8000/play/a06o/index.m3u8
 http://15.204.246.24:8080/GolfChannelHD/index.m3u8
 #EXTINF:-1 tvg-id="MeridianoTV.ve" tvg-name="Meridiano TV" tvg-logo="https://i.imgur.com/I6gsUqD.png" group-title="Sports",Meridiano TV
 http://181.78.8.199:8000/play/a0fr/index.m3u8
+#EXTINF:-1 tvg-id="MLB.us" tvg-name="MLB" tvg-logo="https://i.imgur.com/ym3su2J.png" group-title="Sports",MLB
+https://jmp2.uk/plu-5e66968a70f34c0007d050be.m3u8
+#EXTINF:-1 tvg-id="MLBStrikeZone.us" tvg-name="MLB Strike Zone" tvg-logo="https://i.imgur.com/uMI1ySO.png" group-title="Sports",MLB Strike Zone
+http://23.237.104.106:8080/USA_MLB_STRIKE_ZONE/index.m3u8
 #EXTINF:-1 tvg-id="MonterricoTV.pe" tvg-name="Monterrico TV" tvg-logo="https://i.imgur.com/SuVO9T7.png" group-title="Sports",Monterrico TV
 https://h.jcp.live.opencaster.com/play_src/index.m3u8
 #EXTINF:-1 tvg-id="MultivisionSports.gt" tvg-name="Multivision Sports Not 24/7" tvg-logo="https://i.imgur.com/wLjSSo2.jpg" group-title="Sports",Multivision Sports Not 24/7
 https://stream.digitalgt.com:3605/live/multivisionsportslive.m3u8
 #EXTINF:-1 tvg-id="NSports.br" tvg-name="N Sports" tvg-logo="https://i.imgur.com/7QnJojr.png" group-title="Sports",N Sports
 https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt.m3u8
+#EXTINF:-1 tvg-id="NBATV.us" tvg-name="NBA TV" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/NBA_TV.svg/960px-NBA_TV.svg.png" group-title="Sports",NBA TV
+http://23.237.104.106:8080/USA_NBA/index.m3u8
+#EXTINF:-1 tvg-id="NBATV.us" tvg-name="NBA TV" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/NBA_TV.svg/960px-NBA_TV.svg.png" group-title="Sports",NBA TV (Opc. 2)
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=74&token=tecnotokenplustv230516F&f=.m3u8
 #EXTINF:-1 tvg-id="OlympicChannel.es" tvg-name="Olympic Channel Geo-blocked" tvg-logo="https://i.imgur.com/wPQVVtj.png" group-title="Sports",Olympic Channel Geo-blocked
 https://ocshls-2-olympicchannel.akamaized.net/ocshls/OCTV_1.m3u8
 #EXTINF:-1 tvg-id="OvacionTV.pe" tvg-name="Ovacion TV Not 24/7" tvg-logo="https://i.imgur.com/7Xndgxk.png" group-title="Sports",Ovacion TV Not 24/7
@@ -5681,6 +5829,12 @@ http://45.5.118.152:8000/play/a0cj/index.m3u8
 http://45.5.118.152:8000/play/a0ck/index.m3u8
 #EXTINF:-1 tvg-id="canal98televisionchichicasteca" tvg-name="CANAL 98 TELEVISION CHICHICASTECA" group-title="TV Chichicasteca",CANAL 98 TELEVISION CHICHICASTECA
 http://45.5.118.152:8000/play/a0cl/index.m3u8
+#EXTINF:-1 tvg-id="espnextra" tvg-name="espn extra" group-title="TV PREMIUM",espn extra
+http://tecnotv.club/kwf5/phpcode/lista1.php?c=a0kf&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="telemundo2" tvg-name="TELEMUNDO 2" group-title="TV PREMIUM",TELEMUNDO 2
+http://tecnotv.club/kwf5/phpcode/lista1.php?c=a0mg&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="telemundo3" tvg-name="Telemundo 3" group-title="TV PREMIUM",Telemundo 3
+http://tecnotv.club/kwf5/phpcode/lista2.php?c=a03p&f=.m3u8&token=tecnotokenplustv230516F
 #EXTINF:-1 tvg-id="AtacamaTV.cl" tvg-name="Atacama TV" tvg-logo="https://i.postimg.cc/rwS082hL/atacama-tv.png" group-title="Undefined",Atacama TV
 https://v2.tustreaming.cl/atacamatv/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-id="BailenTV.es" tvg-name="Bailen TV Not 24/7" tvg-logo="https://i.imgur.com/a64hwzq.png" group-title="Undefined",Bailen TV Not 24/7
@@ -6210,5 +6364,23 @@ http://186.148.184.22:8000/play/a0ih/index.m3u8
 http://190.217.66.92:8000/play/a0qs/index.m3u8?hls
 #EXTINF:-1 tvg-id="win" tvg-name="Win+" tvg-logo="https://i.imgur.com/0UN87vB.png" group-title="Win Sports",Win+ (Opc. 3)
 http://181.78.21.38:8000/play/a07r/index.m3u8
+#EXTINF:-1 tvg-id="espn1" tvg-name="ESPN 1",ESPN 1
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=41&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="ESPN.2.mx" tvg-name="ESPN 2 México",ESPN 2 México
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=40&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="espn2sur" tvg-name="ESPN 2 SUR",ESPN 2 SUR
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=79&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="ESPN.3.mx" tvg-name="ESPN 3 México",ESPN 3 México
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=39&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="espn3sur" tvg-name="ESPN 3 SUR",ESPN 3 SUR
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=78&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="espnsur" tvg-name="ESPN SUR",ESPN SUR
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=77&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="foxsports1mx" tvg-name="FOX SPORTS 1 MX",FOX SPORTS 1 MX
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=30&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-id="FOX.SPORTS.3.mx" tvg-name="FOX Sports 3 México",FOX Sports 3 México
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=28&token=tecnotokenplustv230516F&f=.m3u8
 #EXTINF:-1 tvg-id="nativatvsatipono247junin" tvg-name="Nativa TV Satipo No 24/7 Junín" tvg-logo="https://i.imgur.com/ScCAgGB.png",Nativa TV Satipo No 24/7 Junín
 https://7.innovatestream.pe:19360/nativatv/nativatv.m3u8
+#EXTINF:-1 tvg-id="telemundo4" tvg-name="TELEMUNDO 4",TELEMUNDO 4
+http://tecnotv.club/kwf5/phpcode/lista3.php?c=7&token=tecnotokenplustv230516F&f=.m3u8
