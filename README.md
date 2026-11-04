@@ -227,8 +227,8 @@ señales sin desfase y con la parrilla completa.
 
 Con una lista de 1.875 entradas, el conjunto por defecto (17 países +
 DSports + Pluto TV + Samsung TV Plus + Roku) tarda menos de un minuto y publica
-**353 canales con programación real** (11,4 MB): 65 más que antes de añadir la
-guía de DSports y de dejar de dar por resuelto un canal cuando una guía solo lo
+**352 canales con programación real** (11,4 MB): 64 más que antes de mapear
+DSports y de dejar de dar por resuelto un canal cuando una guía solo lo
 lista sin parrilla. La guía de `FR` se incluye
 porque aporta canales internacionales (`Trace Latina`, `24h`, `ON TV`…); sus
 canales `CANAL+LIVE NN` se distinguen del "Canal NN" latinoamericano porque
@@ -238,13 +238,19 @@ Cifras medidas del último run (1.875 entradas en la lista del proveedor):
 
 | Archivo | Resultado |
 | --- | --- |
-| `epg.xml` | 1.432 canales, **353 con EPG real**, 26.236 `<programme>`, 11,4 MB |
+| `epg.xml` | 1.432 canales, **352 con EPG real**, 26.130 `<programme>`, 11,4 MB |
 | `lista.m3u` | **1.875 entradas**: 1.432 canales + **443 señales de respaldo** conservadas, 46 grupos, **0** `tvg-id` fuera de la guía |
 
-Con el mapeo de DSports, la lista publica sus señales con la parrilla real:
-`DSPORTS.(ARG).dtvsp` (`DSports` + `Opc. 2`…`Opc. 5`, 5 entradas) con 45
-`<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` + 2 respaldos) con 42 y
-`DSPORTS.+.HD.dtvsp` (`DSports +` + 1 respaldo) con 55.
+Con el mapeo de DSports, la lista publica sus señales con la parrilla real (y en
+la hora correcta): `[SPOARHD].DSports.Argentina.HD.uy` (`DSports` + `Opc. 2`…
+`Opc. 5`, 5 entradas) con 49 `<programme>`, `DSPORTS.2.HD.dtvsp` (`DSports 2` +
+2 respaldos) con 46 y `[SPOPLH].DSports.+.HD.uy` (`DSports +` + 1 respaldo) con
+55. `DSports Motor` no está en la lista actual del proveedor; su mapeo se
+mantiene por si vuelve a aparecer.
+
+> El canal `FilmRise Series Gratis` perdió su EPG en este run (uno menos que
+> antes): Pluto TV ya no publica ningún canal `filmrise` en su guía (`i.mjh.nz`),
+> así que no es una regresión del mapeo.
 
 > Al mapear variantes (`Canal 5 Nacional`, `Las Estrellas Nacional v1/v2`…) el
 > número de canales puede bajar unas unidades: son el mismo canal, que antes se
