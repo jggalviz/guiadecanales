@@ -1451,20 +1451,20 @@ http://45.134.141.161:2200/ARG/Net_TV/index.m3u8
 #EXTINF:-1 tvg-id="nettvbuenosairesno247" tvg-name="Net TV Buenos Aires No 24/7]" tvg-logo="https://i.imgur.com/IhJ0BjF.png" group-title="Argentina",Net TV Buenos Aires No 24/7] (Opc. 2)
 https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="teleposadasno247" tvg-name="Tele Posadas No 24/7" tvg-logo="https://i.imgur.com/88MVgwX.png" group-title="Argentina",Tele Posadas No 24/7
-https://183.bozztv.com/giatv/giatv-teleposadastv/teleposadastv/playlist.m3u8
+https://iptv.ixfo.com.ar:30443/live/TelePosadasTv/playlist.m3u8
 #EXTINF:-1 tvg-id="telecreativalanusno247" tvg-name="Telecreativa Lanus No 24/7" tvg-logo="https://i.imgur.com/PjlAB6x.jpg" group-title="Argentina",Telecreativa Lanus No 24/7
 https://panel.host-live.com:19360/8012/8012.m3u8
 #EXTINF:-1 tvg-id="Telefe.ar" tvg-name="Telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe
+http://45.173.231.22:8000/play/a053/index.m3u8
+#EXTINF:-1 tvg-id="Telefe.ar" tvg-name="Telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe (Opc. 2)
+https://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8
+#EXTINF:-1 tvg-id="TelefeBuenosAires.ar" tvg-name="Telefe Buenos Aires" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe Buenos Aires
+http://45.134.141.161:2200/ARG/TELEFE_HD/index.m3u8
+#EXTINF:-1 tvg-id="telefegeoblocked" tvg-name="Telefe Geo-Blocked" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe Geo-Blocked
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 #KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 #EXTVLCOPT:http-referrer=https://www.mitelefe.com/
 https://telefe.argtelemax.workers.dev/
-#EXTINF:-1 tvg-id="Telefe.ar" tvg-name="Telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe (Opc. 2)
-http://45.173.231.22:8000/play/a053/index.m3u8
-#EXTINF:-1 tvg-id="Telefe.ar" tvg-name="Telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe (Opc. 3)
-https://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8
-#EXTINF:-1 tvg-id="TelefeBuenosAires.ar" tvg-name="Telefe Buenos Aires" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe Buenos Aires
-http://45.134.141.161:2200/ARG/TELEFE_HD/index.m3u8
 #EXTINF:-1 tvg-id="telefeinteriorno247" tvg-name="Telefe Interior No 24/7" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe Interior No 24/7
 http://200.91.32.158:8080/telefehdvalle/index.m3u8
 #EXTINF:-1 tvg-id="telefeinternacionalargentina" tvg-name="Telefe Internacional Argentina" tvg-logo="https://i.imgur.com/HNcCX3h.png" group-title="Argentina",Telefe Internacional Argentina
@@ -1482,7 +1482,7 @@ https://canal11saltatv.unpocodeawita.workers.dev/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 #KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 #EXTVLCOPT:http-referrer=https://www.elocho.tv/el-ocho-en-vivo.html
-https://g5.vxral-slo.transport.edge-access.net/a05/ngrp:elochotv-100168_all/Playlist.m3u8?sense=true
+https://g5.vxral-slo.transport.edge-access.net/a05/ngrp:elochotv-100168_all/Playlist.m3u8
 #EXTINF:-1 tvg-id="tnbuenosairesno247" tvg-name="TN Buenos Aires No 24/7]" tvg-logo="https://i.imgur.com/vFwPhPS.png" group-title="Argentina",TN Buenos Aires No 24/7]
 https://live-01-01-tn.vodgc.net/TN_DAI_Beta/index.m3u8
 #EXTINF:-1 tvg-id="unitevevillamariacordoba" tvg-name="Uniteve Villa Maria Córdoba" tvg-logo="https://pbs.twimg.com/profile_images/720276300888453120/a_SDOmBc_400x400.jpg" group-title="Argentina",Uniteve Villa Maria Córdoba
@@ -2137,6 +2137,8 @@ http://190.61.47.54:8000/play/a01n/index.m3u8
 http://181.225.190.242:8000/play/a024
 #EXTINF:-1 tvg-id="HogarTV.co" tvg-name="HOGAR TV" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSrTi0kkVY2z9ttrNQRyDmm7KqI3WiP8ABhpZMXfKrLV0yFwCrTd1GL-A&s=10" group-title="Colombia",HOGAR TV (Opc. 3)
 http://138.117.110.151:8000/play/a0dt/index.m3u8
+#EXTINF:-1 tvg-id="masnortetvno247nortedesantander" tvg-name="Mas Norte TV No 24/7 Norte de Santander" tvg-logo="https://i.imgur.com/NmsWlj6.jpeg" group-title="Colombia",Mas Norte TV No 24/7 Norte de Santander
+https://live.arnoproducciones.com/hls/norte.m3u8
 #EXTINF:-1 tvg-id="ondambientaltvbogota" tvg-name="Ondambiental TV Bogotá" tvg-logo="https://i.imgur.com/u5804Au.jpg" group-title="Colombia",Ondambiental TV Bogotá
 https://stmv3.voxtvhd.com.br/ondastereotv/ondastereotv/playlist.m3u8
 #EXTINF:-1 tvg-id="RCNHD2.co" tvg-name="RCN" tvg-logo="https://i.imgur.com/5PhTaHp.png" group-title="Colombia",RCN
@@ -2162,6 +2164,8 @@ http://38.134.250.110:8000/play/a012/index.m3u8
 #EXTINF:-1 tvg-id="teleantioquiaantioquiaregionalgeoblocked" tvg-name="Teleantioquia Antioquia / Regional Geo-Blocked" tvg-logo="https://i.imgur.com/6WMV2Az.png" group-title="Colombia",Teleantioquia Antioquia / Regional Geo-Blocked
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 CrKey/1.44.191160
 https://liveingesta118.cdnmedia.tv/teleantioquialive/smil:dvrlive.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="telebolivarno247bolivar" tvg-name="Telebolívar No 24/7 Bolívar" tvg-logo="https://i.imgur.com/dYhnVoV.png" group-title="Colombia",Telebolívar No 24/7 Bolívar
+https://tvstreaming.albpo.com/memfs/18dd99fc-d98e-41ad-b5e8-03f2d7f98bdb.m3u8
 #EXTINF:-1 tvg-id="telecafeno247ejecafeteroregional" tvg-name="Telecafé No 24/7 Eje Cafetero / Regional" tvg-logo="https://i.imgur.com/28XmS1J.png" group-title="Colombia",Telecafé No 24/7 Eje Cafetero / Regional
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 CrKey/1.44.191160
 #KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 CrKey/1.44.191160
@@ -2215,7 +2219,7 @@ https://video1.azulstream.com:8081/antenaseistv/index.m3u8
 #EXTINF:-1 tvg-id="canal1nacional" tvg-name="Canal 1 Nacional" tvg-logo="https://i.ibb.co/KhNS8Dy/cropped-logoo-1.png" group-title="Costa Rica",Canal 1 Nacional
 https://vid.canal1cr.com:3424/multi_live/play.m3u8
 #EXTINF:-1 tvg-id="canal10nacional" tvg-name="Canal 10 Nacional" tvg-logo="https://i.imgur.com/TO6WQbW.png" group-title="Costa Rica",Canal 10 Nacional
-https://acceso.mediosdecostarica.com:3606/hybrid/play.m3u8
+https://acceso.mediosdecostarica.com:3417/hybrid/play.m3u8
 #EXTINF:-1 tvg-id="canal11repretelnacional" tvg-name="Canal 11 Repretel Nacional" tvg-logo="https://i.ibb.co/39Z9cyWd/Repretel-11-logo.png" group-title="Costa Rica",Canal 11 Repretel Nacional
 http://45.5.117.188:8000/play/a02w/index.m3u8
 #EXTINF:-1 tvg-id="canal11repretelnacional" tvg-name="Canal 11 Repretel Nacional" tvg-logo="https://i.ibb.co/39Z9cyWd/Repretel-11-logo.png" group-title="Costa Rica",Canal 11 Repretel Nacional (Opc. 2)
@@ -4071,6 +4075,8 @@ https://guastream.com:3172/stream/play.m3u8
 https://cdn.streamhispanatv.net:3833/live/canal3regionallive.m3u8
 #EXTINF:-1 tvg-id="canal4ixilno24quiche" tvg-name="Canal 4 Ixíl No 24/ Quiche" tvg-logo="https://static.wixstatic.com/media/7acae1_478125fc36054fb597e5329c10727317~mv2.png" group-title="Guatemala",Canal 4 Ixíl No 24/ Quiche
 https://cdn.streamhispanatv.net:3622/live/canalixillive.m3u8
+#EXTINF:-1 tvg-id="canal5no247" tvg-name="Canal 5 No 24/7" group-title="Guatemala",Canal 5 No 24/7
+http://190.83.9.222:8000/play/ca016/index.m3u8
 #EXTINF:-1 tvg-id="canal6no247panajachel" tvg-name="Canal 6 No 24/7 Panajachel" tvg-logo="https://i.postimg.cc/3JsnWj8k/Diseno-sin-titulo(5).png" group-title="Guatemala",Canal 6 No 24/7 Panajachel
 #EXTVLCOPT:http-referrer=https://www.panadish.com/canal6.html
 https://stream.meteorito.cloud:1947/canal6/smil:canal6.smil/playlist.m3u8
@@ -4192,12 +4198,6 @@ https://streaming.imagenfm105-1.com/hls/stream.m3u8
 https://59d39900ebfb8.streamlock.net/rcv/rcv/playlist.m3u8
 #EXTINF:-1 tvg-id="sulatvsanpedro" tvg-name="Sula TV San Pedro" tvg-logo="https://i.imgur.com/v90r5jS.png" group-title="Honduras",Sula TV San Pedro
 https://tv.webmedialive.com/sulatv/live/playlist.m3u8
-#EXTINF:-1 tvg-id="telecadena74" tvg-name="Telecadena 7/4" tvg-logo="https://i.imgur.com/PTN7fCa.png" group-title="Honduras",Telecadena 7/4
-http://45.167.2.138:8000/play/a07n/index.m3u8
-#EXTINF:-1 tvg-id="telecadena74" tvg-name="Telecadena 7/4" tvg-logo="https://i.imgur.com/PTN7fCa.png" group-title="Honduras",Telecadena 7/4 (Opc. 2)
-http://186.33.26.18:8000/play/a07n/index.m3u8
-#EXTINF:-1 tvg-id="telecadena74" tvg-name="Telecadena 7/4" tvg-logo="https://i.imgur.com/PTN7fCa.png" group-title="Honduras",Telecadena 7/4 (Opc. 3)
-http://45.167.2.101:8000/play/a07n/index.m3u8
 #EXTINF:-1 tvg-id="teleceibanacional" tvg-name="Teleceiba Nacional" tvg-logo="https://i.imgur.com/oPSfsvy.png" group-title="Honduras",Teleceiba Nacional
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
 #EXTVLCOPT:http-referrer=https://teleceiba.com/en-vivo/
@@ -4613,9 +4613,9 @@ https://stream.wapptv.cl/video/index.m3u8
 #EXTINF:-1 tvg-id="Azteca7.mx" tvg-name="Azteca 7" tvg-logo="https://i.imgur.com/UtFXjIn.png" group-title="México",Azteca 7
 http://201.174.175.3:8000/play/a0kl/index.m3u8?hls
 #EXTINF:-1 tvg-id="Azteca7.mx" tvg-name="Azteca 7" tvg-logo="https://i.imgur.com/UtFXjIn.png" group-title="México",Azteca 7 (Opc. 2)
-http://38.65.175.87:8000/play/a0la/index.m3u8u?hls
+http://190.61.101.11:7050/play/a09b/index.m3u8?hls
 #EXTINF:-1 tvg-id="Azteca7.mx" tvg-name="Azteca 7" tvg-logo="https://i.imgur.com/UtFXjIn.png" group-title="México",Azteca 7 (Opc. 3)
-http://38.65.175.87:8000/play/a0fm/index.m3u8u?hls
+http://45.5.117.57:8200/play/a04u/index.m3u8
 #EXTINF:-1 tvg-id="canal11internacionalnacional" tvg-name="Canal 11 Internacional Nacional" tvg-logo="https://i.imgur.com/vcY5uHe.png" group-title="México",Canal 11 Internacional Nacional
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
 https://vivo.canaloncelive.tv/secureoncedos/oncedigital/playlist.m3u8
@@ -4628,11 +4628,11 @@ https://5e50264bd6766.streamlock.net/canal442/videocanal442/playlist.m3u8
 #EXTINF:-1 tvg-id="canal44ciudadjuarezchihuahua" tvg-name="Canal 44 Ciudad Juárez Chihuahua" tvg-logo="https://i.imgur.com/YDp8MlN.png" group-title="México",Canal 44 Ciudad Juárez Chihuahua
 https://5e50264bd6766.streamlock.net/canal44/videocanal44/playlist.m3u8
 #EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5
-http://38.65.175.87:8000/play/a0ll/index.m3u8u?hls
+http://45.172.92.111:8000/play/a0n6/index.m3u8
 #EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5 (Opc. 2)
 http://45.5.118.152:8000/play/a03i/index.m3u8
 #EXTINF:-1 tvg-id="Canal5.mx" tvg-name="Canal 5" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Canal_5_logo.svg/240px-Canal_5_logo.svg.png" group-title="México",Canal 5 (Opc. 3)
-http://200.35.176.154:8000/play/a067/index.m3u8
+http://168.228.44.241:9997/play/AZTECA7/index.m3u8
 #EXTINF:-1 tvg-id="canaloncenacional" tvg-name="Canal Once Nacional" tvg-logo="https://i.imgur.com/K0351vF.png" group-title="México",Canal Once Nacional
 https://vivo.canaloncelive.tv/oncedos/ngrp:pruebachunks_all/.m3u8
 #EXTINF:-1 tvg-id="clictvaztecanacional" tvg-name="Clic TV Azteca Nacional" tvg-logo="https://i.imgur.com/bvSLm9U.png" group-title="México",Clic TV Azteca Nacional
