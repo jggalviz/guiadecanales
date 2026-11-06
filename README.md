@@ -123,7 +123,13 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
   `ESPN2.us`. Editable sin tocar el script y desactivable con `--sin-mapeo`.
 - ✅ **Cero dependencias externas** (`urllib.request`, `re`, `gzip`, `io`, `json`,
   `xml.etree.ElementTree`, `datetime`, `argparse`, `unicodedata`).
-- ✅ **139 pruebas unitarias** con `unittest` y workflow de GitHub Actions.
+- ✅ **Mantenimiento de la lista con señales reales** (`actualizar_lista.py`):
+  comprueba cada enlace por HTTP, descarta los muertos, prueba cabeceras en
+  cascada (publicándolas como `#EXTVLCOPT`), renueva tokens de sesión y deja la
+  lista ordenada, con un informe JSON y una red de seguridad que impide publicar
+  una lista vacía.
+- ✅ **218 pruebas unitarias** con `unittest` y dos workflows de GitHub Actions
+  (regeneración diaria y depuración de señal cada 6 h).
 
 ## Requisitos
 
@@ -134,13 +140,18 @@ guía EPG (XMLTV) ──────┘                   └──►  lista.m3
 ```
 guiadecanales/
 ├── generar_epg.py                  # script principal (todo el flujo)
+├── actualizar_lista.py             # mantenimiento de lista.m3u (señales, cabeceras, tokens)
 ├── epg.xml                         # guía generada (se versiona para publicarla)
 ├── lista.m3u                       # lista propia generada, con el tvg-id de la guía
 ├── mapeo_canales.json              # alias -> tvg-id real de las señales difíciles
 ├── categorias_tematicas.json       # grupos temáticos (patrones de detección)
+├── cabeceras_streams.json          # cabeceras por host + tokens (plantilla, opcional)
 ├── tests/
-│   └── test_generar_epg.py         # pruebas unitarias (unittest)
-├── .github/workflows/actualizar-epg.yml   # regeneración diaria + commit automático
+│   ├── test_generar_epg.py         # pruebas unitarias de la guía y la lista (unittest)
+│   └── test_actualizar_lista.py    # pruebas del mantenimiento de la lista
+├── .github/workflows/
+│   ├── actualizar-epg.yml          # regeneración diaria + commit automático
+│   └── actualizar-lista.yml        # depuración de señal cada 6 h + commit automático
 ├── .vscode/launch.json             # ejecutar/depurar con F5 en VS Code
 ├── .gitignore
 ├── LICENSE                         # MIT
@@ -754,6 +765,128 @@ quedaban sin reconocer ya se descartan bien: `Azteca 7 MÚxico` → `Azteca 7`
 (antes se quedaba como `Azteca 7 MÚxico`) y dos variantes rotas del mismo canal
 (`MÚxico` y `MÃ©xico`) se unifican en una sola señal.
 
+## Mantenimiento de la lista: `actualizar_lista.py`
+
+`generar_epg.py` construye la lista, pero no comprueba si las señales siguen
+vivas (los proveedores cambian de host, caducan los tokens y los espejos se
+caen). `actualizar_lista.py` cierra ese círculo sobre la lista ya publicada:
+
+```powershell
+# Depurar la lista.m3u del repositorio (peticiones reales a cada señal)
+python actualizar_lista.py
+
+# Desde la lista del proveedor y guardando en otro archivo, con informe
+python actualizar_lista.py -u "$env:M3U_URL" --informe informe.json
+
+# Solo limpiar y ordenar, sin tocar la red (segundos en vez de minutos)
+python actualizar_lista.py --sin-verificar
+
+# Prueba rápida: comprobar 40 señales y conservar el resto tal cual
+python actualizar_lista.py --limite-pruebas 40 -q
+
+# Ser más agresivo con lo que se descarta
+python actualizar_lista.py --politica estricta
+```
+
+Qué hace, en orden:
+
+1. **Lee** la lista (`--entrada`, `lista.m3u` por defecto, o `--url`/`M3U_URL`)
+   y separa la cabecera `#EXTM3U` de las entradas, que se conservan tal cual
+   (`#EXTINF` y sus `#EXTVLCOPT`), así que el `tvg-id` sigue sincronizado con
+   `epg.xml`.
+2. **Comprueba cada señal** con una petición HTTP real (unos 2 KB, con
+   `Range` y `Accept-Encoding: identity`) en paralelo (`--trabajadores`, 24 por
+   defecto; `--timeout`, 8 s; `--intentos`, 2). Si el host ignora `HEAD` o
+   devuelve HTML de error en lugar del manifiesto, la señal se da por caída.
+3. **Prueba cabeceras en cascada** cuando la señal está protegida: las de la
+   propia entrada → las del host en `cabeceras_streams.json` → las de
+   `por_defecto` → un perfil de navegador con `Referer`/`Origin` → un perfil de
+   VLC → un perfil móvil. Si la señal solo responde con un perfil, se publican
+   sus `#EXTVLCOPT:http-user-agent=…` / `#EXTVLCOPT:http-referrer=…`, de modo
+   que el reproductor también las use.
+4. **Renueva el token de sesión** (`--sin-renovar` lo desactiva): si el host
+   define `renovar` y la URL lleva `token`/`st`, se pide uno nuevo al endpoint y
+   se reescribe la URL antes de dar la señal por perdida.
+5. **Descarta y ordena** según la política, elimina los duplicados exactos y
+   ordena por la jerarquía de grupos (la misma de `generar_epg.py`). El orden se
+   puede desactivar con `--sin-ordenar`.
+
+| Política | Descarta | Cuándo usarla |
+| --- | --- | --- |
+| `conservadora` | `400`, `404`, `410` y dominios inexistentes | listas en las que un 403 puede ser un bloqueo temporal del proveedor |
+| `normal` (por defecto) | lo anterior **+** `401`/`403` | uso habitual: la señal protegida tampoco abriría en el reproductor |
+| `estricta` | lo anterior **+** `timeout`, `429` y `5xx` | limpiezas a fondo desde una conexión estable |
+
+Lo que **nunca** se descarta con la política por defecto son los `timeout` y los
+`5xx`: casi siempre son fallos puntuales de red, no señales muertas.
+
+**Red de seguridad**: si se descartaría más de `--maximo-descartes` por ciento
+(90 por defecto) o no queda ninguna señal, el script **no escribe** la lista y
+sale con código `2`. Así un corte de Internet del ejecutor no publica una lista
+vacía. La escritura es atómica (`.tmp` + `os.replace`).
+
+**Códigos de salida**: `0` todo correcto (haya cambios o no); `1` no se pudo leer
+el origen o no tenía entradas; `2` se descartaría demasiado y no se escribió.
+
+### Informe de la ejecución (`--informe informe.json`)
+
+```json
+{
+  "generado": "2026-11-05T05:31:12+00:00",
+  "origen": "lista.m3u",
+  "salida": "lista.m3u",
+  "politica": "normal",
+  "entradas_origen": 2795,
+  "senales_distintas": 2480,
+  "entradas_finales": 2601,
+  "duplicadas_eliminadas": 12,
+  "descartadas": 194,
+  "porcentaje_descartes": 6.94,
+  "estados": {"ok": 2286, "caido": 183, "protegido": 11, "dudoso": 43, "sin_comprobar": 0},
+  "cabeceras_aplicadas": 402,
+  "tokens_renovados": 3,
+  "duracion_segundos": 91.4,
+  "detalle_descartes": [
+    {"url": "http://b.example/espn.m3u8", "grupo": "ESPN", "tvg_id": "ESPN.us",
+     "estado": "caido", "codigo": 404, "detalle": "http 404"}
+  ]
+}
+```
+
+`detalle_descartes` se recorta a 500 entradas para que el JSON no crezca sin
+control. Sin `-q` se imprime el mismo resumen en texto.
+
+
+### Cabeceras y tokens por host (`cabeceras_streams.json`)
+
+Archivo opcional (se lee con `--cabeceras` o `M3U_CABECERAS`); si no existe, el
+script funciona igual. Sirve para los hosts que **solo** responden con unas
+cabeceras concretas o que exigen un token de sesión:
+
+```json
+{
+  "por_defecto": {},
+  "hosts": {
+    "cdn.ejemplo.tv": {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "referer": "https://cdn.ejemplo.tv/",
+      "renovar": "https://api.ejemplo.tv/sesion?canal={id}&token={token}"
+    }
+  }
+}
+```
+
+- La regla de `ejemplo.tv` vale también para sus subdominios (`cdn.ejemplo.tv`),
+  y la más específica gana.
+- Claves reconocidas: `user-agent`, `referer`, `origin`, `cookie`,
+  `authorization`, `accept` y `renovar`.
+- `renovar` admite los parámetros de la URL del canal como marcadores
+  (`{id}`, `{token}`, …). El token nuevo se busca en el JSON de la respuesta
+  (`{"token": "..."}`) o en la redirección (`...?token=...`), y se reescribe la
+  URL publicada.
+- Las reglas que empiezan por `$` o `_` son comentarios (el archivo se puede
+  documentar dentro del propio JSON).
+
 ## Cómo se limpian los nombres
 
 | Nombre en el M3U | Nombre limpio | `id` generado |
@@ -921,6 +1054,20 @@ Club`); la copia temática conserva `tvg-id` y señal; el límite de 3 señales 
 respeta en cada grupo; y el `categorias_tematicas.json` del repositorio coincide
 con los patrones del código.
 
+Y las del **mantenimiento de la lista** (`tests/test_actualizar_lista.py`) cubren
+`actualizar_lista.py` sin salir a Internet: el parseo de la lista (`#EXTINF`,
+`#EXTVLCOPT`, URLs inválidas, cabecera sin `x-tvg-url`), el orden por jerarquía de
+grupos y la eliminación de duplicados exactos, la escritura atómica (UTF-8, salto
+de línea final, cabecera intacta), la clasificación de estados por código HTTP
+(`400/404/410` → caída, `401/403` → protegida, `408/429/5xx` → dudosa), la
+cascada de cabeceras (una señal que solo responde con un perfil de reserva
+publica su `#EXTVLCOPT` y cuenta en `cabeceras_aplicadas`), la renovación de
+token (JSON y redirección, sin plantilla o sin parámetro de sesión no hace nada),
+el informe JSON y su resumen en texto (sin división por cero con listas vacías) y
+el flujo completo (`main`): `--sin-verificar` conserva todas las entradas, una
+señal caída se descarta, un origen inexistente devuelve `1` y una caída masiva
+**no** escribe la lista (código `2`).
+
 ## Publicar en GitHub (pasos)
 
 ```powershell
@@ -935,8 +1082,11 @@ git push -u origin main
 ### 1. Automatizar la regeneración diaria
 
 El workflow `.github/workflows/actualizar-epg.yml` ya está incluido: ejecuta las
-pruebas, regenera el `epg.xml` **y la `lista.m3u`** cada día y hace *commit* de
-ambos archivos.
+pruebas, regenera el `epg.xml` **y la `lista.m3u`** cada día, depura las señales
+con `actualizar_lista.py` y hace *commit* de ambos archivos. Además,
+`.github/workflows/actualizar-lista.yml` repite solo la depuración de la lista
+cada 6 horas (sin regenerar la guía), para retirar las señales que se caen entre
+dos regeneraciones.
 
 1. En el repositorio: **Settings → Secrets and variables → Actions → New
    repository secret**.
@@ -950,7 +1100,9 @@ ambos archivos.
    (URLs separadas por comas, sustituye por completo a los países). Sin valores
    se usan todas las guías públicas por defecto, incluida la de EE. UU.
    También puedes fijar `EPG_PUBLICA_URL` si sirves el `epg.xml` con otro dominio
-   (por defecto se usa el `raw` de tu repositorio en la cabecera del M3U).
+   (por defecto se usa el `raw` de tu repositorio en la cabecera del M3U) y
+   `M3U_CABECERAS` si guardas el JSON de cabeceras por host en otra ruta (por
+   defecto `cabeceras_streams.json`).
 5. Lanza el workflow manualmente desde **Actions → Actualizar EPG → Run
    workflow** para comprobar que funciona.
 

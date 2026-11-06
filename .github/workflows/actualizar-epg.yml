@@ -215,6 +215,34 @@ jobs:
           print(f"OK: {len(con_epg)} canales con programacion real de {len(canales)}")
           PY
 
+      - name: Depurar las senales que ya no responden (actualizar_lista.py)
+        if: steps.comprobar.outputs.configurado == 'true'
+        # Comprueba cada enlace con peticiones reales y descarta los muertos,
+        # publicando ademas las cabeceras (#EXTVLCOPT) que cada senal necesita.
+        # Si el ejecutor no alcanza los hosts del proveedor, el script no
+        # escribe la lista (codigo 2) y se publica la lista completa: por eso el
+        # paso no corta el trabajo.
+        continue-on-error: true
+        env:
+          M3U_CABECERAS: ${{ vars.M3U_CABECERAS || 'cabeceras_streams.json' }}
+        run: |
+          python actualizar_lista.py \
+            --entrada lista.m3u \
+            --salida lista.m3u \
+            --cabeceras "$M3U_CABECERAS" \
+            --politica normal \
+            --maximo-descartes 50 \
+            --trabajadores 32 \
+            --informe informe_lista.json
+
+      - name: Publicar el informe de la depuracion de la lista
+        if: always() && steps.comprobar.outputs.configurado == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-lista
+          path: informe_lista.json
+          if-no-files-found: ignore
+
       - name: Commit y push de epg.xml y lista.m3u
         if: steps.comprobar.outputs.configurado == 'true'
         run: |

@@ -1,0 +1,81 @@
+name: Depurar lista M3U
+
+# Mantenimiento de lista.m3u: comprueba de verdad cada senal (HTTP), descarta
+# las que ya no responden, publica las cabeceras que hacen falta (#EXTVLCOPT),
+# renueva el token cuando el host lo permite y deja la lista ordenada. Se apoya
+# en actualizar_lista.py; la generacion de la lista y de epg.xml sigue en
+# actualizar-epg.yml.
+on:
+  schedule:
+    # Cada 6 horas, entre las regeneraciones diarias de la EPG.
+    - cron: "30 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "actualizar_lista.py"
+      - "cabeceras_streams.json"
+      - "tests/**"
+      - ".github/workflows/actualizar-lista.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-lista
+  cancel-in-progress: true
+
+jobs:
+  depurar:
+    name: Comprobar las senales y publicar lista.m3u
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ejecutar pruebas unitarias
+        run: python -m unittest discover -s tests -v
+
+      - name: Comprobar las senales de lista.m3u
+        env:
+          # Cabeceras por host y endpoints de renovacion de token.
+          M3U_CABECERAS: ${{ vars.M3U_CABECERAS || 'cabeceras_streams.json' }}
+        run: |
+          # --politica normal: descarta 404/410/400 (ya no existe) y 401/403
+          # (el reproductor tampoco podria abrirlo), pero conserva los timeouts
+          # y los 5xx, que muchas veces son fallos del ejecutor.
+          # --maximo-descartes: si se caen mas de la mitad de los enlaces, no se
+          # publica nada (probablemente el runner no alcanza esos hosts).
+          python actualizar_lista.py \
+            --entrada lista.m3u \
+            --salida lista.m3u \
+            --cabeceras "$M3U_CABECERAS" \
+            --politica normal \
+            --maximo-descartes 50 \
+            --trabajadores 32 \
+            --informe informe_lista.json
+
+      - name: Publicar el informe de la actualizacion
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-lista
+          path: informe_lista.json
+          if-no-files-found: ignore
+
+      - name: Commit y push de lista.m3u
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lista.m3u
+          if git diff --cached --quiet; then
+            echo "lista.m3u sin cambios; no se hace commit."
+          else
+            git commit -m "chore(lista): depurar senales caidas $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi

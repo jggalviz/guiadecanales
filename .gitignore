@@ -22,3 +22,8 @@ desktop.ini
 # Salidas auxiliares de pruebas manuales
 epg.local.xml
 *.log
+
+# Informes y archivos temporales de actualizar_lista.py
+informe.json
+informe_lista.json
+_tmp_*

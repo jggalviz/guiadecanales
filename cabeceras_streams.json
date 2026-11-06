@@ -1,0 +1,28 @@
+{
+  "$esquema": [
+    "Cabeceras HTTP por host y endpoints de renovacion de token para actualizar_lista.py.",
+    "Se lee con --cabeceras (o la variable M3U_CABECERAS); si el archivo no existe, el script funciona igual.",
+    "",
+    "Estructura:",
+    "  'por_defecto': cabeceras que se prueban para cualquier host.",
+    "  'hosts': regla por host; admite subdominios (una regla de 'ejemplo.tv' vale para 'cdn.ejemplo.tv').",
+    "",
+    "Claves reconocidas dentro de una regla: user-agent, referer, origin, cookie, authorization, accept",
+    "y 'renovar' (plantilla del endpoint que devuelve un token nuevo).",
+    "",
+    "Ejemplo de regla:",
+    "  'cdn.ejemplo.tv': {",
+    "    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',",
+    "    'referer': 'https://cdn.ejemplo.tv/',",
+    "    'renovar': 'https://api.ejemplo.tv/sesion?canal={id}&token={token}'",
+    "  }",
+    "",
+    "En 'renovar' se pueden usar los parametros de la URL del canal como marcadores;",
+    "la respuesta debe traer el token nuevo en JSON ('{\"token\": \"...\"}') o en la",
+    "redireccion ('...?token=...'). Si el token se renueva, la URL publicada se reescribe.",
+    "",
+    "Las reglas que empiezan por '$' o '_' son comentarios."
+  ],
+  "por_defecto": {},
+  "hosts": {}
+}
