@@ -2324,10 +2324,6 @@ https://rtp.noxun.net/hls/stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://live.enhdtv.com:8081/
 https://live.enhdtv.com:8081/8192/index.m3u8
-#EXTINF:-1 tvg-id="unitelno247" tvg-name="Unitel No 24/7" tvg-logo="https://i.imgur.com/B9wg1zj.png" group-title="Bolivia",Unitel No 24/7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://play.agenciastreaming.com:8081/
-https://play.agenciastreaming.com:8081/uniteltv/index.m3u8
 #EXTINF:-1 tvg-id="unitelno247" tvg-name="Unitel No 24/7" tvg-logo="https://i.imgur.com/B9wg1zj.png" group-title="Bolivia",Unitel No 24/7 (Opc. 2)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://200.59.191.177:8000/
@@ -3234,10 +3230,6 @@ https://mdstrm.com/live-stream-playlist/58d1921a72e2b22e2905e493.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://movil.ejeserver.com/
 https://movil.ejeserver.com/live/canal8tv.m3u8
-#EXTINF:-1 tvg-id="canalcalimatvurestvno247calivalledelcauca" tvg-name="Canal Calima TV URESTV No 24/7 Cali / Valle del Cauca" tvg-logo="https://i.imgur.com/6YxtyUR.jpeg" group-title="Colombia",Canal Calima TV URESTV No 24/7 Cali / Valle del Cauca
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://movil.ejeserver.com/
-https://movil.ejeserver.com/live/calimatv.m3u8?r=748
 #EXTINF:-1 tvg-id="canaldosyopalcasanare" tvg-name="Canal Dos Yopal Casanare" tvg-logo="https://i.imgur.com/BYsyNHZ.jpg" group-title="Colombia",Canal Dos Yopal Casanare
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://131.221.41.94/
@@ -4221,10 +4213,6 @@ https://optitelsm.samnetsv.com/play/a0r5/index.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://181.119.83.235:8000/
 http://181.119.83.235:8000/play/C062/index.m3u8
-#EXTINF:-1 tvg-id="canaltrvno247" tvg-name="Canal TRV No 24/7" tvg-logo="https://i.ibb.co/chDfcdsK/canal-trv-sv.png" group-title="El Salvador",Canal TRV No 24/7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://stream.ontvmx.com/
-https://stream.ontvmx.com/ontv/CNMLXR0Z6FPtGdjcI4/playlist.m3u8
 #EXTINF:-1 tvg-id="megavisioncanal19" tvg-name="Megavision Canal 19" tvg-logo="https://i.postimg.cc/2jBJB80V/tse3-mm-bing-net-OIP(1).png" group-title="El Salvador",Megavision Canal 19
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://mgvchannel19-ioriver-cdn.encoders.immergo.tv/
@@ -4362,10 +4350,6 @@ http://45.171.64.30:6060/play/a032/index.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://streaming.multicontenidos.cl:8081/
 http://streaming.multicontenidos.cl:8081/live/canalfeliz/playlist.m3u8
-#EXTINF:-1 tvg-id="EmocionTV.cl" tvg-name="Emocion TV" tvg-logo="https://i.imgur.com/OJ3omla.jpeg" group-title="Entertainment",Emocion TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://v1.tustreaming.cl/
-https://v1.tustreaming.cl/emociontv/index.m3u8
 #EXTINF:-1 tvg-id="EstacionLimacheTV.cl" tvg-name="Estacion Limache TV" tvg-logo="https://i.imgur.com/YAADx7P.png" group-title="Entertainment",Estacion Limache TV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://v4.tustreaming.cl/
@@ -4775,10 +4759,6 @@ https://stream-gtlc.telecentro.net.ar/hls/telemaxhls/main.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://live.11-cdn.com/
 https://live.11-cdn.com/TeleOnce/3fc63fe00050c646635f16b071cd33e2.sdp/playlist.m3u8
-#EXTINF:-1 tvg-id="teleselvano247perusatipojunin" tvg-name="Teleselva No 24/7 Perú - Satipo - Junín" tvg-logo="https://i.imgur.com/cu7hTn8.png" group-title="Entretenimiento / Cine / Series",Teleselva No 24/7 Perú - Satipo - Junín
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://7.innovatestream.pe:19360/
-https://7.innovatestream.pe:19360/tvnoticiassatipo/tvnoticiassatipo.m3u8
 #EXTINF:-1 tvg-id="themavivekanaldrama" tvg-name="Thema Vive Kanal Drama" tvg-logo="https://image-resizer-cloud-cdn.cms.api.canela.tv/image/3052A289-026D-43E2-A4E5-577140AAA913/0-16x9.jpg?width=160&updatedTime=0&dt=Web" group-title="Entretenimiento / Cine / Series",Thema Vive Kanal Drama
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://amg01602-amg01602c2-canelatv-international-5561.playouts.now.amagi.tv/
@@ -5142,10 +5122,6 @@ https://tv.streamcasthd.com:3641/live/canal2mdplive.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://play.agenciastreaming.com:8081/
 https://play.agenciastreaming.com:8081/tvwanka/tracks-v1/index.fmp4.m3u8
-#EXTINF:-1 tvg-id="Canal25Ayacucho.pe" tvg-name="Canal 25 Ayacucho" tvg-logo="https://i.imgur.com/lU02cWc.png" group-title="General",Canal 25 Ayacucho
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg10.tv360.bitel.com.pe/
-https://live-evg10.tv360.bitel.com.pe/bitel/canal25ayacucho/playlist.m3u8
 #EXTINF:-1 tvg-id="Canal3Tacural.ar" tvg-name="Canal 3 Tacural" tvg-logo="https://i.imgur.com/RKvSa52.jpeg" group-title="General",Canal 3 Tacural
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://vivo.canal3tacural.com.ar:8081/
@@ -5210,10 +5186,6 @@ http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://vivo.solumedia.com:19360/
 https://vivo.solumedia.com:19360/cardinal/cardinal.m3u8
-#EXTINF:-1 tvg-id="CanalCalimaTV.co" tvg-name="Canal Calima TV" tvg-logo="https://i.imgur.com/6YxtyUR.jpeg" group-title="General",Canal Calima TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://movil.ejeserver.com/
-https://movil.ejeserver.com/live/calimatv.m3u8
 #EXTINF:-1 tvg-id="CanalCapital.co" tvg-name="Canal Capital" tvg-logo="https://i.imgur.com/zAYtbYi.png" group-title="General",Canal Capital
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://138.121.15.230:9002/
@@ -5242,10 +5214,6 @@ https://canalmalaga-tv-live.flumotion.com/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://movil.ejeserver.com/
 https://movil.ejeserver.com/live/teledoradahd.m3u8
-#EXTINF:-1 tvg-id="CanalMasTV.pe" tvg-name="Canal Mas TV" tvg-logo="https://i.imgur.com/rdHygJ1.png" group-title="General",Canal Mas TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg11.tv360.bitel.com.pe/
-https://live-evg11.tv360.bitel.com.pe/bitel/mastvSRT/playlist.m3u8
 #EXTINF:-1 tvg-id="CanalProvincial.ar" tvg-name="Canal Provincial" tvg-logo="https://i.imgur.com/bXHHtcb.png" group-title="General",Canal Provincial
 https://streaming.telered.com.ar/provincial/streaming/mystream.m3u8
 #EXTINF:-1 tvg-id="CanalRCN.co" tvg-name="Canal RCN" tvg-logo="https://i.imgur.com/5PhTaHp.png" group-title="General",Canal RCN
@@ -5356,10 +5324,6 @@ https://unlimited2-cl-isp.dps.live/decimatv/decimatv.smil/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://streaming.cloud.innovasur.es/
 https://streaming.cloud.innovasur.es/mmj2/index.m3u8
-#EXTINF:-1 tvg-id="DTV.pe" tvg-name="DTV Peru" tvg-logo="https://i.imgur.com/OSvegAq.png" group-title="General",DTV Peru
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg7.tv360.bitel.com.pe/
-https://live-evg7.tv360.bitel.com.pe/bitel/sabormixtvSRT/playlist.m3u8
 #EXTINF:-1 tvg-id="DurangaldekoTelebista.es" tvg-name="Durangaldeko Telebista" tvg-logo="https://i.imgur.com/qdlW6cg.png" group-title="General",Durangaldeko Telebista
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://nlb2-live.emitstream.com/
@@ -5402,10 +5366,6 @@ https://5eaccbab48461.streamlock.net:1936/8074/8074/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://181.78.12.119:16123/
 http://181.78.12.119:16123/play/ch33/index.m3u8
-#EXTINF:-1 tvg-id="EPATV.cl" tvg-name="EPA! TV" tvg-logo="https://cdn.m3u.cl/logo/1649_EPA__TV.png" group-title="General",EPA! TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg10.tv360.bitel.com.pe/
-https://live-evg10.tv360.bitel.com.pe/bitel/epatv/playlist.m3u8
 #EXTINF:-1 tvg-id="EsteCanalTV.es" tvg-name="Este Canal TV" tvg-logo="https://i.imgur.com/jDT5XFs.jpg" group-title="General",Este Canal TV
 http://synclosdragos1.syncsolutions.es:8008/live3/emision/index.m3u8
 #EXTINF:-1 tvg-id="EsTuTele.es" tvg-name="EsTuTele" tvg-logo="https://i.imgur.com/bsAbcmC.png" group-title="General",EsTuTele
@@ -5629,10 +5589,6 @@ http://www.coninfo.net:1935/tvlink/live/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://tv1.ninatv.cl/
 https://tv1.ninatv.cl/hls/stream.m3u8
-#EXTINF:-1 tvg-id="NorteTV.ar" tvg-name="Norte TV Not 24/7" tvg-logo="https://i.imgur.com/jTX2vp0.png" group-title="General",Norte TV Not 24/7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://ntvcanal7.com.ar:81/
-https://ntvcanal7.com.ar:81/dash/stream.mpd
 #EXTINF:-1 tvg-id="NSTV.co" tvg-name="NSTV" tvg-logo="https://i.imgur.com/ES6xFAv.png" group-title="General",NSTV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://sistemastr.tropicalmoonmedia.com/
@@ -5716,10 +5672,6 @@ https://tv.arkeo.cl:19360/8046/8046.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://v2.tustreaming.cl/
 https://v2.tustreaming.cl/fantasiatv/index.m3u8
-#EXTINF:-1 tvg-id="RadioFrecuenciaUno.cl" tvg-name="Radio Frecuencia Uno" tvg-logo="https://cdn.m3u.cl/logo/1646_Radio_Frecuencia_Uno.png" group-title="General",Radio Frecuencia Uno
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://v1.tustreaming.cl/
-https://v1.tustreaming.cl/frecuencia1tv/index.m3u8
 #EXTINF:-1 tvg-id="RadioPanoramica.cl" tvg-name="Radio Panoramica" tvg-logo="https://cdn.m3u.cl/logo/1502_Radio_Panoramica.png" group-title="General",Radio Panoramica
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://v2.tustreaming.cl/
@@ -5760,10 +5712,6 @@ https://live-evg10.tv360.bitel.com.pe/bitel/realtv/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://5eaccbab48461.streamlock.net:1936/
 https://5eaccbab48461.streamlock.net:1936/8124/8124/playlist.m3u8
-#EXTINF:-1 tvg-id="RTP.pe" tvg-name="RTP Peru" tvg-logo="https://i.imgur.com/nHMqAHn.jpeg" group-title="General",RTP Peru
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg7.tv360.bitel.com.pe/
-https://live-evg7.tv360.bitel.com.pe/bitel/rtp/playlist.m3u8
 #EXTINF:-1 tvg-id="RTVManilva.es" tvg-name="RTV Manilva Not 24/7" tvg-logo="https://i.imgur.com/zKgrnXx.png" group-title="General",RTV Manilva Not 24/7
 #EXTVLCOPT:http-referrer=https://player.castr.com/live_e2ae1780dc2a11eca660b7b17b7952a5
 https://stream.castr.com/627a72d21914543be01c1720/live_e2ae1780dc2a11eca660b7b17b7952a5/index.m3u8
@@ -5985,10 +5933,6 @@ https://live-evg11.tv360.bitel.com.pe/bitel/unicentroSRT/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://5ff3d9babae13.streamlock.net/
 https://5ff3d9babae13.streamlock.net/ubyecbxnfd/ubyecbxnfd/playlist.m3u8
-#EXTINF:-1 tvg-id="Unitel.pe" tvg-name="Unitel Peru" tvg-logo="https://i.imgur.com/F0PWpyc.png" group-title="General",Unitel Peru
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://play.agenciastreaming.com:8081/
-https://play.agenciastreaming.com:8081/uniteltv/index.m3u8
 #EXTINF:-1 tvg-id="UrolaTelebista.es" tvg-name="Urola Telebista" tvg-logo="https://i.imgur.com/V23bltn.png" group-title="General",Urola Telebista
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://5940924978228.streamlock.net/
@@ -6055,10 +5999,6 @@ https://live-evg7.tv360.bitel.com.pe/bitel/yurimaguastvSRT/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://live-evg5.tv360.bitel.com.pe/
 https://live-evg5.tv360.bitel.com.pe/bitel/yurivisionSRT/playlist.m3u8
-#EXTINF:-1 tvg-id="ZeleveTV.pe" tvg-name="Zeleve TV" tvg-logo="https://i.imgur.com/CGWaunJ.jpeg" group-title="General",Zeleve TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg11.tv360.bitel.com.pe/
-https://live-evg11.tv360.bitel.com.pe/bitel/zeleve/playlist.m3u8
 #EXTINF:-1 tvg-id="Canal1MarMenorTorrePacheco.es" tvg-name="Canal 1 Mar Menor Torre Pacheco" tvg-logo="https://i.imgur.com/MQOwCdZ.png" group-title="General;News",Canal 1 Mar Menor Torre Pacheco
 https://directo.tuwebtv.es/canal1.m3u8
 #EXTINF:-1 tvg-id="Canal33Tijuana.mx" tvg-name="Canal 33 Tijuana" tvg-logo="https://iili.io/JCt1Nbn.png" group-title="General;News",Canal 33 Tijuana
@@ -6216,10 +6156,6 @@ http://190.61.101.11:7050/play/a088/index.m3u8?hls
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://45.5.118.152:8000/
 http://45.5.118.152:8000/play/a0c0/index.m3u8
-#EXTINF:-1 tvg-id="imagentvtotonicapan" tvg-name="Imagen TV Totonicapan" tvg-logo="https://static.wixstatic.com/media/7acae1_c684a5d4b6984567a144c3e651ac66ad~mv2.png" group-title="Guatemala",Imagen TV Totonicapan
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://cdn.streamhispanatv.net:3587/
-https://cdn.streamhispanatv.net:3587/live/imagentvlive.m3u8
 #EXTINF:-1 tvg-id="lunatvno247quetzaltenango" tvg-name="Luna TV No 24/7 Quetzaltenango" tvg-logo="https://i.postimg.cc/RF2v2bmC/Diseno-sin-titulo(2).png" group-title="Guatemala",Luna TV No 24/7 Quetzaltenango
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://cdn.streamhispanatv.net:3670/
@@ -6228,14 +6164,6 @@ https://cdn.streamhispanatv.net:3670/live/lunavisionlive.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://cdn.streamhispanatv.net:3953/
 https://cdn.streamhispanatv.net:3953/live/mastvtotolive.m3u8
-#EXTINF:-1 tvg-id="nimtvno247" tvg-name="Nim TV No 24/7" tvg-logo="https://i.imgur.com/mBNOSzl.png" group-title="Guatemala",Nim TV No 24/7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://cdn.streamhispanatv.net:3210/
-https://cdn.streamhispanatv.net:3210/live/nimtvgtlive.m3u8
-#EXTINF:-1 tvg-id="sastvno247suchitepequez" tvg-name="SAS TV No 24/7 Suchitepequez" tvg-logo="https://i.postimg.cc/yxgQDv2v/Diseno-sin-titulo(1).png" group-title="Guatemala",SAS TV No 24/7 Suchitepequez
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://cdn.streamhispanatv.net:3390/
-https://cdn.streamhispanatv.net:3390/live/sastvgtlive.m3u8
 #EXTINF:-1 tvg-id="telecostano247" tvg-name="Telecosta No 24/7" tvg-logo="https://www.telecostaescuintla.com/gallery_gen/f57408fa00aca6d969248be4b56b48e6.png" group-title="Guatemala",Telecosta No 24/7
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://tv91.hostingnuclear.com:19360/
@@ -7344,10 +7272,6 @@ https://5ca3e84a76d30.streamlock.net/tvlobo/videotvlobo/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://vivo.solumedia.com:19360/
 https://vivo.solumedia.com:19360/masfm/masfm.m3u8
-#EXTINF:-1 tvg-id="MetropolitanadelCuzco.pe" tvg-name="Metropolitana del Cuzco" tvg-logo="https://i.imgur.com/0B04qgM.png" group-title="Music",Metropolitana del Cuzco
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://video1.earthcam.com/
-https://video1.earthcam.com/myearthcam/075ff02f78c35af55564cf3af3b3f750.flv/playlist.m3u8
 #EXTINF:-1 tvg-id="MielTV.pe" tvg-name="Miel TV" tvg-logo="https://i.imgur.com/dPSFrCs.png" group-title="Music",Miel TV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://live-evg5.tv360.bitel.com.pe/
@@ -7604,10 +7528,6 @@ https://v2.tustreaming.cl/fantasiatv/index.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://cloud.tvomix.com/
 https://cloud.tvomix.com/FLASHBACKMIX/index.m3u8
-#EXTINF:-1 tvg-id="fmmundo" tvg-name="FM Mundo" tvg-logo="https://i.imgur.com/1nNnYQO.png" group-title="Música",FM Mundo
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://video2.makrodigital.com/
-https://video2.makrodigital.com/fmmundo/fmmundo/playlist.m3u8
 #EXTINF:-1 tvg-id="fmhkizzy" tvg-name="FMH KIZZY" tvg-logo="https://www.fmh.la/img/logo_kizzi.png" group-title="Música",FMH KIZZY
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://181.78.21.171:8000/
@@ -8060,10 +7980,6 @@ https://live-evg11.tv360.bitel.com.pe/bitel/selvaticaSRT/playlist.m3u8
 https://redirector.dps.live/hls/t13/playlist.m3u8
 #EXTINF:-1 tvg-id="Telecanal.cl" tvg-name="Telecanal" tvg-logo="https://i.imgur.com/3g6SbSt.png" group-title="News",Telecanal
 http://45.232.210.1:8029/play/a00s/index.m3u8
-#EXTINF:-1 tvg-id="TN.ar" tvg-name="TN" tvg-logo="https://i.imgur.com/vFwPhPS.png" group-title="News",TN
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=http://158.172.155.130:8000/
-http://158.172.155.130:8000/play/a0dp/index.m3u8
 #EXTINF:-1 tvg-id="Turno.cl" tvg-name="Turno" tvg-logo="https://i.imgur.com/XuSeHBt.png" group-title="News",Turno
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://redirector.dps.live/
@@ -8553,10 +8469,6 @@ https://s.emisoras.tv:8081/bendicionchannel/index.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://alfa.betheltv.tv/
 https://alfa.betheltv.tv/srt/3_abr/playlist.m3u8
-#EXTINF:-1 tvg-id="canal4sanjuanargentina" tvg-name="Canal 4 San Juan Argentina" tvg-logo="https://i.imgur.com/MsCnwRA.png" group-title="Religiosos",Canal 4 San Juan Argentina
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
-#EXTVLCOPT:http-referrer=https://canal4sanjuan.com.ar/
-https://streamlov.alsolnet.com/canal4sanjuan/live/playlist.m3u8
 #EXTINF:-1 tvg-id="canal55telemoriscotvno247colombiabogota" tvg-name="Canal 55 Telemorisco TV No 24/7 Colombia - Bogotá" tvg-logo="https://i.imgur.com/9BwZyhM.jpg" group-title="Religiosos",Canal 55 Telemorisco TV No 24/7 Colombia - Bogotá
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://canal.mediaserver.com.co/
@@ -8588,10 +8500,6 @@ https://tv.canalmasuruguay.com/hls/canalmas.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://5fc584f3f19c9.streamlock.net/
 https://5fc584f3f19c9.streamlock.net/cristovision/videocristovision/playlist.m3u8
-#EXTINF:-1 tvg-id="ebenezertvhondurassanpedrosula" tvg-name="Ebenezer TV Honduras / San Pedro Sula" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhA3T5bGXkBuQsXbc8Mj2ZEv-e-3Id7CtJnk_hBTt0IcPIMghp9lwDpUp29I6rc2gTouTx5UDwEaqnJ1ReaIgadQDEsHLP5qml93IDPMxUWd6-ekxv76_yEDfZ2MGYcqCuNXNPnSP1BmZRhr1a9nNgdL132y6FTl2oibyUKURUTUckkwtf9_TGUxh7gUVJj/s600/ebenezer-tv.png" group-title="Religiosos",Ebenezer TV Honduras / San Pedro Sula
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://5e85d90130e77.streamlock.net/
-https://5e85d90130e77.streamlock.net/6010/ngrp:6010_all/playlist.m3u8
 #EXTINF:-1 tvg-id="ejtvinternacional" tvg-name="EJTV Internacional" tvg-logo="https://ejtv.wpenginepowered.com/wp-content/uploads/2014/07/ejtvlogo3.png" group-title="Religiosos",EJTV Internacional
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://livecdnusa.enlace.plus/
@@ -8926,10 +8834,6 @@ https://cdn318.fractalmedia.es/318/live/hls/tvc/master.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://v2.tustreaming.cl/
 https://v2.tustreaming.cl/tnetv/index.m3u8
-#EXTINF:-1 tvg-id="Trece.es" tvg-name="Trece Spain" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Trece.svg/960px-Trece.svg.png" group-title="Religious",Trece Spain
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://play.cdn.enetres.net/
-https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/live.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="TuUniversoTV.co" tvg-name="Tu Universo TV" tvg-logo="https://i.imgur.com/e6esjLZ.jpg" group-title="Religious",Tu Universo TV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://5bf8041cb3fed.streamlock.net/
@@ -9006,10 +8910,6 @@ https://edge.livestreaminggroup.info/vtv32live/index.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://stream.haislin.com/
 https://stream.haislin.com/14tv/index.m3u8
-#EXTINF:-1 tvg-id="colorvision9" tvg-name="Color Vision 9" tvg-logo="https://i.imgur.com/rkgWToA.jpg" group-title="República Dominicana",Color Vision 9
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://ds.tvabierta.net/
-https://ds.tvabierta.net/memfs/2493e646-b24d-489b-8603-0879abb93123.m3u8
 #EXTINF:-1 tvg-id="FuegoTV.pe" tvg-name="Fuego TV" tvg-logo="https://i.imgur.com/T9vWjeB.png" group-title="República Dominicana",Fuego TV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://streamunoapp.com:3553/
@@ -9390,10 +9290,6 @@ https://5924d3ad0efcf.streamlock.net/canal4/canal4live/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=http://190.128.214.97:64333/
 http://190.128.214.97:64333/play/a06l/index.m3u8
-#EXTINF:-1 tvg-id="Canal4SanJuan.ar" tvg-name="Canal 4 San Juan" tvg-logo="https://i.imgur.com/MsCnwRA.png" group-title="Undefined",Canal 4 San Juan
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://streamlov.alsolnet.com/
-https://streamlov.alsolnet.com/canal4sanjuan/live/playlist.m3u8
 #EXTINF:-1 tvg-id="Canal44.mx" tvg-name="Canal 44 Not 24/7" tvg-logo="https://i.imgur.com/YDp8MlN.png" group-title="Undefined",Canal 44 Not 24/7
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://5e50264bd6766.streamlock.net/
@@ -9648,10 +9544,6 @@ https://5d0d1d7a6be9e.streamlock.net/sicom/canal1/playlist.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
 #EXTVLCOPT:http-referrer=https://s5.mexside.net:1936/
 https://s5.mexside.net:1936/enlinea/enlinea/playlist.m3u8
-#EXTINF:-1 tvg-id="SolarTelevision.pe" tvg-name="Solar Television" tvg-logo="https://i.imgur.com/ufnWpUf.png" group-title="Undefined",Solar Television
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg11.tv360.bitel.com.pe/
-https://live-evg11.tv360.bitel.com.pe/bitel/solartvSRT/playlist.m3u8
 #EXTINF:-1 tvg-id="SolidariaTV.es" tvg-name="Solidaria TV" tvg-logo="https://i.imgur.com/Bgm2iZY.png" group-title="Undefined",Solidaria TV
 https://canadaremar2.todostreaming.es/live/solidariatv-webhd.m3u8
 #EXTINF:-1 tvg-id="SoliveTV.ar" tvg-name="Solive TV" tvg-logo="https://i.imgur.com/dyUxugT.png" group-title="Undefined",Solive TV
@@ -9729,10 +9621,6 @@ https://live.telemadrid.cross-media.es/6389770581112/eu-central-1/6416060453001/
 https://s5.mexside.net:1936/telemax/telemax/playlist.m3u8
 #EXTINF:-1 tvg-id="TeleRibera.es" tvg-name="TeleRibera Not 24/7" tvg-logo="https://pbs.twimg.com/profile_images/780539549239902208/g2MfVVuY_400x400.jpg" group-title="Undefined",TeleRibera Not 24/7
 https://video1.lhdserver.es/teleribera/live.m3u8
-#EXTINF:-1 tvg-id="Teleselva.pe" tvg-name="Teleselva" tvg-logo="https://i.imgur.com/cu7hTn8.png" group-title="Undefined",Teleselva
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
-#EXTVLCOPT:http-referrer=https://live-evg7.tv360.bitel.com.pe/
-https://live-evg7.tv360.bitel.com.pe/bitel/teleselva/playlist.m3u8
 #EXTINF:-1 tvg-id="Telesol.ar" tvg-name="Telesol" tvg-logo="https://i.imgur.com/79sTxtP.png" group-title="Undefined",Telesol
 https://cdn1.tvlin.net/open/telesol/playlist.m3u8
 #EXTINF:-1 tvg-id="TeleVigo.es" tvg-name="TeleVigo Not 24/7" tvg-logo="https://i.imgur.com/4iVmlFa.png" group-title="Undefined",TeleVigo Not 24/7
